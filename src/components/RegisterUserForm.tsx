@@ -43,6 +43,7 @@ export default function RegisterUserForm() {
       case 'email':
         if (!value) error = 'Email requerido';
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = 'Email inválido';
+        console.log(`Valor de variable "value" en RegisterUserForm.tsx del front: ${value}`)
         break;
       case 'contrasena':
         if (!value) error = 'Contraseña requerida';
@@ -64,31 +65,81 @@ export default function RegisterUserForm() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    let hayErrores = false;
-    for (const [key, value] of Object.entries(formData)) {
-      validarCampo(key as keyof FormDataType, value);
-      if (errors[key as keyof FormDataType]) hayErrores = true;
+  let hayErrores = false;
+  const nuevosErrores: Partial<FormDataType> = {};
+
+  for (const [key, value] of Object.entries(formData)) {
+    let error = '';
+    switch (key) {
+      case 'email':
+        if (!value) error = 'Email requerido';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = 'Email inválido';
+        break;
+      case 'contrasena':
+        if (!value) error = 'Contraseña requerida';
+        else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/.test(value)) {
+          error = 'Debe tener 8 caracteres, mayúscula, número y símbolo';
+        }
+        break;
+      default:
+        if (!value.trim()) error = `Campo ${key} requerido`;
     }
 
-    if (hayErrores) {
-      toast.error('Corregí los errores del formulario');
-      return;
+    if (error) {
+      hayErrores = true;
+      nuevosErrores[key as keyof FormDataType] = error;
     }
+  }
 
-    setIsLoading(true);
-    //const result = await registerUser(formData);
-    const result = await registerUserService(formData);
-    setIsLoading(false);
+  setErrors(nuevosErrores); // ahora actualizas todos los errores de una
+  if (hayErrores) {
+    toast.error('Corregí los errores del formulario');
+    return;
+  }
 
-    if (result.ok) {
-      toast.success(result.mensaje);
-      router.push('/login/login-user');
-    } else {
-      toast.error(result.mensaje);
-    }
-  };
+  setIsLoading(true);
+  const result = await registerUserService(formData);
+  setIsLoading(false);
+
+  if (result.ok) {
+    toast.success(result.mensaje);
+    router.push('/login/login-user');
+  } else {
+    toast.error(result.mensaje);
+  }
+};
+
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   let hayErrores = false;
+  //   for (const [key, value] of Object.entries(formData)) {
+  //     validarCampo(key as keyof FormDataType, value);
+  //     if (errors[key as keyof FormDataType]) hayErrores = true;
+  //   }
+
+    
+
+  //   if (hayErrores) {
+  //     toast.error('Corregí los errores del formulario');
+  //     return;
+  //   }
+
+  //   setIsLoading(true);
+  //   //const result = await registerUser(formData);
+  //   const result = await registerUserService(formData);
+  //   setIsLoading(false);
+
+  //   if (result.ok) {
+  //     toast.success(result.mensaje);
+  //     router.push('/login/login-user');
+  //   } else {
+  //     toast.error(result.mensaje);
+  //   }
+  // };
 
   return (
     <div className="py-10">

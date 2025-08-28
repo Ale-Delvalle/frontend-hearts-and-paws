@@ -22,6 +22,16 @@ export interface Usuario {
   pais: string;
 }
 
+export interface FormDataType {
+    nombre: string,
+    email: string,
+    contrasena: string,
+    telefono: string,
+    direccion: string,
+    ciudad: string,
+    pais: string,
+}
+
 
 // Tipo del contexto de autenticación
 export interface AuthContextType {
