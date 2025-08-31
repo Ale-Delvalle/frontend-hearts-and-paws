@@ -111,7 +111,9 @@ export default function RegisterUserForm() {
   }
 };
 
-
+  // Éste es el handle que estaba antes.
+  // Diagnostico provisorio: no permite registrar usuario en producción porque arroja error
+  // en el formulario por mal manejo de asincronismo
   // const handleSubmit = async (e: React.FormEvent) => {
   //   e.preventDefault();
 

@@ -1,4 +1,4 @@
-import NewPet from '@/components/componentsong/NewPet'
+import NewPet from '@/components/components-ong/NewPet'
 import React from 'react'
 
 const NuevaMascota = () => {

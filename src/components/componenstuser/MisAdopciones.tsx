@@ -27,7 +27,7 @@ export default function MisAdopciones() {
       }
     }
     fetchAdopciones();
-  }, []);
+  }, [token]);
 
   return (
     <div className="flex min-h-screen bg-pink-50">

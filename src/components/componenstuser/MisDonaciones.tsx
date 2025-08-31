@@ -49,7 +49,7 @@ useEffect(() => {
   }
 
   fetchDonaciones();
-}, []);
+}, [token]);
 
 
   return (

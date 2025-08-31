@@ -50,7 +50,7 @@ export default function DashboardSencillo() {
           direccion: usuario.direccion || '',
           ciudad: usuario.ciudad || '',
           pais: usuario.pais || '',
-          imagenPerfil: usuario.foto || '',
+          imagenPerfil: usuario.imagenPerfil || '',
         });
       } else {
         const {
