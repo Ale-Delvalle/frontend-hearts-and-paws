@@ -28,7 +28,7 @@ export default function DashboardSencillo() {
 
   const [isEditando, setIsEditando] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [previewUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   
 
   const [userData, setUserData] = useState<{
@@ -177,14 +177,20 @@ export default function DashboardSencillo() {
   const handleActualizar = async (archivo: File) => {
     setUploading(true);
     try {
-      await ActualizarPerfil(archivo, token!);
-      const nuevaUrl = URL.createObjectURL(archivo);
+      const respuesta = await ActualizarPerfil(archivo, token!);
+      // Obtener la URL real del backend (Cloudinary)
+      const urlReal = respuesta.imagenPerfil;
+      
       setUserData((prev) => ({
         ...prev,
-        imagenPerfil: nuevaUrl,
+        imagenPerfil: urlReal,
       }));
+      
+      setPreviewUrl(urlReal);
+      toast.success("Foto de perfil actualizada ✅");
     } catch (error) {
       console.error("Error al subir imagen:", error);
+      toast.error("Error al actualizar la foto de perfil");
     } finally {
       setUploading(false);
     }

@@ -21,6 +21,7 @@ export async function registerOng(
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/registro-ong`,{
       method: "POST",
+      credentials: 'include',
       body: dataToSend,
     });
 
@@ -29,9 +30,9 @@ export async function registerOng(
     if (res.ok && response.ok) {
       return { ok: true, mensaje: response.mensaje };
     } else if (res.status === 409) {
-      return { ok: false, mensaje: response.mensaje  ("El correo ya está registrado") };
+      return { ok: false, mensaje: response.mensaje || "El correo ya está registrado" };
     } else {
-      return { ok: false, mensaje: response.mensaje ("Error al registrar ONG") };
+      return { ok: false, mensaje: response.mensaje || "Error al registrar ONG" };
     }
   } catch {
     return { ok: false, mensaje: "Error de red o servidor" };
