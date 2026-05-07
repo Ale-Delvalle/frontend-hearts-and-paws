@@ -21,7 +21,12 @@ import {
 import { supabase } from '@/lib/supabaseClient';
 import { User } from '@supabase/supabase-js';
 
-const Navbar = () => {
+interface ThemeProps {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -133,7 +138,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`sticky top-0 w-full z-50 transition-all ${
-        scrolled ? 'bg-white/70 backdrop-blur-md shadow-md' : 'bg-white/90'
+        scrolled ? 'bg-[color:var(--card)]/95 backdrop-blur-md shadow-md' : 'bg-[color:var(--card)]/90'
       }`}
     >
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -146,13 +151,13 @@ const Navbar = () => {
             <span>Hearts&Paws</span>
           </Link>
 
-          <div className="hidden space-x-6 md:flex">
+          <div className="hidden space-x-6 md:flex items-center">
             {menuLinks.map((link) =>
               link.isButton ? (
                 <button
                   key={link.label}
                   onClick={link.onClick}
-                  className="flex items-center gap-1 text-gray-700 transition hover:text-pink-600"
+                  className="flex items-center gap-1 text-[color:var(--foreground)] transition hover:text-pink-600"
                 >
                   <span className="text-pink-500">{link.icon}</span>
                   {link.label}
@@ -162,19 +167,26 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href!}
                   onClick={link.onClick}
-                  className="flex items-center gap-1 text-gray-700 transition hover:text-pink-600"
+                  className="flex items-center gap-1 text-[color:var(--foreground)] transition hover:text-pink-600"
                 >
                   <span className="text-pink-500">{link.icon}</span>
                   {link.label}
                 </Link>
               )
             )}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="rounded-full border border-gray-300 bg-[color:var(--surface)] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:bg-gray-100"
+            >
+              {theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro'}
+            </button>
           </div>
 
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-700 focus:outline-none"
+              className="text-[color:var(--foreground)] focus:outline-none"
             >
               {isOpen ? (
                 <FaTimes className="text-2xl" />
@@ -189,7 +201,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="px-4 py-4 space-y-2 bg-white shadow-md md:hidden"
+            className="px-4 py-4 space-y-2 bg-[color:var(--card)] shadow-md md:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -203,7 +215,7 @@ const Navbar = () => {
                     setIsOpen(false);
                     link.onClick?.(e);
                   }}
-                  className="flex items-center gap-2 text-gray-700 hover:text-pink-600"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-pink-600"
                 >
                   <span className="text-pink-500">{link.icon}</span>
                   {link.label}
@@ -213,13 +225,23 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href!}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-2 text-gray-700 hover:text-pink-600"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-pink-600"
                 >
                   <span className="text-pink-500">{link.icon}</span>
                   {link.label}
                 </Link>
               )
             )}
+            <button
+              type="button"
+              onClick={() => {
+                toggleTheme();
+                setIsOpen(false);
+              }}
+              className="w-full rounded-full border border-gray-300 bg-[color:var(--surface)] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:bg-gray-100"
+            >
+              {theme === 'dark' ? 'Modo Oscuro' : 'Modo Claro'}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

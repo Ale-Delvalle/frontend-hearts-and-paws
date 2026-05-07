@@ -41,7 +41,7 @@ export default function FormBase<T>({
   return (
     <form
       onSubmit={onSubmit}
-      className="bg-white max-w-2xl mx-auto p-8 rounded-xl shadow-lg border border-pink-600 space-y-6"
+      className="bg-[color:var(--card)] max-w-2xl mx-auto p-8 rounded-xl shadow-lg border border-pink-600 space-y-6"
     >
       <h2 className="text-3xl font-bold text-pink-600 text-center">{title}</h2>
 
@@ -49,7 +49,7 @@ export default function FormBase<T>({
         <div key={String(name)}>
           <label
             htmlFor={String(name)}
-            className="block text-sm font-medium text-gray-800 mb-1"
+            className="block text-sm font-medium text-[color:var(--foreground)] mb-1"
           >
             {label}
           </label>
@@ -64,7 +64,7 @@ export default function FormBase<T>({
               rows={rows}
               className={`w-full border ${
                 errors[name] ? 'border-red-500' : 'border-gray-300'
-              } rounded-md px-4 py-2 resize-none focus:ring-2 focus:ring-pink-500 focus:outline-none`}
+              } rounded-md px-4 py-2 resize-none focus:ring-2 focus:ring-pink-500 focus:outline-none text-[color:var(--foreground)] bg-[color:var(--input-background)] placeholder:text-[color:var(--input-placeholder)]`}
             />
           ) : (
             <div className="relative">
@@ -83,13 +83,13 @@ export default function FormBase<T>({
                 disabled={isLoading}
                 className={`w-full border ${
                   errors[name] ? 'border-red-500' : 'border-gray-300'
-                } rounded-md px-4 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none`}
+                } rounded-md px-4 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none text-[color:var(--foreground)] bg-[color:var(--input-background)] placeholder:text-[color:var(--input-placeholder)]`}
               />
               {name === 'contrasena' && showPasswordToggle && setShowPassword && (
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2 text-gray-600"
+                  className="absolute right-3 top-2 text-[color:var(--foreground)]"
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>

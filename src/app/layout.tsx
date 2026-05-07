@@ -38,12 +38,12 @@ export default function RootLayout({
         <AuthProvider>
           <UsuarioAuthProvider>
             <OngAuthProvider>
-              <NavbarWrapper />              
-             <main className=" bg-pink-50 min-h-screen">{children}</main>
+              <NavbarWrapper />
+              <main className="bg-[color:var(--background)] min-h-screen">{children}</main>
               <Toaster />
             </OngAuthProvider>
           </UsuarioAuthProvider>
-         </AuthProvider>
+        </AuthProvider>
       </body>
     </html>
   );

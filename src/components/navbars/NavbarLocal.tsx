@@ -24,7 +24,12 @@ import {
 import { useOngAuth } from "@/context/OngAuthContext";
 import { useUsuarioAuth } from "@/context/UsuarioAuthContext";
 
-const Navbar = () => {
+interface ThemeProps {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
@@ -169,7 +174,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`sticky top-0 w-full z-50 transition-all ${
-        scrolled ? "bg-white/70 backdrop-blur-md shadow-md" : "bg-white/90"
+        scrolled ? "bg-[color:var(--card)]/95 backdrop-blur-md shadow-md" : "bg-[color:var(--card)]/90"
       }`}
     >
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -193,7 +198,7 @@ const Navbar = () => {
                       e.preventDefault();
                       link.onClick?.();
                     }}
-                    className="flex items-center gap-1 text-lg font-medium text-gray-800 transition hover:text-pink-600 whitespace-nowrap"
+                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] transition hover:text-pink-600 whitespace-nowrap"
                   >
                     <span className="text-2xl text-pink-500">{link.icon}</span>
                     {link.label}
@@ -204,7 +209,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-lg font-medium text-gray-800 transition hover:text-pink-600 whitespace-nowrap"
+                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] transition hover:text-pink-600 whitespace-nowrap"
                   >
                     <span className="text-2xl text-pink-500">{link.icon}</span>
                     {link.label}
@@ -213,12 +218,12 @@ const Navbar = () => {
 
                 {/* Dropdown solo si hay subItems y está abierto */}
                 {link.subItems && showHistorialDropdown && (
-                  <div className="absolute left-0 z-10 mt-2 w-48 bg-white rounded shadow-lg">
+                  <div className="absolute left-0 z-10 mt-2 w-48 bg-[color:var(--card)] rounded shadow-lg">
                     {link.subItems.map((sub) => (
                       <Link
                         key={sub.label}
                         href={sub.href}
-                        className="block px-4 py-2 text-gray-700 hover:bg-pink-100"
+                        className="block px-4 py-2 text-[color:var(--foreground)] hover:bg-pink-100"
                       >
                         {sub.label}
                       </Link>
@@ -227,13 +232,20 @@ const Navbar = () => {
                 )}
               </div>
             ))}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="rounded-full border border-gray-300 bg-[color:var(--surface)] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:bg-gray-100"
+            >
+              {theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro'}
+            </button>
           </div>
 
           {/* Mobile Toggle */}
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-700 focus:outline-none"
+              className="text-[color:var(--foreground)] focus:outline-none"
             >
               {isOpen ? (
                 <FaTimes className="text-4xl" />
@@ -249,7 +261,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="px-4 py-4 space-y-2 bg-white shadow-md md:hidden"
+            className="px-4 py-4 space-y-2 bg-[color:var(--card)] shadow-md md:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -268,7 +280,7 @@ const Navbar = () => {
                       setIsOpen(false);
                     }
                   }}
-                  className="flex items-center gap-2 text-gray-700 hover:text-pink-600"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-pink-600"
                 >
                   <span className="text-pink-500">{link.icon}</span>
                   {link.label}
@@ -282,7 +294,7 @@ const Navbar = () => {
                         key={sub.label}
                         href={sub.href}
                         onClick={() => setIsOpen(false)}
-                        className="block text-gray-600 hover:text-pink-600"
+                        className="block text-[color:var(--foreground)] hover:text-pink-600"
                       >
                         - {sub.label}
                       </a>
@@ -291,6 +303,16 @@ const Navbar = () => {
                 )}
               </div>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                toggleTheme();
+                setIsOpen(false);
+              }}
+              className="w-full rounded-full border border-gray-300 bg-[color:var(--surface)] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:bg-gray-100"
+            >
+              {theme === 'dark' ? 'Modo Oscuro' : 'Modo Claro'}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
