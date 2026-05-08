@@ -21,13 +21,13 @@ html.light {
 }
 
 html.dark {
-  --background: #0b1120;
+  --background: #000000;
   --foreground: #f8fafc;
-  --card: #111827;
-  --input-background: #111827;
-  --input-border: #334155;
+  --card: #1c1c1c;
+  --input-background: #1c1c1c;
+  --input-border: #333333;
   --input-placeholder: #94a3b8;
-  --surface: #111827;
+  --surface: #1c1c1c;
 }
 
 @theme inline {
@@ -73,7 +73,7 @@ html.dark .bg-gray-100,
 html.dark .bg-white\/80,
 html.dark .bg-white\/90,
 html.dark .bg-white\/70 {
-  background-color: #111827 !important;
+  background-color: #1c1c1c !important;
 }
 
 html.dark .bg-pink-200,
@@ -84,7 +84,7 @@ html.dark .border-gray-300,
 html.dark .border-gray-200,
 html.dark .border-gray-100,
 html.dark .border-gray-500 {
-  border-color: #334155 !important;
+  border-color: #333333 !important;
 }
 
 html.dark .text-gray-800,
@@ -103,5 +103,5 @@ html.dark .text-gray-200 {
 
 html.dark .hover\:bg-pink-100:hover,
 html.dark .hover\:bg-gray-100:hover {
-  background-color: #1f2937 !important;
+  background-color: #262626 !important;
 }

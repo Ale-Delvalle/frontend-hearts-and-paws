@@ -154,6 +154,14 @@ type TablaSimpleProps = {
 };
 
 function TablaSimple({ data }: TablaSimpleProps) {
+  if (!data || data.length === 0) {
+    return (
+      <div className="p-4 text-center text-gray-500 bg-white border border-pink-200 rounded-lg shadow">
+        No hay datos para mostrar
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-x-auto bg-white border border-pink-200 rounded-lg shadow">
       <table className="min-w-full divide-y divide-pink-200">
