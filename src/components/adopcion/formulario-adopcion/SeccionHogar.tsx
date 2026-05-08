@@ -14,7 +14,7 @@ export default function SeccionHogar({ formData, onChange }: Props) {
 
   return (
     <div className="max-w-xl mx-auto bg-white border border-pink-300 rounded-xl p-8 shadow-md">
-      <h2 className="text-3xl font-semibold text-pink-600 mb-6 text-center">
+      <h2 className="text-3xl font-semibold text-[#800000] mb-6 text-center">
         Sobre tu Hogar
       </h2>
 

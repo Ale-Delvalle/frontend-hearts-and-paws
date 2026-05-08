@@ -141,7 +141,7 @@ export default function DonacionPage() {
   return (
     <div className="flex flex-col items-center justify-start py-10 px-4 bg-pink-50 min-h-screen">
       <div className="w-full max-w-7xl">
-        <h1 className="text-4xl font-extrabold text-center text-pink-600 mb-2">
+        <h1 className="text-4xl font-extrabold text-center text-[#800000] mb-2">
           Ayudá a una mascota en{" "}
           <span className="italic">situación crítica</span>
         </h1>
@@ -164,7 +164,7 @@ export default function DonacionPage() {
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
               <svg
-                className="w-5 h-5 text-pink-600"
+                className="w-5 h-5 text-[#800000]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}
@@ -192,7 +192,7 @@ export default function DonacionPage() {
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
               <svg
-                className="w-5 h-5 text-pink-600"
+                className="w-5 h-5 text-[#800000]"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={2}

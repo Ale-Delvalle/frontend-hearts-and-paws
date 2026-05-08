@@ -53,12 +53,12 @@ export default function DonacionesRegistradas() {
     fetchDonaciones();
   }, []);
 
-  if (loading) return <p className="text-pink-600">Cargando donaciones...</p>;
+  if (loading) return <p className="text-[#800000]">Cargando donaciones...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <div className="p-6 bg-pink-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-pink-700 mb-6">
+      <h1 className="text-3xl font-bold text-[#800000] mb-6">
         Donaciones Registradas
       </h1>
 
@@ -69,7 +69,7 @@ export default function DonacionesRegistradas() {
             className="bg-white rounded-xl shadow-md p-4 border border-pink-200 flex flex-col justify-between"
           >
             <div>
-              <h2 className="text-xl font-bold text-pink-700 mb-2">
+              <h2 className="text-xl font-bold text-[#800000] mb-2">
                 {donacion.casoDonacion?.caso?.titulo || "Donación"}
               </h2>
 

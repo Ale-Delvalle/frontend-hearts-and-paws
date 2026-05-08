@@ -50,7 +50,7 @@ export default function AdopcionesRegistradas() {
 
   return (
     <div className="p-6 bg-pink-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-pink-700 mb-6">
+      <h1 className="text-3xl font-bold text-[#800000] mb-6">
         Adopciones Registradas
       </h1>
 
@@ -69,7 +69,7 @@ export default function AdopcionesRegistradas() {
                 className="w-32 h-32 object-cover rounded"
               />
               <div>
-                <h2 className="text-lg font-bold text-pink-700">
+                <h2 className="text-lg font-bold text-[#800000]">
                   {adopcion.caso.titulo}
                 </h2>
                 <p className="text-sm text-gray-700">

@@ -75,7 +75,7 @@ const montoEnPesos = donacion.monto * TASA_CAMBIO;
       className="object-cover"
     />
   ) : (
-    <span className="text-pink-500 text-5xl z-10">🐾</span>
+    <span className="text-[#800000] text-5xl z-10">🐾</span>
   )}
 </div>
 
@@ -83,7 +83,7 @@ const montoEnPesos = donacion.monto * TASA_CAMBIO;
 
       {/* Info principal */}
       <div className="flex-1">
-        <h2 className="text-xl font-semibold text-pink-600 mb-1">{donacion.mascota.nombre}</h2>
+        <h2 className="text-xl font-semibold text-[#800000] mb-1">{donacion.mascota.nombre}</h2>
         <p className="text-gray-700 font-medium">{donacion.organizacion.nombre}</p>
         <p className="text-gray-600 text-sm mt-1">
   <span className="font-semibold">Monto:</span> ${donacion.monto.toLocaleString()} USD (~${montoEnPesos.toLocaleString()} ARS)

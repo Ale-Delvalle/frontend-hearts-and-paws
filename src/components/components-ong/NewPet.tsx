@@ -129,7 +129,7 @@ const NewPet = () => {
     return (
       <div className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm flex items-center justify-center pointer-events-auto">
         <div className="flex flex-col items-center gap-4">
-          <div className="text-center text-pink-600 font-semibold text-lg animate-pulse">
+          <div className="text-center text-[#800000] font-semibold text-lg animate-pulse">
             Registrando mascota...<br />
             Redirigiendo al formulario de caso, por favor aguardá.
           </div>
@@ -142,7 +142,7 @@ const NewPet = () => {
   return (
     <div className="min-h-screen pt-20 flex justify-center bg-pink-50">
       <div className="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg text-gray-800">
-        <h1 className="text-3xl font-bold mb-8 text-center text-pink-600">
+        <h1 className="text-3xl font-bold mb-8 text-center text-[#800000]">
           Registrar Nueva Mascota
         </h1>
 

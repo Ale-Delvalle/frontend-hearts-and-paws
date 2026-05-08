@@ -109,7 +109,7 @@ export default function MascotaCard({
       {mostrarFavorito && (
         <button
           onClick={toggleFavorito}
-          className="absolute top-3 right-3 text-pink-500 text-3xl z-10"
+          className="absolute top-3 right-3 text-[#800000] text-3xl z-10"
           aria-label="Marcar como favorito"
           type="button"
         >
@@ -131,14 +131,14 @@ export default function MascotaCard({
           <>
             <button
               onClick={irAAnterior}
-              className="absolute left-2 text-pink-600 text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
+              className="absolute left-2 text-[#800000] text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
               type="button"
             >
               ◀
             </button>
             <button
               onClick={irASiguiente}
-              className="absolute right-2 text-pink-600 text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
+              className="absolute right-2 text-[#800000] text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
               type="button"
             >
               ▶
@@ -148,7 +148,7 @@ export default function MascotaCard({
       </div>
 
       <div className="p-4 flex-1 flex flex-col justify-between">
-        <h2 className="text-xl font-bold text-pink-600 mb-2">{mascota.nombre}</h2>
+        <h2 className="text-xl font-bold text-[#800000] mb-2">{mascota.nombre}</h2>
 
         {modo === 'donacion' && detalleDonacion && (
           <div className="mb-3">
@@ -186,7 +186,7 @@ export default function MascotaCard({
             className={`w-full border py-2 px-4 rounded-full transition flex items-center justify-center ${
               modo === 'donacion' && metaAlcanzada
                 ? 'border-gray-300 bg-gray-100 cursor-not-allowed'
-                : 'border-pink-600 text-pink-600 hover:bg-pink-50'
+                : 'border-pink-600 text-[#800000] hover:bg-pink-50'
             }`}
             type="button"
             disabled={modo === 'donacion' && metaAlcanzada}
@@ -197,7 +197,7 @@ export default function MascotaCard({
             }
           >
             {modo === 'donacion' && metaAlcanzada ? (
-              <span className="text-lg text-pink-600 font-bold flex items-center gap-1">
+              <span className="text-lg text-[#800000] font-bold flex items-center gap-1">
                 ¡Meta alcanzada! <span className="text-lg">🐾</span>
               </span>
             ) : (

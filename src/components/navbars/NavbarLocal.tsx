@@ -136,12 +136,12 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
         {
           label: "Perfil",
           href: "/dashboard/usuario",
-          icon: <FaUser className="text-pink-500" />,
+          icon: <FaUser className="text-[#800000]" />,
         },
         {
           label: "Te necesitan",
           href: "/donacion",
-          icon: <FaHandsHelping className="text-pink-500" />,
+          icon: <FaHandsHelping className="text-[#800000]" />,
         },
         { label: "Adoptar",
            href: "/adoptar/adopcion", 
@@ -160,7 +160,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       {
         label: "Te necesitan",
         href: "/donacion",
-        icon: <FaHandsHelping className="text-pink-500" />,
+        icon: <FaHandsHelping className="text-[#800000]" />,
       },
       { label: "Adoptar", href: "/adoptar/adopcion", icon: <FaPaw /> },
       { label: "Registro", href: "/register", icon: <FaRegClipboard /> },
@@ -182,7 +182,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-1 text-2xl font-semibold text-pink-600 whitespace-nowrap"
+            className="flex items-center gap-1 text-2xl font-semibold text-[#800000] whitespace-nowrap"
           >
             <FaPaw className="text-3xl" />
             <span>Hearts&Paws</span>
@@ -198,9 +198,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                       e.preventDefault();
                       link.onClick?.();
                     }}
-                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] transition hover:text-pink-600 whitespace-nowrap"
+                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] transition hover:text-[#800000] whitespace-nowrap"
                   >
-                    <span className="text-2xl text-pink-500">{link.icon}</span>
+                    <span className="text-2xl text-[#800000]">{link.icon}</span>
                     {link.label}
                     {link.subItems && (
                       <FaChevronDown className="ml-1 text-sm" />
@@ -209,9 +209,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] transition hover:text-pink-600 whitespace-nowrap"
+                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] transition hover:text-[#800000] whitespace-nowrap"
                   >
-                    <span className="text-2xl text-pink-500">{link.icon}</span>
+                    <span className="text-2xl text-[#800000]">{link.icon}</span>
                     {link.label}
                   </Link>
                 )}
@@ -280,9 +280,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                       setIsOpen(false);
                     }
                   }}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-pink-600"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-[#800000]"
                 >
-                  <span className="text-pink-500">{link.icon}</span>
+                  <span className="text-[#800000]">{link.icon}</span>
                   {link.label}
                 </a>
 
@@ -294,7 +294,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                         key={sub.label}
                         href={sub.href}
                         onClick={() => setIsOpen(false)}
-                        className="block text-[color:var(--foreground)] hover:text-pink-600"
+                        className="block text-[color:var(--foreground)] hover:text-[#800000]"
                       >
                         - {sub.label}
                       </a>

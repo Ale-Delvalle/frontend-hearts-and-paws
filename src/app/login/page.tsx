@@ -19,7 +19,7 @@ export default function LoginSelector() {
       style={{ padding: '1rem' }}
     >
       <div className="max-w-xl w-full bg-white p-8 rounded-xl shadow-lg border border-pink-300 box-border">
-        <h1 className="text-3xl font-bold text-pink-600 text-center mb-8">
+        <h1 className="text-3xl font-bold text-[#800000] text-center mb-8">
           ¿Cómo querés iniciar sesión?
         </h1>
 
@@ -33,14 +33,14 @@ export default function LoginSelector() {
 
           <button
             onClick={() => router.push('/login/login-ong')}
-            className="bg-pink-100 hover:bg-pink-200 text-pink-700 font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-pink-400"
+            className="bg-pink-100 hover:bg-pink-200 text-[#800000] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-pink-400"
           >
             Iniciar sesión como ONG
           </button>
 
           <button
             onClick={() => router.push('/login/login-user')}
-            className="bg-pink-100 hover:bg-pink-200 text-pink-700 font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-pink-400"
+            className="bg-pink-100 hover:bg-pink-200 text-[#800000] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-pink-400"
           >
             Iniciar sesión como Usuario
           </button>

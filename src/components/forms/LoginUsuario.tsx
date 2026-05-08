@@ -97,7 +97,7 @@ export default function LoginUsuario() {
       onSubmit={handleLogin}
       className="max-w-md p-6 mx-auto bg-white border border-pink-300 shadow-md rounded-xl"
     >
-      <h2 className="mb-6 text-3xl font-bold text-center text-pink-600">
+      <h2 className="mb-6 text-3xl font-bold text-center text-[#800000]">
         Iniciar sesión
       </h2>
 
@@ -150,7 +150,7 @@ export default function LoginUsuario() {
         <button
           type="button"
           onClick={() => router.push("/register")}
-          className="text-pink-600 font-semibold hover:underline"
+          className="text-[#800000] font-semibold hover:underline"
         >
           Registrate acá
         </button>
@@ -160,7 +160,7 @@ export default function LoginUsuario() {
     {loading && (
   <div className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm flex items-center justify-center pointer-events-auto">
     <div className="flex flex-col items-center gap-4">
-      <div className="text-center text-pink-600 font-semibold text-lg animate-pulse">
+      <div className="text-center text-[#800000] font-semibold text-lg animate-pulse">
         Iniciando sesión...<br />
         Redirigiendo a tu perfil, por favor aguardá.
       </div>

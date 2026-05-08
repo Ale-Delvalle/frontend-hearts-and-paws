@@ -43,7 +43,7 @@ export default function FormBase<T>({
       onSubmit={onSubmit}
       className="bg-[color:var(--card)] max-w-2xl mx-auto p-8 rounded-xl shadow-lg border border-pink-600 space-y-6"
     >
-      <h2 className="text-3xl font-bold text-pink-600 text-center">{title}</h2>
+      <h2 className="text-3xl font-bold text-[#800000] text-center">{title}</h2>
 
       {fields.map(({ name, label, type = 'text', multiline = false, rows = 4 }) => (
         <div key={String(name)}>

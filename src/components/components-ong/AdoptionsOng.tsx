@@ -120,8 +120,8 @@ export default function AdoptionsOng() {
                 height={80}
                 className="w-20 h-20 rounded-full border-2 border-pink-400 object-cover"
               />
-              <p className="text-pink-600 font-semibold text-xl">{mascota.nombre}</p>
-              <span className="ml-auto text-pink-600 font-bold text-2xl select-none">
+              <p className="text-[#800000] font-semibold text-xl">{mascota.nombre}</p>
+              <span className="ml-auto text-[#800000] font-bold text-2xl select-none">
                 {expandida === mascota.id ? "▲" : "▼"}
               </span>
             </button>
@@ -131,7 +131,7 @@ export default function AdoptionsOng() {
                 {solicitudes.length > 0 ? (
                   solicitudes.map((sol) => (
                     <div key={sol.id} className="bg-pink-50 border border-pink-300 rounded-xl p-4">
-                      <p className="font-semibold text-pink-600 mb-2">Solicitante: {sol.usuario.nombre}</p>
+                      <p className="font-semibold text-[#800000] mb-2">Solicitante: {sol.usuario.nombre}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                         <p><strong>Email:</strong> {sol.usuario.email}</p>
                         <p><strong>Teléfono:</strong> {sol.usuario.telefono}</p>
@@ -147,7 +147,7 @@ export default function AdoptionsOng() {
                       </div>
                       <p className="mt-2">
                         <strong>Estado:</strong>{" "}
-                        <span className="capitalize font-semibold text-pink-600">{sol.estado}</span>
+                        <span className="capitalize font-semibold text-[#800000]">{sol.estado}</span>
                       </p>
 
                       {sol.estado === "PENDIENTE" && (

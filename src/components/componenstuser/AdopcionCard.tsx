@@ -47,7 +47,7 @@ export default function AdopcionCard({ adopcion }: AdopcionCardProps) {
 
       <div className="flex-1">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-xl font-bold text-pink-700">{mascota.nombre}</h2>
+          <h2 className="text-xl font-bold text-[#800000]">{mascota.nombre}</h2>
           <span
   className={`text-sm px-4 py-1.5 rounded-full font-semibold capitalize ${
     estadoColor[adopcion.estado as keyof typeof estadoColor] || 'bg-gray-100 text-gray-800'

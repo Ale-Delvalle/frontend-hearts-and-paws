@@ -41,7 +41,7 @@ export default function DonationsOng() {
   return (
     <div className="bg-pink-50 min-h-screen p-6 flex justify-center">
       <div className="max-w-3xl w-full space-y-6">
-       <h1 className="text-2xl font-bold text-pink-600 mb-4 text-center">
+       <h1 className="text-2xl font-bold text-[#800000] mb-4 text-center">
   Historial de Donaciones
 </h1>
 
@@ -59,7 +59,7 @@ export default function DonationsOng() {
                 key={donacion.id}
                 className="bg-white border border-pink-200 rounded-2xl shadow-md p-6 space-y-2"
               >
-                <p className="text-pink-700 font-semibold text-lg">
+                <p className="text-[#800000] font-semibold text-lg">
                   Donante: {donacion.usuario?.nombre || "Anónimo"}
                 </p>
                 <p>

@@ -54,7 +54,7 @@ export default function Home() {
       transition={{ duration: 0.8 }}
       className="flex flex-col justify-center gap-4"
     >
-      <h2 className="text-3xl font-bold leading-tight md:text-4xl text-pink-600">
+      <h2 className="text-3xl font-bold leading-tight md:text-4xl text-[#800000]">
         Unimos fuerzas <br /> por los que no tienen voz
       </h2>
       <p className="text-gray-700">
@@ -92,15 +92,15 @@ export default function Home() {
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="flex flex-col items-center gap-3">
-            <FaHome className="text-4xl text-pink-400" />
+            <FaHome className="text-4xl text-[#800000]" />
             <p>Registrá tu organización</p>
           </div>
           <div className="flex flex-col items-center gap-3">
-            <FaExclamation className="text-4xl text-pink-400" />
+            <FaExclamation className="text-4xl text-[#800000]" />
             <p>Publicá casos de animales que necesiten ayuda</p>
           </div>
           <div className="flex flex-col items-center gap-3">
-            <FaHandshake className="text-4xl text-pink-400" />
+            <FaHandshake className="text-4xl text-[#800000]" />
             <p>Colaborá con otras organizaciones</p>
           </div>
         </div>

@@ -251,7 +251,7 @@ export default function DashboardSencillo() {
             <div className="relative w-28 h-28">
               <div className="w-28 h-28 rounded-full border-2 border-pink-400 shadow overflow-hidden relative bg-white">
                 {uploading ? (
-                  <span className="text-sm text-pink-500 font-semibold animate-pulse flex items-center justify-center h-full">
+                  <span className="text-sm text-[#800000] font-semibold animate-pulse flex items-center justify-center h-full">
                     Cargando...
                   </span>
                 ) : (
@@ -286,7 +286,7 @@ export default function DashboardSencillo() {
             </div>
 
             <div>
-              <p className="text-2xl font-bold text-pink-700">
+              <p className="text-2xl font-bold text-[#800000]">
                 Hola, {userData.nombre}!
               </p>
               <p className="text-sm text-gray-500">
@@ -316,7 +316,7 @@ export default function DashboardSencillo() {
               <div key={campo}>
                 <label
                   htmlFor={campo}
-                  className="block mb-1 text-sm font-medium text-pink-700 capitalize"
+                  className="block mb-1 text-sm font-medium text-[#800000] capitalize"
                 >
                   {campo}
                 </label>

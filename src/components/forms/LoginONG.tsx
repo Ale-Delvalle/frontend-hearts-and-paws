@@ -79,7 +79,7 @@ export default function LoginOng() {
       onSubmit={handleLogin}
       className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md border border-pink-300"
     >
-      <h2 className="text-3xl font-bold mb-6 text-pink-600 text-center">
+      <h2 className="text-3xl font-bold mb-6 text-[#800000] text-center">
         Iniciar sesión como ONG
       </h2>
 
@@ -110,7 +110,7 @@ export default function LoginOng() {
         <button
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}
-          className="absolute right-3 top-[38px] text-gray-600 hover:text-pink-600"
+          className="absolute right-3 top-[38px] text-gray-600 hover:text-[#800000]"
           tabIndex={-1}
           aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
         >
@@ -169,7 +169,7 @@ export default function LoginOng() {
         <button
           type="button"
           onClick={() => router.push("/register")}
-          className="text-pink-600 font-semibold hover:underline"
+          className="text-[#800000] font-semibold hover:underline"
         >
           Registrate acá
         </button>

@@ -93,7 +93,7 @@ export default function DashboardSencillo() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-pink-50">
-        <p className="text-pink-600 font-semibold text-lg">Cargando usuario...</p>
+        <p className="text-[#800000] font-semibold text-lg">Cargando usuario...</p>
       </div>
     );
   }
@@ -137,7 +137,7 @@ export default function DashboardSencillo() {
                   />
                 )}
                 <div>
-                  <p className="text-lg font-semibold text-pink-700">{`Hola, ${userData.nombre}`}</p>
+                  <p className="text-lg font-semibold text-[#800000]">{`Hola, ${userData.nombre}`}</p>
                 </div>
               </div>
             </header>
@@ -155,7 +155,7 @@ export default function DashboardSencillo() {
 
         {seccionActiva === 'datos' && (
           <section>
-            <h1 className="mb-6 text-3xl font-bold text-pink-700">Mis datos</h1>
+            <h1 className="mb-6 text-3xl font-bold text-[#800000]">Mis datos</h1>
 
             <form
               onSubmit={(e) => {
@@ -169,7 +169,7 @@ export default function DashboardSencillo() {
                   <div key={campo}>
                     <label
                       htmlFor={campo}
-                      className="block mb-1 font-semibold text-pink-700 capitalize"
+                      className="block mb-1 font-semibold text-[#800000] capitalize"
                     >
                       {campo}
                     </label>

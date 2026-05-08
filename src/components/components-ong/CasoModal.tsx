@@ -26,7 +26,7 @@ export default function CasoModal({ caso, visible, onClose }: CasoModalProps) {
       >
         <button
           onClick={onClose}
-          className="absolute top-1 right-1 text-pink-500 hover:text-pink-700 text-3xl font-bold z-10"
+          className="absolute top-1 right-1 text-[#800000] hover:text-[#800000] text-3xl font-bold z-10"
           aria-label="Cerrar"
         >
           &times;
@@ -42,7 +42,7 @@ export default function CasoModal({ caso, visible, onClose }: CasoModalProps) {
           />
         </div>
 
-        <h2 className="text-3xl font-extrabold text-pink-600 mb-4 text-center">
+        <h2 className="text-3xl font-extrabold text-[#800000] mb-4 text-center">
           {caso.titulo}
         </h2>
 

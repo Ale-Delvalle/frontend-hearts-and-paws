@@ -42,14 +42,14 @@ export default function CasoCard({ caso, onConocerHistoria }: Props) {
           <>
             <button
               onClick={irAAnterior}
-              className="absolute left-2 text-pink-600 text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
+              className="absolute left-2 text-[#800000] text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
               type="button"
             >
               ◀
             </button>
             <button
               onClick={irASiguiente}
-              className="absolute right-2 text-pink-600 text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
+              className="absolute right-2 text-[#800000] text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
               type="button"
             >
               ▶
@@ -59,7 +59,7 @@ export default function CasoCard({ caso, onConocerHistoria }: Props) {
       </div>
 
       <div className="p-7 flex-1 flex flex-col justify-between">
-        <h2 className="text-xl font-bold text-pink-600 mb-2">{caso.mascota.nombre}</h2>
+        <h2 className="text-xl font-bold text-[#800000] mb-2">{caso.mascota.nombre}</h2>
 
         <div className="mt-auto">
           <button
@@ -106,7 +106,7 @@ export default function CasoCard({ caso, onConocerHistoria }: Props) {
 //       </div>
 
 //       <div className="p-7 flex-1 flex flex-col justify-between">
-//         <h2 className="text-xl font-bold text-pink-600 mb-2">{caso.mascota.nombre}</h2>
+//         <h2 className="text-xl font-bold text-[#800000] mb-2">{caso.mascota.nombre}</h2>
 
 //         <div className="mt-auto">
 //           <button

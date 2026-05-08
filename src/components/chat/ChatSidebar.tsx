@@ -250,7 +250,7 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
                   className="flex items-center gap-4 p-4 bg-gray-50 border border-gray-200 rounded-xl cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all"
                   onClick={() => onSelectChat(chat.id)}
                 >
-                  <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-700 font-bold text-sm flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-[#800000] font-bold text-sm flex-shrink-0">
                     {inicial}
                   </div>
 

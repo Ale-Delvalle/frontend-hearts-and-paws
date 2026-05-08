@@ -19,7 +19,7 @@ export default function AdopcionExitosaPage() {
   return (
     <div className="min-h-screen flex items-start justify-center bg-pink-50 px-4 pt-30">
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-xl w-full text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold text-pink-600 mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-4">
           ¡Gracias por tu interés en adoptar!
         </h1>
 

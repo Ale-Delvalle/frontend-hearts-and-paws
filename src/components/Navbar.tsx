@@ -91,7 +91,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-pink-600"
+            className="flex items-center gap-2 text-xl font-bold text-[#800000]"
           >
             <FaPaw className="text-2xl" />
             <span>Hearts&Paws</span>
@@ -104,9 +104,9 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="flex items-center gap-1 text-gray-700 transition hover:text-pink-600"
+                className="flex items-center gap-1 text-gray-700 transition hover:text-[#800000]"
               >
-                <span className="text-pink-500">{link.icon}</span>
+                <span className="text-[#800000]">{link.icon}</span>
                 {link.label}
               </a>
             ))}
@@ -143,9 +143,9 @@ const Navbar = () => {
                 key={link.label}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-2 text-gray-700 hover:text-pink-600"
+                className="flex items-center gap-2 text-gray-700 hover:text-[#800000]"
               >
-                <span className="text-pink-500">{link.icon}</span>
+                <span className="text-[#800000]">{link.icon}</span>
                 {link.label}
               </a>
             ))}

@@ -32,7 +32,7 @@ export default function OngsRechazadas() {
 
   return (
     <div className="min-h-screen bg-pink-100 p-6">
-      <h1 className="text-2xl font-bold text-pink-700 mb-6 text-center">
+      <h1 className="text-2xl font-bold text-[#800000] mb-6 text-center">
         Organizaciones Rechazadas
       </h1>
 
@@ -49,17 +49,17 @@ export default function OngsRechazadas() {
                 className="w-24 h-24 object-cover border-4 border-pink-500 rounded-full shadow"
               />
               <div>
-                <h2 className="text-lg font-bold text-pink-700">{org.nombre}</h2>
+                <h2 className="text-lg font-bold text-[#800000]">{org.nombre}</h2>
                 <p className="text-sm text-gray-600">{org.ciudad}</p>
                 <p className="text-sm text-gray-500 mt-2">{org.descripcion}</p>
-                <p className="text-sm text-pink-500 mt-2">{org.email}</p>
+                <p className="text-sm text-[#800000] mt-2">{org.email}</p>
               </div>
             </div>
           </div>
         ))}
 
         {ongs.length === 0 && (
-          <p className="col-span-full text-center text-pink-600">
+          <p className="col-span-full text-center text-[#800000]">
             No hay Organizaciones rechazadas.
           </p>
         )}

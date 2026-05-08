@@ -71,11 +71,11 @@ export default function OrganizacionesPanel() {
           <div className="flex justify-center mb-6">
             <div className="bg-white shadow rounded-lg p-4 w-fit border border-pink-300">
               <p className="text-sm text-gray-600">Total Aprobadas</p>
-              <p className="text-2xl font-bold text-pink-700">{totalOrganizaciones}</p>
+              <p className="text-2xl font-bold text-[#800000]">{totalOrganizaciones}</p>
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold text-pink-800">Organizaciones Registradas</h1>
+          <h1 className="text-2xl font-bold text-[#800000]">Organizaciones Registradas</h1>
 
           {/* Filtros */}
           <div className="flex flex-wrap gap-4 mb-6">
@@ -104,7 +104,7 @@ export default function OrganizacionesPanel() {
 
             <button
               onClick={handleLimpiar}
-              className="bg-gray-300 text-pink-700 px-4 py-2 rounded hover:bg-gray-400 transition"
+              className="bg-gray-300 text-[#800000] px-4 py-2 rounded hover:bg-gray-400 transition"
             >
               Limpiar filtros
             </button>
@@ -127,7 +127,7 @@ export default function OrganizacionesPanel() {
                   <div>
                     <p className="text-lg font-semibold text-gray-800">{org.nombre}</p>
                     <p className="text-sm text-gray-700 mb-1">{org.email}</p>
-                    <span className="inline-block px-2 py-1 text-xs bg-pink-100 text-pink-700 rounded-full">
+                    <span className="inline-block px-2 py-1 text-xs bg-pink-100 text-[#800000] rounded-full">
                       {org.plan}
                     </span>
                   </div>
@@ -135,7 +135,7 @@ export default function OrganizacionesPanel() {
                 <p className="text-xs text-gray-500 mt-2">
                   🗓️ Registrado el {new Date(org.creado_en).toLocaleDateString("es-AR")}
                 </p>
-                <p className="text-sm text-pink-600 mt-1 underline">Ver más...</p>
+                <p className="text-sm text-[#800000] mt-1 underline">Ver más...</p>
               </div>
             ))}
           </div>
@@ -151,7 +151,7 @@ export default function OrganizacionesPanel() {
             >
               ✖
             </button>
-            <h2 className="text-xl font-bold text-pink-700 mb-2">
+            <h2 className="text-xl font-bold text-[#800000] mb-2">
               {organizacionSeleccionada.nombre}
             </h2>
             <img

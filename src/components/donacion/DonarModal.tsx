@@ -88,7 +88,7 @@ export default function DonarModal({
           onClick={onClose}
           disabled={loading}
           aria-label="Cerrar modal"
-          className="absolute top-2 right-3 text-pink-500 hover:text-pink-700 text-3xl font-bold z-10"
+          className="absolute top-2 right-3 text-[#800000] hover:text-[#800000] text-3xl font-bold z-10"
         >
           &times;
         </button>
@@ -97,7 +97,7 @@ export default function DonarModal({
         {loading && (
   <div className="absolute inset-0 z-30 bg-white bg-opacity-95 flex flex-col items-center justify-center text-center px-6">
     <div className="animate-spin border-4 border-pink-300 border-t-transparent rounded-full w-12 h-12 mb-4"></div>
-    <p className="text-pink-600 font-semibold text-lg">
+    <p className="text-[#800000] font-semibold text-lg">
       Redirigiéndote a Stripe para completar el pago...
     </p>
     <p className="text-sm text-gray-500 mt-2">
@@ -107,7 +107,7 @@ export default function DonarModal({
 )}
 
 
-        <h2 className="text-2xl font-extrabold text-pink-600 text-center mb-2">Doná para ayudar 🐾</h2>
+        <h2 className="text-2xl font-extrabold text-[#800000] text-center mb-2">Doná para ayudar 🐾</h2>
         <p className="text-center mb-4 text-gray-600">
           Faltan <strong>${faltante}</strong> para alcanzar la meta.
         </p>
@@ -121,7 +121,7 @@ export default function DonarModal({
               className={`px-4 py-2 rounded-full transition ${
                 monto === op
                   ? 'bg-pink-500 text-white'
-                  : 'border border-pink-300 text-pink-600 bg-white hover:bg-pink-100'
+                  : 'border border-pink-300 text-[#800000] bg-white hover:bg-pink-100'
               }`}
             >
               ${op}

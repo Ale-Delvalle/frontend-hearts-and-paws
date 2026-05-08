@@ -178,7 +178,7 @@ export default function MisFavoritos() {
       </nav>
 
       <main className="flex-1 p-10">
-        <h1 className="text-3xl font-bold mb-6 text-pink-700 text-center">Mis Favoritos</h1>
+        <h1 className="text-3xl font-bold mb-6 text-[#800000] text-center">Mis Favoritos</h1>
 
         {loading && <p className="text-center text-gray-500 mt-10">⏳ Cargando tus favoritos...</p>}
         {error && <p className="text-center text-red-600 mt-10">{error}</p>}

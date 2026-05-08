@@ -85,13 +85,13 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        <h1 className="flex items-center mb-6 text-3xl font-bold text-pink-700">
-          <MdVerified className="mr-2 text-pink-600" />
+        <h1 className="flex items-center mb-6 text-3xl font-bold text-[#800000]">
+          <MdVerified className="mr-2 text-[#800000]" />
           Solicitudes de Verificación de ONGs
         </h1>
 
         {loading ? (
-          <div className="font-semibold text-center text-pink-700">
+          <div className="font-semibold text-center text-[#800000]">
             Cargando solicitudes...
           </div>
         ) : requests.length === 0 ? (
@@ -117,7 +117,7 @@ export default function AdminDashboard() {
                 {/* Información textual */}
                 <div className="flex flex-col justify-between">
                   <div>
-                    <h2 className="mb-1 text-xl font-semibold text-pink-800">
+                    <h2 className="mb-1 text-xl font-semibold text-[#800000]">
                       {req.nombre}
                     </h2>
                     <p className="mb-1 text-sm text-gray-600">

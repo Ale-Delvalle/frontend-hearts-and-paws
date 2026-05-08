@@ -81,15 +81,15 @@ export function Vistausuario() {
   return (
     <div className="min-h-screen bg-pink-100 p-6">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-pink-700 mb-6 text-center">
+        <h2 className="text-3xl font-bold text-[#800000] mb-6 text-center">
           Usuarios Logueados
         </h2>
 
         {/* Tarjeta de total de usuarios */}
         <div className="mb-6 flex justify-center">
           <div className="bg-white border border-pink-300 rounded-lg shadow-md px-6 py-4 text-center">
-            <p className="text-sm text-pink-500">Usuarios registrados</p>
-            <p className="text-2xl font-bold text-pink-700">
+            <p className="text-sm text-[#800000]">Usuarios registrados</p>
+            <p className="text-2xl font-bold text-[#800000]">
               {usuarios.length}
             </p>
           </div>
@@ -128,7 +128,7 @@ export function Vistausuario() {
               setFiltroRol("Todos");
               obtenerUsuarios(); 
             }}
-            className="px-4 py-2 bg-gray-300 text-pink-700 rounded-md hover:bg-gray-400 transition"
+            className="px-4 py-2 bg-gray-300 text-[#800000] rounded-md hover:bg-gray-400 transition"
           >
             Limpiar filtros
           </button>
@@ -173,15 +173,15 @@ export function Vistausuario() {
                   className="w-16 h-16 rounded-full object-cover border-2 border-pink-500"
                 />
                 <div>
-                  <p className="text-lg font-semibold text-pink-800">
+                  <p className="text-lg font-semibold text-[#800000]">
                     {user.nombre}
                   </p>
-                  <p className="text-sm text-pink-600">{user.email}</p>
-                  <p className="text-sm text-pink-500">
+                  <p className="text-sm text-[#800000]">{user.email}</p>
+                  <p className="text-sm text-[#800000]">
                     {user.ciudad}, {user.pais}
                   </p>
                   {user.rol && (
-                    <p className="text-xs text-pink-700 bg-pink-300 rounded px-2 mt-1 inline-block">
+                    <p className="text-xs text-[#800000] bg-pink-300 rounded px-2 mt-1 inline-block">
                       Rol: {user.rol}
                     </p>
                   )}
@@ -191,7 +191,7 @@ export function Vistausuario() {
           ))}
 
           {usuariosFiltrados.length === 0 && (
-            <p className="text-center text-pink-600 col-span-full">
+            <p className="text-center text-[#800000] col-span-full">
               No hay usuarios con esos filtros.
             </p>
           )}
@@ -212,12 +212,12 @@ export function Vistausuario() {
           >
             <button
               onClick={cerrarModal}
-              className="absolute top-2 right-4 text-pink-700 hover:text-pink-900 text-2xl font-bold"
+              className="absolute top-2 right-4 text-[#800000] hover:text-[#800000] text-2xl font-bold"
             >
               &times;
             </button>
 
-            <h3 className="text-xl font-bold text-pink-700 mb-4">
+            <h3 className="text-xl font-bold text-[#800000] mb-4">
               Detalles de {usuarioSeleccionado.nombre}
             </h3>
             <div className="space-y-2 text-sm text-gray-700">

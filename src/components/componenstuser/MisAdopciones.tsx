@@ -73,7 +73,7 @@ export default function MisAdopciones() {
 
       {/* Main content */}
       <main className="flex-1 p-10">
-        <h1 className="text-3xl font-bold mb-6 text-pink-700 text-center">Mis Adopciones</h1>
+        <h1 className="text-3xl font-bold mb-6 text-[#800000] text-center">Mis Adopciones</h1>
 
 
         {loading && (

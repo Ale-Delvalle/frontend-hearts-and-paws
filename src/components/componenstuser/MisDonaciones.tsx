@@ -96,7 +96,7 @@ useEffect(() => {
 
       {/* Contenido principal */}
       <main className="flex-1 p-10 max-w-5xl mx-auto w-full">
-        <h1 className="text-3xl font-bold text-pink-700 mb-6 text-center">Mis Donaciones</h1>
+        <h1 className="text-3xl font-bold text-[#800000] mb-6 text-center">Mis Donaciones</h1>
 
 
         

@@ -76,7 +76,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
     {
       label: 'Te necesitan',
       href: '#casos',
-      icon: <FaHeart className="text-pink-500" />,
+      icon: <FaHeart className="text-[#800000]" />,
     },
     { label: 'Adoptar', href: '/adoptar/adopcion', icon: <FaPaw /> },
     { label: 'Registro', href: '/register', icon: <FaRegClipboard /> },
@@ -104,7 +104,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
         {
           label: 'Te necesitan',
           href: '/donacion',
-          icon: <FaHandsHelping className="text-pink-500" />,
+          icon: <FaHandsHelping className="text-[#800000]" />,
         },
         { label: 'Adoptar', href: '/adoptar/adopcion', icon: <FaPaw /> },
        
@@ -145,7 +145,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-pink-600"
+            className="flex items-center gap-2 text-xl font-bold text-[#800000]"
           >
             <FaPaw className="text-2xl" />
             <span>Hearts&Paws</span>
@@ -157,9 +157,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 <button
                   key={link.label}
                   onClick={link.onClick}
-                  className="flex items-center gap-1 text-[color:var(--foreground)] transition hover:text-pink-600"
+                  className="flex items-center gap-1 text-[color:var(--foreground)] transition hover:text-[#800000]"
                 >
-                  <span className="text-pink-500">{link.icon}</span>
+                  <span className="text-[#800000]">{link.icon}</span>
                   {link.label}
                 </button>
               ) : (
@@ -167,9 +167,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                   key={link.label}
                   href={link.href!}
                   onClick={link.onClick}
-                  className="flex items-center gap-1 text-[color:var(--foreground)] transition hover:text-pink-600"
+                  className="flex items-center gap-1 text-[color:var(--foreground)] transition hover:text-[#800000]"
                 >
-                  <span className="text-pink-500">{link.icon}</span>
+                  <span className="text-[#800000]">{link.icon}</span>
                   {link.label}
                 </Link>
               )
@@ -215,9 +215,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                     setIsOpen(false);
                     link.onClick?.(e);
                   }}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-pink-600"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-[#800000]"
                 >
-                  <span className="text-pink-500">{link.icon}</span>
+                  <span className="text-[#800000]">{link.icon}</span>
                   {link.label}
                 </button>
               ) : (
@@ -225,9 +225,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                   key={link.label}
                   href={link.href!}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-pink-600"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] hover:text-[#800000]"
                 >
-                  <span className="text-pink-500">{link.icon}</span>
+                  <span className="text-[#800000]">{link.icon}</span>
                   {link.label}
                 </Link>
               )

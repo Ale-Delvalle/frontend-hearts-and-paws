@@ -75,7 +75,7 @@ export default function MascotaModal({
 
         <button
           onClick={onClose}
-          className="absolute top-1 right-1 text-pink-500 hover:text-pink-700 text-3xl font-bold z-10"
+          className="absolute top-1 right-1 text-[#800000] hover:text-[#800000] text-3xl font-bold z-10"
           aria-label="Cerrar"
         >
           &times;
@@ -91,7 +91,7 @@ export default function MascotaModal({
           />
         </div>
 
-        <h2 className="text-3xl font-extrabold text-pink-600 mb-2 text-center relative z-10">
+        <h2 className="text-3xl font-extrabold text-[#800000] mb-2 text-center relative z-10">
           {mascota.nombre}
         </h2>
 
@@ -111,7 +111,7 @@ export default function MascotaModal({
             disabled={metaAlcanzada}
             className={`px-6 py-3 rounded-full shadow-md transition-all duration-300 font-semibold ${
               metaAlcanzada
-                ? 'bg-pink-200 text-pink-500 cursor-not-allowed'
+                ? 'bg-pink-200 text-[#800000] cursor-not-allowed'
                 : 'bg-pink-500 hover:bg-pink-600 text-white'
             }`}
           >

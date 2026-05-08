@@ -164,7 +164,7 @@ useEffect(() => {
             <div
               key={num}
               className={`flex flex-col items-center ${
-                paso === num ? 'text-pink-600 font-bold' : 'text-gray-400'
+                paso === num ? 'text-[#800000] font-bold' : 'text-gray-400'
               }`}
             >
               <div
@@ -196,7 +196,7 @@ useEffect(() => {
             <button
               type="button"
               onClick={() => router.push('/dashboard/usuario')}
-              className="px-4 py-2 bg-pink-100 text-pink-600 border border-pink-300 rounded hover:bg-pink-200 transition"
+              className="px-4 py-2 bg-pink-100 text-[#800000] border border-pink-300 rounded hover:bg-pink-200 transition"
             >
               Editar mis datos personales
             </button>

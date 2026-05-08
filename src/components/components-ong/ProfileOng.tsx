@@ -15,7 +15,7 @@ const ProfileOng = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg text-gray-800">
-      <h2 className="text-3xl font-bold mb-6 text-pink-600 text-center">Perfil de la ONG</h2>
+      <h2 className="text-3xl font-bold mb-6 text-[#800000] text-center">Perfil de la ONG</h2>
 
       <div className="space-y-4 text-lg">
         <p><span className="font-semibold">Nombre:</span> {ong.nombre}</p>
