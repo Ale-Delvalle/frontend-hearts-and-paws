@@ -15,9 +15,9 @@ const ProfileOng = () => {
 
   return (
     <div className="text-gray-800 dark:text-white">
-      <h2 className="text-3xl font-bold mb-6 text-[#800000] dark:text-[#c81e1e]">Perfil de la ONG</h2>
+      <h2 className="text-[27px] font-bold mb-6 text-[#800000] dark:text-[#c81e1e]">Perfil de la ONG</h2>
 
-      <div className="space-y-4 text-lg">
+      <div className="space-y-4 text-base">
         <p><span className="font-semibold">Nombre:</span> {ong.nombre}</p>
         <p><span className="font-semibold">Descripción:</span> {ong.descripcion}</p>
         <p><span className="font-semibold">Teléfono:</span> {ong.telefono}</p>
