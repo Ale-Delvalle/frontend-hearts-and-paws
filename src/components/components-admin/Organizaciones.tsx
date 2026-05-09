@@ -123,7 +123,7 @@ export default function OrganizacionesPanel() {
 
               <button
                 onClick={handleBuscar}
-                className="bg-[#c81e1e] dark:bg-white text-white dark:text-[#c81e1e] text-sm px-5 py-2 rounded-lg font-semibold shadow-sm hover:bg-[#a11818] dark:hover:bg-gray-100 transition-all active:scale-95"
+                className="bg-white text-black text-sm px-5 py-2 rounded-lg font-semibold shadow-sm border border-gray-300 hover:bg-gray-100 transition-all active:scale-95"
               >
                 Buscar
               </button>
