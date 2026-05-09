@@ -49,7 +49,7 @@ export default function AdopcionesRegistradas() {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="p-6 bg-pink-50 min-h-screen">
+    <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
       <h1 className="text-3xl font-bold text-[#800000] mb-6">
         Adopciones Registradas
       </h1>
@@ -58,7 +58,7 @@ export default function AdopcionesRegistradas() {
         {adopciones.map((adopcion) => (
           <div
             key={adopcion.id}
-            className="bg-white rounded-xl shadow-md p-4 border border-pink-200"
+            className="bg-white dark:bg-zinc-900 rounded-xl shadow-md p-4 border border-pink-200 dark:border-zinc-700"
           >
             <div className="flex items-center gap-4">
               <img

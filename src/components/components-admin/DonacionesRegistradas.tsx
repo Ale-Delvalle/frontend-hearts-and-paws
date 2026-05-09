@@ -57,7 +57,7 @@ export default function DonacionesRegistradas() {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="p-6 bg-pink-50 min-h-screen">
+    <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
       <h1 className="text-3xl font-bold text-[#800000] mb-6">
         Donaciones Registradas
       </h1>
@@ -66,7 +66,7 @@ export default function DonacionesRegistradas() {
         {donaciones.map((donacion) => (
           <div
             key={donacion.id}
-            className="bg-white rounded-xl shadow-md p-4 border border-pink-200 flex flex-col justify-between"
+            className="bg-white dark:bg-zinc-900 rounded-xl shadow-md p-4 border border-pink-200 dark:border-zinc-700 flex flex-col justify-between"
           >
             <div>
               <h2 className="text-xl font-bold text-[#800000] mb-2">

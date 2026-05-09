@@ -79,7 +79,7 @@ export function Vistausuario() {
   };
 
   return (
-    <div className="min-h-screen bg-pink-100 p-6">
+    <div className="min-h-screen bg-pink-100 dark:bg-black p-6">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-[#800000] mb-6 text-center">
           Usuarios Logueados
@@ -87,7 +87,7 @@ export function Vistausuario() {
 
         {/* Tarjeta de total de usuarios */}
         <div className="mb-6 flex justify-center">
-          <div className="bg-white border border-pink-300 rounded-lg shadow-md px-6 py-4 text-center">
+          <div className="bg-white dark:bg-zinc-900 border border-pink-300 dark:border-zinc-700 rounded-lg shadow-md px-6 py-4 text-center">
             <p className="text-sm text-[#800000]">Usuarios registrados</p>
             <p className="text-2xl font-bold text-[#800000]">
               {usuarios.length}
@@ -100,7 +100,7 @@ export function Vistausuario() {
           <input
             type="text"
             placeholder="Buscar por nombre"
-            className="p-2 rounded-md border border-pink-400"
+            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroNombre}
             onChange={(e) => setFiltroNombre(e.target.value)}
           />
@@ -108,14 +108,14 @@ export function Vistausuario() {
           <input
             type="text"
             placeholder="Buscar por email"
-            className="p-2 rounded-md border border-pink-400"
+            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroEmail}
             onChange={(e) => setFiltroEmail(e.target.value)}
           />
 
           <button
             onClick={handleBuscar}
-            className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition"
+            className="px-4 py-2 bg-pink-500 dark:bg-zinc-700 text-white rounded-md hover:bg-pink-600 dark:hover:bg-zinc-600 transition"
           >
             Buscar
           </button>
@@ -134,7 +134,7 @@ export function Vistausuario() {
           </button>
 
           <select
-            className="p-2 rounded-md border border-pink-400"
+            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroPais}
             onChange={(e) => setFiltroPais(e.target.value)}
           >
@@ -146,7 +146,7 @@ export function Vistausuario() {
           </select>
 
           <select
-            className="p-2 rounded-md border border-pink-400"
+            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroRol}
             onChange={(e) => setFiltroRol(e.target.value)}
           >
@@ -164,7 +164,7 @@ export function Vistausuario() {
             <div
               key={user.id}
               onClick={() => abrirModal(user)}
-              className="cursor-pointer bg-pink-200 rounded-xl shadow-md p-5 hover:bg-pink-300 transition-all"
+              className="cursor-pointer bg-pink-200 dark:bg-zinc-800 rounded-xl shadow-md p-5 hover:bg-pink-300 dark:hover:bg-zinc-700 transition-all"
             >
               <div className="flex items-center space-x-4">
                 <img
@@ -181,7 +181,7 @@ export function Vistausuario() {
                     {user.ciudad}, {user.pais}
                   </p>
                   {user.rol && (
-                    <p className="text-xs text-[#800000] bg-pink-300 rounded px-2 mt-1 inline-block">
+                    <p className="text-xs text-[#800000] dark:text-white bg-pink-300 dark:bg-zinc-700 rounded px-2 mt-1 inline-block">
                       Rol: {user.rol}
                     </p>
                   )}
@@ -201,12 +201,12 @@ export function Vistausuario() {
       {/* Modal flotante */}
       {usuarioSeleccionado && (
         <div
-          className={`fixed inset-0 flex items-center justify-center bg-pink-300 bg-opacity-50 z-50 transition-opacity ${
+          className={`fixed inset-0 flex items-center justify-center bg-pink-300 dark:bg-black bg-opacity-50 dark:bg-opacity-70 z-50 transition-opacity ${
             mostrarModal ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
           <div
-            className={`bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md transform transition-all duration-300 ${
+            className={`bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-6 w-[90%] max-w-md transform transition-all duration-300 ${
               mostrarModal ? "scale-100 opacity-100" : "scale-95 opacity-0"
             }`}
           >

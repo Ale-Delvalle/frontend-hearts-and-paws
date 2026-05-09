@@ -31,7 +31,7 @@ export default function OngsRechazadas() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-pink-100 p-6">
+    <div className="min-h-screen bg-pink-100 dark:bg-black p-6">
       <h1 className="text-2xl font-bold text-[#800000] mb-6 text-center">
         Organizaciones Rechazadas
       </h1>
@@ -40,7 +40,7 @@ export default function OngsRechazadas() {
         {ongs.map((org) => (
           <div
             key={org.id}
-            className="bg-white border border-pink-300 rounded-lg p-5 shadow hover:shadow-lg transition"
+            className="bg-white dark:bg-zinc-900 border border-pink-300 dark:border-zinc-700 rounded-lg p-5 shadow hover:shadow-lg transition"
           >
             <div className="flex items-center gap-4">
               <img

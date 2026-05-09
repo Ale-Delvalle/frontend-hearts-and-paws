@@ -77,7 +77,7 @@ export default function AdminDashboard() {
 
   
   return (
-    <main className="min-h-screen p-8 bg-gradient-to-br from-pink-100 to-pink-200">
+    <main className="min-h-screen p-8 bg-pink-100 dark:bg-black">
       <div className="max-w-4xl mx-auto">
         <header className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
@@ -95,14 +95,14 @@ export default function AdminDashboard() {
             Cargando solicitudes...
           </div>
         ) : requests.length === 0 ? (
-          <div className="p-6 text-center text-gray-600 bg-white rounded-lg shadow">
+          <div className="p-6 text-center text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 rounded-lg shadow">
             No hay solicitudes pendientes.
           </div>
         ) : (
           requests.map((req: OngUser) => (
             <div
               key={req.id}
-              className="p-5 mb-6 transition-shadow duration-200 bg-white border-2 border-pink-400 rounded-lg shadow-lg hover:shadow-pink-300"
+              className="p-5 mb-6 transition-shadow duration-200 bg-white dark:bg-zinc-900 border-2 border-pink-400 dark:border-zinc-700 rounded-lg shadow-lg"
             >
               <div className="flex gap-6">
                 {/* Imagen de perfil */}

@@ -50,7 +50,7 @@ export default function MascotasRegistradas() {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-  <div className="p-6 bg-pink-50 min-h-screen">
+  <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
     <h1 className="text-3xl font-bold text-[#800000] mb-6">
       Mascotas Registradas
     </h1>
@@ -59,9 +59,9 @@ export default function MascotasRegistradas() {
       {mascotas.map((mascota) => (
         <div
           key={mascota.id}
-          className="bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col"
+          className="bg-white dark:bg-zinc-900 rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col"
         >
-          <div className="w-full h-48 p-2 flex items-center justify-center bg-white">
+          <div className="w-full h-48 p-2 flex items-center justify-center bg-white dark:bg-zinc-900">
             <img
               src={mascota.imagenes[0]?.url || "/default-pet.jpg"}
               alt={`Foto de ${mascota.nombre}`}
@@ -95,8 +95,8 @@ export default function MascotasRegistradas() {
 
     {/* Modal */}
     {mascotaSeleccionada && (
-      <div className="fixed inset-0 bg-pink-300 bg-opacity-50 z-50 flex items-center justify-center">
-        <div className="bg-white rounded-lg p-6 max-w-md w-full relative shadow-lg">
+      <div className="fixed inset-0 bg-pink-300 dark:bg-black bg-opacity-50 dark:bg-opacity-70 z-50 flex items-center justify-center">
+        <div className="bg-white dark:bg-zinc-900 rounded-lg p-6 max-w-md w-full relative shadow-lg">
           <button
             onClick={() => setMascotaSeleccionada(null)}
             className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
