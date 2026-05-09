@@ -1,4 +1,4 @@
-import MascotasRegistradas from "@/components/componentsadmin/MascotasRegistradas";
+import MascotasRegistradas from "@/components/components-admin/MascotasRegistradas";
 
 export default function HomePage() {
   return <MascotasRegistradas />;

@@ -237,7 +237,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
               onClick={toggleTheme}
               className="rounded-full border border-gray-300 bg-[color:var(--surface)] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:bg-gray-100"
             >
-              {theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro'}
+              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
             </button>
           </div>
 
@@ -311,7 +311,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
               }}
               className="w-full rounded-full border border-gray-300 bg-[color:var(--surface)] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:bg-gray-100"
             >
-              {theme === 'dark' ? 'Modo Oscuro' : 'Modo Claro'}
+              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
             </button>
           </motion.div>
         )}

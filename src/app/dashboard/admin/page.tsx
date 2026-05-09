@@ -1,5 +1,5 @@
 // app/admin/page.tsx (Server Component)
-import AdminDashboard from "../../../components/componentsadmin/AdminDashboard";
+import AdminDashboard from "../../../components/components-admin/AdminDashboard";
 
 
 export default async function AdminPage() {
