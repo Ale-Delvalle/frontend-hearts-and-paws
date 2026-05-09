@@ -102,34 +102,36 @@ export default function DashboardResumen() {
 
   return (
     <div className="p-6 bg-pink-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-[#800000] mb-6">
-        Resumen del Panel de Administración
-      </h1>
+      <div className="w-[60%] mx-auto">
+        <h1 className="text-3xl font-bold text-[#800000] mb-6">
+          Resumen del Panel de Administración
+        </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-        <ResumenCard
-          title="Organizaciones Aprobadas"
-          value={stats.organizations}
-        />
-        <ResumenCard title="Mascotas Registradas" value={stats.pets} />
-        <ResumenCard title="Adopciones Completadas" value={stats.adoptions} />
-        <ResumenCard title="Donaciones Totales" value={`$${stats.donations}`} />
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+          <ResumenCard
+            title="Organizaciones Aprobadas"
+            value={stats.organizations}
+          />
+          <ResumenCard title="Mascotas Registradas" value={stats.pets} />
+          <ResumenCard title="Adopciones Completadas" value={stats.adoptions} />
+          <ResumenCard title="Donaciones Totales" value={`$${stats.donations}`} />
+        </div>
 
-      {/* Tabla de Organizaciones */}
-      <div className="mb-10">
-        <h2 className="text-2xl font-semibold text-[#800000] mb-4">
-          Últimas Organizaciones Registradas
-        </h2>
-        <TablaSimple data={orgs} />
-      </div>
+        {/* Tabla de Organizaciones */}
+        <div className="mb-10">
+          <h2 className="text-2xl font-semibold text-[#800000] mb-4">
+            Últimas Organizaciones Registradas
+          </h2>
+          <TablaSimple data={orgs} />
+        </div>
 
-      {/* Tabla de Usuarios */}
-      <div>
-        <h2 className="text-2xl font-semibold text-[#800000] mb-4">
-          Últimos Usuarios Registrados
-        </h2>
-        <TablaSimple data={usuarios} />
+        {/* Tabla de Usuarios */}
+        <div>
+          <h2 className="text-2xl font-semibold text-[#800000] mb-4">
+            Últimos Usuarios Registrados
+          </h2>
+          <TablaSimple data={usuarios} />
+        </div>
       </div>
     </div>
   );
