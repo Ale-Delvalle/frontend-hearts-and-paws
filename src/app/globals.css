@@ -105,3 +105,8 @@ html.dark .hover\:bg-pink-100:hover,
 html.dark .hover\:bg-gray-100:hover {
   background-color: #141414 !important;
 }
+
+/* Color granate más claro para mejor visibilidad en modo oscuro */
+html.dark .text-\[\#800000\] {
+  color: #c81e1e !important;
+}
