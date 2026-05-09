@@ -188,3 +188,10 @@ export async function getTotalOrganizacionesRechazadas() {
     credentials: "include",
   });
 }
+
+export async function getCasosDonacion() {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/casos/donacion`, {
+    method: "GET",
+    credentials: "include",
+  });
+}
