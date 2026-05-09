@@ -11,10 +11,17 @@ import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const NewCaseOng = () => {
-  const { ong } = useOngAuth();
+  const { ong, loading: authLoading } = useOngAuth();
   const router = useRouter();
   const [mostrarNewPet] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Redirige si no hay sesión
+  useEffect(() => {
+    if (!authLoading && !ong) {
+      router.push("/login");
+    }
+  }, [authLoading, ong, router]);
 
   const {
     register,
@@ -41,6 +48,8 @@ const NewCaseOng = () => {
       };
     }
   }, [loading]);
+
+  if (authLoading || !ong) return null;
 
   if (mostrarNewPet) return <NewPet />;
 

@@ -28,11 +28,18 @@ export interface NuevaMascotaData {
 }
 
 const NewPet = () => {
-  const { ong } = useOngAuth();
+  const { ong, loading: authLoading } = useOngAuth();
   const router = useRouter();
   const [tipos, setTipos] = useState<TipoMascota[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+
+  // Redirige si no hay sesión
+  useEffect(() => {
+    if (!authLoading && !ong) {
+      router.push("/login");
+    }
+  }, [authLoading, ong, router]);
 
   const {
     register,
@@ -116,7 +123,7 @@ const NewPet = () => {
       reset();
 
       setTimeout(() => {
-        router.push("/dashboard/ong/nuevo-caso");
+        router.push("/dashboard/ong/crear-caso");
       }, 1500);
     } catch (error) {
       console.error(error);
@@ -124,6 +131,8 @@ const NewPet = () => {
       setLoading(false);
     }
   };
+
+  if (authLoading || !ong) return null;
 
   if (loading) {
     return (

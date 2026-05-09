@@ -34,6 +34,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
   const [showHistorialDropdown, setShowHistorialDropdown] = useState(false);
+  const [showPublicarDropdown, setShowPublicarDropdown] = useState(false);
 
   const { ong, logout: logoutOng } = useOngAuth();
   const { usuario, logout: logoutUsuario } = useUsuarioAuth();
@@ -78,8 +79,13 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       { label: "Mi Perfil", href: "/dashboard/ong", icon: <FaUserShield /> },
       {
         label: "Publicar",
-        href: "/dashboard/ong/nueva-mascota",
+        href: "#",
         icon: <FaExclamationTriangle />,
+        onClick: () => setShowPublicarDropdown((prev) => !prev),
+        subItems: [
+          { label: "Registrar nueva mascota", href: "/dashboard/ong/nueva-mascota" },
+          { label: "Crear caso", href: "/dashboard/ong/crear-caso" },
+        ],
       },
       {
         label: "Cerrar sesión",
@@ -217,7 +223,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 )}
 
                 {/* Dropdown solo si hay subItems y está abierto */}
-                {link.subItems && showHistorialDropdown && (
+                {link.subItems && ((link.label === "Mascotas" && showHistorialDropdown) || (link.label === "Publicar" && showPublicarDropdown)) && (
                   <div className="absolute left-0 z-10 mt-2 w-48 bg-[color:var(--card)] dark:bg-[#a11818] rounded shadow-lg">
                     {link.subItems.map((sub) => (
                       <Link
