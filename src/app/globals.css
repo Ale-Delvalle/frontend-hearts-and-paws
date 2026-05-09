@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #111827;
@@ -74,6 +76,10 @@ html.dark .bg-white\/80,
 html.dark .bg-white\/90,
 html.dark .bg-white\/70 {
   background-color: #0a0a0a !important;
+}
+
+html.dark .bg-red-50 {
+  background-color: #000000 !important;
 }
 
 html.dark .bg-pink-200,

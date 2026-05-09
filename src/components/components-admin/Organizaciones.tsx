@@ -54,7 +54,7 @@ export default function OrganizacionesPanel() {
   };
 
   return (
-    <div className="min-h-screen bg-red-50 dark:bg-black pb-10">
+    <div className="min-h-screen bg-pink-100 dark:bg-black pb-10">
       {/* Tarjeta total centrada arriba */}
       <div className="pt-6 pb-4 px-5">
         <div className="flex justify-center">
