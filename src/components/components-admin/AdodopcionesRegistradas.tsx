@@ -50,7 +50,7 @@ export default function AdopcionesRegistradas() {
 
   return (
     <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
-      <h1 className="text-3xl font-bold text-[#800000] mb-6">
+      <h1 className="text-3xl font-bold text-[#800000] mb-6 text-center">
         Adopciones Registradas
       </h1>
 
@@ -58,35 +58,33 @@ export default function AdopcionesRegistradas() {
         {adopciones.map((adopcion) => (
           <div
             key={adopcion.id}
-            className="bg-white dark:bg-zinc-900 rounded-xl shadow-md p-4 border border-pink-200 dark:border-zinc-700"
+            className="bg-white dark:bg-zinc-900 rounded-xl shadow-md p-4 border border-pink-200 dark:border-zinc-700 w-[60%] mx-auto"
           >
-            <div className="flex items-center gap-4">
+            <div className="block flow-root">
               <img
                 src={
                   adopcion.caso.mascota.imagenes[0]?.url || "/default-pet.jpg"
                 }
                 alt={adopcion.caso.mascota.nombre}
-                className="w-32 h-32 object-cover rounded"
+                className="w-32 h-32 object-cover rounded float-left mr-4 mb-2 mt-1"
               />
-              <div>
-                <h2 className="text-lg font-bold text-[#800000]">
-                  {adopcion.caso.titulo}
-                </h2>
-                <p className="text-sm text-gray-700">
-                  {adopcion.caso.descripcion}
-                </p>
-                <p className="text-sm text-gray-600 mt-1">
-                  🐾 Mascota: {adopcion.caso.mascota.nombre} (
-                  {adopcion.caso.mascota.edad} años)
-                </p>
-                <p className="text-sm text-gray-600">
-                  🏠 Organización:{" "}
-                  {adopcion.caso.mascota.organizacion.nombre || "Desconocida"}
-                </p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Estado: <span className="font-medium">{adopcion.estado}</span>
-                </p>
-              </div>
+              <h2 className="text-lg font-bold text-[#800000]">
+                {adopcion.caso.titulo}
+              </h2>
+              <p className="text-sm text-gray-700">
+                {adopcion.caso.descripcion}
+              </p>
+              <p className="text-sm text-gray-600 mt-1">
+                🐾 Mascota: {adopcion.caso.mascota.nombre} (
+                {adopcion.caso.mascota.edad} años)
+              </p>
+              <p className="text-sm text-gray-600">
+                🏠 Organización:{" "}
+                {adopcion.caso.mascota.organizacion.nombre || "Desconocida"}
+              </p>
+              <p className="text-xs text-gray-500 mt-2">
+                Estado: <span className="font-medium">{adopcion.estado}</span>
+              </p>
             </div>
           </div>
         ))}
