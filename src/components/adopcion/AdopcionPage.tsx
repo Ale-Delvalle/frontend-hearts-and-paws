@@ -87,7 +87,7 @@ router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
         <div className="flex flex-col sm:flex-row sm:justify-center gap-4 max-w-md mx-auto mb-8">
   <div className="relative w-full max-w-xs">
     <select
-      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FA8072]"
       value={tipo}
       onChange={(e) => setTipo(e.target.value as 'perro' | 'gato' | '')}
       aria-label="Filtrar por tipo de mascota"
@@ -111,7 +111,7 @@ router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
 
   <div className="relative w-full max-w-xs">
     <select
-      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FA8072]"
       value={orden}
       onChange={(e) => setOrden(e.target.value as 'mas_reciente' | 'mas_antiguo')}
       aria-label="Ordenar mascotas"

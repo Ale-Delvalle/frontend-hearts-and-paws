@@ -105,7 +105,7 @@ export default function MascotaCard({
   const metaAlcanzada = recaudado >= meta
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col relative h-full">
+    <div className={`bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col relative ${modo === 'adopcion' ? 'max-w-[280px] mx-auto h-auto' : 'h-full'}`}>
       {mostrarFavorito && (
         <button
           onClick={toggleFavorito}
@@ -117,7 +117,7 @@ export default function MascotaCard({
         </button>
       )}
 
-      <div className="relative w-full h-48 bg-white flex items-center justify-center">
+      <div className={`relative w-full ${modo === 'adopcion' ? 'h-40' : 'h-48'} bg-white flex items-center justify-center`}>
         {totalImagenes > 0 && (
           <Image
             src={mascota.imagenes[imagenActual]?.url}
@@ -147,8 +147,8 @@ export default function MascotaCard({
         )}
       </div>
 
-      <div className="p-4 flex-1 flex flex-col justify-between">
-        <h2 className="text-xl font-bold text-[#FA8072] mb-2">{mascota.nombre}</h2>
+      <div className="p-4 flex-1 flex flex-col gap-2">
+        <h2 className={`text-xl font-bold text-[#FA8072] mb-2 mt-[40px] ${modo === 'adopcion' ? 'text-center' : ''}`}>{mascota.nombre || "Sin nombre"}</h2>
 
         {modo === 'donacion' && detalleDonacion && (
           <div className="mb-3">
@@ -172,10 +172,10 @@ export default function MascotaCard({
           </div>
         )}
 
-        <div className="mt-auto space-y-2">
+        <div className="flex flex-row justify-center gap-2">
           <button
             onClick={() => onConocerHistoria?.(mascota)}
-            className="w-full bg-[#FA8072] hover:bg-[#e87366] text-white py-2 px-4 rounded-full transition"
+            className="w-fit mx-auto bg-[#FA8072] hover:bg-[#e87366] text-white py-2 px-4 rounded-full transition flex items-center justify-center"
             type="button"
           >
             Conocer historia
@@ -183,10 +183,10 @@ export default function MascotaCard({
 
           <button
             onClick={handleAccion}
-            className={`w-full border py-2 px-4 rounded-full transition flex items-center justify-center ${
+            className={`w-fit mx-auto border py-2 px-4 rounded-full transition flex items-center justify-center ${
               modo === 'donacion' && metaAlcanzada
                 ? 'border-gray-300 bg-gray-100 cursor-not-allowed'
-                : 'border-pink-600 text-[#FA8072] hover:bg-[#fff5f2]'
+                : 'border-[#FA8072] text-[#FA8072]'
             }`}
             type="button"
             disabled={modo === 'donacion' && metaAlcanzada}

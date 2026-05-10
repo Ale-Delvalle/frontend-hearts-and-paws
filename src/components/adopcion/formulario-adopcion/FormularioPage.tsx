@@ -169,7 +169,7 @@ useEffect(() => {
             >
               <div
                 className={`w-8 h-8 rounded-full border-2 flex items-center justify-center mb-1 ${
-                  paso === num ? 'border-pink-600 bg-[#ffece8]' : 'border-gray-300'
+                  paso === num ? 'border-[#FA8072] bg-[#ffece8]' : 'border-gray-300'
                 }`}
               >
                 {num}
@@ -186,7 +186,7 @@ useEffect(() => {
             <button
               type="button"
               onClick={() => setPaso((prev) => prev - 1)}
-              className="px-4 py-2 text-white bg-pink-400 rounded hover:bg-[#fff5f2]0 transition"
+              className="px-4 py-2 text-white bg-[#FA8072] rounded hover:bg-[#e87366] transition"
             >
               Atrás
             </button>
@@ -209,7 +209,7 @@ useEffect(() => {
               className={`px-4 py-2 text-white rounded transition ${
                 pasoValido(paso, formData)
                   ? 'bg-[#FA8072] hover:bg-[#e87366]'
-                  : 'bg-pink-300 cursor-not-allowed'
+                  : 'bg-[#ffcfc7] cursor-not-allowed'
               }`}
               disabled={!pasoValido(paso, formData)}
             >
@@ -221,7 +221,7 @@ useEffect(() => {
               className={`px-4 py-2 text-white rounded transition ${
                 pasoValido(paso, formData)
                   ? 'bg-[#FA8072] hover:bg-[#e87366]'
-                  : 'bg-pink-300 cursor-not-allowed'
+                  : 'bg-[#ffcfc7] cursor-not-allowed'
               }`}
               disabled={!pasoValido(paso, formData)}
             >
