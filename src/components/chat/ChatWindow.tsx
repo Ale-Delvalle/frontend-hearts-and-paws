@@ -64,7 +64,7 @@ export default function ChatWindow({ chatId, autorId, autorNombre }: ChatWindowP
             <div
               key={msg.id}
               className={`max-w-full break-words rounded-lg px-4 py-3 text-sm
-                ${esAutor ? 'bg-pink-200 self-end text-right' : 'bg-gray-200 self-start text-left'}
+                ${esAutor ? 'bg-[#ffcfc7] self-end text-right' : 'bg-gray-200 self-start text-left'}
                 shadow-sm
               `}
             >
@@ -93,7 +93,7 @@ export default function ChatWindow({ chatId, autorId, autorNombre }: ChatWindowP
         />
         <button
           type="submit"
-          className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-5 py-2 rounded-md transition"
+          className="bg-[#FA8072] hover:bg-[#e87366] text-white font-semibold px-5 py-2 rounded-md transition"
         >
           Enviar
         </button>

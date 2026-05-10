@@ -100,7 +100,7 @@ export default function AdoptionsOng() {
   if (cargando) return <p className="p-6 text-center">⏳ Cargando tus solicitudes...</p>;
 
  return (
-  <div className="bg-pink-50 min-h-screen p-12 flex justify-center">
+  <div className="bg-[#fff5f2] min-h-screen p-12 flex justify-center">
     <div className="max-w-4xl w-full px-6 space-y-6">
       {data.every(({ solicitudes }) => solicitudes.length === 0) ? (
         <p className="text-center text-gray-600 text-lg mt-10">
@@ -111,27 +111,27 @@ export default function AdoptionsOng() {
           <div key={mascota.id}>
             <button
               onClick={() => toggleExpandir(mascota.id)}
-              className="flex items-center gap-4 p-4 bg-white border border-pink-200 rounded-2xl shadow-md w-full hover:bg-pink-100 transition"
+              className="flex items-center gap-4 p-4 bg-white border border-[#ffcfc7] rounded-2xl shadow-md w-full hover:bg-[#ffece8] transition"
             >
               <Image
                 src={mascota.imagenes?.[0]?.url || "/placeholder.jpg"}
                 alt={mascota.nombre}
                 width={80}
                 height={80}
-                className="w-20 h-20 rounded-full border-2 border-pink-400 object-cover"
+                className="w-20 h-20 rounded-full border-2 border-[#FA8072] object-cover"
               />
-              <p className="text-[#800000] font-semibold text-xl">{mascota.nombre}</p>
-              <span className="ml-auto text-[#800000] font-bold text-2xl select-none">
+              <p className="text-[#FA8072] font-semibold text-xl">{mascota.nombre}</p>
+              <span className="ml-auto text-[#FA8072] font-bold text-2xl select-none">
                 {expandida === mascota.id ? "▲" : "▼"}
               </span>
             </button>
 
             {expandida === mascota.id && (
-              <div className="mt-4 bg-white border border-pink-200 rounded-2xl shadow-md p-6 text-gray-800 space-y-4">
+              <div className="mt-4 bg-white border border-[#ffcfc7] rounded-2xl shadow-md p-6 text-gray-800 space-y-4">
                 {solicitudes.length > 0 ? (
                   solicitudes.map((sol) => (
-                    <div key={sol.id} className="bg-pink-50 border border-pink-300 rounded-xl p-4">
-                      <p className="font-semibold text-[#800000] mb-2">Solicitante: {sol.usuario.nombre}</p>
+                    <div key={sol.id} className="bg-[#fff5f2] border border-[#ffbba5] rounded-xl p-4">
+                      <p className="font-semibold text-[#FA8072] mb-2">Solicitante: {sol.usuario.nombre}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                         <p><strong>Email:</strong> {sol.usuario.email}</p>
                         <p><strong>Teléfono:</strong> {sol.usuario.telefono}</p>
@@ -147,7 +147,7 @@ export default function AdoptionsOng() {
                       </div>
                       <p className="mt-2">
                         <strong>Estado:</strong>{" "}
-                        <span className="capitalize font-semibold text-[#800000]">{sol.estado}</span>
+                        <span className="capitalize font-semibold text-[#FA8072]">{sol.estado}</span>
                       </p>
 
                       {sol.estado === "PENDIENTE" && (
@@ -155,7 +155,7 @@ export default function AdoptionsOng() {
                           <button
                             onClick={() => handleEstadoSolicitud(mascota.id, sol.id, "ACEPTADA")}
                             disabled={loading === sol.id}
-                            className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-xl shadow disabled:opacity-50"
+                            className="bg-[#FA8072] hover:bg-[#e87366] text-white px-4 py-2 rounded-xl shadow disabled:opacity-50"
                           >
                             {loading === sol.id ? "Procesando..." : "Aceptar"}
                           </button>

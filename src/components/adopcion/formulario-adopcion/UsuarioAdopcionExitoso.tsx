@@ -17,9 +17,9 @@ export default function AdopcionExitosaPage() {
   }, [])
 
   return (
-    <div className="min-h-screen flex items-start justify-center bg-pink-50 px-4 pt-30">
+    <div className="min-h-screen flex items-start justify-center bg-[#fff5f2] px-4 pt-30">
       <div className="bg-white rounded-xl shadow-lg p-8 max-w-xl w-full text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#800000] mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#FA8072] mb-4">
           ¡Gracias por tu interés en adoptar!
         </h1>
 
@@ -39,7 +39,7 @@ export default function AdopcionExitosaPage() {
 
         <Link
           href="/"
-          className="inline-block mt-4 bg-pink-600 text-white px-6 py-3 rounded-full hover:bg-pink-700 transition"
+          className="inline-block mt-4 bg-[#FA8072] text-white px-6 py-3 rounded-full hover:bg-[#e87366] transition"
         >
           Volver al inicio
         </Link>

@@ -4,11 +4,11 @@ import Link from 'next/link';
 
  export const Footer = () => {
   return (
-    <footer className="py-8 mt-12 text-gray-800 bg-pink-100">
+    <footer className="py-8 mt-12 text-gray-800 bg-[#ffece8]">
       <div className="grid grid-cols-1 gap-8 px-4 mx-auto max-w-7xl md:grid-cols-3">
         {/* Logo + Descripción */}
         <div>
-          <div className="flex items-center gap-2 mb-2 text-2xl font-bold text-[#800000]">
+          <div className="flex items-center gap-2 mb-2 text-2xl font-bold text-[#FA8072]">
             <FaPaw />
             <span>Hearts&Paws</span>
           </div>
@@ -22,22 +22,22 @@ import Link from 'next/link';
   <h4 className="mb-2 font-semibold">Enlaces</h4>
   <ul className="space-y-1 text-sm">
     <li>
-      <a href="/adoptar/adopcion" className="hover:text-[#800000]">
+      <a href="/adoptar/adopcion" className="hover:text-[#FA8072]">
         Adopciones
       </a>
     </li>
     <li>
-      <a href="/donacion" className="hover:text-[#800000]">
+      <a href="/donacion" className="hover:text-[#FA8072]">
         Donaciones
       </a>
     </li>
     <li>
-      <Link href="/register" className="hover:text-[#800000]">
+      <Link href="/register" className="hover:text-[#FA8072]">
         Registro
       </Link>
     </li>
     <li>
-      <a href="/login" className="hover:text-[#800000]">Iniciar sesión</a>
+      <a href="/login" className="hover:text-[#FA8072]">Iniciar sesión</a>
     </li>
   </ul>
 </div>
@@ -46,15 +46,15 @@ import Link from 'next/link';
         {/* Redes sociales */}
         <div>
           <h4 className="mb-2 font-semibold">Seguinos</h4>
-          <div className="flex gap-4 text-xl text-[#800000]">
-            <a href="#" aria-label="Facebook" className="hover:text-[#800000]"><FaFacebook /></a>
-            <a href="#" aria-label="Instagram" className="hover:text-[#800000]"><FaInstagram /></a>
-            <a href="#" aria-label="Twitter" className="hover:text-[#800000]"><FaTwitter /></a>
+          <div className="flex gap-4 text-xl text-[#FA8072]">
+            <a href="#" aria-label="Facebook" className="hover:text-[#FA8072]"><FaFacebook /></a>
+            <a href="#" aria-label="Instagram" className="hover:text-[#FA8072]"><FaInstagram /></a>
+            <a href="#" aria-label="Twitter" className="hover:text-[#FA8072]"><FaTwitter /></a>
           </div>
         </div>
       </div>
 
-      <div className="pt-4 mt-8 text-sm text-center text-gray-500 border-t border-pink-300">
+      <div className="pt-4 mt-8 text-sm text-center text-gray-500 border-t border-[#ffbba5]">
         © {new Date().getFullYear()} Hearts&Paws. Todos los derechos reservados.
       </div>
     </footer>

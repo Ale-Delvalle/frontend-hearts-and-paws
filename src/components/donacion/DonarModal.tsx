@@ -80,15 +80,15 @@ export default function DonarModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-pink-100 bg-opacity-50 backdrop-blur-sm min-h-screen">
-      <div className="relative bg-pink-50 rounded-2xl shadow-lg max-w-md w-full p-6 border border-pink-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-[#ffece8] bg-opacity-50 backdrop-blur-sm min-h-screen">
+      <div className="relative bg-[#fff5f2] rounded-2xl shadow-lg max-w-md w-full p-6 border border-[#ffcfc7]">
 
         {/* Botón cerrar en la esquina superior derecha */}
         <button
           onClick={onClose}
           disabled={loading}
           aria-label="Cerrar modal"
-          className="absolute top-2 right-3 text-[#800000] hover:text-[#800000] text-3xl font-bold z-10"
+          className="absolute top-2 right-3 text-[#FA8072] hover:text-[#FA8072] text-3xl font-bold z-10"
         >
           &times;
         </button>
@@ -96,8 +96,8 @@ export default function DonarModal({
         {/* Overlay de carga */}
         {loading && (
   <div className="absolute inset-0 z-30 bg-white bg-opacity-95 flex flex-col items-center justify-center text-center px-6">
-    <div className="animate-spin border-4 border-pink-300 border-t-transparent rounded-full w-12 h-12 mb-4"></div>
-    <p className="text-[#800000] font-semibold text-lg">
+    <div className="animate-spin border-4 border-[#ffbba5] border-t-transparent rounded-full w-12 h-12 mb-4"></div>
+    <p className="text-[#FA8072] font-semibold text-lg">
       Redirigiéndote a Stripe para completar el pago...
     </p>
     <p className="text-sm text-gray-500 mt-2">
@@ -107,7 +107,7 @@ export default function DonarModal({
 )}
 
 
-        <h2 className="text-2xl font-extrabold text-[#800000] text-center mb-2">Doná para ayudar 🐾</h2>
+        <h2 className="text-2xl font-extrabold text-[#FA8072] text-center mb-2">Doná para ayudar 🐾</h2>
         <p className="text-center mb-4 text-gray-600">
           Faltan <strong>${faltante}</strong> para alcanzar la meta.
         </p>
@@ -120,8 +120,8 @@ export default function DonarModal({
               disabled={loading}
               className={`px-4 py-2 rounded-full transition ${
                 monto === op
-                  ? 'bg-pink-500 text-white'
-                  : 'border border-pink-300 text-[#800000] bg-white hover:bg-pink-100'
+                  ? 'bg-[#fff5f2]0 text-white'
+                  : 'border border-[#ffbba5] text-[#FA8072] bg-white hover:bg-[#ffece8]'
               }`}
             >
               ${op}
@@ -132,7 +132,7 @@ export default function DonarModal({
         <div className="mb-4 text-center">
           <input
             type="number"
-            className="w-full px-4 py-2 border border-pink-300 rounded-full focus:ring-2 focus:ring-pink-400 outline-none"
+            className="w-full px-4 py-2 border border-[#ffbba5] rounded-full focus:ring-2 focus:ring-pink-400 outline-none"
             placeholder="Otro monto"
             value={monto}
             onChange={(e) => handleChange(Number(e.target.value))}
@@ -148,7 +148,7 @@ export default function DonarModal({
           <button
             onClick={handleConfirmar}
             disabled={loading || !!errorMonto || monto === ''}
-            className="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-all duration-300 disabled:opacity-50"
+            className="bg-[#fff5f2]0 hover:bg-[#FA8072] text-white font-semibold px-6 py-3 rounded-full shadow-md transition-all duration-300 disabled:opacity-50"
           >
             {loading ? 'Procesando...' : '¡Quiero Donar!'}
           </button>

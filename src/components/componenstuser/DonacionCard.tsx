@@ -35,7 +35,7 @@ export default function DonacionCard({ donacion }: DonacionCardProps) {
   const colorEstadoPago: Record<string, string> = {
     paid: 'bg-green-100 text-green-800',
     pending: 'bg-yellow-100 text-yellow-800',
-    failed: 'bg-red-100 text-red-800',
+    failed: 'bg-[#ffece8] text-red-800',
     canceled: 'bg-gray-200 text-gray-700',
   }
 
@@ -56,7 +56,7 @@ const montoEnPesos = donacion.monto * TASA_CAMBIO;
 
 
   return (
-    <div className="relative bg-white border border-pink-300 rounded-lg shadow-md p-4 md:pr-24 flex flex-col md:flex-row gap-4">
+    <div className="relative bg-white border border-[#ffbba5] rounded-lg shadow-md p-4 md:pr-24 flex flex-col md:flex-row gap-4">
       {/* Badge flotante: en el centro a la derecha en md+, arriba a la derecha en mobile */}
       <div
         className={`absolute right-4 top-4 md:top-1/2 md:-translate-y-1/2 text-sm md:text-base px-4 md:px-5 py-1.5 md:py-2 rounded-full font-semibold capitalize flex items-center gap-2 ${color}`}
@@ -66,7 +66,7 @@ const montoEnPesos = donacion.monto * TASA_CAMBIO;
       </div>
 
       {/* Imagen de la mascota o ícono por defecto */}
-<div className="w-full md:w-32 h-32 flex items-center justify-center bg-pink-100 rounded-md overflow-hidden relative">
+<div className="w-full md:w-32 h-32 flex items-center justify-center bg-[#ffece8] rounded-md overflow-hidden relative">
   {donacion.mascota.imagenes?.[0]?.url ? (
     <Image
       src={donacion.mascota.imagenes[0].url}
@@ -75,7 +75,7 @@ const montoEnPesos = donacion.monto * TASA_CAMBIO;
       className="object-cover"
     />
   ) : (
-    <span className="text-[#800000] text-5xl z-10">🐾</span>
+    <span className="text-[#FA8072] text-5xl z-10">🐾</span>
   )}
 </div>
 
@@ -83,7 +83,7 @@ const montoEnPesos = donacion.monto * TASA_CAMBIO;
 
       {/* Info principal */}
       <div className="flex-1">
-        <h2 className="text-xl font-semibold text-[#800000] mb-1">{donacion.mascota.nombre}</h2>
+        <h2 className="text-xl font-semibold text-[#FA8072] mb-1">{donacion.mascota.nombre}</h2>
         <p className="text-gray-700 font-medium">{donacion.organizacion.nombre}</p>
         <p className="text-gray-600 text-sm mt-1">
   <span className="font-semibold">Monto:</span> ${donacion.monto.toLocaleString()} USD (~${montoEnPesos.toLocaleString()} ARS)

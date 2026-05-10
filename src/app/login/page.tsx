@@ -15,32 +15,32 @@ export default function LoginSelector() {
 
   return (
     <div
-      className="fixed inset-0 bg-pink-50 overflow-hidden flex items-center justify-center"
+      className="fixed inset-0 bg-[#fff5f2] overflow-hidden flex items-center justify-center"
       style={{ padding: '1rem' }}
     >
-      <div className="max-w-xl w-full bg-white p-8 rounded-xl shadow-lg border border-pink-300 box-border">
-        <h1 className="text-3xl font-bold text-[#800000] text-center mb-8">
+      <div className="max-w-xl w-full bg-white p-8 rounded-xl shadow-lg border border-[#ffbba5] box-border">
+        <h1 className="text-3xl font-bold text-[#FA8072] text-center mb-8">
           ¿Cómo querés iniciar sesión?
         </h1>
 
         <div className="flex flex-col gap-6">
           <button
             onClick={() => router.push('/login/login')}
-            className="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-4 px-6 rounded-md text-lg transition w-full"
+            className="bg-[#FA8072] hover:bg-[#e87366] text-white font-semibold py-4 px-6 rounded-md text-lg transition w-full"
           >
             Iniciar sesión con Google
           </button>
 
           <button
             onClick={() => router.push('/login/login-ong')}
-            className="bg-pink-100 hover:bg-pink-200 text-[#800000] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-pink-400"
+            className="bg-[#ffece8] hover:bg-[#ffcfc7] text-[#FA8072] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-[#FA8072]"
           >
             Iniciar sesión como ONG
           </button>
 
           <button
             onClick={() => router.push('/login/login-user')}
-            className="bg-pink-100 hover:bg-pink-200 text-[#800000] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-pink-400"
+            className="bg-[#ffece8] hover:bg-[#ffcfc7] text-[#FA8072] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-[#FA8072]"
           >
             Iniciar sesión como Usuario
           </button>

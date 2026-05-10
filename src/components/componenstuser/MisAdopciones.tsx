@@ -30,14 +30,14 @@ export default function MisAdopciones() {
   }, [token]);
 
   return (
-    <div className="flex min-h-screen bg-pink-50">
+    <div className="flex min-h-screen bg-[#fff5f2]">
       {/* Sidebar */}
-      <nav className="flex flex-col px-4 py-6 text-white bg-pink-600 w-60">
+      <nav className="flex flex-col px-4 py-6 text-white bg-[#FA8072] w-60">
         <h2 className="mb-8 text-xl font-semibold text-center">Perfil del Usuario</h2>
 
         <button
           onClick={() => router.push('/dashboard/usuario')}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Principal
         </button>
@@ -51,20 +51,20 @@ export default function MisAdopciones() {
 
         <button
           onClick={() => router.push('/usuario/donaciones')}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mis Donaciones
         </button>
 
 <button
           onClick={() => router.push('/usuario/favoritos')}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mis Favoritos
         </button>
           <button
           onClick={() => router.push("/chat")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mensajes
         </button>
@@ -73,7 +73,7 @@ export default function MisAdopciones() {
 
       {/* Main content */}
       <main className="flex-1 p-10">
-        <h1 className="text-3xl font-bold mb-6 text-[#800000] text-center">Mis Adopciones</h1>
+        <h1 className="text-3xl font-bold mb-6 text-[#FA8072] text-center">Mis Adopciones</h1>
 
 
         {loading && (

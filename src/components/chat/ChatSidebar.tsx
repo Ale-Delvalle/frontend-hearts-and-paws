@@ -176,7 +176,7 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
     <aside className="w-120 border-r border-gray-200 p-4 flex flex-col bg-white shadow-sm">
       <button
         onClick={handleToggleDropdown}
-        className="mb-4 bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-lg transition-colors"
+        className="mb-4 bg-[#FA8072] hover:bg-[#e87366] text-white py-2 px-4 rounded-lg transition-colors"
       >
         {mostrarDropdown ? "Cerrar lista" : "Iniciar nuevo chat"}
       </button>
@@ -184,7 +184,7 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
       {mostrarDropdown && (
         <div
           ref={dropdownRef}
-          className="mb-4 max-h-60 overflow-y-auto border border-pink-300 rounded-lg shadow-sm bg-white"
+          className="mb-4 max-h-60 overflow-y-auto border border-[#ffbba5] rounded-lg shadow-sm bg-white"
         >
           {destinatarios.length === 0 ? (
             <p className="p-4 text-center text-gray-500 text-sm">
@@ -195,13 +195,13 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
               {destinatarios.map((dest) => (
                 <li
                   key={dest.id}
-                  className="flex items-center justify-between px-4 py-3 hover:bg-pink-50 cursor-pointer transition-colors"
+                  className="flex items-center justify-between px-4 py-3 hover:bg-[#fff5f2] cursor-pointer transition-colors"
                   onClick={() => handleSeleccionarDestinatario(dest.id)}
                 >
                   <span className="text-sm font-medium text-gray-800">{dest.nombre}</span>
                   <span
                     className={`ml-2 w-3 h-3 rounded-full ${
-                      dest.conectado ? "bg-green-500" : "bg-red-500"
+                      dest.conectado ? "bg-green-500" : "bg-[#fff5f2]0"
                     }`}
                     title={dest.conectado ? "Conectado" : "Desconectado"}
                   />
@@ -217,7 +217,7 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
         value={filtro}
         onChange={(e) => setFiltro(e.target.value)}
         placeholder="Buscar por nombre..."
-        className="mb-4 px-3 py-2 text-sm border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+        className="mb-4 px-3 py-2 text-sm border border-[#ffbba5] rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
       />
 
       {loading ? (
@@ -250,7 +250,7 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
                   className="flex items-center gap-4 p-4 bg-gray-50 border border-gray-200 rounded-xl cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all"
                   onClick={() => onSelectChat(chat.id)}
                 >
-                  <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-[#800000] font-bold text-sm flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#ffece8] flex items-center justify-center text-[#FA8072] font-bold text-sm flex-shrink-0">
                     {inicial}
                   </div>
 

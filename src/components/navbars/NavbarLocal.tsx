@@ -142,12 +142,12 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
         {
           label: "Perfil",
           href: "/dashboard/usuario",
-          icon: <FaUser className="text-[#800000]" />,
+          icon: <FaUser className="text-[#FA8072]" />,
         },
         {
           label: "Te necesitan",
           href: "/donacion",
-          icon: <FaHandsHelping className="text-[#800000]" />,
+          icon: <FaHandsHelping className="text-[#FA8072]" />,
         },
         { label: "Adoptar",
            href: "/adoptar/adopcion", 
@@ -166,7 +166,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       {
         label: "Te necesitan",
         href: "/donacion",
-        icon: <FaHandsHelping className="text-[#800000]" />,
+        icon: <FaHandsHelping className="text-[#FA8072]" />,
       },
       { label: "Adoptar", href: "/adoptar/adopcion", icon: <FaPaw /> },
       { label: "Registro", href: "/register", icon: <FaRegClipboard /> },
@@ -180,7 +180,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`sticky top-0 w-full z-50 transition-all ${
-        scrolled ? "bg-[color:var(--card)]/95 dark:bg-[#c81e1e]/95 backdrop-blur-md shadow-md" : "bg-[color:var(--card)]/90 dark:bg-[#c81e1e]/90"
+        scrolled ? "bg-[color:var(--card)]/95 dark:bg-[#FA8072]/95 backdrop-blur-md shadow-md" : "bg-[color:var(--card)]/90 dark:bg-[#FA8072]/90"
       }`}
     >
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -188,7 +188,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-1 text-2xl font-semibold text-[#800000] dark:text-white whitespace-nowrap"
+            className="flex items-center gap-1 text-2xl font-semibold text-[#FA8072] dark:text-white whitespace-nowrap"
           >
             <FaPaw className="text-3xl dark:text-white" />
             <span className="dark:text-white">Hearts&Paws</span>
@@ -204,9 +204,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                       e.preventDefault();
                       link.onClick?.();
                     }}
-                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] dark:text-white transition hover:text-[#800000] dark:hover:text-pink-200 whitespace-nowrap"
+                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7] whitespace-nowrap"
                   >
-                    <span className="text-2xl text-[#800000] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
+                    <span className="text-2xl text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                     {link.label}
                     {link.subItems && (
                       <FaChevronDown className="ml-1 text-sm dark:text-white" />
@@ -215,21 +215,21 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] dark:text-white transition hover:text-[#800000] dark:hover:text-pink-200 whitespace-nowrap"
+                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7] whitespace-nowrap"
                   >
-                    <span className="text-2xl text-[#800000] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
+                    <span className="text-2xl text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                     {link.label}
                   </Link>
                 )}
 
                 {/* Dropdown solo si hay subItems y está abierto */}
                 {link.subItems && ((link.label === "Mascotas" && showHistorialDropdown) || (link.label === "Publicar" && showPublicarDropdown)) && (
-                  <div className="absolute left-0 z-10 mt-2 w-48 bg-[color:var(--card)] dark:bg-[#a11818] rounded shadow-lg">
+                  <div className="absolute left-0 z-10 mt-2 w-48 bg-[color:var(--card)] dark:bg-[#e87366] rounded shadow-lg">
                     {link.subItems.map((sub) => (
                       <Link
                         key={sub.label}
                         href={sub.href}
-                        className="block px-4 py-2 text-[color:var(--foreground)] dark:text-white hover:bg-pink-100 dark:hover:bg-[#800000]"
+                        className="block px-4 py-2 text-[color:var(--foreground)] dark:text-white hover:bg-[#ffece8] dark:hover:bg-[#FA8072]"
                       >
                         {sub.label}
                       </Link>
@@ -241,7 +241,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
             <button
               type="button"
               onClick={toggleTheme}
-              className="rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#a11818] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#800000]"
+              className="rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
             >
               {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
             </button>
@@ -267,7 +267,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="px-4 py-4 space-y-2 bg-[color:var(--card)] dark:bg-[#c81e1e] shadow-md md:hidden"
+            className="px-4 py-4 space-y-2 bg-[color:var(--card)] dark:bg-[#FA8072] shadow-md md:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -286,9 +286,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                       setIsOpen(false);
                     }
                   }}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#800000] dark:hover:text-pink-200"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
                 >
-                  <span className="text-[#800000] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
+                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                   {link.label}
                 </a>
 
@@ -300,7 +300,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                         key={sub.label}
                         href={sub.href}
                         onClick={() => setIsOpen(false)}
-                        className="block text-[color:var(--foreground)] dark:text-white hover:text-[#800000] dark:hover:text-pink-200"
+                        className="block text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
                       >
                         - {sub.label}
                       </a>
@@ -315,7 +315,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 toggleTheme();
                 setIsOpen(false);
               }}
-              className="w-full rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#a11818] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#800000]"
+              className="w-full rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
             >
               {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
             </button>

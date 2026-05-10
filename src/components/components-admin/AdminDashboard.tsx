@@ -77,7 +77,7 @@ export default function AdminDashboard() {
 
   
   return (
-    <main className="min-h-screen p-8 bg-pink-100 dark:bg-black">
+    <main className="min-h-screen p-8 bg-[#ffece8] dark:bg-black">
       <div className="max-w-4xl mx-auto">
         <header className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
@@ -85,13 +85,13 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        <h1 className="flex items-center mb-6 text-3xl font-bold text-[#800000]">
-          <MdVerified className="mr-2 text-[#800000]" />
+        <h1 className="flex items-center mb-6 text-3xl font-bold text-[#FA8072]">
+          <MdVerified className="mr-2 text-[#FA8072]" />
           Solicitudes de Verificación de ONGs
         </h1>
 
         {loading ? (
-          <div className="font-semibold text-center text-[#800000]">
+          <div className="font-semibold text-center text-[#FA8072]">
             Cargando solicitudes...
           </div>
         ) : requests.length === 0 ? (
@@ -102,7 +102,7 @@ export default function AdminDashboard() {
           requests.map((req: OngUser) => (
             <div
               key={req.id}
-              className="p-5 mb-6 transition-shadow duration-200 bg-white dark:bg-zinc-900 border-2 border-pink-400 dark:border-zinc-700 rounded-lg shadow-lg"
+              className="p-5 mb-6 transition-shadow duration-200 bg-white dark:bg-zinc-900 border-2 border-[#FA8072] dark:border-zinc-700 rounded-lg shadow-lg"
             >
               <div className="flex gap-6">
                 {/* Imagen de perfil */}
@@ -110,14 +110,14 @@ export default function AdminDashboard() {
                   <img
                     src={req.imagenPerfil}
                     alt={`Foto de perfil de ${req.nombre}`}
-                    className="w-40 h-40 object-cover border-4 border-pink-500 shadow-md rounded"
+                    className="w-40 h-40 object-cover border-4 border-[#e87366] shadow-md rounded"
                   />
                 </div>
 
                 {/* Información textual */}
                 <div className="flex flex-col justify-between">
                   <div>
-                    <h2 className="mb-1 text-xl font-semibold text-[#800000]">
+                    <h2 className="mb-1 text-xl font-semibold text-[#FA8072]">
                       {req.nombre}
                     </h2>
                     <p className="mb-1 text-sm text-gray-600">
@@ -139,7 +139,7 @@ export default function AdminDashboard() {
                   <div className="flex space-x-4 mt-2">
                     <button
                       onClick={() => handleDecision(String(req.id), "APROBADA")}
-                      className="flex items-center px-4 py-2 text-white bg-pink-600 rounded shadow hover:bg-pink-700"
+                      className="flex items-center px-4 py-2 text-white bg-[#FA8072] rounded shadow hover:bg-[#e87366]"
                     >
                       <FaCheckCircle className="mr-2" />
                       Aceptar

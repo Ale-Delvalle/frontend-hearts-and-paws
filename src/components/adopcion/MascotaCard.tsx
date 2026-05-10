@@ -109,7 +109,7 @@ export default function MascotaCard({
       {mostrarFavorito && (
         <button
           onClick={toggleFavorito}
-          className="absolute top-3 right-3 text-[#800000] text-3xl z-10"
+          className="absolute top-3 right-3 text-[#FA8072] text-3xl z-10"
           aria-label="Marcar como favorito"
           type="button"
         >
@@ -131,14 +131,14 @@ export default function MascotaCard({
           <>
             <button
               onClick={irAAnterior}
-              className="absolute left-2 text-[#800000] text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
+              className="absolute left-2 text-[#FA8072] text-xl bg-white rounded-full shadow p-1 hover:bg-[#ffece8] transition z-10"
               type="button"
             >
               ◀
             </button>
             <button
               onClick={irASiguiente}
-              className="absolute right-2 text-[#800000] text-xl bg-white rounded-full shadow p-1 hover:bg-pink-100 transition z-10"
+              className="absolute right-2 text-[#FA8072] text-xl bg-white rounded-full shadow p-1 hover:bg-[#ffece8] transition z-10"
               type="button"
             >
               ▶
@@ -148,7 +148,7 @@ export default function MascotaCard({
       </div>
 
       <div className="p-4 flex-1 flex flex-col justify-between">
-        <h2 className="text-xl font-bold text-[#800000] mb-2">{mascota.nombre}</h2>
+        <h2 className="text-xl font-bold text-[#FA8072] mb-2">{mascota.nombre}</h2>
 
         {modo === 'donacion' && detalleDonacion && (
           <div className="mb-3">
@@ -160,7 +160,7 @@ export default function MascotaCard({
             <div className="relative w-full bg-red-200 rounded-full h-4 overflow-hidden">
               <div
                 className={`h-full transition-all duration-500 ${
-                  metaAlcanzada ? 'bg-pink-500' : 'bg-green-500'
+                  metaAlcanzada ? 'bg-[#fff5f2]0' : 'bg-green-500'
                 }`}
                 style={{ width: `${porcentaje}%` }}
               >
@@ -175,7 +175,7 @@ export default function MascotaCard({
         <div className="mt-auto space-y-2">
           <button
             onClick={() => onConocerHistoria?.(mascota)}
-            className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-full transition"
+            className="w-full bg-[#FA8072] hover:bg-[#e87366] text-white py-2 px-4 rounded-full transition"
             type="button"
           >
             Conocer historia
@@ -186,7 +186,7 @@ export default function MascotaCard({
             className={`w-full border py-2 px-4 rounded-full transition flex items-center justify-center ${
               modo === 'donacion' && metaAlcanzada
                 ? 'border-gray-300 bg-gray-100 cursor-not-allowed'
-                : 'border-pink-600 text-[#800000] hover:bg-pink-50'
+                : 'border-pink-600 text-[#FA8072] hover:bg-[#fff5f2]'
             }`}
             type="button"
             disabled={modo === 'donacion' && metaAlcanzada}
@@ -197,7 +197,7 @@ export default function MascotaCard({
             }
           >
             {modo === 'donacion' && metaAlcanzada ? (
-              <span className="text-lg text-[#800000] font-bold flex items-center gap-1">
+              <span className="text-lg text-[#FA8072] font-bold flex items-center gap-1">
                 ¡Meta alcanzada! <span className="text-lg">🐾</span>
               </span>
             ) : (

@@ -9,9 +9,9 @@ interface Props {
 
 export default function DeclaracionFinal({ formData, onChange }: Props) {
   return (
-    <div className="max-w-xl mx-auto bg-white border border-pink-300 rounded-xl p-8 shadow-md">
+    <div className="max-w-xl mx-auto bg-white border border-[#ffbba5] rounded-xl p-8 shadow-md">
       <fieldset className="space-y-6">
-        <legend className="text-2xl font-semibold text-center text-[#800000] mb-4">
+        <legend className="text-2xl font-semibold text-center text-[#FA8072] mb-4">
           Declaración Final
         </legend>
 

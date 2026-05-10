@@ -139,27 +139,27 @@ export default function MisFavoritos() {
 
 
   return (
-    <div className="flex min-h-screen bg-pink-50">
-       <nav className="flex flex-col px-4 py-6 text-white bg-pink-600 w-60">
+    <div className="flex min-h-screen bg-[#fff5f2]">
+       <nav className="flex flex-col px-4 py-6 text-white bg-[#FA8072] w-60">
         <h2 className="mb-8 text-xl font-semibold text-center">
           Perfil del Usuario
         </h2>
 
         <button
           onClick={() => router.push("/dashboard/usuario")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Principal
         </button>
         <button
           onClick={() => router.push("/usuario/adopciones")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mis Adopciones
         </button>
         <button
           onClick={() => router.push("/usuario/donaciones")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mis Donaciones
         </button>
@@ -171,14 +171,14 @@ export default function MisFavoritos() {
         </button>
           <button
           onClick={() => router.push("/chat")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mensajes
         </button>
       </nav>
 
       <main className="flex-1 p-10">
-        <h1 className="text-3xl font-bold mb-6 text-[#800000] text-center">Mis Favoritos</h1>
+        <h1 className="text-3xl font-bold mb-6 text-[#FA8072] text-center">Mis Favoritos</h1>
 
         {loading && <p className="text-center text-gray-500 mt-10">⏳ Cargando tus favoritos...</p>}
         {error && <p className="text-center text-red-600 mt-10">{error}</p>}

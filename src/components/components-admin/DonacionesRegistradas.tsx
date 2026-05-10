@@ -54,13 +54,13 @@ export default function DonacionesRegistradas() {
     fetchCasosDonacion();
   }, []);
 
-  if (loading) return <p className="text-[#800000] p-6">Cargando datos...</p>;
+  if (loading) return <p className="text-[#FA8072] p-6">Cargando datos...</p>;
   if (error) return <p className="text-red-500 p-6">{error}</p>;
 
   const renderCasoCard = (caso: CasoDonacion) => (
     <div
       key={caso.id}
-      className="bg-white dark:bg-zinc-900 rounded-xl shadow p-4 border border-pink-200 dark:border-zinc-700 flex flex-col mb-4 transition hover:shadow-md"
+      className="bg-white dark:bg-zinc-900 rounded-xl shadow p-4 border border-[#ffcfc7] dark:border-zinc-700 flex flex-col mb-4 transition hover:shadow-md"
     >
       <div className="flex items-start gap-4">
         <img
@@ -69,7 +69,7 @@ export default function DonacionesRegistradas() {
           className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded shadow-sm"
         />
         <div className="flex-1">
-          <h2 className="text-md font-bold text-[#800000] line-clamp-2 leading-tight mb-1">
+          <h2 className="text-md font-bold text-[#FA8072] line-clamp-2 leading-tight mb-1">
             {caso.titulo}
           </h2>
           <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2 mb-2">
@@ -103,8 +103,8 @@ export default function DonacionesRegistradas() {
   );
 
   return (
-    <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
-      <h1 className="text-3xl font-bold text-[#800000] mb-8 text-center">
+    <div className="p-6 bg-[#fff5f2] dark:bg-black min-h-screen">
+      <h1 className="text-3xl font-bold text-[#FA8072] mb-8 text-center">
         Panel de Donaciones
       </h1>
 

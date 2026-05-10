@@ -25,11 +25,11 @@ const MyAccount = () => {
   if (loading || !ong) return null;
 
   return (
-    <div className="min-h-screen bg-pink-100 dark:bg-black pt-28 pb-10">
+    <div className="min-h-screen bg-[#ffece8] dark:bg-black pt-28 pb-10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-[30px] px-6">
         <aside className="w-full md:w-56 flex-shrink-0">
-          <div className="bg-white dark:bg-[#c81e1e] rounded-xl shadow-sm border border-red-100 dark:border-transparent overflow-hidden sticky top-28">
-            <div className="bg-[#c81e1e] dark:bg-[#a11818] px-5 py-4">
+          <div className="bg-white dark:bg-[#FA8072] rounded-xl shadow-sm border border-[#ffece8] dark:border-transparent overflow-hidden sticky top-28">
+            <div className="bg-[#FA8072] dark:bg-[#e87366] px-5 py-4">
               <h2 className="text-base font-bold text-white flex items-center gap-2">
                 <svg className="w-5 h-5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -67,17 +67,17 @@ const MyAccount = () => {
                     onClick={() => setSelectedView(item.view as ViewType)}
                     className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-lg transition-all group ${
                       isActive
-                        ? "text-[#800000] dark:text-white bg-red-50 dark:bg-[#800000]"
-                        : "text-gray-700 dark:text-white bg-gray-50 dark:bg-[#a11818] hover:bg-red-50 dark:hover:bg-[#800000] hover:text-[#800000] dark:hover:text-white"
+                        ? "text-[#FA8072] dark:text-white bg-[#fff5f2] dark:bg-[#FA8072]"
+                        : "text-gray-700 dark:text-white bg-gray-50 dark:bg-[#e87366] hover:bg-[#fff5f2] dark:hover:bg-[#FA8072] hover:text-[#FA8072] dark:hover:text-white"
                     }`}
                   >
                     <div className="flex items-center gap-2">
-                      <div className={`${isActive ? "text-[#800000] dark:text-white" : "text-gray-400 dark:text-white"} transition-colors`}>
+                      <div className={`${isActive ? "text-[#FA8072] dark:text-white" : "text-gray-400 dark:text-white"} transition-colors`}>
                         {item.icon}
                       </div>
                       <span>{item.label}</span>
                     </div>
-                    <svg className={`w-3 h-3 transition-colors transform group-hover:translate-x-1 ${isActive ? "text-[#800000] dark:text-white" : "text-gray-400 dark:text-white"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-3 h-3 transition-colors transform group-hover:translate-x-1 ${isActive ? "text-[#FA8072] dark:text-white" : "text-gray-400 dark:text-white"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -86,7 +86,7 @@ const MyAccount = () => {
               
               <button
                 onClick={() => router.push("/chat")}
-                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-lg transition-all group text-gray-700 dark:text-white bg-gray-50 dark:bg-[#a11818] hover:bg-red-50 dark:hover:bg-[#800000] hover:text-[#800000] dark:hover:text-white"
+                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-lg transition-all group text-gray-700 dark:text-white bg-gray-50 dark:bg-[#e87366] hover:bg-[#fff5f2] dark:hover:bg-[#FA8072] hover:text-[#FA8072] dark:hover:text-white"
               >
                 <div className="flex items-center gap-2">
                   <div className="text-gray-400 dark:text-white transition-colors">

@@ -31,8 +31,8 @@ export default function OngsRechazadas() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-pink-100 dark:bg-black p-6">
-      <h1 className="text-2xl font-bold text-[#800000] mb-6 text-center">
+    <div className="min-h-screen bg-[#ffece8] dark:bg-black p-6">
+      <h1 className="text-2xl font-bold text-[#FA8072] mb-6 text-center">
         Organizaciones Rechazadas
       </h1>
 
@@ -40,26 +40,26 @@ export default function OngsRechazadas() {
         {ongs.map((org) => (
           <div
             key={org.id}
-            className="bg-white dark:bg-zinc-900 border border-pink-300 dark:border-zinc-700 rounded-lg p-5 shadow hover:shadow-lg transition"
+            className="bg-white dark:bg-zinc-900 border border-[#ffbba5] dark:border-zinc-700 rounded-lg p-5 shadow hover:shadow-lg transition"
           >
             <div className="flex items-center gap-4">
               <img
                 src={org.imagenPerfil ?? "/default-profile.png"}
                 alt={`Foto de ${org.nombre}`}
-                className="w-24 h-24 object-cover border-4 border-pink-500 rounded-full shadow"
+                className="w-24 h-24 object-cover border-4 border-[#e87366] rounded-full shadow"
               />
               <div>
-                <h2 className="text-lg font-bold text-[#800000]">{org.nombre}</h2>
+                <h2 className="text-lg font-bold text-[#FA8072]">{org.nombre}</h2>
                 <p className="text-sm text-gray-600">{org.ciudad}</p>
                 <p className="text-sm text-gray-500 mt-2">{org.descripcion}</p>
-                <p className="text-sm text-[#800000] mt-2">{org.email}</p>
+                <p className="text-sm text-[#FA8072] mt-2">{org.email}</p>
               </div>
             </div>
           </div>
         ))}
 
         {ongs.length === 0 && (
-          <p className="col-span-full text-center text-[#800000]">
+          <p className="col-span-full text-center text-[#FA8072]">
             No hay Organizaciones rechazadas.
           </p>
         )}

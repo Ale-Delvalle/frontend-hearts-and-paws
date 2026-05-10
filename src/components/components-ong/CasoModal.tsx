@@ -17,16 +17,16 @@ export default function CasoModal({ caso, visible, onClose }: CasoModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-pink-100 bg-opacity-30"
+      className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-[#ffece8] bg-opacity-30"
       onClick={onClose}
     >
       <div
-        className="relative bg-pink-50 rounded-2xl shadow-lg max-w-md w-full p-6 border border-pink-200 overflow-hidden"
+        className="relative bg-[#fff5f2] rounded-2xl shadow-lg max-w-md w-full p-6 border border-[#ffcfc7] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-1 right-1 text-[#800000] hover:text-[#800000] text-3xl font-bold z-10"
+          className="absolute top-1 right-1 text-[#FA8072] hover:text-[#FA8072] text-3xl font-bold z-10"
           aria-label="Cerrar"
         >
           &times;
@@ -42,7 +42,7 @@ export default function CasoModal({ caso, visible, onClose }: CasoModalProps) {
           />
         </div>
 
-        <h2 className="text-3xl font-extrabold text-[#800000] mb-4 text-center">
+        <h2 className="text-3xl font-extrabold text-[#FA8072] mb-4 text-center">
           {caso.titulo}
         </h2>
 

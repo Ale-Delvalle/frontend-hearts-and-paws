@@ -49,8 +49,8 @@ export default function AdopcionesRegistradas() {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
-      <h1 className="text-3xl font-bold text-[#800000] mb-6 text-center">
+    <div className="p-6 bg-[#fff5f2] dark:bg-black min-h-screen">
+      <h1 className="text-3xl font-bold text-[#FA8072] mb-6 text-center">
         Adopciones Registradas
       </h1>
 
@@ -58,7 +58,7 @@ export default function AdopcionesRegistradas() {
         {adopciones.map((adopcion) => (
           <div
             key={adopcion.id}
-            className="bg-white dark:bg-zinc-900 rounded-xl shadow-md p-4 border border-pink-200 dark:border-zinc-700 w-[60%] mx-auto"
+            className="bg-white dark:bg-zinc-900 rounded-xl shadow-md p-4 border border-[#ffcfc7] dark:border-zinc-700 w-[60%] mx-auto"
           >
             <div className="block flow-root">
               <img
@@ -68,7 +68,7 @@ export default function AdopcionesRegistradas() {
                 alt={adopcion.caso.mascota.nombre}
                 className="w-32 h-32 object-cover rounded float-left mr-4 mb-2 mt-1"
               />
-              <h2 className="text-lg font-bold text-[#800000]">
+              <h2 className="text-lg font-bold text-[#FA8072]">
                 {adopcion.caso.titulo}
               </h2>
               <p className="text-sm text-gray-700">

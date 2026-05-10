@@ -165,7 +165,7 @@ export function RegisterONGForm() {
           <label className="block mb-2 text-sm font-medium text-gray-800">
             Imagen de perfil
           </label>
-          <label className="inline-block px-4 py-2 text-white bg-pink-600 rounded cursor-pointer file:sr-only hover:bg-pink-700">
+          <label className="inline-block px-4 py-2 text-white bg-[#FA8072] rounded cursor-pointer file:sr-only hover:bg-[#e87366]">
             Seleccionar imagen
             <input
               type="file"
@@ -215,7 +215,7 @@ export function RegisterONGForm() {
                 return copia;
               });
             }}
-            className="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-pink-600 file:text-white hover:file:bg-pink-700"
+            className="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-[#FA8072] file:text-white hover:file:bg-pink-700"
           />
           {errors.archivoVerificacion && (
             <p className="mt-1 text-sm text-red-600">{errors.archivoVerificacion}</p>

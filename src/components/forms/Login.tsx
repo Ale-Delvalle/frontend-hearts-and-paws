@@ -28,7 +28,7 @@ export default function LoginPage() {
       {!user ? (
         <button
           onClick={handleLoginWithGoogle}
-          className="px-4 py-2 text-white bg-pink-600 rounded hover:bg-pink-700"
+          className="px-4 py-2 text-white bg-[#FA8072] rounded hover:bg-[#e87366]"
         >
           Iniciar sesión con Google
         </button>

@@ -79,17 +79,17 @@ export function Vistausuario() {
   };
 
   return (
-    <div className="min-h-screen bg-pink-100 dark:bg-black p-6">
+    <div className="min-h-screen bg-[#ffece8] dark:bg-black p-6">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-[#800000] mb-6 text-center">
+        <h2 className="text-3xl font-bold text-[#FA8072] mb-6 text-center">
           Usuarios Logueados
         </h2>
 
         {/* Tarjeta de total de usuarios */}
         <div className="mb-6 flex justify-center">
-          <div className="bg-white dark:bg-zinc-900 border border-pink-300 dark:border-zinc-700 rounded-lg shadow-md px-6 py-4 text-center">
-            <p className="text-sm text-[#800000]">Usuarios registrados</p>
-            <p className="text-2xl font-bold text-[#800000]">
+          <div className="bg-white dark:bg-zinc-900 border border-[#ffbba5] dark:border-zinc-700 rounded-lg shadow-md px-6 py-4 text-center">
+            <p className="text-sm text-[#FA8072]">Usuarios registrados</p>
+            <p className="text-2xl font-bold text-[#FA8072]">
               {usuarios.length}
             </p>
           </div>
@@ -100,7 +100,7 @@ export function Vistausuario() {
           <input
             type="text"
             placeholder="Buscar por nombre"
-            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroNombre}
             onChange={(e) => setFiltroNombre(e.target.value)}
           />
@@ -108,14 +108,14 @@ export function Vistausuario() {
           <input
             type="text"
             placeholder="Buscar por email"
-            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroEmail}
             onChange={(e) => setFiltroEmail(e.target.value)}
           />
 
           <button
             onClick={handleBuscar}
-            className="px-4 py-2 bg-pink-500 dark:bg-zinc-700 text-white rounded-md hover:bg-pink-600 dark:hover:bg-zinc-600 transition"
+            className="px-4 py-2 bg-[#fff5f2]0 dark:bg-zinc-700 text-white rounded-md hover:bg-[#FA8072] dark:hover:bg-zinc-600 transition"
           >
             Buscar
           </button>
@@ -128,13 +128,13 @@ export function Vistausuario() {
               setFiltroRol("Todos");
               obtenerUsuarios(); 
             }}
-            className="px-4 py-2 bg-gray-300 text-[#800000] rounded-md hover:bg-gray-400 transition"
+            className="px-4 py-2 bg-gray-300 text-[#FA8072] rounded-md hover:bg-gray-400 transition"
           >
             Limpiar filtros
           </button>
 
           <select
-            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroPais}
             onChange={(e) => setFiltroPais(e.target.value)}
           >
@@ -146,7 +146,7 @@ export function Vistausuario() {
           </select>
 
           <select
-            className="p-2 rounded-md border border-pink-400 dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
             value={filtroRol}
             onChange={(e) => setFiltroRol(e.target.value)}
           >
@@ -164,24 +164,24 @@ export function Vistausuario() {
             <div
               key={user.id}
               onClick={() => abrirModal(user)}
-              className="cursor-pointer bg-pink-200 dark:bg-zinc-800 rounded-xl shadow-md p-5 hover:bg-pink-300 dark:hover:bg-zinc-700 transition-all"
+              className="cursor-pointer bg-[#ffcfc7] dark:bg-zinc-800 rounded-xl shadow-md p-5 hover:bg-pink-300 dark:hover:bg-zinc-700 transition-all"
             >
               <div className="flex items-center space-x-4">
                 <img
                   src={getAvatarUrl(user.nombre, user.imagenPerfil)}
                   alt={user.nombre}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-pink-500"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-[#e87366]"
                 />
                 <div>
-                  <p className="text-lg font-semibold text-[#800000]">
+                  <p className="text-lg font-semibold text-[#FA8072]">
                     {user.nombre}
                   </p>
-                  <p className="text-sm text-[#800000]">{user.email}</p>
-                  <p className="text-sm text-[#800000]">
+                  <p className="text-sm text-[#FA8072]">{user.email}</p>
+                  <p className="text-sm text-[#FA8072]">
                     {user.ciudad}, {user.pais}
                   </p>
                   {user.rol && (
-                    <p className="text-xs text-[#800000] dark:text-white bg-pink-300 dark:bg-zinc-700 rounded px-2 mt-1 inline-block">
+                    <p className="text-xs text-[#FA8072] dark:text-white bg-pink-300 dark:bg-zinc-700 rounded px-2 mt-1 inline-block">
                       Rol: {user.rol}
                     </p>
                   )}
@@ -191,7 +191,7 @@ export function Vistausuario() {
           ))}
 
           {usuariosFiltrados.length === 0 && (
-            <p className="text-center text-[#800000] col-span-full">
+            <p className="text-center text-[#FA8072] col-span-full">
               No hay usuarios con esos filtros.
             </p>
           )}
@@ -212,12 +212,12 @@ export function Vistausuario() {
           >
             <button
               onClick={cerrarModal}
-              className="absolute top-2 right-4 text-[#800000] hover:text-[#800000] text-2xl font-bold"
+              className="absolute top-2 right-4 text-[#FA8072] hover:text-[#FA8072] text-2xl font-bold"
             >
               &times;
             </button>
 
-            <h3 className="text-xl font-bold text-[#800000] mb-4">
+            <h3 className="text-xl font-bold text-[#FA8072] mb-4">
               Detalles de {usuarioSeleccionado.nombre}
             </h3>
             <div className="space-y-2 text-sm text-gray-700">
@@ -227,7 +227,7 @@ export function Vistausuario() {
                   usuarioSeleccionado.imagenPerfil
                 )}
                 alt={usuarioSeleccionado.nombre}
-                className="w-24 h-24 mx-auto rounded-full object-cover border-2 border-pink-400 mb-4"
+                className="w-24 h-24 mx-auto rounded-full object-cover border-2 border-[#FA8072] mb-4"
               />
               <p>
                 <strong>Nombre:</strong> {usuarioSeleccionado.nombre}

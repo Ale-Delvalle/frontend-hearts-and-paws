@@ -97,13 +97,13 @@ export default function DashboardResumen() {
     loadStats();
   }, []);
 
-  if (loading) return <p className="text-[#800000]">Cargando resumen...</p>;
+  if (loading) return <p className="text-[#FA8072]">Cargando resumen...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
+    <div className="p-6 bg-[#fff5f2] dark:bg-black min-h-screen">
       <div className="w-[60%] mx-auto">
-        <h1 className="text-3xl font-bold text-[#800000] mb-6">
+        <h1 className="text-3xl font-bold text-[#FA8072] mb-6">
           Resumen del Panel de Administración
         </h1>
 
@@ -119,7 +119,7 @@ export default function DashboardResumen() {
 
         {/* Tabla de Organizaciones */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-[#800000] mb-4">
+          <h2 className="text-2xl font-semibold text-[#FA8072] mb-4">
             Últimas Organizaciones Registradas
           </h2>
           <TablaSimple data={orgs} />
@@ -127,7 +127,7 @@ export default function DashboardResumen() {
 
         {/* Tabla de Usuarios */}
         <div>
-          <h2 className="text-2xl font-semibold text-[#800000] mb-4">
+          <h2 className="text-2xl font-semibold text-[#FA8072] mb-4">
             Últimos Usuarios Registrados
           </h2>
           <TablaSimple data={usuarios} />
@@ -144,7 +144,7 @@ type ResumenCardProps = {
 
 function ResumenCard({ title, value }: ResumenCardProps) {
   return (
-    <div className="bg-pink-100 dark:bg-zinc-900 text-[#800000] dark:text-white border border-pink-200 dark:border-zinc-700 rounded-lg p-4 shadow-sm hover:shadow-md transition duration-200">
+    <div className="bg-[#ffece8] dark:bg-zinc-900 text-[#FA8072] dark:text-white border border-[#ffcfc7] dark:border-zinc-700 rounded-lg p-4 shadow-sm hover:shadow-md transition duration-200">
       <h4 className="text-sm font-semibold uppercase tracking-wide">{title}</h4>
       <p className="mt-2 text-2xl font-bold">{value}</p>
     </div>
@@ -158,30 +158,30 @@ type TablaSimpleProps = {
 function TablaSimple({ data }: TablaSimpleProps) {
   if (!data || data.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-500 dark:text-gray-300 bg-white dark:bg-zinc-900 border border-pink-200 dark:border-zinc-700 rounded-lg shadow">
+      <div className="p-4 text-center text-gray-500 dark:text-gray-300 bg-white dark:bg-zinc-900 border border-[#ffcfc7] dark:border-zinc-700 rounded-lg shadow">
         No hay datos para mostrar
       </div>
     );
   }
 
   return (
-    <div className="overflow-x-auto bg-white dark:bg-zinc-900 border border-pink-200 dark:border-zinc-700 rounded-lg shadow">
+    <div className="overflow-x-auto bg-white dark:bg-zinc-900 border border-[#ffcfc7] dark:border-zinc-700 rounded-lg shadow">
       <table className="min-w-full divide-y divide-pink-200 dark:divide-zinc-700">
-        <thead className="bg-pink-100 dark:bg-zinc-800">
+        <thead className="bg-[#ffece8] dark:bg-zinc-800">
           <tr>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-[#800000] uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
               Nombre
             </th>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-[#800000] uppercase tracking-wider">
+            <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
               Email
             </th>
             {"rol" in data[0] && (
-              <th className="px-4 py-3 text-left text-xs font-semibold text-[#800000] uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
                 País
               </th>
             )}
             {"rol" in data[0] && (
-              <th className="px-4 py-3 text-left text-xs font-semibold text-[#800000] uppercase tracking-wider">
+              <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
                 Origen
               </th>
             )}

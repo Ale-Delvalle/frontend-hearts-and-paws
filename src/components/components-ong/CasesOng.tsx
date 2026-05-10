@@ -47,9 +47,9 @@ export default function CasesOng() {
   const cerrarModal = () => setCasoSeleccionado(null);
 
   return (
-    <div className="flex flex-col items-center justify-start py-10 px-4 bg-pink-50 min-h-screen">
+    <div className="flex flex-col items-center justify-start py-10 px-4 bg-[#fff5f2] min-h-screen">
       <div className="w-full max-w-7xl">
-        <h1 className="text-4xl font-extrabold text-center text-[#800000] mb-2">
+        <h1 className="text-4xl font-extrabold text-center text-[#FA8072] mb-2">
           Mis casos publicados
         </h1>
         <p className="text-gray-600 text-lg mb-6 text-center">

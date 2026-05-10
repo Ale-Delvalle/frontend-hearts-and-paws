@@ -99,9 +99,9 @@ const NewCaseOng = () => {
 
   return (
     <>
-      <div className="min-h-screen pt-20 flex justify-center bg-pink-50">
+      <div className="min-h-screen pt-20 flex justify-center bg-[#fff5f2]">
         <div className="max-w-2xl w-full bg-white p-8 rounded-2xl shadow-lg text-gray-800">
-          <h1 className="text-3xl font-bold mb-4 text-center text-[#800000]">
+          <h1 className="text-3xl font-bold mb-4 text-center text-[#FA8072]">
             Crear nuevo caso
           </h1>
 
@@ -110,7 +110,7 @@ const NewCaseOng = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-pink-600 text-white py-3 rounded-xl font-semibold hover:bg-pink-700 transition duration-300 ${
+              className={`w-full bg-[#FA8072] text-white py-3 rounded-xl font-semibold hover:bg-[#e87366] transition duration-300 ${
                 loading ? "opacity-60 cursor-not-allowed" : ""
               }`}
             >
@@ -122,8 +122,8 @@ const NewCaseOng = () => {
 
       {loading && (
         <div className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center pointer-events-auto">
-          <LoaderCircle className="animate-spin w-10 h-10 text-[#800000] mb-4" />
-          <p className="text-[#800000] font-semibold text-lg text-center px-4">
+          <LoaderCircle className="animate-spin w-10 h-10 text-[#FA8072] mb-4" />
+          <p className="text-[#FA8072] font-semibold text-lg text-center px-4">
             Confirmando Registro del caso, por favor aguarde...
           </p>
         </div>

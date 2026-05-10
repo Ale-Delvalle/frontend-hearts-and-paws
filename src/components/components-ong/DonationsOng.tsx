@@ -39,9 +39,9 @@ export default function DonationsOng() {
   if (!ong) return <p className="text-center mt-10">No se encontró la organización autenticada.</p>;
 
   return (
-    <div className="bg-pink-50 min-h-screen p-6 flex justify-center">
+    <div className="bg-[#fff5f2] min-h-screen p-6 flex justify-center">
       <div className="max-w-3xl w-full space-y-6">
-       <h1 className="text-2xl font-bold text-[#800000] mb-4 text-center">
+       <h1 className="text-2xl font-bold text-[#FA8072] mb-4 text-center">
   Historial de Donaciones
 </h1>
 
@@ -57,9 +57,9 @@ export default function DonationsOng() {
             return (
               <div
                 key={donacion.id}
-                className="bg-white border border-pink-200 rounded-2xl shadow-md p-6 space-y-2"
+                className="bg-white border border-[#ffcfc7] rounded-2xl shadow-md p-6 space-y-2"
               >
-                <p className="text-[#800000] font-semibold text-lg">
+                <p className="text-[#FA8072] font-semibold text-lg">
                   Donante: {donacion.usuario?.nombre || "Anónimo"}
                 </p>
                 <p>

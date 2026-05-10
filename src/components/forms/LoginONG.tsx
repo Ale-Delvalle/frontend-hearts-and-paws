@@ -77,9 +77,9 @@ export default function LoginOng() {
   return (
     <form
       onSubmit={handleLogin}
-      className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md border border-pink-300"
+      className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md border border-[#ffbba5]"
     >
-      <h2 className="text-3xl font-bold mb-6 text-[#800000] text-center">
+      <h2 className="text-3xl font-bold mb-6 text-[#FA8072] text-center">
         Iniciar sesión como ONG
       </h2>
 
@@ -110,7 +110,7 @@ export default function LoginOng() {
         <button
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}
-          className="absolute right-3 top-[38px] text-gray-600 hover:text-[#800000]"
+          className="absolute right-3 top-[38px] text-gray-600 hover:text-[#FA8072]"
           tabIndex={-1}
           aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
         >
@@ -158,7 +158,7 @@ export default function LoginOng() {
       <button
         type="submit"
         disabled={loading}
-        className={`w-full bg-pink-600 text-white py-3 rounded font-semibold hover:bg-pink-700 transition ${
+        className={`w-full bg-[#FA8072] text-white py-3 rounded font-semibold hover:bg-[#e87366] transition ${
           loading ? "opacity-60 cursor-not-allowed" : ""
         }`}
       >
@@ -169,7 +169,7 @@ export default function LoginOng() {
         <button
           type="button"
           onClick={() => router.push("/register")}
-          className="text-[#800000] font-semibold hover:underline"
+          className="text-[#FA8072] font-semibold hover:underline"
         >
           Registrate acá
         </button>

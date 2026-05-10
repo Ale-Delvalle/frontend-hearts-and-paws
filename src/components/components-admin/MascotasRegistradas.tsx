@@ -46,12 +46,12 @@ export default function MascotasRegistradas() {
     fetchMascotas();
   }, []);
 
-  if (loading) return <p className="text-[#800000]">Cargando mascotas...</p>;
+  if (loading) return <p className="text-[#FA8072]">Cargando mascotas...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-  <div className="p-6 bg-pink-50 dark:bg-black min-h-screen">
-    <h1 className="text-3xl font-bold text-[#800000] mb-6">
+  <div className="p-6 bg-[#fff5f2] dark:bg-black min-h-screen">
+    <h1 className="text-3xl font-bold text-[#FA8072] mb-6">
       Mascotas Registradas
     </h1>
 
@@ -72,14 +72,14 @@ export default function MascotasRegistradas() {
             />
           </div>
           <div className="p-4 flex-1 flex flex-col justify-between">
-            <h2 className="text-xl font-semibold text-[#800000]">
+            <h2 className="text-xl font-semibold text-[#FA8072]">
               {mascota.nombre}
             </h2>
             <p className="text-sm text-gray-700">Edad: {mascota.edad} años</p>
 
             <button
               onClick={() => setMascotaSeleccionada(mascota)}
-              className="mt-2 text-sm text-[#800000] underline hover:text-[#800000] rounded-full"
+              className="mt-2 text-sm text-[#FA8072] underline hover:text-[#FA8072] rounded-full"
             >
               Conocer historia
             </button>
@@ -103,7 +103,7 @@ export default function MascotasRegistradas() {
           >
             ✖
           </button>
-          <h2 className="text-xl font-bold text-[#800000] mb-2">
+          <h2 className="text-xl font-bold text-[#FA8072] mb-2">
             {mascotaSeleccionada.nombre}
           </h2>
           <img

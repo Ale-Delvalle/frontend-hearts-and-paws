@@ -76,7 +76,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
     {
       label: 'Te necesitan',
       href: '#casos',
-      icon: <FaHeart className="text-[#800000]" />,
+      icon: <FaHeart className="text-[#FA8072]" />,
     },
     { label: 'Adoptar', href: '/adoptar/adopcion', icon: <FaPaw /> },
     { label: 'Registro', href: '/register', icon: <FaRegClipboard /> },
@@ -104,7 +104,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
         {
           label: 'Te necesitan',
           href: '/donacion',
-          icon: <FaHandsHelping className="text-[#800000]" />,
+          icon: <FaHandsHelping className="text-[#FA8072]" />,
         },
         { label: 'Adoptar', href: '/adoptar/adopcion', icon: <FaPaw /> },
        
@@ -138,14 +138,14 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`sticky top-0 w-full z-50 transition-all ${
-        scrolled ? 'bg-[color:var(--card)]/95 dark:bg-[#c81e1e]/95 backdrop-blur-md shadow-md' : 'bg-[color:var(--card)]/90 dark:bg-[#c81e1e]/90'
+        scrolled ? 'bg-[color:var(--card)]/95 dark:bg-[#FA8072]/95 backdrop-blur-md shadow-md' : 'bg-[color:var(--card)]/90 dark:bg-[#FA8072]/90'
       }`}
     >
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-[#800000] dark:text-white"
+            className="flex items-center gap-2 text-xl font-bold text-[#FA8072] dark:text-white"
           >
             <FaPaw className="text-2xl dark:text-white" />
             <span className="dark:text-white">Hearts&Paws</span>
@@ -157,9 +157,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 <button
                   key={link.label}
                   onClick={link.onClick}
-                  className="flex items-center gap-1 text-[color:var(--foreground)] dark:text-white transition hover:text-[#800000] dark:hover:text-pink-200"
+                  className="flex items-center gap-1 text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
                 >
-                  <span className="text-[#800000] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
+                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                   {link.label}
                 </button>
               ) : (
@@ -167,9 +167,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                   key={link.label}
                   href={link.href!}
                   onClick={link.onClick}
-                  className="flex items-center gap-1 text-[color:var(--foreground)] dark:text-white transition hover:text-[#800000] dark:hover:text-pink-200"
+                  className="flex items-center gap-1 text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
                 >
-                  <span className="text-[#800000] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
+                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                   {link.label}
                 </Link>
               )
@@ -177,7 +177,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
             <button
               type="button"
               onClick={toggleTheme}
-              className="rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#a11818] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#800000]"
+              className="rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
             >
               {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
             </button>
@@ -201,7 +201,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="px-4 py-4 space-y-2 bg-[color:var(--card)] dark:bg-[#c81e1e] shadow-md md:hidden"
+            className="px-4 py-4 space-y-2 bg-[color:var(--card)] dark:bg-[#FA8072] shadow-md md:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -215,9 +215,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                     setIsOpen(false);
                     link.onClick?.(e);
                   }}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#800000] dark:hover:text-pink-200"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
                 >
-                  <span className="text-[#800000] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
+                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                   {link.label}
                 </button>
               ) : (
@@ -225,9 +225,9 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                   key={link.label}
                   href={link.href!}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#800000] dark:hover:text-pink-200"
+                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
                 >
-                  <span className="text-[#800000] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
+                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                   {link.label}
                 </Link>
               )
@@ -238,7 +238,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 toggleTheme();
                 setIsOpen(false);
               }}
-              className="w-full rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#a11818] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#800000]"
+              className="w-full rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
             >
               {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
             </button>

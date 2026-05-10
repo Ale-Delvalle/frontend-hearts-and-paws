@@ -84,14 +84,14 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`sticky top-0 w-full z-50 transition-all ${
-        scrolled ? "bg-white/70 backdrop-blur-md shadow-md" : "bg-white/90"
+        scrolled ? "bg-white/70 dark:bg-[#FA8072]/90 backdrop-blur-md shadow-md" : "bg-white/90 dark:bg-[#FA8072]"
       }`}
     >
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-[#800000]"
+            className="flex items-center gap-2 text-xl font-bold text-[#FA8072]"
           >
             <FaPaw className="text-2xl" />
             <span>Hearts&Paws</span>
@@ -104,9 +104,9 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="flex items-center gap-1 text-gray-700 transition hover:text-[#800000]"
+                className="flex items-center gap-1 text-gray-700 transition hover:text-[#FA8072]"
               >
-                <span className="text-[#800000]">{link.icon}</span>
+                <span className="text-[#FA8072]">{link.icon}</span>
                 {link.label}
               </a>
             ))}
@@ -132,7 +132,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="px-4 py-4 space-y-2 bg-white shadow-md md:hidden"
+            className="px-4 py-4 space-y-2 bg-white dark:bg-[#FA8072] shadow-md md:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -143,9 +143,9 @@ const Navbar = () => {
                 key={link.label}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-2 text-gray-700 hover:text-[#800000]"
+                className="flex items-center gap-2 text-gray-700 hover:text-[#FA8072]"
               >
-                <span className="text-[#800000]">{link.icon}</span>
+                <span className="text-[#FA8072]">{link.icon}</span>
                 {link.label}
               </a>
             ))}

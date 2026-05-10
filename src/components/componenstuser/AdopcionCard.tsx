@@ -25,7 +25,7 @@ interface AdopcionCardProps {
 const estadoColor = {
   PENDIENTE: 'bg-yellow-100 text-yellow-800 border border-yellow-300',
   ACEPTADA: 'bg-green-100 text-green-800 border border-green-300',
-  RECHAZADA: 'bg-red-100 text-red-800 border border-red-300',
+  RECHAZADA: 'bg-[#ffece8] text-red-800 border border-red-300',
 };
 
 export default function AdopcionCard({ adopcion }: AdopcionCardProps) {
@@ -33,7 +33,7 @@ export default function AdopcionCard({ adopcion }: AdopcionCardProps) {
   const imagen = mascota.imagenes[0]?.url;
 
   return (
-    <div className="relative bg-white border-2 border-pink-400 rounded-xl shadow-sm p-6 flex flex-col md:flex-row gap-6 max-w-4xl mx-auto">
+    <div className="relative bg-white border-2 border-[#FA8072] rounded-xl shadow-sm p-6 flex flex-col md:flex-row gap-6 max-w-4xl mx-auto">
       {imagen && (
         <div className="w-full md:w-40 h-40 relative">
           <Image
@@ -47,7 +47,7 @@ export default function AdopcionCard({ adopcion }: AdopcionCardProps) {
 
       <div className="flex-1">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-xl font-bold text-[#800000]">{mascota.nombre}</h2>
+          <h2 className="text-xl font-bold text-[#FA8072]">{mascota.nombre}</h2>
           <span
   className={`text-sm px-4 py-1.5 rounded-full font-semibold capitalize ${
     estadoColor[adopcion.estado as keyof typeof estadoColor] || 'bg-gray-100 text-gray-800'

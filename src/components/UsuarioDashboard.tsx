@@ -92,8 +92,8 @@ export default function DashboardSencillo() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-pink-50">
-        <p className="text-[#800000] font-semibold text-lg">Cargando usuario...</p>
+      <div className="flex items-center justify-center min-h-screen bg-[#fff5f2]">
+        <p className="text-[#FA8072] font-semibold text-lg">Cargando usuario...</p>
       </div>
     );
   }
@@ -101,14 +101,14 @@ export default function DashboardSencillo() {
   if (!usuario && !user) return null;
 
   return (
-    <div className="flex min-h-screen bg-pink-50">
-      <nav className="flex flex-col px-4 py-6 text-white bg-pink-600 w-60">
+    <div className="flex min-h-screen bg-[#fff5f2]">
+      <nav className="flex flex-col px-4 py-6 text-white bg-[#FA8072] w-60">
         <h2 className="mb-8 text-xl font-semibold text-center">Panel del Usuario</h2>
 
         <button
           onClick={() => setSeccionActiva('perfil')}
           className={`mb-4 text-left px-3 py-2 rounded ${
-            seccionActiva === 'perfil' ? 'bg-pink-800 font-semibold' : 'hover:bg-pink-700'
+            seccionActiva === 'perfil' ? 'bg-pink-800 font-semibold' : 'hover:bg-[#e87366]'
           }`}
         >
           Mi perfil
@@ -117,7 +117,7 @@ export default function DashboardSencillo() {
         <button
           onClick={() => setSeccionActiva('datos')}
           className={`text-left px-3 py-2 rounded ${
-            seccionActiva === 'datos' ? 'bg-pink-800 font-semibold' : 'hover:bg-pink-700'
+            seccionActiva === 'datos' ? 'bg-pink-800 font-semibold' : 'hover:bg-[#e87366]'
           }`}
         >
           Mis datos
@@ -133,20 +133,20 @@ export default function DashboardSencillo() {
                   <img
                     src={userData.imagenPerfil}
                     alt={`Foto de perfil de ${userData.nombre}`}
-                    className="w-12 h-12 rounded-full border-2 border-pink-400 shadow"
+                    className="w-12 h-12 rounded-full border-2 border-[#FA8072] shadow"
                   />
                 )}
                 <div>
-                  <p className="text-lg font-semibold text-[#800000]">{`Hola, ${userData.nombre}`}</p>
+                  <p className="text-lg font-semibold text-[#FA8072]">{`Hola, ${userData.nombre}`}</p>
                 </div>
               </div>
             </header>
 
             <div className="flex gap-4">
-              <button className="px-6 py-2 font-semibold text-white transition bg-pink-500 rounded hover:bg-pink-600">
+              <button className="px-6 py-2 font-semibold text-white transition bg-[#fff5f2]0 rounded hover:bg-[#FA8072]">
                 Adoptar
               </button>
-              <button className="px-6 py-2 font-semibold text-white transition bg-pink-400 rounded hover:bg-pink-500">
+              <button className="px-6 py-2 font-semibold text-white transition bg-pink-400 rounded hover:bg-[#fff5f2]0">
                 Donar
               </button>
             </div>
@@ -155,7 +155,7 @@ export default function DashboardSencillo() {
 
         {seccionActiva === 'datos' && (
           <section>
-            <h1 className="mb-6 text-3xl font-bold text-[#800000]">Mis datos</h1>
+            <h1 className="mb-6 text-3xl font-bold text-[#FA8072]">Mis datos</h1>
 
             <form
               onSubmit={(e) => {
@@ -169,7 +169,7 @@ export default function DashboardSencillo() {
                   <div key={campo}>
                     <label
                       htmlFor={campo}
-                      className="block mb-1 font-semibold text-[#800000] capitalize"
+                      className="block mb-1 font-semibold text-[#FA8072] capitalize"
                     >
                       {campo}
                     </label>
@@ -182,7 +182,7 @@ export default function DashboardSencillo() {
                       onChange={handleChange}
                       className={`w-full border rounded px-3 py-2 ${
                         isEditando
-                          ? 'border-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400'
+                          ? 'border-[#e87366] focus:outline-none focus:ring-2 focus:ring-pink-400'
                           : 'border-gray-300 bg-gray-100 cursor-not-allowed'
                       }`}
                       required={campo === 'nombre' || campo === 'email'}
@@ -195,14 +195,14 @@ export default function DashboardSencillo() {
                 <button
                   type="button"
                   onClick={() => setIsEditando(true)}
-                  className="px-6 py-2 text-white bg-pink-600 rounded hover:bg-pink-700"
+                  className="px-6 py-2 text-white bg-[#FA8072] rounded hover:bg-[#e87366]"
                 >
                   Editar
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="px-6 py-2 text-white bg-pink-600 rounded hover:bg-pink-700"
+                  className="px-6 py-2 text-white bg-[#FA8072] rounded hover:bg-[#e87366]"
                 >
                   Guardar
                 </button>

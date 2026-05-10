@@ -205,39 +205,39 @@ export default function DashboardSencillo() {
   }
 
   return (
-    <div className="flex min-h-screen bg-pink-50">
+    <div className="flex min-h-screen bg-[#fff5f2]">
       {/* Navegación lateral */}
-      <nav className="flex flex-col px-4 py-6 text-white bg-pink-600 w-60">
+      <nav className="flex flex-col px-4 py-6 text-white bg-[#FA8072] w-60">
         <h2 className="mb-8 text-xl font-semibold text-center">
           Perfil del Usuario
         </h2>
         <button
           onClick={() => router.push("/dashboard/usuario")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Principal
         </button>
         <button
           onClick={() => router.push("/usuario/adopciones")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mis Adopciones
         </button>
         <button
           onClick={() => router.push("/usuario/donaciones")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mis Donaciones
         </button>
         <button
           onClick={() => router.push("/usuario/favoritos")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mis Favoritos
         </button>
         <button
           onClick={() => router.push("/chat")}
-          className="text-left px-3 py-2 rounded hover:bg-pink-700"
+          className="text-left px-3 py-2 rounded hover:bg-[#e87366]"
         >
           Mensajes
         </button>
@@ -249,9 +249,9 @@ export default function DashboardSencillo() {
           {/* Avatar */}
           <div className="flex items-center space-x-6 mb-6">
             <div className="relative w-28 h-28">
-              <div className="w-28 h-28 rounded-full border-2 border-pink-400 shadow overflow-hidden relative bg-white">
+              <div className="w-28 h-28 rounded-full border-2 border-[#FA8072] shadow overflow-hidden relative bg-white">
                 {uploading ? (
-                  <span className="text-sm text-[#800000] font-semibold animate-pulse flex items-center justify-center h-full">
+                  <span className="text-sm text-[#FA8072] font-semibold animate-pulse flex items-center justify-center h-full">
                     Cargando...
                   </span>
                 ) : (
@@ -262,13 +262,13 @@ export default function DashboardSencillo() {
                       "/default-avatar.png"
                     }
                     alt={`Foto de perfil de ${userData.nombre}`}
-                    className="w-32 h-32 rounded-full object-cover border-2 border-pink-400 shadow"
+                    className="w-32 h-32 rounded-full object-cover border-2 border-[#FA8072] shadow"
                   />
                 )}
               </div>
               <label
                 htmlFor="imagen-perfil"
-                className="absolute bottom-0 right-0 bg-pink-600 hover:bg-pink-700 text-white p-1 rounded-full cursor-pointer transition"
+                className="absolute bottom-0 right-0 bg-[#FA8072] hover:bg-[#e87366] text-white p-1 rounded-full cursor-pointer transition"
                 title="Cambiar imagen"
               >
                 📷
@@ -286,7 +286,7 @@ export default function DashboardSencillo() {
             </div>
 
             <div>
-              <p className="text-2xl font-bold text-[#800000]">
+              <p className="text-2xl font-bold text-[#FA8072]">
                 Hola, {userData.nombre}!
               </p>
               <p className="text-sm text-gray-500">
@@ -316,7 +316,7 @@ export default function DashboardSencillo() {
               <div key={campo}>
                 <label
                   htmlFor={campo}
-                  className="block mb-1 text-sm font-medium text-[#800000] capitalize"
+                  className="block mb-1 text-sm font-medium text-[#FA8072] capitalize"
                 >
                   {campo}
                 </label>
@@ -345,7 +345,7 @@ export default function DashboardSencillo() {
                     onChange={handleChange}
                     className={`w-full px-3 py-2 rounded border text-sm transition ${
                       isEditando
-                        ? "border-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
+                        ? "border-[#FA8072] focus:outline-none focus:ring-2 focus:ring-pink-300"
                         : "border-gray-300 bg-gray-100 cursor-not-allowed"
                     }`}
                     required={campo === "nombre"}
@@ -359,7 +359,7 @@ export default function DashboardSencillo() {
                 <button
                   type="button"
                   onClick={() => setIsEditando(true)}
-                  className="px-6 py-2 text-white transition bg-pink-600 rounded hover:bg-pink-700"
+                  className="px-6 py-2 text-white transition bg-[#FA8072] rounded hover:bg-[#e87366]"
                 >
                   Editar
                 </button>
@@ -368,7 +368,7 @@ export default function DashboardSencillo() {
               {isEditando && (
                 <button
                   type="submit"
-                  className="px-6 py-2 text-white transition bg-pink-600 rounded hover:bg-pink-700"
+                  className="px-6 py-2 text-white transition bg-[#FA8072] rounded hover:bg-[#e87366]"
                 >
                   Guardar
                 </button>

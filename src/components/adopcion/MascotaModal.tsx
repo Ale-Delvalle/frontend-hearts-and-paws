@@ -69,13 +69,13 @@ export default function MascotaModal({
   if (!visible) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-pink-100 bg-opacity-30">
-      <div className="relative bg-pink-50 rounded-2xl shadow-lg max-w-md w-full p-6 border border-pink-200 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-[#ffece8] bg-opacity-30">
+      <div className="relative bg-[#fff5f2] rounded-2xl shadow-lg max-w-md w-full p-6 border border-[#ffcfc7] overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('/huellas-bg.png')] bg-contain bg-repeat pointer-events-none"></div>
 
         <button
           onClick={onClose}
-          className="absolute top-1 right-1 text-[#800000] hover:text-[#800000] text-3xl font-bold z-10"
+          className="absolute top-1 right-1 text-[#FA8072] hover:text-[#FA8072] text-3xl font-bold z-10"
           aria-label="Cerrar"
         >
           &times;
@@ -91,7 +91,7 @@ export default function MascotaModal({
           />
         </div>
 
-        <h2 className="text-3xl font-extrabold text-[#800000] mb-2 text-center relative z-10">
+        <h2 className="text-3xl font-extrabold text-[#FA8072] mb-2 text-center relative z-10">
           {mascota.nombre}
         </h2>
 
@@ -111,8 +111,8 @@ export default function MascotaModal({
             disabled={metaAlcanzada}
             className={`px-6 py-3 rounded-full shadow-md transition-all duration-300 font-semibold ${
               metaAlcanzada
-                ? 'bg-pink-200 text-[#800000] cursor-not-allowed'
-                : 'bg-pink-500 hover:bg-pink-600 text-white'
+                ? 'bg-[#ffcfc7] text-[#FA8072] cursor-not-allowed'
+                : 'bg-[#fff5f2]0 hover:bg-[#FA8072] text-white'
             }`}
           >
             {metaAlcanzada ? 'Meta alcanzada 🐾' : textoBoton}

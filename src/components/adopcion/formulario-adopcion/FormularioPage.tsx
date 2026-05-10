@@ -154,7 +154,7 @@ useEffect(() => {
   ]
 
   return (
-    <div className="min-h-screen bg-pink-50 py-10 px-4 flex justify-center">
+    <div className="min-h-screen bg-[#fff5f2] py-10 px-4 flex justify-center">
       <form
         className="w-full max-w-3xl space-y-10 bg-white p-8 rounded-xl shadow-md"
         onSubmit={enviarFormulario}
@@ -164,12 +164,12 @@ useEffect(() => {
             <div
               key={num}
               className={`flex flex-col items-center ${
-                paso === num ? 'text-[#800000] font-bold' : 'text-gray-400'
+                paso === num ? 'text-[#FA8072] font-bold' : 'text-gray-400'
               }`}
             >
               <div
                 className={`w-8 h-8 rounded-full border-2 flex items-center justify-center mb-1 ${
-                  paso === num ? 'border-pink-600 bg-pink-100' : 'border-gray-300'
+                  paso === num ? 'border-pink-600 bg-[#ffece8]' : 'border-gray-300'
                 }`}
               >
                 {num}
@@ -186,7 +186,7 @@ useEffect(() => {
             <button
               type="button"
               onClick={() => setPaso((prev) => prev - 1)}
-              className="px-4 py-2 text-white bg-pink-400 rounded hover:bg-pink-500 transition"
+              className="px-4 py-2 text-white bg-pink-400 rounded hover:bg-[#fff5f2]0 transition"
             >
               Atrás
             </button>
@@ -196,7 +196,7 @@ useEffect(() => {
             <button
               type="button"
               onClick={() => router.push('/dashboard/usuario')}
-              className="px-4 py-2 bg-pink-100 text-[#800000] border border-pink-300 rounded hover:bg-pink-200 transition"
+              className="px-4 py-2 bg-[#ffece8] text-[#FA8072] border border-[#ffbba5] rounded hover:bg-[#ffcfc7] transition"
             >
               Editar mis datos personales
             </button>
@@ -208,7 +208,7 @@ useEffect(() => {
               onClick={avanzarPaso}
               className={`px-4 py-2 text-white rounded transition ${
                 pasoValido(paso, formData)
-                  ? 'bg-pink-600 hover:bg-pink-700'
+                  ? 'bg-[#FA8072] hover:bg-[#e87366]'
                   : 'bg-pink-300 cursor-not-allowed'
               }`}
               disabled={!pasoValido(paso, formData)}
@@ -220,7 +220,7 @@ useEffect(() => {
               type="submit"
               className={`px-4 py-2 text-white rounded transition ${
                 pasoValido(paso, formData)
-                  ? 'bg-pink-600 hover:bg-pink-700'
+                  ? 'bg-[#FA8072] hover:bg-[#e87366]'
                   : 'bg-pink-300 cursor-not-allowed'
               }`}
               disabled={!pasoValido(paso, formData)}

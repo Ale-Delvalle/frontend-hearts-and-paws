@@ -95,9 +95,9 @@ export default function LoginUsuario() {
   <>
     <form
       onSubmit={handleLogin}
-      className="max-w-md p-6 mx-auto bg-white border border-pink-300 shadow-md rounded-xl"
+      className="max-w-md p-6 mx-auto bg-white border border-[#ffbba5] shadow-md rounded-xl"
     >
-      <h2 className="mb-6 text-3xl font-bold text-center text-[#800000]">
+      <h2 className="mb-6 text-3xl font-bold text-center text-[#FA8072]">
         Iniciar sesión
       </h2>
 
@@ -138,7 +138,7 @@ export default function LoginUsuario() {
       <button
         type="submit"
         disabled={loading}
-        className={`w-full bg-pink-600 text-white py-3 rounded font-semibold hover:bg-pink-700 transition ${
+        className={`w-full bg-[#FA8072] text-white py-3 rounded font-semibold hover:bg-[#e87366] transition ${
           loading ? "opacity-60 cursor-not-allowed" : ""
         }`}
       >
@@ -150,7 +150,7 @@ export default function LoginUsuario() {
         <button
           type="button"
           onClick={() => router.push("/register")}
-          className="text-[#800000] font-semibold hover:underline"
+          className="text-[#FA8072] font-semibold hover:underline"
         >
           Registrate acá
         </button>
@@ -160,7 +160,7 @@ export default function LoginUsuario() {
     {loading && (
   <div className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm flex items-center justify-center pointer-events-auto">
     <div className="flex flex-col items-center gap-4">
-      <div className="text-center text-[#800000] font-semibold text-lg animate-pulse">
+      <div className="text-center text-[#FA8072] font-semibold text-lg animate-pulse">
         Iniciando sesión...<br />
         Redirigiendo a tu perfil, por favor aguardá.
       </div>
