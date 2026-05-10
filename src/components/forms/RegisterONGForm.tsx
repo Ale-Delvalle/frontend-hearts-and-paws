@@ -231,7 +231,7 @@ export function RegisterONGForm() {
                 return copia;
               });
             }}
-            className="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-[#FA8072] file:text-white hover:file:bg-pink-700"
+            className="w-full text-sm text-gray-700 dark:text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-[#FA8072] file:text-white hover:file:bg-pink-700"
           />
           {errors.archivoVerificacion && (
             <p className="text-red-600 text-sm mt-1">{errors.archivoVerificacion}</p>

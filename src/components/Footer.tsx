@@ -4,7 +4,7 @@ import Link from 'next/link';
 
  export const Footer = () => {
   return (
-    <footer className="py-8 mt-12 text-gray-800 bg-[#ffece8]">
+    <footer className="py-8 mt-12 text-gray-800 dark:text-gray-200 bg-[#ffece8] dark:bg-black">
       <div className="grid grid-cols-1 gap-8 px-4 mx-auto max-w-7xl md:grid-cols-3">
         {/* Logo + Descripción */}
         <div>
@@ -54,7 +54,7 @@ import Link from 'next/link';
         </div>
       </div>
 
-      <div className="pt-4 mt-8 text-sm text-center text-gray-500 border-t border-[#ffbba5]">
+      <div className="pt-4 mt-8 text-sm text-center text-gray-500 dark:text-gray-400 border-t border-[#ffbba5] dark:border-zinc-800">
         © {new Date().getFullYear()} Hearts&Paws. Todos los derechos reservados.
       </div>
     </footer>

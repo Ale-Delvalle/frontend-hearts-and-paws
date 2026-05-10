@@ -15,10 +15,10 @@ export default function LoginSelector() {
 
   return (
     <div
-      className="fixed inset-0 bg-[#fff5f2] overflow-hidden flex items-center justify-center"
+      className="fixed inset-0 bg-[#fff5f2] dark:bg-black overflow-hidden flex items-center justify-center"
       style={{ padding: '1rem' }}
     >
-      <div className="max-w-xl w-full bg-white p-8 rounded-xl shadow-lg border border-[#ffbba5] box-border">
+      <div className="max-w-xl w-full bg-white dark:bg-zinc-900 p-8 rounded-xl shadow-lg border border-[#ffbba5] dark:border-zinc-800 box-border">
         <h1 className="text-3xl font-bold text-[#FA8072] text-center mb-8">
           ¿Cómo querés iniciar sesión?
         </h1>
@@ -33,20 +33,20 @@ export default function LoginSelector() {
 
           <button
             onClick={() => router.push('/login/login-ong')}
-            className="bg-[#ffece8] hover:bg-[#ffcfc7] text-[#FA8072] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-[#FA8072]"
+            className="bg-[#ffece8] dark:bg-zinc-800 hover:bg-[#ffcfc7] dark:hover:bg-zinc-700 text-[#FA8072] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-[#FA8072]"
           >
             Iniciar sesión como ONG
           </button>
 
           <button
             onClick={() => router.push('/login/login-user')}
-            className="bg-[#ffece8] hover:bg-[#ffcfc7] text-[#FA8072] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-[#FA8072]"
+            className="bg-[#ffece8] dark:bg-zinc-800 hover:bg-[#ffcfc7] dark:hover:bg-zinc-700 text-[#FA8072] font-semibold py-4 px-6 rounded-md text-lg transition w-full border border-[#FA8072]"
           >
             Iniciar sesión como Usuario
           </button>
         </div>
 
-        <p className="text-center text-gray-600 mt-6 text-sm">
+        <p className="text-center text-gray-600 dark:text-gray-300 mt-6 text-sm">
           Elegí la opción que se corresponda con tu cuenta.
         </p>
       </div>

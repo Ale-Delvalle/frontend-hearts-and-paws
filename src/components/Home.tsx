@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-   <main className="flex flex-col items-center justify-start text-gray-800 bg-[#fff5f2] min-w-full overflow-x-hidden">
+   <main className="flex flex-col items-center justify-start text-gray-800 dark:text-gray-200 bg-[#fff5f2] dark:bg-black min-w-full overflow-x-hidden">
 
       
       <div className="w-full relative h-[60vh] overflow-hidden flex items-center justify-center">
@@ -45,7 +45,7 @@ export default function Home() {
 
      {/* Sección destacada: mensaje + imagen en contenedor blanco */}
 <section className="w-full px-4 py-10 flex justify-center">
-  <div className="grid items-center bg-white rounded-xl shadow-md p-8 w-full max-w-5xl grid-cols-1 md:grid-cols-2 gap-8">
+  <div className="grid items-center bg-white dark:bg-zinc-900 rounded-xl shadow-md p-8 w-full max-w-5xl grid-cols-1 md:grid-cols-2 gap-8">
     
     {/* Texto */}
     <motion.div
@@ -57,7 +57,7 @@ export default function Home() {
       <h2 className="text-3xl font-bold leading-tight md:text-4xl text-[#FA8072]">
         Unimos fuerzas <br /> por los que no tienen voz
       </h2>
-      <p className="text-gray-700">
+      <p className="text-gray-700 dark:text-gray-300">
         Ayudá, adoptá o colaborá con causas que salvan vidas. Nuestra red conecta corazones con patas. 🐾
       </p>
     </motion.div>

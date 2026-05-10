@@ -77,14 +77,14 @@ export default function LoginOng() {
   return (
     <form
       onSubmit={handleLogin}
-      className="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md border border-[#ffbba5]"
+      className="max-w-md mx-auto p-6 bg-white dark:bg-zinc-900 rounded-xl shadow-md border border-[#ffbba5] dark:border-zinc-800"
     >
       <h2 className="text-3xl font-bold mb-6 text-[#FA8072] text-center">
         Iniciar sesión como ONG
       </h2>
 
       <label className="block mb-4">
-        <span className="block font-semibold mb-1 text-gray-700">Email:</span>
+        <span className="block font-semibold mb-1 text-gray-700 dark:text-gray-300">Email:</span>
         <input
           type="email"
           value={email}
@@ -97,7 +97,7 @@ export default function LoginOng() {
       </label>
 
       <label className="block mb-6 relative">
-        <span className="block font-semibold mb-1 text-gray-700">Contraseña:</span>
+        <span className="block font-semibold mb-1 text-gray-700 dark:text-gray-300">Contraseña:</span>
         <input
           type={showPassword ? "text" : "password"}
           value={password}
@@ -110,7 +110,7 @@ export default function LoginOng() {
         <button
           type="button"
           onClick={() => setShowPassword((prev) => !prev)}
-          className="absolute right-3 top-[38px] text-gray-600 hover:text-[#FA8072]"
+          className="absolute right-3 top-[38px] text-gray-600 dark:text-gray-300 hover:text-[#FA8072]"
           tabIndex={-1}
           aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
         >
@@ -164,7 +164,7 @@ export default function LoginOng() {
       >
         {loading ? "Ingresando..." : "Entrar"}
       </button>
-      <div className="mt-6 text-center text-sm text-gray-600">
+      <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
         ¿No tenés una cuenta?{" "}
         <button
           type="button"

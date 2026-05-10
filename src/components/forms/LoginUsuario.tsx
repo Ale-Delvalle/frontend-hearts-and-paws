@@ -95,19 +95,19 @@ export default function LoginUsuario() {
   <>
     <form
       onSubmit={handleLogin}
-      className="max-w-md p-6 mx-auto bg-white border border-[#ffbba5] shadow-md rounded-xl"
+      className="max-w-md p-6 mx-auto bg-white dark:bg-zinc-900 border border-[#ffbba5] dark:border-zinc-800 shadow-md rounded-xl"
     >
       <h2 className="mb-6 text-3xl font-bold text-center text-[#FA8072]">
         Iniciar sesión
       </h2>
 
       <label className="block mb-4">
-        <span className="block mb-1 font-semibold text-gray-700">Email:</span>
+        <span className="block mb-1 font-semibold text-gray-700 dark:text-gray-300">Email:</span>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
           placeholder="ejemplo@correo.com"
           disabled={loading}
           required
@@ -115,12 +115,12 @@ export default function LoginUsuario() {
       </label>
 
       <label className="relative block mb-6">
-        <span className="block mb-1 font-semibold text-gray-700">Contraseña:</span>
+        <span className="block mb-1 font-semibold text-gray-700 dark:text-gray-300">Contraseña:</span>
         <input
           type={showPassword ? "text" : "password"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 pr-10 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+          className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
           placeholder="Tu contraseña"
           disabled={loading}
           required
@@ -145,7 +145,7 @@ export default function LoginUsuario() {
         {loading ? "Ingresando..." : "Entrar"}
       </button>
 
-      <div className="mt-6 text-center text-sm text-gray-600">
+      <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
         ¿No tenés una cuenta?{" "}
         <button
           type="button"

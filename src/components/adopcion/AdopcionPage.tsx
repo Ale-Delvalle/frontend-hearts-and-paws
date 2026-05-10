@@ -75,19 +75,19 @@ router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
   }
 
   return (
-    <div className="flex flex-col items-center justify-start py-10 px-4 bg-[#fff5f2] min-h-screen">
+    <div className="flex flex-col items-center justify-start py-10 px-4 bg-[#fff5f2] dark:bg-black min-h-screen">
       <div className="w-full max-w-7xl">
         <h1 className="text-4xl font-extrabold text-center text-[#FA8072] mb-2">
           Mi raza favorita es <span className="italic">adoptada</span>
         </h1>
-        <p className="text-gray-600 text-lg mb-6 text-center">
+        <p className="text-gray-600 dark:text-gray-300 text-lg mb-6 text-center">
           Encontrá a tu nuevo mejor amigo.
         </p>
 
         <div className="flex flex-col sm:flex-row sm:justify-center gap-4 max-w-md mx-auto mb-8">
   <div className="relative w-full max-w-xs">
     <select
-      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
       value={tipo}
       onChange={(e) => setTipo(e.target.value as 'perro' | 'gato' | '')}
       aria-label="Filtrar por tipo de mascota"
@@ -111,7 +111,7 @@ router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
 
   <div className="relative w-full max-w-xs">
     <select
-      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
       value={orden}
       onChange={(e) => setOrden(e.target.value as 'mas_reciente' | 'mas_antiguo')}
       aria-label="Ordenar mascotas"
