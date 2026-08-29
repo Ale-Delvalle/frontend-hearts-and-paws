@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { OngPerfilPublico } from '@/types/ong'
 import { getPerfilPublicoOng } from '@/services/ongProfile'
+import OngPerfilHeader from './OngPerfilHeader'
 
 export default function OngPerfilPage({ id }: { id: string }) {
   const [ong, setOng] = useState<OngPerfilPublico | null>(null)
@@ -32,11 +33,7 @@ export default function OngPerfilPage({ id }: { id: string }) {
         {cargando && <p className="text-center text-gray-500">Cargando organización...</p>}
         {error && <p className="text-center text-red-500">{error}</p>}
 
-        {!cargando && ong && (
-          <h1 className="text-3xl font-extrabold text-center text-[#FA8072]">
-            {ong.nombre}
-          </h1>
-        )}
+        {!cargando && ong && <OngPerfilHeader ong={ong} />}
       </div>
     </div>
   )
