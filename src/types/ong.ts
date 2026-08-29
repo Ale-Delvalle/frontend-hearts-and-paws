@@ -31,5 +31,18 @@ export type ContextType = {
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   loading: boolean;
-  logged: boolean; 
+  logged: boolean;
+};
+
+// GET /organizaciones/:id/perfil
+export type OngPerfilPublico = {
+  id: string;
+  nombre: string;
+  descripcion: string | null;
+  ciudad: string | null;
+  pais: string | null;
+  imagenPerfil: string | null;
+  creado_en: string;
+  mascotasActivas: number;
+  casosPublicados: number;
 };
