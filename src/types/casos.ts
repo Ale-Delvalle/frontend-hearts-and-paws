@@ -11,3 +11,28 @@ export interface Caso {
   creado_en: string
   mascota: Mascota
 }
+
+// GET /organizaciones/:id/timeline
+export interface CasoTimelineItem {
+  id: string
+  titulo: string
+  descripcion: string
+  tipo: 'ADOPCION' | 'DONACION'
+  mascotaId: string
+  ongId: string | null
+  creado_en: string
+  mascota: {
+    id: string
+    nombre: string
+    imagenes: { id: string; url: string }[]
+  }
+  adopcion: { id: string; estado: 'PENDIENTE' | 'ACEPTADA' } | null
+  donacion: { id: string; estadoDonacion: number; metaDonacion: number; estado: 'ACTIVO' | 'COMPLETADO' } | null
+}
+
+export interface TimelinePaginado {
+  data: CasoTimelineItem[]
+  total: number
+  page: number
+  limit: number
+}

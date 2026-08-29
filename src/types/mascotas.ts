@@ -33,3 +33,24 @@ export interface MascotaModalProps {
   onAccion?: (id: string) => void
   modo: 'adopcion' | 'donacion'
 }
+
+// GET /organizaciones/:id/mascotas
+export interface MascotaCatalogoItem {
+  id: string
+  nombre: string
+  edad: number
+  descripcion: string | null
+  estado: 'EN_ADOPCION' | 'EN_TRANSITO' | 'ADOPTADO' | 'FALLECIDO'
+  creada_en: string
+  organizacionId: string
+  tipoId: string
+  tipo: { id: string; nombre: string }
+  imagenes: { id: string; url: string }[]
+}
+
+export interface MascotasPaginado {
+  data: MascotaCatalogoItem[]
+  total: number
+  page: number
+  limit: number
+}
