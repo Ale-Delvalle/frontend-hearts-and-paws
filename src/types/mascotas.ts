@@ -54,3 +54,37 @@ export interface MascotasPaginado {
   page: number
   limit: number
 }
+
+// GET /mascotas/:id/perfil
+export interface MascotaCasoHistorial {
+  id: string
+  titulo: string
+  descripcion: string
+  tipo: 'ADOPCION' | 'DONACION'
+  mascotaId: string
+  ongId: string | null
+  creado_en: string
+  adopcion: { id: string; estado: 'PENDIENTE' | 'ACEPTADA' } | null
+  donacion: { id: string; estadoDonacion: number; metaDonacion: number; estado: 'ACTIVO' | 'COMPLETADO' } | null
+}
+
+export interface MascotaPerfil {
+  id: string
+  nombre: string
+  edad: number
+  descripcion: string | null
+  estado: 'EN_ADOPCION' | 'EN_TRANSITO' | 'ADOPTADO' | 'FALLECIDO'
+  creada_en: string
+  organizacionId: string
+  tipoId: string
+  tipo: { id: string; nombre: string }
+  imagenes: { id: string; url: string; urlBlur: string | null; esSensible: boolean | null }[]
+  organizacion: {
+    id: string
+    nombre: string
+    imagenPerfil: string | null
+    ciudad: string | null
+    pais: string | null
+  }
+  casos: MascotaCasoHistorial[]
+}
