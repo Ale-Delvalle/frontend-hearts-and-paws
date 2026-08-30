@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { CasoFeedItem } from '@/types/casos'
 
@@ -56,13 +55,8 @@ export default function GlobalFeedPostCard({ caso }: { caso: CasoFeedItem }) {
       </div>
 
       <div className="relative w-full h-64 bg-[#fff5f2]">
-        <Image
-          src={imagenUrl}
-          alt={caso.mascota.nombre}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 640px"
-        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={imagenUrl} alt={caso.mascota.nombre} className="w-full h-full object-cover" />
       </div>
 
       <div className="p-5 flex flex-col gap-2">
