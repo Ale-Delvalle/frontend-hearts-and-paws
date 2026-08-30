@@ -29,3 +29,17 @@ export const petImages = async (mascotaId: string, imagenes: FileList) => {
 
   if (!res.ok) throw new Error("Error al subir las imágenes");
 };
+
+// Cambiar el estado de una mascota (en adopción / en tránsito / adoptado / dado de baja)
+export const updateEstadoMascota = async (mascotaId: string, estado: string) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/mascotas/${mascotaId}/estado`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ estado }),
+  });
+
+  if (!res.ok) throw new Error("Error al actualizar el estado de la mascota");
+
+  return await res.json();
+};

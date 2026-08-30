@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Caso } from "@/types/casos";
+import { ESTADOS_MASCOTA } from "@/lib/estadoMascota";
 
 type Props = {
   caso: Caso;
@@ -11,6 +12,7 @@ type Props = {
 
 export default function CasoCard({ caso, onConocerHistoria }: Props) {
   const imagenes = caso.mascota.imagenes ?? [];
+  const estado = caso.mascota.estado ? ESTADOS_MASCOTA[caso.mascota.estado] : null;
   const [imagenActual, setImagenActual] = useState(0);
   const totalImagenes = imagenes.length;
 
@@ -59,7 +61,14 @@ export default function CasoCard({ caso, onConocerHistoria }: Props) {
       </div>
 
       <div className="p-7 flex-1 flex flex-col justify-between">
-        <h2 className="text-xl font-bold text-[#FA8072] mb-2">{caso.mascota.nombre}</h2>
+        <div className="flex items-center justify-between gap-2 mb-2">
+          <h2 className="text-xl font-bold text-[#FA8072]">{caso.mascota.nombre}</h2>
+          {estado && (
+            <span className={`text-[10px] font-semibold uppercase tracking-wide px-2 py-1 rounded-full shrink-0 ${estado.className}`}>
+              {estado.label}
+            </span>
+          )}
+        </div>
 
         <div className="mt-auto">
           <button

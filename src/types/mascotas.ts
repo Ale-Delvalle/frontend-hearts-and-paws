@@ -11,6 +11,7 @@ export interface Mascota {
   imagenes: Imagen[]
   descripcion: string
   casoId:string
+  estado?: 'EN_ADOPCION' | 'EN_TRANSITO' | 'ADOPTADO' | 'FALLECIDO'
 }
 
 export interface MascotaCardProps {
