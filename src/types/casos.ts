@@ -36,3 +36,23 @@ export interface TimelinePaginado {
   page: number
   limit: number
 }
+
+// GET /casos/timeline
+export interface OngResumen {
+  id: string
+  nombre: string
+  imagenPerfil: string | null
+  ciudad: string | null
+  pais: string | null
+}
+
+export interface CasoFeedItem extends Omit<CasoTimelineItem, 'ongId'> {
+  ong: OngResumen
+}
+
+export interface FeedGlobalPaginado {
+  data: CasoFeedItem[]
+  total: number
+  page: number
+  limit: number
+}
