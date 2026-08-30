@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { FaHome, FaExclamation, FaHandshake } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import GlobalTimeline from './components-feed/GlobalTimeline';
 
 
 export default function Home() {
@@ -80,6 +81,10 @@ export default function Home() {
   </div>
 </section>
 
+      {/* Timeline público de publicaciones de las ONGs */}
+      <section className="w-full px-4 py-10 flex justify-center">
+        <GlobalTimeline />
+      </section>
 
       {/* Cómo funciona la red */}
       <motion.section
