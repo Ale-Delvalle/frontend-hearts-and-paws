@@ -79,7 +79,16 @@ export default function OngMascotasCatalogo({ ongId }: { ongId: string }) {
         </select>
       </div>
 
-      {cargando && <p className="text-center text-gray-500">Cargando mascotas...</p>}
+      {cargando && (
+        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 animate-pulse">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              className="h-52 bg-white dark:bg-zinc-900 rounded-xl border border-[#ffcfc7] dark:border-zinc-700"
+            />
+          ))}
+        </div>
+      )}
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {!cargando && !error && mascotas.length === 0 && (

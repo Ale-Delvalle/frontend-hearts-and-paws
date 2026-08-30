@@ -60,7 +60,16 @@ export default function OngTimeline({ ongId }: { ongId: string }) {
     <div className="flex flex-col gap-5">
       <h2 className="text-xl font-bold text-[#FA8072]">Publicaciones</h2>
 
-      {cargando && <p className="text-center text-gray-500">Cargando publicaciones...</p>}
+      {cargando && (
+        <div className="flex flex-col gap-5 animate-pulse">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="h-48 bg-white dark:bg-zinc-900 rounded-2xl border border-[#ffcfc7] dark:border-zinc-700"
+            />
+          ))}
+        </div>
+      )}
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {!cargando && !error && casos.length === 0 && (

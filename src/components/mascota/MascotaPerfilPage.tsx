@@ -31,7 +31,20 @@ export default function MascotaPerfilPage({ id }: { id: string }) {
 
   return (
     <div className="bg-[#fff5f2] dark:bg-black min-h-screen py-10 px-4">
-      {cargando && <p className="text-center text-gray-500">Cargando mascota...</p>}
+      {cargando && (
+        <div className="w-full max-w-6xl mx-auto flex flex-col gap-8 animate-pulse">
+          <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-8 items-start">
+            <div className="w-full aspect-square rounded-2xl bg-[#ffece8] dark:bg-zinc-800" />
+            <div className="flex flex-col gap-4 bg-white dark:bg-zinc-900 rounded-2xl shadow-md border border-[#ffcfc7] dark:border-zinc-700 p-6">
+              <div className="h-6 w-40 bg-[#ffece8] dark:bg-zinc-800 rounded" />
+              <div className="h-3 w-24 bg-[#ffece8] dark:bg-zinc-800 rounded" />
+              <div className="h-3 w-full bg-[#ffece8] dark:bg-zinc-800 rounded" />
+              <div className="h-3 w-2/3 bg-[#ffece8] dark:bg-zinc-800 rounded" />
+              <div className="h-10 w-full bg-[#ffece8] dark:bg-zinc-800 rounded mt-4" />
+            </div>
+          </div>
+        </div>
+      )}
       {error && <p className="text-center text-red-500">{error}</p>}
 
       {!cargando && mascota && (
