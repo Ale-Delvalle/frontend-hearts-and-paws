@@ -1,10 +1,9 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
-//import { createClient } from "../lib/supabaseClient";
 import { useOngAuth } from "@/context/OngAuthContext";
 import { useUsuarioAuth } from "@/context/UsuarioAuthContext";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { User } from "@supabase/supabase-js";
 import { createClient } from '@supabase/supabase-js';
@@ -12,7 +11,6 @@ import { createClient } from '@supabase/supabase-js';
 const NavbarSupabase = dynamic(() => import("./navbars/NavbarSupabase"), { ssr: false });
 const NavbarLocal = dynamic(() => import("./navbars/NavbarLocal"), { ssr: false });
 
-// Crear supabase solo una vez afuera del componente
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -21,6 +19,7 @@ const supabase = createClient(
 type ThemeMode = "light" | "dark";
 
 const NavbarWrapper = () => {
+  const pathname = usePathname();
   const [theme, setTheme] = useState<ThemeMode>("light");
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -69,11 +68,14 @@ const NavbarWrapper = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, []); // array vacío ya que supabase es estable
+  }, []);
 
   const toggleTheme = () => {
     setTheme((current) => (current === "dark" ? "light" : "dark"));
   };
+
+  // En la página de inicio '/', se renderiza únicamente el header del nuevo diseño
+  if (pathname === '/') return null;
 
   if (loading) return null;
 
