@@ -2,9 +2,10 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
+import GlobalTimeline from './components-feed/GlobalTimeline';
 
 export default function Home() {
-  // Asegurar que la página Home siempre renderice en modo claro puro (sin clases dark)
+  // Asegurar que la página Home siempre renderice en modo claro puro
   useEffect(() => {
     document.documentElement.classList.remove('dark');
     document.documentElement.classList.add('light');
@@ -13,7 +14,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
-      {/* 1. Header TopAppBar (Idéntico a la imagen adjunta) */}
+      {/* 1. Header TopAppBar (Idéntico a la imagen de referencia) */}
       <header className="bg-[#fff8f5]/90 backdrop-blur-md sticky top-0 z-50 border-b border-[#6c2f00]/10 w-full">
         <div className="flex justify-between items-center px-6 md:px-12 py-4 max-w-[1280px] mx-auto">
           {/* Logo */}
@@ -119,7 +120,7 @@ export default function Home() {
               </p>
             </div>
             <a
-              href="#"
+              href="#publicaciones"
               className="hidden md:flex font-body-editorial font-semibold text-sm text-[#6c2f00] items-center gap-1.5 hover:opacity-75 transition-opacity"
             >
               Ver todas las historias <span className="material-symbols-outlined text-base">arrow_forward</span>
@@ -185,9 +186,28 @@ export default function Home() {
             </article>
           </div>
         </section>
+
+        {/* 5. Timeline de Publicaciones de las ONGs */}
+        <section id="publicaciones" className="w-full py-16 px-6 md:px-12 border-t border-[#6c2f00]/10 bg-[#fff1ea]/40">
+          <div className="max-w-[1280px] mx-auto">
+            <div className="text-center mb-12">
+              <span className="material-symbols-outlined text-[#ae2f34] text-4xl mb-2">
+                pets
+              </span>
+              <h2 className="font-display-editorial text-3xl md:text-4xl text-[#6c2f00] font-semibold">
+                Publicaciones de la Red de ONGs
+              </h2>
+              <p className="font-body-editorial text-base text-[#54433a] mt-2 max-w-xl mx-auto">
+                Casos activos, avisos e historias compartidas en tiempo real por nuestras organizaciones aliadas.
+              </p>
+            </div>
+
+            <GlobalTimeline />
+          </div>
+        </section>
       </main>
 
-      {/* 5. Footer (Idéntico a la imagen adjunta) */}
+      {/* 6. Footer (Idéntico a la imagen de referencia) */}
       <footer className="bg-[#fbddca] w-full py-12 px-6 md:px-12 border-t border-[#dac2b6]/40">
         <div className="flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto gap-8">
           <div className="font-display-editorial text-2xl font-bold text-[#6c2f00] flex items-center gap-2">
