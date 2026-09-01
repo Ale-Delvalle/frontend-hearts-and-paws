@@ -234,19 +234,19 @@ export default function Home() {
           </div>
 
           {/* Tarjeta del Carrusel de Historia de Éxito */}
-          <div className="relative overflow-hidden rounded-2xl border border-[#6c2f00]/15 bg-[#fff1ea] shadow-md transition-all duration-500">
-            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[480px]">
+          <div className="relative overflow-hidden rounded-2xl border border-[#6c2f00]/15 bg-[#fff1ea] shadow-md hover:shadow-lg transition-all duration-500">
+            <div key={currentStory.id} className="grid grid-cols-1 lg:grid-cols-12 min-h-[480px] transition-all duration-500 animate-in fade-in slide-in-from-right-4 duration-300">
               {/* Columna de Texto/Detalles (7 columnas) */}
               <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between z-10">
                 <div>
                   {/* Fila ONG & Badges */}
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                    <div className="flex items-center gap-2 bg-[#6c2f00]/10 px-3.5 py-1.5 rounded-full text-[#6c2f00] font-body-editorial text-xs font-bold">
+                    <div className="flex items-center gap-2 bg-[#6c2f00]/10 px-3.5 py-1.5 rounded-full text-[#6c2f00] font-body-editorial text-xs font-bold shadow-xs">
                       <span className="material-symbols-outlined text-base text-[#ae2f34]">pets</span>
                       {currentStory.ongName}
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="bg-[#ae2f34] text-white px-3 py-1 rounded-full font-body-editorial text-xs font-semibold uppercase tracking-wider">
+                      <span className="bg-[#ae2f34] text-white px-3 py-1 rounded-full font-body-editorial text-xs font-semibold uppercase tracking-wider shadow-xs">
                         {currentStory.tag}
                       </span>
                       <span className="bg-[#6c2f00]/10 text-[#6c2f00] px-3 py-1 rounded-full font-body-editorial text-xs font-semibold">
@@ -256,14 +256,14 @@ export default function Home() {
                   </div>
 
                   {/* Nombre del animal */}
-                  <h3 className="font-display-editorial text-3xl sm:text-4xl text-[#6c2f00] font-bold mb-6">
+                  <h3 className="font-display-editorial text-3xl sm:text-4xl text-[#6c2f00] font-bold mb-6 tracking-tight">
                     La nueva vida de {currentStory.animalName}
                   </h3>
 
                   {/* Bloques de Obstáculo y Resultado Final */}
                   <div className="space-y-4 mb-8">
                     {/* Obstáculo */}
-                    <div className="p-4 rounded-xl bg-[#fff8f5] border border-[#6c2f00]/10">
+                    <div className="p-4 rounded-xl bg-[#fff8f5] border border-[#6c2f00]/10 shadow-xs hover:border-[#6c2f00]/20 transition-colors">
                       <div className="flex items-center gap-2 text-[#934b19] font-semibold text-sm mb-1 font-body-editorial">
                         <span className="material-symbols-outlined text-lg">healing</span>
                         El Obstáculo Inicial:
@@ -274,7 +274,7 @@ export default function Home() {
                     </div>
 
                     {/* Resultado Final */}
-                    <div className="p-4 rounded-xl bg-[#2e5d32]/10 border border-[#2e5d32]/20">
+                    <div className="p-4 rounded-xl bg-[#2e5d32]/10 border border-[#2e5d32]/20 shadow-xs hover:border-[#2e5d32]/40 transition-colors">
                       <div className="flex items-center gap-2 text-[#2e5d32] font-semibold text-sm mb-1 font-body-editorial">
                         <span className="material-symbols-outlined text-lg">workspace_premium</span>
                         El Resultado Final:
@@ -300,6 +300,7 @@ export default function Home() {
                         key={idx}
                         onClick={() => setCurrentIndex(idx)}
                         aria-label={`Ir a historia ${idx + 1}`}
+                        title={`Ver historia ${idx + 1}`}
                         className={`transition-all duration-300 cursor-pointer rounded-full ${
                           idx === currentIndex
                             ? 'w-7 h-2.5 bg-[#6c2f00]'
@@ -312,12 +313,12 @@ export default function Home() {
               </div>
 
               {/* Columna de Imagen del Animal Feliz (5 columnas) */}
-              <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full overflow-hidden bg-[#6c2f00]/5">
+              <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full overflow-hidden bg-[#6c2f00]/5 group">
                 <Image
                   src={currentStory.imageUrl}
                   alt={currentStory.imageAlt}
                   fill
-                  className="object-cover object-center transition-all duration-700 hover:scale-105"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:hidden" />
