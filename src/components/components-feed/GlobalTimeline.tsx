@@ -54,23 +54,21 @@ export default function GlobalTimeline() {
   const hayMas = casos.length < total
 
   return (
-    <div className="flex flex-col gap-5 max-w-2xl mx-auto w-full">
-      <h2 className="text-xl font-bold text-[#FA8072]">Publicaciones de las ONGs</h2>
-
+    <div className="flex flex-col gap-6 max-w-2xl mx-auto w-full font-body-editorial">
       {cargando && (
-        <div className="flex flex-col gap-5 animate-pulse">
+        <div className="flex flex-col gap-6 animate-pulse">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="h-96 bg-white dark:bg-zinc-900 rounded-2xl border border-[#ffcfc7] dark:border-zinc-700"
+              className="h-96 bg-[#fff1ea] rounded-2xl border border-[#6c2f00]/15"
             />
           ))}
         </div>
       )}
-      {error && <p className="text-center text-red-500">{error}</p>}
+      {error && <p className="text-center text-[#ae2f34] font-medium">{error}</p>}
 
       {!cargando && !error && casos.length === 0 && (
-        <p className="text-center text-gray-500">
+        <p className="text-center text-[#54433a]">
           Todavía no hay publicaciones de ninguna organización.
         </p>
       )}
@@ -83,9 +81,9 @@ export default function GlobalTimeline() {
         <button
           onClick={handleCargarMas}
           disabled={cargandoMas}
-          className="self-center bg-white hover:bg-[#ffece8] text-[#FA8072] border border-[#FA8072] py-2 px-6 rounded-full transition disabled:opacity-50"
+          className="self-center bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 shadow-sm hover:scale-105 disabled:opacity-50 flex items-center gap-2 cursor-pointer"
         >
-          {cargandoMas ? 'Cargando...' : 'Cargar más'}
+          {cargandoMas ? 'Cargando...' : 'Cargar más publicaciones'}
         </button>
       )}
     </div>
