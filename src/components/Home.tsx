@@ -87,9 +87,106 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Timeline público de publicaciones de las ONGs */}
-      <section className="w-full px-4 py-10 flex justify-center">
-        <GlobalTimeline />
+      {/* Bento Grid: Historias Destacadas (Paso 4) */}
+      <motion.section
+        id="historias"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="w-full py-12 px-5 md:px-8 max-w-[1280px] mx-auto"
+      >
+        <div className="flex justify-between items-end mb-10">
+          <div>
+            <h2 className="font-display-editorial text-3xl md:text-4xl text-[#6c2f00] dark:text-[#ffb68c] font-semibold mb-2">
+              Historias Destacadas
+            </h2>
+            <p className="font-body-editorial text-base text-[#54433a] dark:text-gray-300">
+              Rescates recientes que buscan un hogar definitivo.
+            </p>
+          </div>
+          <a
+            href="#como-funciona"
+            className="hidden md:flex font-body-editorial font-semibold text-[#6c2f00] dark:text-[#ffb68c] items-center gap-2 hover:opacity-70 transition-opacity"
+          >
+            Ver más <span className="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 min-h-[420px]">
+          {/* Card Principal 1 (Spans 8 cols) */}
+          <article className="md:col-span-8 group relative overflow-hidden rounded-xl border border-[#6c2f00]/15 bg-[#fff1ea] dark:bg-zinc-900 transition-all duration-500 hover:border-[#6c2f00]/30 shadow-sm min-h-[380px]">
+            <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
+              <Image
+                src="/gato-y-amor.jpg"
+                alt="El viaje de Milo hacia la paz"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#3f2c20]/90 via-[#3f2c20]/30 to-transparent z-10" />
+            <div className="absolute bottom-0 left-0 p-8 w-full z-20">
+              <div className="flex gap-2 mb-4">
+                <span className="bg-[#934b19] text-white px-3 py-1 rounded-sm font-body-editorial text-xs font-semibold uppercase tracking-wider">
+                  Tranquilo
+                </span>
+                <span className="bg-[#934b19] text-white px-3 py-1 rounded-sm font-body-editorial text-xs font-semibold uppercase tracking-wider">
+                  Senior
+                </span>
+              </div>
+              <h3 className="font-display-editorial text-2xl md:text-3xl text-white mb-2 font-semibold">
+                El viaje de Milo hacia la paz
+              </h3>
+              <p className="font-body-editorial text-white/90 line-clamp-2 max-w-xl text-sm md:text-base">
+                Después de años vagando, Milo finalmente está aprendiendo lo que se siente dormir en una cama suave y despertar sin miedo.
+              </p>
+            </div>
+          </article>
+
+          {/* Card Secundaria 2 (Spans 4 cols) */}
+          <article className="md:col-span-4 group relative overflow-hidden rounded-xl border border-[#6c2f00]/15 bg-[#fff1ea] dark:bg-zinc-900 transition-all duration-500 hover:border-[#6c2f00]/30 shadow-sm min-h-[380px]">
+            <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
+              <Image
+                src="/pexels.jpg"
+                alt="Luna: Pequeña pero feroz"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#3f2c20]/90 via-[#3f2c20]/30 to-transparent z-10" />
+            <div className="absolute bottom-0 left-0 p-6 w-full z-20">
+              <div className="flex gap-2 mb-3">
+                <span className="bg-[#934b19] text-white px-3 py-1 rounded-sm font-body-editorial text-xs font-semibold uppercase tracking-wider">
+                  Juguetón
+                </span>
+              </div>
+              <h3 className="font-display-editorial text-xl text-white mb-1 font-semibold">
+                Luna: Pequeña pero feroz
+              </h3>
+              <p className="font-body-editorial text-white/90 line-clamp-2 text-sm">
+                Una bola de energía inagotable que traerá luz (y algo de caos) a tu hogar.
+              </p>
+            </div>
+          </article>
+        </div>
+      </motion.section>
+
+      {/* Timeline público de publicaciones de las ONGs (Integrado Editorialmente - Paso 4) */}
+      <section className="w-full max-w-[1280px] px-4 py-12 flex flex-col items-center">
+        <div className="w-full text-center mb-8">
+          <span className="material-symbols-outlined text-[#ae2f34] text-3xl mb-2">
+            pets
+          </span>
+          <h2 className="font-display-editorial text-3xl md:text-4xl text-[#6c2f00] dark:text-[#ffb68c] font-semibold">
+            Novedades de la Red de ONGs
+          </h2>
+          <p className="font-body-editorial text-base text-[#54433a] dark:text-gray-300 mt-2">
+            Casos activos, avisos e historias compartidas en tiempo real por nuestras refugios aliados.
+          </p>
+        </div>
+        <div className="w-full bg-[#fff1ea]/60 dark:bg-zinc-900/40 border border-[#877369]/15 p-4 md:p-8 rounded-2xl shadow-sm">
+          <GlobalTimeline />
+        </div>
       </section>
 
       {/* Cómo funciona la red (Estilo Editorial - Paso 3) */}
