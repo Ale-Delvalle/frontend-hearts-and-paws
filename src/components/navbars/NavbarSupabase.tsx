@@ -3,20 +3,15 @@
 import { useState, useEffect, JSX } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import {
   FaPaw,
   FaBars,
   FaTimes,
   FaExclamationTriangle,
-  FaRegClipboard,
-  FaSignInAlt,
-  FaHeart,
   FaUserShield,
   FaSignOutAlt,
-  FaHome,
   FaCommentDots,
-  FaHandsHelping,
 } from 'react-icons/fa';
 import { supabase } from '@/lib/supabaseClient';
 import { User } from '@supabase/supabase-js';
@@ -28,6 +23,7 @@ interface ThemeProps {
 
 const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -50,7 +46,6 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       setUser(user);
 
       if (user) {
-        // Simulación: podrías reemplazar esto por lógica real basada en metadata
         setRoles(['user']);
       }
     };
@@ -67,24 +62,26 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   type MenuLink = {
     label: string;
     href?: string;
-    icon: JSX.Element;
+    icon?: JSX.Element;
     onClick?: (e?: React.MouseEvent) => void | Promise<void>;
     isButton?: boolean;
+    isPrimaryBtn?: boolean;
   };
 
   let menuLinks: MenuLink[] = [
-    {
-      label: 'Te necesitan',
-      href: '#casos',
-      icon: <FaHeart className="text-[#FA8072]" />,
-    },
-    { label: 'Adoptar', href: '/adoptar/adopcion', icon: <FaPaw /> },
-    { label: 'Registro', href: '/register', icon: <FaRegClipboard /> },
-    { label: 'Iniciar Sesión', href: '/login', icon: <FaSignInAlt /> },
+    { label: 'Historias', href: '/#historias' },
+    { label: 'Adoptar', href: '/adoptar/adopcion' },
+    { label: 'Donar', href: '/donacion' },
+    { label: 'ONGs', href: '/ongs' },
+    { label: 'Iniciar Sesión', href: '/login', isPrimaryBtn: true },
   ];
 
   if (user) {
-    menuLinks = [{ label: 'Inicio', href: '/', icon: <FaHome /> }];
+    menuLinks = [
+      { label: 'Historias', href: '/#historias' },
+      { label: 'Adoptar', href: '/adoptar/adopcion' },
+      { label: 'Donar', href: '/donacion' },
+    ];
 
     if (roles.includes('ong')) {
       menuLinks.push(
@@ -99,16 +96,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
     }
 
     if (roles.includes('user')) {
-      menuLinks.push(
-        { label: 'Mi Perfil', href: '/dashboard/usuario', icon: <FaUserShield /> },
-        {
-          label: 'Te necesitan',
-          href: '/donacion',
-          icon: <FaHandsHelping className="text-[#FA8072]" />,
-        },
-        { label: 'Adoptar', href: '/adoptar/adopcion', icon: <FaPaw /> },
-       
-      );
+      menuLinks.push({ label: 'Perfil', href: '/dashboard/usuario', icon: <FaUserShield /> });
     }
 
     if (roles.includes('admin')) {
@@ -123,6 +111,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       label: 'Cerrar sesión',
       icon: <FaSignOutAlt />,
       isButton: true,
+      isPrimaryBtn: true,
       onClick: async (e) => {
         e?.preventDefault();
         await supabase.auth.signOut();
@@ -132,76 +121,120 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
     });
   }
 
+  const isLinkActive = (href?: string) => {
+    if (!href) return false;
+    if (href === '/' || href === '/#historias') return pathname === '/';
+    return pathname.startsWith(href);
+  };
+
   return (
-    <motion.div
-      initial={{ y: -50, opacity: 0 }}
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
       className={`sticky top-0 w-full z-50 transition-all ${
-        scrolled ? 'bg-[color:var(--card)]/95 dark:bg-[#FA8072]/95 backdrop-blur-md shadow-md' : 'bg-[color:var(--card)]/90 dark:bg-[#FA8072]/90'
+        scrolled
+          ? 'bg-[#fff8f5]/95 backdrop-blur-md shadow-xs border-b border-[#6c2f00]/10'
+          : 'bg-[#fff8f5]/90 backdrop-blur-md border-b border-[#6c2f00]/10'
       }`}
     >
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="px-6 md:px-12 mx-auto max-w-[1280px]">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo Editorial */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-[#FA8072] dark:text-white"
+            className="font-display-editorial text-2xl font-bold text-[#6c2f00] flex items-center gap-2 whitespace-nowrap"
           >
-            <FaPaw className="text-2xl dark:text-white" />
-            <span className="dark:text-white">Hearts&Paws</span>
+            <span className="material-symbols-outlined text-[#6c2f00] text-2xl">pets</span>
+            Hearts&amp;Paws
           </Link>
 
-          <div className="hidden space-x-6 md:flex items-center">
-            {menuLinks.map((link) =>
-              link.isButton ? (
-                <button
-                  key={link.label}
-                  onClick={link.onClick}
-                  className="flex items-center gap-1 text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
-                >
-                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
-                  {link.label}
-                </button>
-              ) : (
-                <Link
-                  key={link.label}
-                  href={link.href!}
-                  onClick={link.onClick}
-                  className="flex items-center gap-1 text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
-                >
-                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
-                  {link.label}
-                </Link>
-              )
-            )}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
-            >
-              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
-            </button>
+          {/* Navigation Desktop */}
+          <div className="hidden md:flex items-center gap-8">
+            <nav className="flex items-center gap-7 font-body-editorial text-sm font-semibold">
+              {menuLinks
+                .filter((link) => !link.isPrimaryBtn)
+                .map((link) => {
+                  const active = isLinkActive(link.href);
+                  return link.isButton ? (
+                    <button
+                      key={link.label}
+                      onClick={link.onClick}
+                      className={`transition-colors flex items-center gap-1 cursor-pointer ${
+                        active
+                          ? 'text-[#6c2f00] font-bold border-b-2 border-[#6c2f00] pb-0.5'
+                          : 'text-[#54433a] hover:text-[#6c2f00]'
+                      }`}
+                    >
+                      {link.icon && <span className="text-base text-[#6c2f00]">{link.icon}</span>}
+                      {link.label}
+                    </button>
+                  ) : (
+                    <Link
+                      key={link.label}
+                      href={link.href!}
+                      className={`transition-colors flex items-center gap-1 cursor-pointer ${
+                        active
+                          ? 'text-[#6c2f00] font-bold border-b-2 border-[#6c2f00] pb-0.5'
+                          : 'text-[#54433a] hover:text-[#6c2f00]'
+                      }`}
+                    >
+                      {link.icon && <span className="text-base text-[#6c2f00]">{link.icon}</span>}
+                      {link.label}
+                    </Link>
+                  );
+                })}
+            </nav>
+
+            {/* Actions (Modo claro/oscuro + Botón Destacado) */}
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="font-body-editorial text-xs font-semibold border border-[#6c2f00]/20 text-[#6c2f00] px-4 py-2 rounded-full hover:bg-[#ffeade] transition-all cursor-pointer hidden sm:block"
+              >
+                {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
+              </button>
+
+              {menuLinks
+                .filter((link) => link.isPrimaryBtn)
+                .map((link) => (
+                  <button
+                    key={link.label}
+                    onClick={(e) => {
+                      if (link.onClick) {
+                        link.onClick(e);
+                      } else if (link.href) {
+                        router.push(link.href);
+                      }
+                    }}
+                    className="bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-base">login</span>
+                    {link.label}
+                  </button>
+                ))}
+            </div>
           </div>
 
+          {/* Toggle Mobile */}
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-[color:var(--foreground)] dark:text-white focus:outline-none"
+              className="text-[#6c2f00] focus:outline-none p-2"
+              aria-label="Abrir menú"
             >
-              {isOpen ? (
-                <FaTimes className="text-2xl" />
-              ) : (
-                <FaBars className="text-2xl" />
-              )}
+              {isOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Menu Mobile */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="px-4 py-4 space-y-2 bg-[color:var(--card)] dark:bg-[#FA8072] shadow-md md:hidden"
+            className="px-6 py-6 space-y-4 bg-[#fff8f5] border-b border-[#6c2f00]/10 shadow-md md:hidden font-body-editorial"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -215,9 +248,8 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                     setIsOpen(false);
                     link.onClick?.(e);
                   }}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
+                  className="w-full text-left font-semibold text-base text-[#6c2f00] py-1 flex items-center gap-2"
                 >
-                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                   {link.label}
                 </button>
               ) : (
@@ -225,28 +257,30 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                   key={link.label}
                   href={link.href!}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
+                  className="block font-semibold text-base text-[#54433a] hover:text-[#6c2f00] py-1"
                 >
-                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                   {link.label}
                 </Link>
               )
             )}
-            <button
-              type="button"
-              onClick={() => {
-                toggleTheme();
-                setIsOpen(false);
-              }}
-              className="w-full rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
-            >
-              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
-            </button>
+            <div className="pt-2 border-t border-[#6c2f00]/10 flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  toggleTheme();
+                  setIsOpen(false);
+                }}
+                className="w-full font-body-editorial text-xs font-semibold border border-[#6c2f00]/20 text-[#6c2f00] py-2.5 rounded-full hover:bg-[#ffeade] transition-all text-center"
+              >
+                {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.header>
   );
 };
 
 export default Navbar;
+

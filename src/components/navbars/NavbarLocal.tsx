@@ -2,7 +2,7 @@
 
 import type { JSX } from "react";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBuilding, FaChartPie, FaChevronDown, FaInbox } from "react-icons/fa";
 import Link from "next/link";
@@ -30,6 +30,7 @@ interface ThemeProps {
 }
 
 const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
@@ -66,9 +67,10 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   type MenuLink = {
     label: string;
     href: string;
-    icon: JSX.Element;
+    icon?: JSX.Element;
     onClick?: () => void;
     subItems?: { label: string; href: string }[];
+    isPrimaryBtn?: boolean;
   };
 
   let menuLinks: MenuLink[] = [];
@@ -92,6 +94,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
         href: "#",
         icon: <FaSignOutAlt />,
         onClick: handleLogoutOng,
+        isPrimaryBtn: true,
       },
     ];
   } else if (usuario) {
@@ -102,14 +105,13 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
           href: "/dashboard/admin/resumen",
           icon: <FaChartPie />,
         },
-
         {
           label: "Solicitudes",
           href: "/dashboard/admin",
           icon: <FaInbox />,
         },
         {
-          label: " Usuarios",
+          label: "Usuarios",
           href: "/dashboard/admin/vista-user",
           icon: <FaUser />,
         },
@@ -118,7 +120,6 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
           href: "/dashboard/admin/organizaciones",
           icon: <FaBuilding />,
         },
-
         {
           label: "Mascotas",
           href: "#",
@@ -135,101 +136,208 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
           href: "#",
           icon: <FaSignOutAlt />,
           onClick: handleLogoutUsuario,
+          isPrimaryBtn: true,
         },
       ];
     } else {
       menuLinks = [
-        {
-          label: "Perfil",
-          href: "/dashboard/usuario",
-          icon: <FaUser className="text-[#FA8072]" />,
-        },
-        {
-          label: "Te necesitan",
-          href: "/donacion",
-          icon: <FaHandsHelping className="text-[#FA8072]" />,
-        },
-        { label: "Adoptar",
-           href: "/adoptar/adopcion", 
-           icon: <FaPaw /> 
-        },
+        { label: "Historias", href: "/#historias" },
+        { label: "Adoptar", href: "/adoptar/adopcion" },
+        { label: "Donar", href: "/donacion" },
+        { label: "Perfil", href: "/dashboard/usuario" },
         {
           label: "Cerrar sesión",
-          href: "/login",
+          href: "#",
           icon: <FaSignOutAlt />,
           onClick: handleLogoutUsuario,
+          isPrimaryBtn: true,
         },
       ];
     }
   } else {
     menuLinks = [
-      {
-        label: "Te necesitan",
-        href: "/donacion",
-        icon: <FaHandsHelping className="text-[#FA8072]" />,
-      },
-      { label: "Adoptar", href: "/adoptar/adopcion", icon: <FaPaw /> },
-      { label: "Registro", href: "/register", icon: <FaRegClipboard /> },
-      { label: "Iniciar Sesión", href: "/login", icon: <FaSignInAlt /> },
+      { label: "Historias", href: "/#historias" },
+      { label: "Adoptar", href: "/adoptar/adopcion" },
+      { label: "Donar", href: "/donacion" },
+      { label: "ONGs", href: "/ongs" },
+      { label: "Iniciar Sesión", href: "/login", isPrimaryBtn: true },
     ];
   }
 
+  const isLinkActive = (href: string) => {
+    if (href === '/' || href === '/#historias') return pathname === '/';
+    if (href === '#') return false;
+    return pathname.startsWith(href);
+  };
+
   return (
-    <motion.div
-      initial={{ y: -50, opacity: 0 }}
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className={`sticky top-0 w-full z-50 transition-all ${
-        scrolled ? "bg-[color:var(--card)]/95 dark:bg-[#FA8072]/95 backdrop-blur-md shadow-md" : "bg-[color:var(--card)]/90 dark:bg-[#FA8072]/90"
+        scrolled
+          ? "bg-[#fff8f5]/95 backdrop-blur-md shadow-xs border-b border-[#6c2f00]/10"
+          : "bg-[#fff8f5]/90 backdrop-blur-md border-b border-[#6c2f00]/10"
       }`}
     >
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+      <div className="px-6 md:px-12 mx-auto max-w-[1280px]">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo Editorial */}
           <Link
             href="/"
-            className="flex items-center gap-1 text-2xl font-semibold text-[#FA8072] dark:text-white whitespace-nowrap"
+            className="font-display-editorial text-2xl font-bold text-[#6c2f00] flex items-center gap-2 whitespace-nowrap"
           >
-            <FaPaw className="text-3xl dark:text-white" />
-            <span className="dark:text-white">Hearts&Paws</span>
+            <span className="material-symbols-outlined text-[#6c2f00] text-2xl">pets</span>
+            Hearts&amp;Paws
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Menu Desktop */}
+          <div className="hidden md:flex items-center gap-8">
+            <nav className="flex items-center gap-7">
+              {menuLinks
+                .filter((link) => !link.isPrimaryBtn)
+                .map((link) => {
+                  const active = isLinkActive(link.href);
+                  return (
+                    <div key={link.label} className="relative group">
+                      {link.onClick ? (
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            link.onClick?.();
+                          }}
+                          className={`font-body-editorial text-sm font-semibold transition-colors flex items-center gap-1 cursor-pointer ${
+                            active
+                              ? "text-[#6c2f00] font-bold border-b-2 border-[#6c2f00] pb-0.5"
+                              : "text-[#54433a] hover:text-[#6c2f00]"
+                          }`}
+                        >
+                          {link.icon && <span className="text-base text-[#6c2f00]">{link.icon}</span>}
+                          {link.label}
+                          {link.subItems && <FaChevronDown className="ml-1 text-xs text-[#6c2f00]" />}
+                        </button>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className={`font-body-editorial text-sm font-semibold transition-colors flex items-center gap-1 cursor-pointer ${
+                            active
+                              ? "text-[#6c2f00] font-bold border-b-2 border-[#6c2f00] pb-0.5"
+                              : "text-[#54433a] hover:text-[#6c2f00]"
+                          }`}
+                        >
+                          {link.icon && <span className="text-base text-[#6c2f00]">{link.icon}</span>}
+                          {link.label}
+                        </Link>
+                      )}
+
+                      {/* Dropdown de SubItems */}
+                      {link.subItems &&
+                        ((link.label === "Mascotas" && showHistorialDropdown) ||
+                          (link.label === "Publicar" && showPublicarDropdown)) && (
+                          <div className="absolute left-0 z-20 mt-2 w-52 bg-white border border-[#6c2f00]/15 rounded-xl shadow-md p-1">
+                            {link.subItems.map((sub) => (
+                              <Link
+                                key={sub.label}
+                                href={sub.href}
+                                className="block px-4 py-2 text-xs font-semibold text-[#54433a] hover:text-[#6c2f00] hover:bg-[#ffeade] rounded-lg transition-all"
+                              >
+                                {sub.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                    </div>
+                  );
+                })}
+            </nav>
+
+            {/* Acciones Derecha (Modo claro/oscuro + Botón Destacado) */}
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="font-body-editorial text-xs font-semibold border border-[#6c2f00]/20 text-[#6c2f00] px-4 py-2 rounded-full hover:bg-[#ffeade] transition-all cursor-pointer hidden sm:block"
+              >
+                {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
+              </button>
+
+              {menuLinks
+                .filter((link) => link.isPrimaryBtn)
+                .map((link) => (
+                  <button
+                    key={link.label}
+                    onClick={(e) => {
+                      if (link.onClick) {
+                        e.preventDefault();
+                        link.onClick();
+                      } else {
+                        router.push(link.href);
+                      }
+                    }}
+                    className="bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-base">login</span>
+                    {link.label}
+                  </button>
+                ))}
+            </div>
+          </div>
+
+          {/* Toggle Menú Mobile */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="text-[#6c2f00] focus:outline-none p-2"
+              aria-label="Abrir menú"
+            >
+              {isOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Menú Desplegable Mobile */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="px-6 py-6 space-y-4 bg-[#fff8f5] border-b border-[#6c2f00]/10 shadow-md md:hidden font-body-editorial"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             {menuLinks.map((link) => (
-              <div key={link.label} className="relative group">
+              <div key={link.label}>
                 {link.onClick ? (
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       link.onClick?.();
+                      setIsOpen(false);
                     }}
-                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7] whitespace-nowrap"
+                    className="w-full text-left font-semibold text-base text-[#6c2f00] py-1 flex items-center gap-2"
                   >
-                    <span className="text-2xl text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                     {link.label}
-                    {link.subItems && (
-                      <FaChevronDown className="ml-1 text-sm dark:text-white" />
-                    )}
                   </button>
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 text-lg font-medium text-[color:var(--foreground)] dark:text-white transition hover:text-[#FA8072] dark:hover:text-[#ffcfc7] whitespace-nowrap"
+                    onClick={() => setIsOpen(false)}
+                    className="block font-semibold text-base text-[#54433a] hover:text-[#6c2f00] py-1"
                   >
-                    <span className="text-2xl text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
                     {link.label}
                   </Link>
                 )}
 
-                {/* Dropdown solo si hay subItems y está abierto */}
-                {link.subItems && ((link.label === "Mascotas" && showHistorialDropdown) || (link.label === "Publicar" && showPublicarDropdown)) && (
-                  <div className="absolute left-0 z-10 mt-2 w-48 bg-[color:var(--card)] dark:bg-[#e87366] rounded shadow-lg">
+                {link.subItems && (
+                  <div className="ml-4 mt-2 space-y-2 border-l-2 border-[#6c2f00]/20 pl-3">
                     {link.subItems.map((sub) => (
                       <Link
                         key={sub.label}
                         href={sub.href}
-                        className="block px-4 py-2 text-[color:var(--foreground)] dark:text-white hover:bg-[#ffece8] dark:hover:bg-[#FA8072]"
+                        onClick={() => setIsOpen(false)}
+                        className="block text-sm text-[#54433a] hover:text-[#6c2f00]"
                       >
                         {sub.label}
                       </Link>
@@ -238,91 +346,23 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
                 )}
               </div>
             ))}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
-            >
-              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
-            </button>
-          </div>
 
-          {/* Mobile Toggle */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-[color:var(--foreground)] dark:text-white focus:outline-none"
-            >
-              {isOpen ? (
-                <FaTimes className="text-4xl" />
-              ) : (
-                <FaBars className="text-4xl" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="px-4 py-4 space-y-2 bg-[color:var(--card)] dark:bg-[#FA8072] shadow-md md:hidden"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {menuLinks.map((link) => (
-              <div key={link.label}>
-                <a
-                  href={link.href}
-                  onClick={(e) => {
-                    if (link.onClick) {
-                      e.preventDefault();
-                      link.onClick();
-                      setIsOpen(false);
-                    } else {
-                      setIsOpen(false);
-                    }
-                  }}
-                  className="flex items-center gap-2 text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
-                >
-                  <span className="text-[#FA8072] dark:text-white [&_svg]:dark:text-white">{link.icon}</span>
-                  {link.label}
-                </a>
-
-                {/* Subitems (solo para historial ONG en mobile) */}
-                {link.subItems && (
-                  <div className="ml-6 mt-1 space-y-1">
-                    {link.subItems.map((sub) => (
-                      <a
-                        key={sub.label}
-                        href={sub.href}
-                        onClick={() => setIsOpen(false)}
-                        className="block text-[color:var(--foreground)] dark:text-white hover:text-[#FA8072] dark:hover:text-[#ffcfc7]"
-                      >
-                        - {sub.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={() => {
-                toggleTheme();
-                setIsOpen(false);
-              }}
-              className="w-full rounded-full border border-gray-300 dark:border-white bg-[color:var(--surface)] dark:bg-[#e87366] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] dark:text-white transition hover:bg-gray-100 dark:hover:bg-[#FA8072]"
-            >
-              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
-            </button>
+            <div className="pt-2 border-t border-[#6c2f00]/10 flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  toggleTheme();
+                  setIsOpen(false);
+                }}
+                className="w-full font-body-editorial text-xs font-semibold border border-[#6c2f00]/20 text-[#6c2f00] py-2.5 rounded-full hover:bg-[#ffeade] transition-all text-center"
+              >
+                {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.header>
   );
 };
 
