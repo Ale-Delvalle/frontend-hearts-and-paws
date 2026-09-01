@@ -110,108 +110,137 @@ export default function MascotaCard({
   const metaAlcanzada = recaudado >= meta
 
   return (
-    <div className={`bg-white rounded-xl shadow-md overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col relative ${modo === 'adopcion' ? 'max-w-[280px] mx-auto h-auto' : 'h-full'}`}>
+    <article className="bg-white rounded-2xl border border-[#6c2f00]/15 overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between h-full relative group">
+      {/* Botón de Favoritos en la esquina superior derecha de la imagen */}
       {mostrarFavorito && (
         <button
           onClick={toggleFavorito}
-          className="absolute top-3 right-3 text-[#FA8072] text-3xl z-10"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#ff6b6b] hover:bg-white hover:scale-110 transition-all shadow-xs cursor-pointer"
           aria-label="Marcar como favorito"
           type="button"
         >
-          {esFavorito ? <FaHeart /> : <FaRegHeart />}
+          {esFavorito ? <FaHeart className="text-base text-[#ff6b6b]" /> : <FaRegHeart className="text-base text-[#ff6b6b]" />}
         </button>
       )}
 
-      <div className={`relative w-full ${modo === 'adopcion' ? 'h-40' : 'h-48'} bg-white flex items-center justify-center`}>
-        {totalImagenes > 0 && (
+      {/* Contenedor Destacado de Imagen */}
+      <div className="relative w-full h-64 sm:h-72 bg-[#6c2f00]/5 overflow-hidden">
+        {totalImagenes > 0 ? (
           <Image
             src={mascota.imagenes[imagenActual]?.url}
             alt={mascota.nombre}
-            width={180}
-            height={130}
-            className="object-contain"
+            fill
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
             unoptimized
           />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center text-[#6c2f00]/30">
+            <span className="material-symbols-outlined text-4xl mb-1">pets</span>
+            <span className="font-body-editorial text-xs">Sin foto disponible</span>
+          </div>
         )}
+
+        {/* Flechas de Navegación si hay múltiples imágenes */}
         {totalImagenes > 1 && (
           <>
             <button
               onClick={irAAnterior}
-              className="absolute left-2 text-[#FA8072] text-xl bg-white rounded-full shadow p-1 hover:bg-[#ffece8] transition z-10"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6c2f00] bg-white/90 backdrop-blur-md rounded-full shadow-xs p-2 hover:bg-white transition-all z-10 cursor-pointer"
               type="button"
+              aria-label="Imagen anterior"
             >
-              ◀
+              <span className="material-symbols-outlined text-sm block">chevron_left</span>
             </button>
             <button
               onClick={irASiguiente}
-              className="absolute right-2 text-[#FA8072] text-xl bg-white rounded-full shadow p-1 hover:bg-[#ffece8] transition z-10"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6c2f00] bg-white/90 backdrop-blur-md rounded-full shadow-xs p-2 hover:bg-white transition-all z-10 cursor-pointer"
               type="button"
+              aria-label="Imagen siguiente"
             >
-              ▶
+              <span className="material-symbols-outlined text-sm block">chevron_right</span>
             </button>
           </>
         )}
       </div>
 
-      <div className="p-4 flex-1 flex flex-col gap-2">
-        <h2 className={`text-xl font-bold text-[#FA8072] mb-2 mt-[40px] ${modo === 'adopcion' ? 'text-center' : ''}`}>{mascota.nombre || "Sin nombre"}</h2>
+      {/* Cuerpo de la Tarjeta Editorial */}
+      <div className="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          {/* Título de la Mascota */}
+          <h2 className="font-display-editorial text-2xl font-bold text-[#6c2f00] mb-2 leading-tight">
+            {mascota.nombre || "Sin nombre"}
+          </h2>
 
-        {modo === 'donacion' && detalleDonacion && (
-          <div className="mb-3">
-            <div className="flex justify-between text-xs text-gray-600 mb-1">
-              <span>Recaudado: {detalleDonacion.estadoDonacionARS}</span>
-              <span>Meta: {detalleDonacion.metaDonacionARS}</span>
-            </div>
+          {/* Descripción Breve */}
+          <p className="font-body-editorial text-sm text-[#54433a] leading-relaxed line-clamp-3 mb-4">
+            {mascota.descripcion || "Un compañero amoroso que busca una segunda oportunidad y un hogar lleno de cariño."}
+          </p>
 
-            <div className="relative w-full bg-red-200 rounded-full h-4 overflow-hidden">
-              <div
-                className={`h-full transition-all duration-500 ${
-                  metaAlcanzada ? 'bg-[#fff5f2]0' : 'bg-green-500'
-                }`}
-                style={{ width: `${porcentaje}%` }}
-              >
-                <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-black text-[10px] font-semibold">
-                  {porcentaje.toFixed(1)}%
-                </span>
+          {/* Progreso de Donación si aplica */}
+          {modo === 'donacion' && detalleDonacion && (
+            <div className="mb-4 p-3 rounded-xl bg-[#fff1ea] border border-[#6c2f00]/10">
+              <div className="flex justify-between text-xs text-[#54433a] font-semibold mb-1 font-body-editorial">
+                <span>Recaudado: {detalleDonacion.estadoDonacionARS}</span>
+                <span>Meta: {detalleDonacion.metaDonacionARS}</span>
+              </div>
+
+              <div className="relative w-full bg-[#6c2f00]/10 rounded-full h-3 overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-500 ${
+                    metaAlcanzada ? 'bg-[#2e5d32]' : 'bg-[#ae2f34]'
+                  }`}
+                  style={{ width: `${porcentaje}%` }}
+                />
               </div>
             </div>
+          )}
+        </div>
+
+        {/* Bloque Inferior: Metadata y Botones de Acción */}
+        <div>
+          {/* Fila Informativa (Edad & Refugio/ONG) */}
+          <div className="border-t border-[#6c2f00]/10 pt-3 mb-4 flex items-center justify-between text-xs text-[#54433a] font-semibold font-body-editorial">
+            <span className="flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-base text-[#6c2f00]">calendar_today</span>
+              {mascota.tipo === 'gato' ? 'Joven' : 'Adulto'}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-base text-[#6c2f00]">location_on</span>
+              Refugio Aliado
+            </span>
           </div>
-        )}
 
-        <div className="flex flex-row justify-center gap-2">
-          <button
-            onClick={() => onConocerHistoria?.(mascota)}
-            className="w-fit mx-auto bg-[#FA8072] hover:bg-[#e87366] text-white py-2 px-4 rounded-full transition flex items-center justify-center"
-            type="button"
-          >
-            Conocer historia
-          </button>
+          {/* Botones de Acción Solicitados */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => onConocerHistoria?.(mascota)}
+              className="flex-1 bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold py-2.5 px-3 rounded-full transition-all duration-300 shadow-xs flex items-center justify-center gap-1 cursor-pointer active:scale-95"
+              type="button"
+            >
+              <span className="material-symbols-outlined text-base">menu_book</span>
+              <span>Conocer historia</span>
+            </button>
 
-          <button
-            onClick={handleAccion}
-            className={`w-fit mx-auto border py-2 px-4 rounded-full transition flex items-center justify-center ${
-              modo === 'donacion' && metaAlcanzada
-                ? 'border-gray-300 bg-gray-100 cursor-not-allowed'
-                : 'border-[#FA8072] text-[#FA8072]'
-            }`}
-            type="button"
-            disabled={modo === 'donacion' && metaAlcanzada}
-            title={
-              modo === 'donacion' && metaAlcanzada
-                ? 'La meta ya fue alcanzada. Gracias por tu interés 💖'
-                : ''
-            }
-          >
-            {modo === 'donacion' && metaAlcanzada ? (
-              <span className="text-lg text-[#FA8072] font-bold flex items-center gap-1">
-                ¡Meta alcanzada! <span className="text-lg">🐾</span>
+            <button
+              onClick={handleAccion}
+              className={`flex-1 border border-[#6c2f00]/30 hover:bg-[#ffeade] text-[#6c2f00] font-body-editorial text-xs font-semibold py-2.5 px-3 rounded-full transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer active:scale-95 ${
+                modo === 'donacion' && metaAlcanzada
+                  ? 'opacity-60 cursor-not-allowed border-gray-300'
+                  : ''
+              }`}
+              type="button"
+              disabled={modo === 'donacion' && metaAlcanzada}
+            >
+              <span className="material-symbols-outlined text-base">
+                {modo === 'adopcion' ? 'pets' : 'favorite'}
               </span>
-            ) : (
-              textoBotonAccion
-            )}
-          </button>
+              <span>
+                {modo === 'donacion' && metaAlcanzada ? '¡Alcanzada!' : textoBotonAccion}
+              </span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   )
 }
