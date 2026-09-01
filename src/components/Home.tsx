@@ -1,8 +1,60 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import GlobalTimeline from './components-feed/GlobalTimeline';
+
+interface SuccessStory {
+  id: string;
+  animalName: string;
+  species: string;
+  ongName: string;
+  tag: string;
+  obstacle: string;
+  result: string;
+  imageUrl: string;
+  imageAlt: string;
+  adoptedYear: string;
+}
+
+const SUCCESS_STORIES: SuccessStory[] = [
+  {
+    id: '1',
+    animalName: 'Milo',
+    species: 'Perro',
+    ongName: 'Fundación Patitas Suaves',
+    tag: 'Rehabilitación y Adopción',
+    obstacle: 'Fue rescatado en la vía pública con alto grado de desnutrición y desconfianza profunda hacia los humanos.',
+    result: 'Tras 6 meses de cuidados médicos y contención, Milo recuperó su vitalidad y hoy vive feliz y amado en su hogar definitivo.',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDeEPLs9AvI-9kaxqEv2wTnh4Lzx2-6VxTOfR86UJxVC9MuQvF-pmTBspjG9Cs65FaIi5j7dGa1-XzHaXih8UJQfBhxWj2WdEESyoUzoUfxSfaed_eTNZm1zylVqqI-5UoI0tq4QOwiNTb2VxHl01OQCF5b6mfyCtsw6ILC8NQ9ReCOkQYAauq6u0efo8-ZR4247ZTqTXOmhz3PtcqeApNtxEsRlAfwj1ff_pl9v3f65_ueTLCo11QB',
+    imageAlt: 'Milo sonriendo feliz en su nuevo hogar',
+    adoptedYear: '2024',
+  },
+  {
+    id: '2',
+    animalName: 'Luna',
+    species: 'Gata',
+    ongName: 'Rescatistas Unidos',
+    tag: 'Final Feliz',
+    obstacle: 'Encontrada siendo apenas una cachorrita con una lesión articular severa que le impedía caminar con normalidad.',
+    result: 'Recibió cirugía correctiva y fisioterapia intensiva. Hoy Luna corre, salta y llena de alegría a su familia adoptiva.',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCbbcKawZFLb_hpDv_Ltu-wUXBmn0bSBiYMV0mNksKjL1ZTR0q8KnmZljAuh6mdGGXaUSx1z02wkSSxxbHAG2KQPSMlMvbdvJ7n_2Sid2aWBkYZCfupw-4GaUNJCtzuRiGr04WAl8XbAQ0QyHtuDuowHAMG4MBCo7AdamXhTj-eFuXuDqapXYbhwnsM76KRc-ByTFkynx55SPEYDrHrIkI7SNIJMsTdQjdYFmzEkTuoeFtpCU2nJlNk',
+    imageAlt: 'Luna jugando llena de energía',
+    adoptedYear: '2024',
+  },
+  {
+    id: '3',
+    animalName: 'Oliver & Mateo',
+    species: 'Perros',
+    ongName: 'Refugio Huellitas de Amor',
+    tag: 'Adopción Conjunta',
+    obstacle: 'Dos hermanos inseparables que sufrieron abandono y necesitaban una familia dispuesta a no separarlos nunca.',
+    result: 'Una familia compasiva los adoptó juntos. Hoy disfrutan paseos al aire libre y una vida llena de mimos.',
+    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCpiJoWoSrqvFR7bQPrSWSWM5uoxBuZmi5kHPSt1aqWTpZ4KitaSj-wfRxk0pNuyudmmk-UuXtuk-8HL_6z5Ugw4qu1wdQY_dMCAbYrkxuKzwNvg3j7c7ocHgqneVSad5JG3aXJboM-CD4J4WPeFPnZCp6xkcbFYqTyhsPqQxtmF23lN27orN6BO-jZkkRdmuElCGge6kAaVXu9NLmR3UDBhyZEF97Psm-SiFzUvC4i9tyEP9rtn_Yw',
+    imageAlt: 'Oliver y Mateo corriendo juntos felices en un parque',
+    adoptedYear: '2023',
+  },
+];
 
 export default function Home() {
   // Asegurar que la página Home siempre renderice en modo claro puro
@@ -11,6 +63,32 @@ export default function Home() {
     document.documentElement.classList.add('light');
     document.documentElement.dataset.theme = 'light';
   }, []);
+
+  // Estado del carrusel de Historias de éxito
+  const [stories, setStories] = useState<SuccessStory[]>(SUCCESS_STORIES);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Seleccionar historias de manera aleatoria al cargar la página
+  useEffect(() => {
+    const shuffled = [...SUCCESS_STORIES].sort(() => Math.random() - 0.5);
+    setStories(shuffled);
+  }, []);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % stories.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + stories.length) % stories.length);
+  };
+
+  const handleShuffle = () => {
+    const shuffled = [...stories].sort(() => Math.random() - 0.5);
+    setStories(shuffled);
+    setCurrentIndex(0);
+  };
+
+  const currentStory = stories[currentIndex] || SUCCESS_STORIES[0];
 
   return (
     <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
@@ -108,82 +186,147 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. Bento Grid: Historias Destacadas */}
+        {/* 4. Carrusel: Historias de éxito */}
         <section id="historias" className="pb-24 px-6 md:px-12 max-w-[1280px] mx-auto w-full">
-          <div className="flex justify-between items-end mb-10">
+          {/* Encabezado de la sección */}
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
             <div>
+              <div className="flex items-center gap-2 text-[#ae2f34] text-sm font-semibold uppercase tracking-wider mb-2 font-body-editorial">
+                <span className="material-symbols-outlined text-lg">verified</span>
+                Casos Reales Seleccionados por ONGs
+              </div>
               <h2 className="font-display-editorial text-3xl md:text-5xl text-[#6c2f00] font-bold mb-2">
-                Historias Destacadas
+                Historias de éxito
               </h2>
               <p className="font-body-editorial text-base text-[#54433a]">
-                Rescates recientes que buscan un hogar definitivo.
+                Transformaciones inspiradoras que demuestran que el amor y la dedicación cambian vidas.
               </p>
             </div>
-            <a
-              href="#publicaciones"
-              className="hidden md:flex font-body-editorial font-semibold text-sm text-[#6c2f00] items-center gap-1.5 hover:opacity-75 transition-opacity"
-            >
-              Ver todas las historias <span className="material-symbols-outlined text-base">arrow_forward</span>
-            </a>
+
+            {/* Controles superiores */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleShuffle}
+                title="Mostrar historias en orden aleatorio"
+                className="flex items-center gap-2 border border-[#6c2f00]/20 bg-[#fff1ea] text-[#6c2f00] hover:bg-[#ffeade] px-4 py-2 rounded-full font-body-editorial text-xs font-semibold transition-all cursor-pointer shadow-sm active:scale-95"
+              >
+                <span className="material-symbols-outlined text-base">shuffle</span>
+                <span>Mezclar historias</span>
+              </button>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handlePrev}
+                  aria-label="Historia anterior"
+                  className="w-10 h-10 rounded-full border border-[#6c2f00]/20 bg-[#fff1ea] text-[#6c2f00] hover:bg-[#6c2f00] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm active:scale-95"
+                >
+                  <span className="material-symbols-outlined text-xl">chevron_left</span>
+                </button>
+                <button
+                  onClick={handleNext}
+                  aria-label="Siguiente historia"
+                  className="w-10 h-10 rounded-full border border-[#6c2f00]/20 bg-[#fff1ea] text-[#6c2f00] hover:bg-[#6c2f00] hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-sm active:scale-95"
+                >
+                  <span className="material-symbols-outlined text-xl">chevron_right</span>
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[400px]">
-            {/* Card Principal 1 (8 columnas) */}
-            <article className="md:col-span-8 group relative overflow-hidden rounded-xl border border-[#6c2f00]/15 bg-[#fff1ea] transition-all duration-500 hover:border-[#6c2f00]/30 shadow-sm min-h-[380px]">
-              <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeEPLs9AvI-9kaxqEv2wTnh4Lzx2-6VxTOfR86UJxVC9MuQvF-pmTBspjG9Cs65FaIi5j7dGa1-XzHaXih8UJQfBhxWj2WdEESyoUzoUfxSfaed_eTNZm1zylVqqI-5UoI0tq4QOwiNTb2VxHl01OQCF5b6mfyCtsw6ILC8NQ9ReCOkQYAauq6u0efo8-ZR4247ZTqTXOmhz3PtcqeApNtxEsRlAfwj1ff_pl9v3f65_ueTLCo11QB"
-                  alt="Milo mirando por la ventana"
-                  fill
-                  className="object-cover object-center"
-                  unoptimized
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#3f2c20]/90 via-[#3f2c20]/25 to-transparent z-10" />
-              <div className="absolute bottom-0 left-0 p-8 w-full z-20">
-                <div className="flex gap-2 mb-4">
-                  <span className="bg-[#934b19] text-white px-3 py-1 rounded-sm font-body-editorial text-xs font-semibold uppercase tracking-wider">
-                    Tranquilo
-                  </span>
-                  <span className="bg-[#934b19] text-white px-3 py-1 rounded-sm font-body-editorial text-xs font-semibold uppercase tracking-wider">
-                    Senior
-                  </span>
-                </div>
-                <h3 className="font-display-editorial text-2xl md:text-3xl text-white mb-2 font-semibold">
-                  El viaje de Milo hacia la paz
-                </h3>
-                <p className="font-body-editorial text-white/90 line-clamp-2 max-w-xl text-sm md:text-base">
-                  Después de años vagando, Milo finalmente está aprendiendo lo que se siente dormir en una cama suave y despertar sin miedo.
-                </p>
-              </div>
-            </article>
+          {/* Tarjeta del Carrusel de Historia de Éxito */}
+          <div className="relative overflow-hidden rounded-2xl border border-[#6c2f00]/15 bg-[#fff1ea] shadow-md transition-all duration-500">
+            <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[480px]">
+              {/* Columna de Texto/Detalles (7 columnas) */}
+              <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between z-10">
+                <div>
+                  {/* Fila ONG & Badges */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+                    <div className="flex items-center gap-2 bg-[#6c2f00]/10 px-3.5 py-1.5 rounded-full text-[#6c2f00] font-body-editorial text-xs font-bold">
+                      <span className="material-symbols-outlined text-base text-[#ae2f34]">pets</span>
+                      {currentStory.ongName}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="bg-[#ae2f34] text-white px-3 py-1 rounded-full font-body-editorial text-xs font-semibold uppercase tracking-wider">
+                        {currentStory.tag}
+                      </span>
+                      <span className="bg-[#6c2f00]/10 text-[#6c2f00] px-3 py-1 rounded-full font-body-editorial text-xs font-semibold">
+                        Adoptado en {currentStory.adoptedYear}
+                      </span>
+                    </div>
+                  </div>
 
-            {/* Card Secundaria 2 (4 columnas) */}
-            <article className="md:col-span-4 group relative overflow-hidden rounded-xl border border-[#6c2f00]/15 bg-[#fff1ea] transition-all duration-500 hover:border-[#6c2f00]/30 shadow-sm min-h-[380px]">
-              <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
+                  {/* Nombre del animal */}
+                  <h3 className="font-display-editorial text-3xl sm:text-4xl text-[#6c2f00] font-bold mb-6">
+                    La nueva vida de {currentStory.animalName}
+                  </h3>
+
+                  {/* Bloques de Obstáculo y Resultado Final */}
+                  <div className="space-y-4 mb-8">
+                    {/* Obstáculo */}
+                    <div className="p-4 rounded-xl bg-[#fff8f5] border border-[#6c2f00]/10">
+                      <div className="flex items-center gap-2 text-[#934b19] font-semibold text-sm mb-1 font-body-editorial">
+                        <span className="material-symbols-outlined text-lg">healing</span>
+                        El Obstáculo Inicial:
+                      </div>
+                      <p className="font-body-editorial text-sm sm:text-base text-[#54433a] leading-relaxed">
+                        {currentStory.obstacle}
+                      </p>
+                    </div>
+
+                    {/* Resultado Final */}
+                    <div className="p-4 rounded-xl bg-[#2e5d32]/10 border border-[#2e5d32]/20">
+                      <div className="flex items-center gap-2 text-[#2e5d32] font-semibold text-sm mb-1 font-body-editorial">
+                        <span className="material-symbols-outlined text-lg">workspace_premium</span>
+                        El Resultado Final:
+                      </div>
+                      <p className="font-body-editorial text-sm sm:text-base text-[#28180d] font-medium leading-relaxed">
+                        {currentStory.result}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer de la Tarjeta y Paginación */}
+                <div className="flex items-center justify-between pt-4 border-t border-[#6c2f00]/10">
+                  <div className="flex items-center gap-2 text-xs text-[#54433a] font-semibold">
+                    <span className="material-symbols-outlined text-base text-[#ae2f34]">favorite</span>
+                    Caso {currentIndex + 1} de {stories.length}
+                  </div>
+
+                  {/* Puntos de Navegación Directa */}
+                  <div className="flex items-center gap-2">
+                    {stories.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        aria-label={`Ir a historia ${idx + 1}`}
+                        className={`transition-all duration-300 cursor-pointer rounded-full ${
+                          idx === currentIndex
+                            ? 'w-7 h-2.5 bg-[#6c2f00]'
+                            : 'w-2.5 h-2.5 bg-[#6c2f00]/30 hover:bg-[#6c2f00]/60'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Columna de Imagen del Animal Feliz (5 columnas) */}
+              <div className="lg:col-span-5 relative min-h-[300px] lg:min-h-full overflow-hidden bg-[#6c2f00]/5">
                 <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbbcKawZFLb_hpDv_Ltu-wUXBmn0bSBiYMV0mNksKjL1ZTR0q8KnmZljAuh6mdGGXaUSx1z02wkSSxxbHAG2KQPSMlMvbdvJ7n_2Sid2aWBkYZCfupw-4GaUNJCtzuRiGr04WAl8XbAQ0QyHtuDuowHAMG4MBCo7AdamXhTj-eFuXuDqapXYbhwnsM76KRc-ByTFkynx55SPEYDrHrIkI7SNIJMsTdQjdYFmzEkTuoeFtpCU2nJlNk"
-                  alt="Luna la gatita saltando"
+                  src={currentStory.imageUrl}
+                  alt={currentStory.imageAlt}
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-center transition-all duration-700 hover:scale-105"
                   unoptimized
                 />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#3f2c20]/90 via-[#3f2c20]/25 to-transparent z-10" />
-              <div className="absolute bottom-0 left-0 p-6 w-full z-20">
-                <div className="flex gap-2 mb-3">
-                  <span className="bg-[#934b19] text-white px-3 py-1 rounded-sm font-body-editorial text-xs font-semibold uppercase tracking-wider">
-                    Juguetón
-                  </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:hidden" />
+                <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-md text-[#2e5d32] font-body-editorial text-xs font-bold flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-base">sentiment_very_satisfied</span>
+                  Rehabilitado &amp; Feliz
                 </div>
-                <h3 className="font-display-editorial text-xl text-white mb-1 font-semibold">
-                  Luna: Pequeña pero feroz
-                </h3>
-                <p className="font-body-editorial text-white/90 line-clamp-2 text-sm">
-                  Una bola de energía inagotable que traerá luz (y algo de caos) a tu hogar.
-                </p>
               </div>
-            </article>
+            </div>
           </div>
         </section>
 
