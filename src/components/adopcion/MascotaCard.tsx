@@ -43,8 +43,13 @@ export default function MascotaCard({
   const textoBotonAccion = modo === 'adopcion' ? 'Adoptar' : 'Donar'
 
   const getUserId = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
-    return usuario?.id || user?.id || null
+    if (usuario?.id) return usuario.id
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      return session?.user?.id || null
+    } catch {
+      return null
+    }
   }
 
   const handleAccion = async () => {
@@ -69,11 +74,11 @@ export default function MascotaCard({
   }
 
   useEffect(() => {
-    const cargarFavoritos = async () => {
-      
+    if (!token) return
 
+    const cargarFavoritos = async () => {
       try {
-        const favoritos: FavoritoItem[] = await getFavoritosPorUsuario(token ?? undefined)
+        const favoritos: FavoritoItem[] = await getFavoritosPorUsuario(token)
         const estaEnFavoritos = favoritos.some((f) => f.caso.id === mascota.casoId)
         setEsFavorito(estaEnFavoritos)
       } catch (error) {
@@ -82,7 +87,7 @@ export default function MascotaCard({
     }
 
     cargarFavoritos()
-  }, [ mascota.casoId, token])
+  }, [mascota.casoId, token])
 
   useEffect(() => {
     if (modo !== 'donacion') return
@@ -125,6 +130,7 @@ export default function MascotaCard({
             width={180}
             height={130}
             className="object-contain"
+            unoptimized
           />
         )}
         {totalImagenes > 1 && (

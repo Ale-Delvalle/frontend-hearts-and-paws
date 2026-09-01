@@ -2,6 +2,16 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
+    ],
     domains: [
       'placedog.net',
       'encrypted-tbn0.gstatic.com',
@@ -9,10 +19,12 @@ const nextConfig: NextConfig = {
       'smylepets.com',
       'via.placeholder.com', 
       'placekitten.com',
-       'images.pexels.com',
-       'res.cloudinary.com',
-       'via.placeholder.com',
-       'comunidad.retorn.com'
+      'images.pexels.com',
+      'res.cloudinary.com',
+      'comunidad.retorn.com',
+      'img.magnific.com',
+      'img.freepik.com',
+      'lh3.googleusercontent.com',
     ],
   },
 }
