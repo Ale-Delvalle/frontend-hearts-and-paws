@@ -79,42 +79,7 @@ export default function AdopcionPage() {
 
   return (
     <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
-      {/* 1. Header TopAppBar Editorial */}
-      <header className="bg-[#fff8f5]/90 backdrop-blur-md sticky top-0 z-50 border-b border-[#6c2f00]/10 w-full">
-        <div className="flex justify-between items-center px-6 md:px-12 py-4 max-w-[1280px] mx-auto">
-          {/* Logo */}
-          <a href="/" className="font-display-editorial text-2xl font-bold text-[#6c2f00] flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#6c2f00] text-2xl">pets</span>
-            Hearts&amp;Paws
-          </a>
 
-          {/* Navegación Central */}
-          <nav className="hidden md:flex gap-8 items-center">
-            <a href="/#historias" className="font-body-editorial text-sm text-[#54433a] hover:text-[#6c2f00] transition-colors">
-              Historias
-            </a>
-            <a href="/adoptar/adopcion" className="font-body-editorial text-sm font-bold text-[#6c2f00] border-b-2 border-[#6c2f00] pb-0.5">
-              Adoptar
-            </a>
-            <a href="/donaciones" className="font-body-editorial text-sm text-[#54433a] hover:text-[#6c2f00] transition-colors">
-              Donar
-            </a>
-            <a href="/ongs" className="font-body-editorial text-sm text-[#54433a] hover:text-[#6c2f00] transition-colors">
-              ONGs
-            </a>
-          </nav>
-
-          {/* Navegación Derecha */}
-          <div className="flex items-center gap-4">
-            <button className="font-body-editorial text-xs font-semibold border border-[#6c2f00]/20 text-[#6c2f00] px-4 py-2 rounded-full hover:bg-[#ffeade] transition-all cursor-pointer hidden sm:block">
-              Modo claro
-            </button>
-            <a href="/login" className="bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center gap-1.5 cursor-pointer">
-              <span className="material-symbols-outlined text-base">login</span> Iniciar Sesión
-            </a>
-          </div>
-        </div>
-      </header>
 
       {/* 2. Main Content */}
       <main className="flex-grow py-16 px-6 md:px-12 max-w-[1280px] mx-auto w-full">

@@ -74,9 +74,6 @@ const NavbarWrapper = () => {
     setTheme((current) => (current === "dark" ? "light" : "dark"));
   };
 
-  // En la página de inicio '/', se renderiza únicamente el header del nuevo diseño
-  if (pathname === '/') return null;
-
   if (loading) return null;
 
   if (user) return <NavbarSupabase theme={theme} toggleTheme={toggleTheme} />;
