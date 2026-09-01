@@ -66,69 +66,80 @@ export default function Home() {
       </section>
 
 
-     {/* Sección destacada: mensaje + imagen en contenedor blanco */}
-<section className="w-full px-4 py-10 flex justify-center">
-  <div className="grid items-center bg-white dark:bg-zinc-900 rounded-xl shadow-md p-8 w-full max-w-5xl grid-cols-1 md:grid-cols-2 gap-8">
-    
-    {/* Texto */}
-    <motion.div
-      initial={{ opacity: 0, x: -40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-      className="flex flex-col justify-center gap-4"
-    >
-      <h2 className="text-3xl font-bold leading-tight md:text-4xl text-[#FA8072]">
-        Unimos fuerzas <br /> por los que no tienen voz
-      </h2>
-      <p className="text-gray-700 dark:text-gray-300">
-        Ayudá, adoptá o colaborá con causas que salvan vidas. Nuestra red conecta corazones con patas. 🐾
-      </p>
-    </motion.div>
-
-    {/* Imagen */}
-    <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-      className="flex justify-center"
-    >
-      <Image
-        src="/gato-y-amor.jpg"
-        alt="Perro y gato"
-        width={300}
-        height={300}
-        className="rounded-xl"
-      />
-    </motion.div>
-  </div>
-</section>
+      {/* Declaración de Misión Editorial (Paso 3) */}
+      <section className="py-20 md:py-28 px-5 md:px-8 max-w-[1280px] mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mx-auto flex flex-col items-center"
+        >
+          <span className="material-symbols-outlined text-[#6c2f00] dark:text-[#ffb68c] text-5xl mb-6 opacity-90">
+            volunteer_activism
+          </span>
+          <h2 className="font-display-editorial text-3xl md:text-4xl text-[#8b4513] dark:text-[#ffb68c] mb-6 font-semibold">
+            Unimos fuerzas por los que no tienen voz
+          </h2>
+          <p className="font-body-editorial text-lg md:text-xl text-[#54433a] dark:text-gray-300 leading-relaxed">
+            Hearts&amp;Paws no es solo una plataforma; es un movimiento editorial dedicado a elevar la narrativa del rescate animal. Creemos que cada animal merece un retrato digno y una historia contada con compasión y estilo.
+          </p>
+        </motion.div>
+      </section>
 
       {/* Timeline público de publicaciones de las ONGs */}
       <section className="w-full px-4 py-10 flex justify-center">
         <GlobalTimeline />
       </section>
 
-      {/* Cómo funciona la red */}
+      {/* Cómo funciona la red (Estilo Editorial - Paso 3) */}
       <motion.section
+        id="como-funciona"
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="w-full max-w-5xl px-4 py-16 text-center"
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-[1280px] px-5 md:px-8 py-16 text-center mx-auto my-8 border-t border-[#877369]/15 dark:border-zinc-800"
       >
-        <h2 className="mb-10 text-2xl font-semibold md:text-3xl">Cómo funciona la red</h2>
+        <h2 className="font-display-editorial text-3xl md:text-4xl text-[#6c2f00] dark:text-[#ffb68c] font-semibold mb-12">
+          Cómo funciona la red
+        </h2>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div className="flex flex-col items-center gap-3">
-            <FaHome className="text-4xl text-[#FA8072]" />
-            <p>Registrá tu organización</p>
+          <div className="flex flex-col items-center text-center gap-4 p-8 rounded-xl bg-[#fff1ea] dark:bg-zinc-900/60 border border-[#877369]/15 transition-all duration-300 hover:-translate-y-1 hover:border-[#6c2f00]/30 shadow-sm">
+            <div className="w-16 h-16 rounded-full bg-[#ffeade] dark:bg-zinc-800 flex items-center justify-center text-[#ae2f34]">
+              <FaHome className="text-2xl" />
+            </div>
+            <h3 className="font-display-editorial text-xl font-semibold text-[#6c2f00] dark:text-white">
+              Registrá tu organización
+            </h3>
+            <p className="font-body-editorial text-sm text-[#54433a] dark:text-gray-300 leading-relaxed">
+              Conéctate con nuestra red de apoyo y comparte tu misión con la comunidad.
+            </p>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <FaExclamation className="text-4xl text-[#FA8072]" />
-            <p>Publicá casos de animales que necesiten ayuda</p>
+
+          <div className="flex flex-col items-center text-center gap-4 p-8 rounded-xl bg-[#fff1ea] dark:bg-zinc-900/60 border border-[#877369]/15 transition-all duration-300 hover:-translate-y-1 hover:border-[#6c2f00]/30 shadow-sm">
+            <div className="w-16 h-16 rounded-full bg-[#ffeade] dark:bg-zinc-800 flex items-center justify-center text-[#ae2f34]">
+              <FaExclamation className="text-2xl" />
+            </div>
+            <h3 className="font-display-editorial text-xl font-semibold text-[#6c2f00] dark:text-white">
+              Publicá casos de animales
+            </h3>
+            <p className="font-body-editorial text-sm text-[#54433a] dark:text-gray-300 leading-relaxed">
+              Da visibilidad a animales que necesiten adopción o cuidados especiales.
+            </p>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <FaHandshake className="text-4xl text-[#FA8072]" />
-            <p>Colaborá con otras organizaciones</p>
+
+          <div className="flex flex-col items-center text-center gap-4 p-8 rounded-xl bg-[#fff1ea] dark:bg-zinc-900/60 border border-[#877369]/15 transition-all duration-300 hover:-translate-y-1 hover:border-[#6c2f00]/30 shadow-sm">
+            <div className="w-16 h-16 rounded-full bg-[#ffeade] dark:bg-zinc-800 flex items-center justify-center text-[#ae2f34]">
+              <FaHandshake className="text-2xl" />
+            </div>
+            <h3 className="font-display-editorial text-xl font-semibold text-[#6c2f00] dark:text-white">
+              Colaborá con otras ONGs
+            </h3>
+            <p className="font-body-editorial text-sm text-[#54433a] dark:text-gray-300 leading-relaxed">
+              Construye alianzas para potenciar el impacto de cada rescate.
+            </p>
           </div>
         </div>
       </motion.section>
