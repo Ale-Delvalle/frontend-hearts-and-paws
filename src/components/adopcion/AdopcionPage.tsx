@@ -13,6 +13,13 @@ import { getMascotasEnAdopcion, getMascotasFiltradas } from '@/services/mascotas
 export default function AdopcionPage() {
   const router = useRouter()
 
+  // Estado para el tema claro forzado de esta vista editorial
+  useEffect(() => {
+    document.documentElement.classList.remove('dark')
+    document.documentElement.classList.add('light')
+    document.documentElement.dataset.theme = 'light'
+  }, [])
+
   // Ahora tipo puede ser '', 'perro' o 'gato'
   const [tipo, setTipo] = useState<'perro' | 'gato' | ''>('')
   const [resultados, setResultados] = useState<Caso[]>([])
@@ -62,108 +69,148 @@ export default function AdopcionPage() {
   }
 
   const handleAdoptar = (id: string) => {
-   const caso = resultados.find(c => c.mascota.id === id)
-if (!caso) return
+    const caso = resultados.find(c => c.mascota.id === id)
+    if (!caso) return
 
-
-
-toast.success(`¡Gracias por querer adoptar a ${caso.mascota.nombre}! 🐶🐱`)
-setMostrandoHistoria(false)
-router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
-
-
+    toast.success(`¡Gracias por querer adoptar a ${caso.mascota.nombre}! 🐶🐱`)
+    setMostrandoHistoria(false)
+    router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
   }
 
   return (
-    <div className="flex flex-col items-center justify-start py-10 px-4 bg-[#fff5f2] dark:bg-black min-h-screen">
-      <div className="w-full max-w-7xl">
-        <h1 className="text-4xl font-extrabold text-center text-[#FA8072] mb-2">
-          Mi raza favorita es <span className="italic">adoptada</span>
-        </h1>
-        <p className="text-gray-600 dark:text-gray-300 text-lg mb-6 text-center">
-          Encontrá a tu nuevo mejor amigo.
-        </p>
+    <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
+      {/* 1. Header TopAppBar Editorial */}
+      <header className="bg-[#fff8f5]/90 backdrop-blur-md sticky top-0 z-50 border-b border-[#6c2f00]/10 w-full">
+        <div className="flex justify-between items-center px-6 md:px-12 py-4 max-w-[1280px] mx-auto">
+          {/* Logo */}
+          <a href="/" className="font-display-editorial text-2xl font-bold text-[#6c2f00] flex items-center gap-2">
+            <span className="material-symbols-outlined text-[#6c2f00] text-2xl">pets</span>
+            Hearts&amp;Paws
+          </a>
 
-        <div className="flex flex-col sm:flex-row sm:justify-center gap-4 max-w-md mx-auto mb-8">
-  <div className="relative w-full max-w-xs">
-    <select
-      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FA8072]"
-      value={tipo}
-      onChange={(e) => setTipo(e.target.value as 'perro' | 'gato' | '')}
-      aria-label="Filtrar por tipo de mascota"
-    >
-      <option value="">Todos</option>
-      <option value="perro">Perro</option>
-      <option value="gato">Gato</option>
-    </select>
-    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-      <svg
-        className="w-5 h-5 text-[#FA8072]"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2}
-        viewBox="0 0 24 24"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
-  </div>
+          {/* Navegación Central */}
+          <nav className="hidden md:flex gap-8 items-center">
+            <a href="/#historias" className="font-body-editorial text-sm text-[#54433a] hover:text-[#6c2f00] transition-colors">
+              Historias
+            </a>
+            <a href="/adoptar/adopcion" className="font-body-editorial text-sm font-bold text-[#6c2f00] border-b-2 border-[#6c2f00] pb-0.5">
+              Adoptar
+            </a>
+            <a href="/donaciones" className="font-body-editorial text-sm text-[#54433a] hover:text-[#6c2f00] transition-colors">
+              Donar
+            </a>
+            <a href="/ongs" className="font-body-editorial text-sm text-[#54433a] hover:text-[#6c2f00] transition-colors">
+              ONGs
+            </a>
+          </nav>
 
-  <div className="relative w-full max-w-xs">
-    <select
-      className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FA8072]"
-      value={orden}
-      onChange={(e) => setOrden(e.target.value as 'mas_reciente' | 'mas_antiguo')}
-      aria-label="Ordenar mascotas"
-    >
-      <option value="mas_reciente">Más reciente</option>
-      <option value="mas_antiguo">Más antiguo</option>
-    </select>
-    
-    <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-      <svg
-        className="w-5 h-5 text-[#FA8072]"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2}
-        viewBox="0 0 24 24"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
-  </div>
-</div>
+          {/* Navegación Derecha */}
+          <div className="flex items-center gap-4">
+            <button className="font-body-editorial text-xs font-semibold border border-[#6c2f00]/20 text-[#6c2f00] px-4 py-2 rounded-full hover:bg-[#ffeade] transition-all cursor-pointer hidden sm:block">
+              Modo claro
+            </button>
+            <a href="/login" className="bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center gap-1.5 cursor-pointer">
+              <span className="material-symbols-outlined text-base">login</span> Iniciar Sesión
+            </a>
+          </div>
+        </div>
+      </header>
 
+      {/* 2. Main Content */}
+      <main className="flex-grow py-16 px-6 md:px-12 max-w-[1280px] mx-auto w-full">
+        {/* Titulación Hero Editorial */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h1 className="font-display-editorial text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#6c2f00] font-bold mb-6 tracking-tight leading-[1.1]">
+            Nuestros Amigos Esperan
+          </h1>
+          <p className="font-body-editorial text-base sm:text-lg md:text-xl text-[#54433a] leading-relaxed">
+            Cada uno de estos animales tiene una historia única y está listo para comenzar un nuevo capítulo. Encuentra a tu compañero ideal.
+          </p>
+        </div>
 
-        {cargando && <p className="text-center text-gray-500">Cargando mascotas...</p>}
-        {error && <p className="text-center text-red-500">{error}</p>}
-        {!cargando && resultados.length === 0 && (
-          <p className="text-center text-gray-500 mt-4">No se encontraron mascotas.</p>
+        {/* 3. Filtros de Búsqueda Integrados */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto mb-14">
+          {/* Filtro por Tipo */}
+          <div className="relative w-full sm:w-1/2">
+            <select
+              className="appearance-none w-full px-5 py-3 pr-10 border border-[#6c2f00]/20 bg-white text-[#6c2f00] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all cursor-pointer"
+              value={tipo}
+              onChange={(e) => setTipo(e.target.value as 'perro' | 'gato' | '')}
+              aria-label="Filtrar por tipo de mascota"
+            >
+              <option value="">Todos los animales</option>
+              <option value="perro">Perros</option>
+              <option value="gato">Gatos</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#6c2f00]">
+              <span className="material-symbols-outlined text-xl">expand_more</span>
+            </div>
+          </div>
+
+          {/* Filtro por Orden */}
+          <div className="relative w-full sm:w-1/2">
+            <select
+              className="appearance-none w-full px-5 py-3 pr-10 border border-[#6c2f00]/20 bg-white text-[#6c2f00] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all cursor-pointer"
+              value={orden}
+              onChange={(e) => setOrden(e.target.value as 'mas_reciente' | 'mas_antiguo')}
+              aria-label="Ordenar mascotas"
+            >
+              <option value="mas_reciente">Más reciente</option>
+              <option value="mas_antiguo">Más antiguo</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#6c2f00]">
+              <span className="material-symbols-outlined text-xl">swap_vert</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Estados de Carga y Error */}
+        {cargando && (
+          <div className="text-center py-12">
+            <span className="material-symbols-outlined text-4xl text-[#6c2f00] animate-spin mb-2">progress_activity</span>
+            <p className="font-body-editorial text-base text-[#54433a]">Cargando compañeros en adopción...</p>
+          </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-         {resultadosOrdenados.map((caso) => {
-  const mascota = {
-    ...caso.mascota,
-    casoId: caso.id,
-    tipo: caso.tipo.toLowerCase(), 
-    descripcion: caso.descripcion, 
-  }
+        {error && (
+          <div className="text-center py-8 p-4 rounded-xl bg-red-50 border border-red-200 max-w-md mx-auto">
+            <p className="font-body-editorial text-sm text-red-600 font-semibold">{error}</p>
+          </div>
+        )}
 
-  return (
-    <MascotaCard
-      key={caso.id}
-      mascota={mascota}
-      onConocerHistoria={() => handleConocerHistoria(mascota)}
-      onAdoptar={() => handleAdoptar(mascota.id)}
-      modo="adopcion"
-    />
-  )
-})}
+        {!cargando && resultados.length === 0 && (
+          <div className="text-center py-16 bg-[#fff1ea] rounded-2xl border border-[#6c2f00]/10">
+            <span className="material-symbols-outlined text-5xl text-[#6c2f00]/40 mb-3">pets</span>
+            <p className="font-body-editorial text-lg text-[#54433a] font-medium">No se encontraron mascotas con el filtro seleccionado.</p>
+          </div>
+        )}
 
-        </div>
-      </div>
+        {/* 4. Grilla de Tarjetas de Mascotas */}
+        {!cargando && resultados.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {resultadosOrdenados.map((caso) => {
+              const mascota = {
+                ...caso.mascota,
+                casoId: caso.id,
+                tipo: caso.tipo.toLowerCase(),
+                descripcion: caso.descripcion,
+              }
 
+              return (
+                <MascotaCard
+                  key={caso.id}
+                  mascota={mascota}
+                  onConocerHistoria={() => handleConocerHistoria(mascota)}
+                  onAdoptar={() => handleAdoptar(mascota.id)}
+                  modo="adopcion"
+                />
+              )
+            })}
+          </div>
+        )}
+      </main>
+
+      {/* Modal de Historia / Detalles de la Mascota */}
       {mascotaSeleccionada && (
         <MascotaModal
           mascota={mascotaSeleccionada}
@@ -174,6 +221,26 @@ router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
           modo="adopcion"
         />
       )}
+
+      {/* 5. Footer Editorial (Idéntico a la referencia) */}
+      <footer className="bg-[#fbddca] w-full py-12 px-6 md:px-12 border-t border-[#dac2b6]/40 mt-auto">
+        <div className="flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto gap-8">
+          <div className="font-display-editorial text-2xl font-bold text-[#6c2f00] flex items-center gap-2">
+            <span className="material-symbols-outlined text-[#6c2f00]">pets</span>
+            Hearts&amp;Paws
+          </div>
+          <nav className="flex flex-wrap justify-center gap-6 font-body-editorial text-sm font-semibold text-[#54433a]">
+            <a href="#" className="hover:text-[#6c2f00] transition-colors">Privacidad</a>
+            <a href="#" className="hover:text-[#6c2f00] transition-colors">Términos</a>
+            <a href="#" className="hover:text-[#6c2f00] transition-colors">Contacto</a>
+            <a href="#" className="hover:text-[#6c2f00] transition-colors">Voluntariado</a>
+          </nav>
+          <div className="font-body-editorial text-sm text-[#6c2f00] text-center md:text-right font-medium">
+            © 2024 Hearts&amp;Paws. Cada huella cuenta una historia.
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
+
