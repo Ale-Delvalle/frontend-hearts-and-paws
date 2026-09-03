@@ -2,6 +2,7 @@
 
 import { getTodosUser } from "@/services/adminconexion";
 import React, { useEffect, useState } from "react";
+import Footer from "../Footer";
 
 type Usuario = {
   id: string;
@@ -176,92 +177,135 @@ export function Vistausuario() {
         </div>
 
         {/* Lista de usuarios */}
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-12">
           {usuariosFiltrados.map((user) => (
             <div
               key={user.id}
               onClick={() => abrirModal(user)}
-              className="cursor-pointer bg-[#ffcfc7] dark:bg-zinc-800 rounded-xl shadow-md p-5 hover:bg-pink-300 dark:hover:bg-zinc-700 transition-all"
+              className="cursor-pointer bg-white border border-[#6c2f00]/15 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all duration-300 group flex items-start gap-4"
             >
-              <div className="flex items-center space-x-4">
-                <img
-                  src={getAvatarUrl(user.nombre, user.imagenPerfil)}
-                  alt={user.nombre}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-[#e87366]"
-                />
-                <div>
-                  <p className="text-lg font-semibold text-[#FA8072]">
-                    {user.nombre}
-                  </p>
-                  <p className="text-sm text-[#FA8072]">{user.email}</p>
-                  <p className="text-sm text-[#FA8072]">
-                    {user.ciudad}, {user.pais}
-                  </p>
-                  {user.rol && (
-                    <p className="text-xs text-[#FA8072] dark:text-white bg-pink-300 dark:bg-zinc-700 rounded px-2 mt-1 inline-block">
-                      Rol: {user.rol}
-                    </p>
-                  )}
-                </div>
+              <img
+                src={getAvatarUrl(user.nombre, user.imagenPerfil)}
+                alt={user.nombre}
+                className="w-16 h-16 rounded-full object-cover border-2 border-[#6c2f00]/15 group-hover:border-[#ff6b6b] transition-colors shrink-0 shadow-xs"
+              />
+              <div className="min-w-0 flex-1">
+                <p className="font-display-editorial text-lg font-bold text-[#6c2f00] group-hover:text-[#ff6b6b] transition-colors truncate">
+                  {user.nombre || "Usuario Anónimo"}
+                </p>
+                <p className="font-body-editorial text-xs text-[#54433a] truncate mt-0.5">
+                  {user.email}
+                </p>
+                <p className="font-body-editorial text-xs text-[#54433a]/80 mt-1 flex items-center gap-1">
+                  <span className="material-symbols-outlined text-xs text-[#6c2f00]">location_on</span>
+                  {user.ciudad ? `${user.ciudad}, ` : ""}{user.pais || "País no especificado"}
+                </p>
+                {user.rol && (
+                  <span className="inline-flex items-center gap-1 bg-[#fff1ea] text-[#6c2f00] border border-[#6c2f00]/15 text-[11px] font-semibold px-2.5 py-0.5 rounded-full mt-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#6c2f00]" />
+                    {user.rol}
+                  </span>
+                )}
               </div>
             </div>
           ))}
 
           {usuariosFiltrados.length === 0 && (
-            <p className="text-center text-[#FA8072] col-span-full">
-              No hay usuarios con esos filtros.
-            </p>
+            <div className="p-12 text-center text-[#54433a] bg-white border border-[#6c2f00]/15 rounded-2xl shadow-xs col-span-full font-body-editorial text-sm font-semibold">
+              No se encontraron usuarios que coincidan con los filtros aplicados.
+            </div>
           )}
         </div>
       </div>
 
-      {/* Modal flotante */}
+      {/* Modal Flotante Editorial */}
       {usuarioSeleccionado && (
         <div
-          className={`fixed inset-0 flex items-center justify-center bg-pink-300 dark:bg-black bg-opacity-50 dark:bg-opacity-70 z-50 transition-opacity ${
+          className={`fixed inset-0 bg-[#28180d]/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${
             mostrarModal ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
+          onClick={cerrarModal}
         >
           <div
-            className={`bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-6 w-[90%] max-w-md transform transition-all duration-300 ${
+            className={`bg-white border border-[#6c2f00]/15 rounded-3xl p-8 max-w-md w-full shadow-2xl relative font-body-editorial transform transition-all duration-300 ${
               mostrarModal ? "scale-100 opacity-100" : "scale-95 opacity-0"
             }`}
+            onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={cerrarModal}
-              className="absolute top-2 right-4 text-[#FA8072] hover:text-[#FA8072] text-2xl font-bold"
+              className="absolute top-4 right-4 text-[#6c2f00] hover:text-[#ff6b6b] transition-colors p-2 rounded-full hover:bg-[#fff8f5] cursor-pointer flex items-center justify-center"
+              aria-label="Cerrar detalles"
             >
-              &times;
+              <span className="material-symbols-outlined text-2xl">close</span>
             </button>
 
-            <h3 className="text-xl font-bold text-[#FA8072] mb-4">
-              Detalles de {usuarioSeleccionado.nombre}
+            <img
+              src={getAvatarUrl(
+                usuarioSeleccionado.nombre,
+                usuarioSeleccionado.imagenPerfil
+              )}
+              alt={usuarioSeleccionado.nombre}
+              className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-[#fff1ea] shadow-md mb-4"
+            />
+
+            <h3 className="font-display-editorial text-2xl font-bold text-[#6c2f00] text-center mb-6">
+              {usuarioSeleccionado.nombre || "Usuario Anónimo"}
             </h3>
-            <div className="space-y-2 text-sm text-gray-700">
-              <img
-                src={getAvatarUrl(
-                  usuarioSeleccionado.nombre,
-                  usuarioSeleccionado.imagenPerfil
-                )}
-                alt={usuarioSeleccionado.nombre}
-                className="w-24 h-24 mx-auto rounded-full object-cover border-2 border-[#FA8072] mb-4"
-              />
-              <p>
-                <strong>Nombre:</strong> {usuarioSeleccionado.nombre}
-              </p>
-              <p>
-                <strong>Email:</strong> {usuarioSeleccionado.email}
-              </p>
-              <p>
-                <strong>País:</strong> {usuarioSeleccionado.pais}
-              </p>
-              <p>
-                <strong>Rol:</strong> {usuarioSeleccionado.rol ?? "Sin rol"}
-              </p>
+
+            <div className="space-y-3 text-sm text-[#54433a] bg-[#fff8f5] p-5 rounded-2xl border border-[#6c2f00]/10">
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-lg text-[#6c2f00]">mail</span>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#6c2f00]">Email</p>
+                  <p className="font-semibold text-[#28180d]">{usuarioSeleccionado.email}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-lg text-[#6c2f00]">public</span>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#6c2f00]">Ubicación</p>
+                  <p className="font-semibold text-[#28180d]">
+                    {usuarioSeleccionado.ciudad ? `${usuarioSeleccionado.ciudad}, ` : ""}{usuarioSeleccionado.pais || "No especificado"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-[#6c2f00] text-lg">badge</span>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#6c2f00]">Rol del Usuario</p>
+                  <span className="bg-[#fff1ea] text-[#6c2f00] border border-[#6c2f00]/15 text-xs font-semibold px-3 py-0.5 rounded-full inline-block mt-0.5">
+                    {usuarioSeleccionado.rol ?? "Sin rol asignado"}
+                  </span>
+                </div>
+              </div>
+
+              {usuarioSeleccionado.telefono && (
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-lg text-[#6c2f00]">call</span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#6c2f00]">Teléfono</p>
+                    <p className="font-semibold text-[#28180d]">{usuarioSeleccionado.telefono}</p>
+                  </div>
+                </div>
+              )}
+
+              {usuarioSeleccionado.direccion && (
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-lg text-[#6c2f00]">home</span>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#6c2f00]">Dirección</p>
+                    <p className="font-semibold text-[#28180d]">{usuarioSeleccionado.direccion}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }
