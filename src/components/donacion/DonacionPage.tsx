@@ -19,6 +19,7 @@ import { useUsuarioAuth } from "@/context/UsuarioAuthContext";
 import { DetalleDonacion } from "@/types/detalledonacion";
 import { supabase } from "@/lib/supabaseClient";
 import { useAuth } from "../SupabaseProvider";
+import Footer from "../Footer";
 
 export default function DonacionPage() {
   const { usuario } = useUsuarioAuth();
@@ -190,13 +191,30 @@ export default function DonacionPage() {
         </div>
 
         {cargando && (
-          <p className="text-center text-gray-500">Cargando casos...</p>
+          <div className="flex flex-col items-center justify-center py-16 gap-3">
+            <div className="w-10 h-10 border-4 border-[#ff6b6b] border-t-transparent rounded-full animate-spin"></div>
+            <p className="font-body-editorial text-sm font-semibold text-[#54433a]">
+              Cargando casos de donación...
+            </p>
+          </div>
         )}
-        {error && <p className="text-center text-red-500">{error}</p>}
-        {!cargando && resultados.length === 0 && (
-          <p className="text-center text-gray-500 mt-4">
-            No se encontraron casos.
-          </p>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-2xl text-center max-w-md mx-auto my-6 font-body-editorial text-sm font-semibold">
+            {error}
+          </div>
+        )}
+
+        {!cargando && !error && resultados.length === 0 && (
+          <div className="bg-white border border-[#6c2f00]/15 rounded-3xl p-12 text-center max-w-md mx-auto my-8 shadow-xs font-body-editorial">
+            <span className="material-symbols-outlined text-4xl text-[#ff6b6b] mb-3">pets</span>
+            <h3 className="font-display-editorial text-xl font-bold text-[#6c2f00] mb-1">
+              No se encontraron casos
+            </h3>
+            <p className="text-sm text-[#54433a]">
+              No hay animales que coincidan con los filtros seleccionados en este momento.
+            </p>
+          </div>
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
@@ -243,6 +261,8 @@ export default function DonacionPage() {
           recaudado={detalleDonacion.estadoDonacion}
         />
       )}
+
+      <Footer />
     </div>
   );
 }
