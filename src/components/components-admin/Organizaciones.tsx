@@ -54,87 +54,95 @@ export default function OrganizacionesPanel() {
   };
 
   return (
-    <div className="min-h-screen bg-[#ffece8] dark:bg-black pb-10">
-      {/* Tarjeta total centrada arriba */}
-      <div className="pt-6 pb-4 px-5">
-        <div className="flex justify-center">
-          <div className="bg-white dark:bg-[#FA8072] shadow-sm rounded-xl p-5 w-52 border border-[#ffece8] dark:border-transparent text-center hover:shadow-md transition-shadow">
-            <p className="text-xs font-semibold text-gray-500 dark:text-white uppercase tracking-wider mb-1">Total Aprobadas</p>
-            <p className="text-4xl font-extrabold text-[#FA8072] dark:text-white">{totalOrganizaciones}</p>
+    <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
+      <div className="flex-grow max-w-[1280px] mx-auto px-6 md:px-12 py-12 w-full">
+        {/* Encabezado Hero Editorial */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fff1ea] border border-[#6c2f00]/15 text-[#6c2f00] font-body-editorial text-xs font-semibold mb-4">
+            <span className="material-symbols-outlined text-base">corporate_fare</span>
+            Directorio de ONGs
+          </div>
+          <h1 className="font-display-editorial text-4xl sm:text-5xl md:text-6xl text-[#6c2f00] font-bold tracking-tight mb-4 leading-[1.1]">
+            Organizaciones Aprobadas
+          </h1>
+          <p className="font-body-editorial text-base sm:text-lg text-[#54433a] leading-relaxed">
+            Consulta la lista de organizaciones activas en Hearts&amp;Paws, gestiona sus planes y filtra rápidamente sus datos.
+          </p>
+        </div>
+
+        {/* Tarjeta de Total Aprobadas */}
+        <div className="mb-10 flex justify-center">
+          <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-6 shadow-xs max-w-xs w-full text-center">
+            <p className="font-body-editorial text-xs font-bold uppercase tracking-wider text-[#54433a] mb-1 flex items-center justify-center gap-1.5">
+              <span className="material-symbols-outlined text-lg text-[#6c2f00]">verified</span>
+              Total Aprobadas
+            </p>
+            <p className="font-display-editorial text-4xl font-bold text-[#6c2f00]">
+              {totalOrganizaciones}
+            </p>
           </div>
         </div>
-      </div>
 
-      <div className="flex flex-col md:flex-row gap-6 px-6 max-w-6xl mx-auto">
-        {/* Sidebar / Nav - A la misma altura que el título */}
-        <aside className="w-full md:w-56 flex-shrink-0">
-          <div className="bg-white dark:bg-[#FA8072] rounded-xl shadow-sm border border-[#ffece8] dark:border-transparent overflow-hidden sticky top-6">
-            <div className="bg-[#FA8072] dark:bg-[#e87366] px-5 py-4">
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <svg className="w-5 h-5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-                Panel ONG
+        <div className="flex flex-col md:flex-row gap-8 items-start">
+          {/* Sidebar Nav */}
+          <aside className="w-full md:w-64 shrink-0">
+            <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-5 shadow-xs sticky top-6 font-body-editorial">
+              <h2 className="font-display-editorial text-lg font-bold text-[#6c2f00] mb-4 flex items-center gap-2 pb-3 border-b border-[#6c2f00]/10">
+                <span className="material-symbols-outlined text-xl text-[#6c2f00]">domain</span>
+                Navegación ONG
               </h2>
-            </div>
-            <div className="p-2">
               <button
                 onClick={() => router.push("/dashboard/admin/ong-rechazadas")}
-                className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-gray-700 dark:text-white bg-gray-50 dark:bg-[#e87366] rounded-lg hover:bg-[#fff5f2] dark:hover:bg-[#FA8072] hover:text-[#FA8072] dark:hover:text-white transition-all group"
+                className="w-full flex items-center justify-between px-4 py-2.5 text-xs font-semibold text-[#54433a] hover:text-[#6c2f00] bg-[#fff8f5] hover:bg-[#fff1ea] border border-[#6c2f00]/15 rounded-full transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-gray-400 dark:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Rechazadas</span>
+                  <span className="material-symbols-outlined text-base text-[#ff6b6b]">cancel</span>
+                  <span>Ver Rechazadas</span>
                 </div>
-                <svg className="w-3 h-3 text-gray-400 dark:text-white transition-colors transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform">chevron_right</span>
               </button>
             </div>
-          </div>
-        </aside>
+          </aside>
 
-        {/* Contenido Principal */}
-        <main className="flex-1 min-w-0">
-          <div className="flex flex-col gap-5">
-            <h1 className="text-2xl md:text-3xl font-extrabold text-[#FA8072] dark:text-white tracking-tight">
-              Organizaciones Registradas
-            </h1>
+          {/* Contenido Principal */}
+          <main className="flex-1 min-w-0 w-full">
+            <div className="flex flex-col gap-6">
+              {/* Panel de Filtros */}
+              <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-5 shadow-xs flex flex-col sm:flex-row flex-wrap items-center gap-3">
+                <input
+                  type="text"
+                  placeholder="Filtrar por nombre..."
+                  value={filtroNombre}
+                  onChange={(e) => setFiltroNombre(e.target.value)}
+                  className="w-full sm:w-52 px-5 py-2 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] placeholder:text-[#54433a]/60 font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all"
+                />
 
-            {/* Filtros */}
-            <div className="flex flex-wrap gap-3 bg-white dark:bg-[#FA8072] p-3 rounded-xl shadow-sm border border-[#ffece8] dark:border-transparent">
-              <input
-                type="text"
-                placeholder="Filtrar por nombre"
-                value={filtroNombre}
-                onChange={(e) => setFiltroNombre(e.target.value)}
-                className="flex-1 min-w-[160px] text-sm border border-gray-200 dark:border-transparent bg-gray-50 dark:bg-[#e87366] dark:text-white dark:placeholder-gray-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition-all"
-              />
+                <input
+                  type="text"
+                  placeholder="Filtrar por plan..."
+                  value={filtroPlan}
+                  onChange={(e) => setFiltroPlan(e.target.value)}
+                  className="w-full sm:w-52 px-5 py-2 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] placeholder:text-[#54433a]/60 font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all"
+                />
 
-              <input
-                type="text"
-                placeholder="Filtrar por plan"
-                value={filtroPlan}
-                onChange={(e) => setFiltroPlan(e.target.value)}
-                className="flex-1 min-w-[160px] text-sm border border-gray-200 dark:border-transparent bg-gray-50 dark:bg-[#e87366] dark:text-white dark:placeholder-gray-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition-all"
-              />
+                <div className="flex items-center gap-2 w-full sm:w-auto ml-auto">
+                  <button
+                    onClick={handleBuscar}
+                    className="bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center justify-center gap-1.5 cursor-pointer flex-1 sm:flex-initial"
+                  >
+                    <span className="material-symbols-outlined text-base">search</span>
+                    Buscar
+                  </button>
 
-              <button
-                onClick={handleBuscar}
-                className="bg-white text-black text-sm px-5 py-2 rounded-lg font-semibold shadow-sm border border-gray-300 hover:bg-gray-100 transition-all active:scale-95"
-              >
-                Buscar
-              </button>
-
-              <button
-                onClick={handleLimpiar}
-                className="bg-gray-100 dark:bg-[#e87366] text-gray-700 dark:text-white text-sm px-5 py-2 rounded-lg font-semibold hover:bg-gray-200 dark:hover:bg-[#FA8072] transition-all active:scale-95"
-              >
-                Limpiar
-              </button>
-            </div>
+                  <button
+                    onClick={handleLimpiar}
+                    className="border border-[#6c2f00]/20 text-[#6c2f00] hover:bg-[#ffeade] font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all cursor-pointer flex-1 sm:flex-initial flex items-center justify-center gap-1.5"
+                  >
+                    <span className="material-symbols-outlined text-base">restart_alt</span>
+                    Limpiar
+                  </button>
+                </div>
+              </div>
 
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-1">
@@ -175,6 +183,7 @@ export default function OrganizacionesPanel() {
           </div>
         </main>
       </div>
+    </div>
 
       {organizacionSeleccionada && (
         <div className="fixed inset-0 bg-red-900 dark:bg-black bg-opacity-40 dark:bg-opacity-70 flex items-center justify-center z-50 p-4">
