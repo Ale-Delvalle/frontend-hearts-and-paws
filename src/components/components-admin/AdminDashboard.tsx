@@ -77,26 +77,32 @@ export default function AdminDashboard() {
 
   
   return (
-    <main className="min-h-screen p-8 bg-[#ffece8] dark:bg-black">
-      <div className="max-w-4xl mx-auto">
-        <header className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
-    
+    <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
+      <div className="flex-grow max-w-[1280px] mx-auto px-6 md:px-12 py-12 w-full">
+        {/* Encabezado Hero Editorial */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fff1ea] border border-[#6c2f00]/15 text-[#6c2f00] font-body-editorial text-xs font-semibold mb-4">
+            <span className="material-symbols-outlined text-base">verified</span>
+            Panel de Verificación
           </div>
-        </header>
-
-        <h1 className="flex items-center mb-6 text-3xl font-bold text-[#FA8072]">
-          <MdVerified className="mr-2 text-[#FA8072]" />
-          Solicitudes de Verificación de ONGs
-        </h1>
+          <h1 className="font-display-editorial text-4xl sm:text-5xl md:text-6xl text-[#6c2f00] font-bold tracking-tight mb-4 leading-[1.1]">
+            Solicitudes de ONGs
+          </h1>
+          <p className="font-body-editorial text-base sm:text-lg text-[#54433a] leading-relaxed">
+            Revisa, valida la documentación y gestiona las solicitudes de verificación pendientes para incorporar nuevas organizaciones a Hearts&amp;Paws.
+          </p>
+        </div>
 
         {loading ? (
-          <div className="font-semibold text-center text-[#FA8072]">
-            Cargando solicitudes...
+          <div className="flex flex-col items-center justify-center p-12 text-[#6c2f00] gap-3">
+            <span className="material-symbols-outlined text-4xl animate-spin">progress_activity</span>
+            <p className="font-semibold text-sm">Cargando solicitudes pendientes...</p>
           </div>
         ) : requests.length === 0 ? (
-          <div className="p-6 text-center text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 rounded-lg shadow">
-            No hay solicitudes pendientes.
+          <div className="p-12 text-center text-[#54433a] bg-white border border-[#6c2f00]/15 rounded-2xl shadow-xs max-w-xl mx-auto font-body-editorial">
+            <span className="material-symbols-outlined text-[#6c2f00] text-4xl mb-3">task_alt</span>
+            <h3 className="font-display-editorial text-xl font-bold text-[#6c2f00] mb-2">Todo al día</h3>
+            <p className="text-sm text-[#54433a]">No hay solicitudes de verificación de ONGs pendientes en este momento.</p>
           </div>
         ) : (
           requests.map((req: OngUser) => (
@@ -170,7 +176,7 @@ export default function AdminDashboard() {
           ))
         )}
       </div>
-    </main>
+    </div>
   );
 }
 
