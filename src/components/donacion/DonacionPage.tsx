@@ -139,72 +139,53 @@ export default function DonacionPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start py-10 px-4 bg-[#fff5f2] dark:bg-black min-h-screen">
-      <div className="w-full max-w-7xl">
-        <h1 className="text-4xl font-extrabold text-center text-[#FA8072] mb-2">
-          Ayudá a una mascota en{" "}
-          <span className="italic">situación crítica</span>
-        </h1>
-        <p className="text-gray-600 dark:text-gray-300 text-lg mb-6 text-center">
-          Estos animales necesitan tu colaboración. Gracias por tu interés en
-          ayudarlos.
-        </p>
+    <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
+      <div className="flex-grow max-w-[1280px] mx-auto px-6 md:px-12 py-12 w-full">
+        {/* Encabezado Hero Editorial */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fff1ea] border border-[#6c2f00]/15 text-[#6c2f00] font-body-editorial text-xs font-semibold mb-4">
+            <span className="material-symbols-outlined text-base">favorite</span>
+            Donaciones &amp; Casos Críticos
+          </div>
+          <h1 className="font-display-editorial text-4xl sm:text-5xl md:text-6xl text-[#6c2f00] font-bold tracking-tight mb-4 leading-[1.1]">
+            Ayudá a una mascota en <em className="italic text-[#ff6b6b]">situación crítica</em>
+          </h1>
+          <p className="font-body-editorial text-base sm:text-lg text-[#54433a] leading-relaxed max-w-2xl mx-auto">
+            Estos animales necesitan atención médica urgente y refugio. Tu colaboración marca una diferencia real en sus vidas.
+          </p>
+        </div>
 
-        {/* Filtros */}
-        <div className="flex flex-col sm:flex-row sm:justify-center gap-4 max-w-md mx-auto mb-8">
-          <div className="relative w-full max-w-xs">
+        {/* Panel de Filtros */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto mb-12 bg-white border border-[#6c2f00]/15 p-3 rounded-full shadow-xs">
+          <div className="relative w-full sm:flex-1">
             <select
-              className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="appearance-none w-full px-5 py-2.5 pr-10 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all cursor-pointer"
               value={tipo}
               onChange={(e) => setTipo(e.target.value as "perro" | "gato" | "")}
             >
-              <option value="">Todos</option>
-              <option value="perro">Perro</option>
-              <option value="gato">Gato</option>
+              <option value="">Todas las especies</option>
+              <option value="perro">🐶 Perros</option>
+              <option value="gato">🐱 Gatos</option>
             </select>
-            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <svg
-                className="w-5 h-5 text-[#FA8072]"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </div>
+            <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#6c2f00] pointer-events-none text-xl">
+              expand_more
+            </span>
           </div>
 
-          <div className="relative w-full max-w-xs">
+          <div className="relative w-full sm:flex-1">
             <select
-              className="appearance-none w-full px-4 py-3 pr-10 border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="appearance-none w-full px-5 py-2.5 pr-10 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all cursor-pointer"
               value={orden}
               onChange={(e) =>
                 setOrden(e.target.value as "mas_reciente" | "mas_antiguo")
               }
             >
-              <option value="mas_reciente">Más reciente</option>
-              <option value="mas_antiguo">Más antiguo</option>
+              <option value="mas_reciente">Más recientes primero</option>
+              <option value="mas_antiguo">Más antiguos primero</option>
             </select>
-            <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-              <svg
-                className="w-5 h-5 text-[#FA8072]"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </div>
+            <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#6c2f00] pointer-events-none text-xl">
+              expand_more
+            </span>
           </div>
         </div>
 
