@@ -6,6 +6,7 @@ import {
   getTodosOng,
   getTotalOrganizacionesAprobadas,
 } from "@/services/adminconexion";
+import Footer from "../Footer";
 
 interface Organizacion {
   id: string;
@@ -145,37 +146,42 @@ export default function OrganizacionesPanel() {
               </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mt-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
               {organizaciones.map((org) => (
                 <div
                   key={org.id}
                   onClick={() => setOrganizacionSeleccionada(org)}
-                  className="cursor-pointer border border-[#ffece8] dark:border-transparent rounded-xl p-4 bg-white dark:bg-[#FA8072] shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
+                  className="bg-white border border-[#6c2f00]/15 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group flex flex-col justify-between"
                 >
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-[#fff5f2] dark:bg-[#e87366] rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <img
-                      src={org.imagenPerfil ?? "/default-profile.png"}
+                      src={org.imagenPerfil || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
                       alt={`Foto de ${org.nombre}`}
-                      className="w-16 h-16 object-cover border-4 border-[#ffece8] dark:border-[#e87366] rounded-full shadow-sm group-hover:border-[#ffcfc7] dark:group-hover:border-white transition-colors"
+                      className="w-16 h-16 object-cover border-2 border-[#6c2f00]/15 group-hover:border-[#ff6b6b] rounded-full shadow-xs transition-colors shrink-0"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="text-base font-bold text-gray-900 dark:text-white truncate">{org.nombre}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-200 mb-1 truncate">{org.email}</p>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#ffece8] dark:bg-white text-[#FA8072] dark:text-[#FA8072]">
+                      <h3 className="font-display-editorial text-lg font-bold text-[#6c2f00] group-hover:text-[#ff6b6b] transition-colors truncate">
+                        {org.nombre}
+                      </h3>
+                      <p className="font-body-editorial text-xs text-[#54433a] truncate mt-0.5">
+                        {org.email}
+                      </p>
+                      <span className="inline-flex items-center gap-1 bg-[#fff1ea] text-[#6c2f00] border border-[#6c2f00]/15 text-[11px] font-semibold px-2.5 py-0.5 rounded-full mt-2">
+                        <span className="material-symbols-outlined text-xs">workspace_premium</span>
                         {org.plan}
                       </span>
                     </div>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-gray-100 dark:border-[#e87366] flex items-center justify-between">
-                    <p className="text-[11px] text-gray-400 dark:text-gray-200 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+
+                  <div className="mt-5 pt-3 border-t border-[#6c2f00]/10 flex items-center justify-between font-body-editorial text-xs text-[#54433a]">
+                    <span className="flex items-center gap-1">
+                      <span className="material-symbols-outlined text-xs text-[#6c2f00]">calendar_month</span>
                       {new Date(org.creado_en).toLocaleDateString("es-AR")}
-                    </p>
-                    <p className="text-xs font-semibold text-[#FA8072] dark:text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                    </span>
+                    <span className="font-semibold text-[#6c2f00] group-hover:text-[#ff6b6b] transition-colors flex items-center gap-0.5">
                       Ver más
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                    </p>
+                      <span className="material-symbols-outlined text-xs">chevron_right</span>
+                    </span>
                   </div>
                 </div>
               ))}
@@ -185,36 +191,47 @@ export default function OrganizacionesPanel() {
       </div>
     </div>
 
+      {/* Modal Flotante de Detalle */}
       {organizacionSeleccionada && (
-        <div className="fixed inset-0 bg-red-900 dark:bg-black bg-opacity-40 dark:bg-opacity-70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-[#FA8072] p-5 rounded-xl w-full max-w-sm relative shadow-xl">
+        <div className="fixed inset-0 bg-[#28180d]/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 transition-opacity">
+          <div className="bg-white border border-[#6c2f00]/15 rounded-3xl p-8 max-w-md w-full shadow-2xl relative font-body-editorial">
             <button
               onClick={() => setOrganizacionSeleccionada(null)}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-white dark:hover:text-gray-200"
+              className="absolute top-4 right-4 text-[#6c2f00] hover:text-[#ff6b6b] transition-colors p-2 rounded-full hover:bg-[#fff8f5] cursor-pointer flex items-center justify-center"
             >
-              ✖
+              <span className="material-symbols-outlined text-xl">close</span>
             </button>
-            <h2 className="text-lg font-bold text-[#FA8072] dark:text-white mb-2">
+
+            <img
+              src={organizacionSeleccionada.imagenPerfil || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
+              alt={`Foto de perfil de ${organizacionSeleccionada.nombre}`}
+              className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-[#fff1ea] shadow-md mb-4"
+            />
+
+            <h2 className="font-display-editorial text-2xl font-bold text-[#6c2f00] text-center mb-6">
               {organizacionSeleccionada.nombre}
             </h2>
-            <img
-              src={organizacionSeleccionada.imagenPerfil ?? "/default-profile.png"}
-              alt={`Foto de perfil de ${organizacionSeleccionada.nombre}`}
-              className="w-32 h-32 object-cover border-4 border-[#ffcfc7] dark:border-white shadow-sm rounded-full mx-auto mb-3"
-            />
-            <p className="text-xs text-gray-700 dark:text-white mb-1">
-              <strong>Email:</strong> {organizacionSeleccionada.email}
-            </p>
-            <p className="text-xs text-gray-700 dark:text-white mb-1">
-              <strong>Plan:</strong> {organizacionSeleccionada.plan}
-            </p>
-            <p className="text-xs text-gray-700 dark:text-white">
-              <strong>Creado en:</strong>{" "}
-              {new Date(organizacionSeleccionada.creado_en).toLocaleDateString("es-AR")}
-            </p>
+
+            <div className="space-y-3 text-sm text-[#54433a] bg-[#fff8f5] p-5 rounded-2xl border border-[#6c2f00]/10">
+              <p className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-base text-[#6c2f00]">mail</span>
+                <strong className="text-[#6c2f00]">Email:</strong> {organizacionSeleccionada.email}
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-base text-[#6c2f00]">workspace_premium</span>
+                <strong className="text-[#6c2f00]">Plan:</strong> {organizacionSeleccionada.plan}
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-base text-[#6c2f00]">calendar_month</span>
+                <strong className="text-[#6c2f00]">Fecha de Registro:</strong>{" "}
+                {new Date(organizacionSeleccionada.creado_en).toLocaleDateString("es-AR")}
+              </p>
+            </div>
           </div>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }
