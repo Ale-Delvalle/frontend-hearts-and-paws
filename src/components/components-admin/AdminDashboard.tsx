@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { MdVerified } from "react-icons/md";
 import toast from "react-hot-toast";
-import {getTotalOrganizaciones, getVerificacion, Patchsolicitud } from "@/services/adminconexion";
+import { getTotalOrganizaciones, getVerificacion, Patchsolicitud } from "@/services/adminconexion";
 import { OngUser } from "@/types/ong";
+import Footer from "../Footer";
 
 
 
@@ -105,77 +103,78 @@ export default function AdminDashboard() {
             <p className="text-sm text-[#54433a]">No hay solicitudes de verificación de ONGs pendientes en este momento.</p>
           </div>
         ) : (
-          requests.map((req: OngUser) => (
-            <div
-              key={req.id}
-              className="p-5 mb-6 transition-shadow duration-200 bg-white dark:bg-zinc-900 border-2 border-[#FA8072] dark:border-zinc-700 rounded-lg shadow-lg"
-            >
-              <div className="flex gap-6">
+          <div className="space-y-6">
+            {requests.map((req: OngUser) => (
+              <div
+                key={req.id}
+                className="bg-white border border-[#6c2f00]/15 rounded-3xl p-6 md:p-8 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 font-body-editorial"
+              >
                 {/* Imagen de perfil */}
-                <div className="flex-shrink-0">
-                  <img
-                    src={req.imagenPerfil}
-                    alt={`Foto de perfil de ${req.nombre}`}
-                    className="w-40 h-40 object-cover border-4 border-[#e87366] shadow-md rounded"
-                  />
-                </div>
+                <img
+                  src={req.imagenPerfil || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
+                  alt={`Foto de perfil de ${req.nombre}`}
+                  className="w-32 h-32 md:w-36 md:h-36 object-cover border-4 border-[#fff1ea] rounded-2xl shadow-xs shrink-0"
+                />
 
-                {/* Información textual */}
-                <div className="flex flex-col justify-between">
+                {/* Información textual y Botones */}
+                <div className="flex-1 flex flex-col justify-between w-full">
                   <div>
-                    <h2 className="mb-1 text-xl font-semibold text-[#FA8072]">
+                    <h2 className="font-display-editorial text-2xl font-bold text-[#6c2f00] mb-2">
                       {req.nombre}
                     </h2>
-                    <p className="mb-1 text-sm text-gray-600">
-                      <strong>Contacto:</strong> {req.email ?? "Sin contacto"}
-                    </p>
-                    <p className="mb-4 text-sm text-gray-600">
-                      <strong>Creado:</strong>{" "}
-                      {req.creado_en
-                        ? new Date(req.creado_en).toLocaleDateString("es-ES", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })
-                        : "Sin descripción"}
-                    </p>
+                    
+                    <div className="space-y-1 mb-4 text-sm text-[#54433a]">
+                      <p className="flex items-center gap-2">
+                        <span className="material-symbols-outlined text-base text-[#6c2f00]">mail</span>
+                        <span className="font-bold text-[#6c2f00]">Contacto:</span> {req.email ?? "Sin contacto registrado"}
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <span className="material-symbols-outlined text-base text-[#6c2f00]">calendar_month</span>
+                        <span className="font-bold text-[#6c2f00]">Fecha de Registro:</span>{" "}
+                        {req.creado_en
+                          ? new Date(req.creado_en).toLocaleDateString("es-ES", {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                            })
+                          : "No especificada"}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Botones */}
-                  <div className="flex space-x-4 mt-2">
+                  {/* Botonera de Acciones Editorial */}
+                  <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-[#6c2f00]/10">
                     <button
                       onClick={() => handleDecision(String(req.id), "APROBADA")}
-                      className="flex items-center px-4 py-2 text-white bg-[#FA8072] rounded shadow hover:bg-[#e87366]"
+                      className="bg-[#2e5d32] hover:bg-[#1b431e] text-white font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center justify-center gap-1.5 cursor-pointer flex-1 sm:flex-initial"
                     >
-                      <FaCheckCircle className="mr-2" />
+                      <span className="material-symbols-outlined text-base">check_circle</span>
                       Aceptar
                     </button>
+                    
                     <button
-                      onClick={() =>
-                        handleDecision(String(req.id), "RECHAZADA")
-                      }
-                      className="flex items-center px-4 py-2 text-black bg-gray-300 rounded shadow hover:bg-gray-400"
+                      onClick={() => handleDecision(String(req.id), "RECHAZADA")}
+                      className="bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center justify-center gap-1.5 cursor-pointer flex-1 sm:flex-initial"
                     >
-                      <FaTimesCircle className="mr-2" />
+                      <span className="material-symbols-outlined text-base">cancel</span>
                       Rechazar
                     </button>
-                      <button
-                      onClick={() =>
-                           handleVerificacion(String(req.id))
-                          
-                      }
-                      className="flex items-center px-4 py-2 text-black bg-gray-300 rounded shadow hover:bg-gray-400"
+
+                    <button
+                      onClick={() => handleVerificacion(String(req.id))}
+                      className="border border-[#6c2f00]/20 text-[#6c2f00] hover:bg-[#ffeade] font-body-editorial text-xs font-semibold px-5 py-2.5 rounded-full transition-all cursor-pointer flex items-center justify-center gap-1.5 w-full sm:w-auto"
                     >
-                      <FaTimesCircle className="mr-2" />
-                      Ver Documentacion
+                      <span className="material-symbols-outlined text-base">description</span>
+                      Ver Documentación
                     </button>
                   </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
