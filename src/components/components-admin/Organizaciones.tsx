@@ -71,23 +71,10 @@ export default function OrganizacionesPanel() {
           </p>
         </div>
 
-        {/* Tarjeta de Total Aprobadas */}
-        <div className="mb-10 flex justify-center">
-          <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-6 shadow-xs max-w-xs w-full text-center">
-            <p className="font-body-editorial text-xs font-bold uppercase tracking-wider text-[#54433a] mb-1 flex items-center justify-center gap-1.5">
-              <span className="material-symbols-outlined text-lg text-[#6c2f00]">verified</span>
-              Total Aprobadas
-            </p>
-            <p className="font-display-editorial text-4xl font-bold text-[#6c2f00]">
-              {totalOrganizaciones}
-            </p>
-          </div>
-        </div>
-
         <div className="flex flex-col md:flex-row gap-8 items-start">
           {/* Sidebar Nav */}
-          <aside className="w-full md:w-64 shrink-0">
-            <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-5 shadow-xs sticky top-6 font-body-editorial">
+          <aside className="w-full md:w-64 shrink-0 space-y-4 sticky top-6 font-body-editorial">
+            <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-5 shadow-xs">
               <h2 className="font-display-editorial text-lg font-bold text-[#6c2f00] mb-4 flex items-center gap-2 pb-3 border-b border-[#6c2f00]/10">
                 <span className="material-symbols-outlined text-xl text-[#6c2f00]">domain</span>
                 Navegación ONG
@@ -102,6 +89,17 @@ export default function OrganizacionesPanel() {
                 </div>
                 <span className="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform">chevron_right</span>
               </button>
+            </div>
+
+            {/* Tarjeta de Total Aprobadas */}
+            <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-5 shadow-xs text-center">
+              <p className="font-body-editorial text-xs font-bold uppercase tracking-wider text-[#54433a] mb-1 flex items-center justify-center gap-1.5">
+                <span className="material-symbols-outlined text-lg text-[#6c2f00]">verified</span>
+                Total Aprobadas
+              </p>
+              <p className="font-display-editorial text-3xl font-bold text-[#6c2f00]">
+                {totalOrganizaciones}
+              </p>
             </div>
           </aside>
 
