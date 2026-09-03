@@ -79,83 +79,100 @@ export function Vistausuario() {
   };
 
   return (
-    <div className="min-h-screen bg-[#ffece8] dark:bg-black p-6">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-[#FA8072] mb-6 text-center">
-          Usuarios Logueados
-        </h2>
+    <div className="min-h-screen bg-[#fff8f5] text-[#28180d] font-body-editorial flex flex-col selection:bg-[#ff6b6b] selection:text-white">
+      <div className="flex-grow max-w-[1280px] mx-auto px-6 md:px-12 py-12 w-full">
+        {/* Encabezado Hero Editorial */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#fff1ea] border border-[#6c2f00]/15 text-[#6c2f00] font-body-editorial text-xs font-semibold mb-4">
+            <span className="material-symbols-outlined text-base">group</span>
+            Gestión de Usuarios
+          </div>
+          <h1 className="font-display-editorial text-4xl sm:text-5xl md:text-6xl text-[#6c2f00] font-bold tracking-tight mb-4 leading-[1.1]">
+            Usuarios Registrados
+          </h1>
+          <p className="font-body-editorial text-base sm:text-lg text-[#54433a] leading-relaxed">
+            Explora, busca y examina en detalle la lista completa de usuarios registrados en el sistema.
+          </p>
+        </div>
 
-        {/* Tarjeta de total de usuarios */}
-        <div className="mb-6 flex justify-center">
-          <div className="bg-white dark:bg-zinc-900 border border-[#ffbba5] dark:border-zinc-700 rounded-lg shadow-md px-6 py-4 text-center">
-            <p className="text-sm text-[#FA8072]">Usuarios registrados</p>
-            <p className="text-2xl font-bold text-[#FA8072]">
+        {/* Tarjeta de Total Registrados */}
+        <div className="mb-10 flex justify-center">
+          <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-6 shadow-xs max-w-xs w-full text-center">
+            <p className="font-body-editorial text-xs font-bold uppercase tracking-wider text-[#54433a] mb-1 flex items-center justify-center gap-1.5">
+              <span className="material-symbols-outlined text-lg text-[#6c2f00]">badge</span>
+              Total Registrados
+            </p>
+            <p className="font-display-editorial text-4xl font-bold text-[#6c2f00]">
               {usuarios.length}
             </p>
           </div>
         </div>
 
-        {/* Filtros */}
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-6">
+        {/* Panel de Filtros Editorial */}
+        <div className="bg-white border border-[#6c2f00]/15 rounded-2xl p-6 shadow-xs mb-12 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
           <input
             type="text"
-            placeholder="Buscar por nombre"
-            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            placeholder="Buscar por nombre..."
+            className="w-full sm:w-56 px-5 py-2.5 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] placeholder:text-[#54433a]/60 font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all"
             value={filtroNombre}
             onChange={(e) => setFiltroNombre(e.target.value)}
           />
 
           <input
             type="text"
-            placeholder="Buscar por email"
-            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            placeholder="Buscar por email..."
+            className="w-full sm:w-56 px-5 py-2.5 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] placeholder:text-[#54433a]/60 font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all"
             value={filtroEmail}
             onChange={(e) => setFiltroEmail(e.target.value)}
           />
 
-          <button
-            onClick={handleBuscar}
-            className="px-4 py-2 bg-[#fff5f2]0 dark:bg-zinc-700 text-white rounded-md hover:bg-[#FA8072] dark:hover:bg-zinc-600 transition"
-          >
-            Buscar
-          </button>
-
-          <button
-            onClick={() => {
-              setFiltroNombre("");
-              setFiltroEmail("");
-              setFiltroPais("Todos");
-              setFiltroRol("Todos");
-              obtenerUsuarios(); 
-            }}
-            className="px-4 py-2 bg-gray-300 text-[#FA8072] rounded-md hover:bg-gray-400 transition"
-          >
-            Limpiar filtros
-          </button>
-
           <select
-            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            className="appearance-none w-full sm:w-auto px-5 py-2.5 pr-10 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all cursor-pointer"
             value={filtroPais}
             onChange={(e) => setFiltroPais(e.target.value)}
           >
             {paises.map((pais) => (
               <option key={pais} value={pais}>
-                {pais}
+                País: {pais}
               </option>
             ))}
           </select>
 
           <select
-            className="p-2 rounded-md border border-[#FA8072] dark:border-zinc-600 dark:bg-zinc-900 dark:text-white"
+            className="appearance-none w-full sm:w-auto px-5 py-2.5 pr-10 border border-[#6c2f00]/20 bg-[#fff8f5] text-[#6c2f00] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] transition-all cursor-pointer"
             value={filtroRol}
             onChange={(e) => setFiltroRol(e.target.value)}
           >
             {roles.map((rol) => (
               <option key={rol} value={rol}>
-                {rol}
+                Rol: {rol}
               </option>
             ))}
           </select>
+
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-center">
+            <button
+              onClick={handleBuscar}
+              className="bg-[#ff6b6b] hover:bg-[#ae2f34] text-white font-body-editorial text-xs font-semibold px-6 py-2.5 rounded-full transition-all duration-300 shadow-xs flex items-center justify-center gap-1.5 cursor-pointer flex-1 sm:flex-initial"
+            >
+              <span className="material-symbols-outlined text-base">search</span>
+              Buscar
+            </button>
+
+            <button
+              onClick={() => {
+                setFiltroNombre("");
+                setFiltroEmail("");
+                setFiltroPais("Todos");
+                setFiltroRol("Todos");
+                obtenerUsuarios();
+              }}
+              className="border border-[#6c2f00]/20 text-[#6c2f00] hover:bg-[#ffeade] font-body-editorial text-xs font-semibold px-6 py-2.5 rounded-full transition-all cursor-pointer flex-1 sm:flex-initial flex items-center justify-center gap-1.5"
+            >
+              <span className="material-symbols-outlined text-base">restart_alt</span>
+              Limpiar
+            </button>
+          </div>
         </div>
 
         {/* Lista de usuarios */}
