@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Footer from "../Footer";
 import {
   getTotalMascotas,
   getTotalDonaciones,
@@ -185,6 +186,7 @@ export default function DashboardResumen() {
           <TablaSimple data={usuarios} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
@@ -222,49 +224,63 @@ type TablaSimpleProps = {
 function TablaSimple({ data }: TablaSimpleProps) {
   if (!data || data.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-500 dark:text-gray-300 bg-white dark:bg-zinc-900 border border-[#ffcfc7] dark:border-zinc-700 rounded-lg shadow">
-        No hay datos para mostrar
+      <div className="p-8 text-center text-[#54433a] bg-white border border-[#6c2f00]/15 rounded-2xl shadow-xs font-body-editorial text-sm font-semibold">
+        No hay datos registrados para mostrar en esta sección.
       </div>
     );
   }
 
+  const tieneRol = "rol" in data[0];
+
   return (
-    <div className="overflow-x-auto bg-white dark:bg-zinc-900 border border-[#ffcfc7] dark:border-zinc-700 rounded-lg shadow">
-      <table className="min-w-full divide-y divide-pink-200 dark:divide-zinc-700">
-        <thead className="bg-[#ffece8] dark:bg-zinc-800">
+    <div className="overflow-x-auto bg-white border border-[#6c2f00]/15 rounded-2xl shadow-xs">
+      <table className="min-w-full divide-y divide-[#6c2f00]/10 font-body-editorial">
+        <thead className="bg-[#fff1ea]">
           <tr>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
+            <th className="px-6 py-4 text-left text-xs font-bold text-[#6c2f00] uppercase tracking-wider">
               Nombre
             </th>
-            <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
+            <th className="px-6 py-4 text-left text-xs font-bold text-[#6c2f00] uppercase tracking-wider">
               Email
             </th>
-            {"rol" in data[0] && (
-              <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
+            {tieneRol && (
+              <th className="px-6 py-4 text-left text-xs font-bold text-[#6c2f00] uppercase tracking-wider">
                 País
               </th>
             )}
-            {"rol" in data[0] && (
-              <th className="px-4 py-3 text-left text-xs font-semibold text-[#FA8072] uppercase tracking-wider">
+            {tieneRol && (
+              <th className="px-6 py-4 text-left text-xs font-bold text-[#6c2f00] uppercase tracking-wider">
                 Origen
               </th>
             )}
           </tr>
         </thead>
-        <tbody className="divide-y divide-pink-100 dark:divide-zinc-700">
+        <tbody className="divide-y divide-[#6c2f00]/5 bg-white">
           {data.map((item) => (
-            <tr key={item.id}>
-              <td className="px-4 py-3 text-sm text-gray-800">{item.nombre}</td>
-              <td className="px-4 py-3 text-sm text-gray-700">{item.email}</td>
+            <tr key={item.id} className="hover:bg-[#fff8f5] transition-colors">
+              <td className="px-6 py-4 text-sm font-semibold text-[#28180d] whitespace-nowrap">
+                {item.nombre || "Sin nombre"}
+              </td>
+              <td className="px-6 py-4 text-sm text-[#54433a] whitespace-nowrap">
+                {item.email}
+              </td>
               {"rol" in item && (
-                <td className="px-4 py-3 text-sm text-gray-600">{item.pais}</td>
+                <td className="px-6 py-4 text-sm text-[#54433a] whitespace-nowrap">
+                  {item.pais || "No especificado"}
+                </td>
               )}
               {"rol" in item && (
-                <td className="px-4 py-3 text-sm">
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
                   {item.externalId ? (
-                    <span className="text-green-600 font-medium">Supabase</span>
+                    <span className="bg-[#e6f4ea] text-[#2e5d32] border border-[#2e5d32]/20 text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#2e5d32]" />
+                      Supabase
+                    </span>
                   ) : (
-                    <span className="text-blue-600 font-medium">Local</span>
+                    <span className="bg-[#fff1ea] text-[#6c2f00] border border-[#6c2f00]/20 text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#6c2f00]" />
+                      Local
+                    </span>
                   )}
                 </td>
               )}
