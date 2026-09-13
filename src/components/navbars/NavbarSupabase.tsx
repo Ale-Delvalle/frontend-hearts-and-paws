@@ -79,6 +79,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   if (user) {
     menuLinks = [
       { label: 'Historias', href: '/#historias' },
+      { label: 'Publicaciones', href: '/publicaciones' },
       { label: 'Adoptar', href: '/adoptar/adopcion' },
       { label: 'Donar', href: '/donacion' },
     ];
