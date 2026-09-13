@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import GlobalTimeline from './components-feed/GlobalTimeline';
 
 interface SuccessStory {
   id: string;
@@ -285,25 +284,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* 5. Timeline de Publicaciones de las ONGs */}
-        <section id="publicaciones" className="w-full py-16 px-6 md:px-12 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/20 bg-[#fff1ea]/40 dark:bg-[#18181d]/70">
-          <div className="max-w-[1280px] mx-auto">
-            <div className="text-center mb-12">
-              <span className="material-symbols-outlined text-[#a84320] dark:text-[#c85a32] text-4xl mb-2">
-                pets
-              </span>
-              <h2 className="font-display-editorial text-3xl md:text-4xl text-[#6c2f00] dark:text-[#ffdbc9] font-semibold">
-                Publicaciones de la Red de ONGs
-              </h2>
-              <p className="font-body-editorial text-base text-[#54433a] dark:text-[#dac2b6] mt-2 max-w-xl mx-auto">
-                Casos activos, avisos e historias compartidas en tiempo real por nuestras organizaciones aliadas.
-              </p>
-            </div>
-
-            <GlobalTimeline />
           </div>
         </section>
       </main>
