@@ -7,7 +7,13 @@ import GlobalFeedPostCard from './GlobalFeedPostCard'
 
 const LIMITE_POR_PAGINA = 10
 
-export default function GlobalTimeline() {
+export type TipoFiltroPublicacion = 'TODOS' | 'ADOPCION' | 'DONACION'
+
+export interface GlobalTimelineProps {
+  filtroTipo?: TipoFiltroPublicacion
+}
+
+export default function GlobalTimeline({ filtroTipo = 'TODOS' }: GlobalTimelineProps = {}) {
   const [casos, setCasos] = useState<CasoFeedItem[]>([])
   const [pagina, setPagina] = useState(1)
   const [total, setTotal] = useState(0)
