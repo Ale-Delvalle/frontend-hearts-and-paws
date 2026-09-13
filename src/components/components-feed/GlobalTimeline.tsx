@@ -59,6 +59,18 @@ export default function GlobalTimeline({ filtroTipo = 'TODOS' }: GlobalTimelineP
 
   const hayMas = casos.length < total
 
+  const casosFiltrados = casos.filter((caso) => {
+    if (filtroTipo === 'ADOPCION') return caso.tipo === 'ADOPCION'
+    if (filtroTipo === 'DONACION') return caso.tipo !== 'ADOPCION'
+    return true
+  })
+
+  const mensajeVacio = () => {
+    if (filtroTipo === 'ADOPCION') return 'No hay publicaciones de adopción en este momento.'
+    if (filtroTipo === 'DONACION') return 'No hay campañas de donación activas en este momento.'
+    return 'Todavía no hay publicaciones de ninguna organización.'
+  }
+
   return (
     <div className="flex flex-col gap-6 max-w-2xl mx-auto w-full font-body-editorial">
       {cargando && (
@@ -97,20 +109,20 @@ export default function GlobalTimeline({ filtroTipo = 'TODOS' }: GlobalTimelineP
         </div>
       )}
 
-      {!cargando && !error && casos.length === 0 && (
+      {!cargando && !error && casosFiltrados.length === 0 && (
         <div className="text-center py-16 px-6 rounded-2xl bg-white dark:bg-[#1c1c21] border border-[#6c2f00]/10 dark:border-[#c85a32]/20 shadow-sm">
           <span className="material-symbols-outlined text-4xl text-[#a84320] dark:text-[#c85a32] mb-3 opacity-80 block">
             feed
           </span>
           <p className="text-base text-[#54433a] dark:text-[#dac2b6] font-medium">
-            Todavía no hay publicaciones de ninguna organización.
+            {mensajeVacio()}
           </p>
         </div>
       )}
 
-      {!cargando && casos.length > 0 && (
+      {!cargando && casosFiltrados.length > 0 && (
         <div className="flex flex-col gap-6">
-          {casos.map((caso) => (
+          {casosFiltrados.map((caso) => (
             <GlobalFeedPostCard key={caso.id} caso={caso} />
           ))}
         </div>
