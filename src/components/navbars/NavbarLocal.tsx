@@ -18,6 +18,7 @@ import {
   FaHome,
   FaUser,
   FaCat,
+  FaNewspaper,
 } from "react-icons/fa";
 
 import { useOngAuth } from "@/context/OngAuthContext";
@@ -77,6 +78,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   if (ong) {
     menuLinks = [
       { label: "Inicio", href: "/", icon: <FaHome /> },
+      { label: "Publicaciones", href: "/publicaciones", icon: <FaNewspaper /> },
       { label: "Mi Perfil", href: "/dashboard/ong", icon: <FaUserShield /> },
       {
         label: "Publicar",
@@ -103,6 +105,11 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
           label: "Resumen",
           href: "/dashboard/admin/resumen",
           icon: <FaChartPie />,
+        },
+        {
+          label: "Publicaciones",
+          href: "/publicaciones",
+          icon: <FaNewspaper />,
         },
         {
           label: "Solicitudes",
@@ -141,6 +148,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
     } else {
       menuLinks = [
         { label: "Inicio", href: "/" },
+        { label: "Publicaciones", href: "/publicaciones" },
         { label: "Adoptar", href: "/adoptar/adopcion" },
         { label: "Donar", href: "/donacion" },
         { label: "Perfil", href: "/dashboard/usuario" },
