@@ -318,15 +318,13 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
                     <span>¡Quiero Adoptar a {mascota.nombre}!</span>
                   </button>
 
-                  {casoDonacionActiva && (
-                    <button
-                      onClick={() => router.push('/donacion')}
-                      className="border border-[#c85a32] text-[#c85a32] hover:bg-[#c85a32] hover:text-white font-body-editorial font-semibold py-3.5 px-5 rounded-full text-sm transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
-                    >
-                      <span className="material-symbols-outlined text-lg">favorite</span>
-                      <span>Donar a este caso</span>
-                    </button>
-                  )}
+                  <button
+                    onClick={() => router.push('/donacion')}
+                    className="border-2 border-[#c85a32] text-[#c85a32] hover:bg-[#c85a32] hover:text-white dark:hover:text-white font-body-editorial font-semibold py-3.5 px-6 rounded-full text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-95 bg-white dark:bg-[#1c1c21]"
+                  >
+                    <span className="material-symbols-outlined text-lg">favorite</span>
+                    <span>{casoDonacionActiva ? 'Donar a este caso' : 'Colaborar con donación'}</span>
+                  </button>
                 </div>
               </div>
             </div>
