@@ -1,6 +1,6 @@
-import MascotaPerfilPage from "@/components/mascota/MascotaPerfilPage";
+import MascotaPerfilDetalle from "@/components/mascota/MascotaPerfilDetalle";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  return <MascotaPerfilPage id={id} />;
+  return <MascotaPerfilDetalle id={id} />;
 }
