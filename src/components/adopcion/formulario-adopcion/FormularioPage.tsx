@@ -153,81 +153,132 @@ useEffect(() => {
     <DeclaracionFinal key="paso4" formData={formData} onChange={handleChange} />,
   ]
 
+  const nombresPasos = [
+    { num: 1, titulo: 'Tu Hogar', icon: 'home' },
+    { num: 2, titulo: 'Compromisos', icon: 'handshake' },
+    { num: 3, titulo: 'Tus Datos', icon: 'badge' },
+    { num: 4, titulo: 'Declaración', icon: 'verified' },
+  ]
+
   return (
-    <div className="min-h-screen bg-[#fff5f2] py-10 px-4 flex justify-center">
+    <div className="min-h-screen bg-[#fff8f5] dark:bg-[#121214] text-[#1c1c21] dark:text-[#ffede4] font-body-editorial py-10 sm:py-16 px-4 sm:px-6 flex flex-col items-center justify-start selection:bg-[#c85a32] selection:text-white">
+      {/* Encabezado editorial */}
+      <div className="w-full max-w-3xl mb-8 text-center space-y-2">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#fff1ea] dark:bg-[#26262e] text-[#c85a32] border border-[#6c2f00]/10 dark:border-[#c85a32]/20 mb-1 shadow-xs">
+          <span className="material-symbols-outlined text-2xl">pets</span>
+        </div>
+        <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#6c2f00] dark:text-[#ffdbc9] tracking-tight">
+          Solicitud de Adopción Responsable
+        </h1>
+        <p className="text-sm sm:text-base text-[#54433a] dark:text-[#dac2b6] max-w-xl mx-auto leading-relaxed">
+          Completá este formulario para que la organización pueda evaluar tu postulación y coordinar una adopción segura y consciente.
+        </p>
+      </div>
+
       <form
-        className="w-full max-w-3xl space-y-10 bg-white p-8 rounded-xl shadow-md"
+        className="w-full max-w-3xl space-y-8 bg-white dark:bg-[#1c1c21] p-6 sm:p-10 rounded-3xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 shadow-xl transition-all"
         onSubmit={enviarFormulario}
       >
-        <div className="flex justify-center items-center space-x-6 mb-6 select-none">
-          {[1, 2, 3, 4].map((num) => (
-            <div
-              key={num}
-              className={`flex flex-col items-center ${
-                paso === num ? 'text-[#FA8072] font-bold' : 'text-gray-400'
-              }`}
-            >
-              <div
-                className={`w-8 h-8 rounded-full border-2 flex items-center justify-center mb-1 ${
-                  paso === num ? 'border-[#FA8072] bg-[#ffece8]' : 'border-gray-300'
-                }`}
-              >
-                {num}
-              </div>
-              <span className="text-xs">Paso {num}</span>
-            </div>
-          ))}
+        {/* Stepper moderno de 4 Pasos */}
+        <div className="relative mb-8 select-none">
+          <div className="grid grid-cols-4 gap-2">
+            {nombresPasos.map((item) => {
+              const estaActivo = paso === item.num
+              const estaCompletado = paso > item.num
+
+              return (
+                <div key={item.num} className="flex flex-col items-center text-center">
+                  <div
+                    className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 flex items-center justify-center mb-2 transition-all duration-300 font-bold text-sm ${
+                      estaActivo
+                        ? 'border-[#c85a32] bg-[#c85a32] text-white shadow-sm ring-4 ring-[#c85a32]/20 scale-105'
+                        : estaCompletado
+                        ? 'border-[#c85a32] bg-[#fff1ea] dark:bg-[#26262e] text-[#c85a32]'
+                        : 'border-[#6c2f00]/15 dark:border-[#ffdbc9]/20 bg-[#fff8f5] dark:bg-[#1c1c21] text-[#877369] dark:text-[#dac2b6]/60'
+                    }`}
+                  >
+                    {estaCompletado ? (
+                      <span className="material-symbols-outlined text-base">check</span>
+                    ) : (
+                      item.num
+                    )}
+                  </div>
+                  <span
+                    className={`text-[11px] sm:text-xs font-semibold leading-tight ${
+                      estaActivo
+                        ? 'text-[#c85a32] dark:text-[#ffdbc9]'
+                        : estaCompletado
+                        ? 'text-[#6c2f00] dark:text-[#dac2b6]'
+                        : 'text-[#877369] dark:text-[#dac2b6]/60'
+                    }`}
+                  >
+                    {item.titulo}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
         </div>
 
-        {pasos[paso - 1]}
+        {/* Contenido del paso activo */}
+        <div className="min-h-[280px]">{pasos[paso - 1]}</div>
 
-        <div className="flex justify-center mt-6 gap-4 flex-wrap">
-          {paso > 1 && (
-            <button
-              type="button"
-              onClick={() => setPaso((prev) => prev - 1)}
-              className="px-4 py-2 text-white bg-[#FA8072] rounded hover:bg-[#e87366] transition"
-            >
-              Atrás
-            </button>
-          )}
+        {/* Botones de navegación con estilo editorial */}
+        <div className="flex justify-between items-center pt-6 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/15 gap-3 flex-wrap">
+          <div>
+            {paso > 1 && (
+              <button
+                type="button"
+                onClick={() => setPaso((prev) => prev - 1)}
+                className="px-5 sm:px-6 py-2.5 sm:py-3 border border-[#6c2f00]/20 dark:border-[#ffdbc9]/20 text-[#6c2f00] dark:text-[#ffdbc9] bg-white dark:bg-[#26262e] rounded-full text-xs sm:text-sm font-semibold hover:bg-[#fff1ea] dark:hover:bg-[#34343d] transition-all cursor-pointer shadow-xs active:scale-95 inline-flex items-center gap-1.5"
+              >
+                <span className="material-symbols-outlined text-base">arrow_back</span>
+                <span>Atrás</span>
+              </button>
+            )}
+          </div>
 
-          {paso === 3 && (
-            <button
-              type="button"
-              onClick={() => router.push('/dashboard/usuario')}
-              className="px-4 py-2 bg-[#ffece8] text-[#FA8072] border border-[#ffbba5] rounded hover:bg-[#ffcfc7] transition"
-            >
-              Editar mis datos personales
-            </button>
-          )}
+          <div className="flex items-center gap-3 flex-wrap">
+            {paso === 3 && (
+              <button
+                type="button"
+                onClick={() => router.push('/dashboard/usuario')}
+                className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#fff1ea] dark:bg-[#26262e] text-[#c85a32] dark:text-[#ffdbc9] border border-[#c85a32]/30 rounded-full text-xs sm:text-sm font-semibold hover:bg-[#ffeade] dark:hover:bg-[#34343d] transition-all cursor-pointer shadow-xs active:scale-95 inline-flex items-center gap-1.5"
+              >
+                <span className="material-symbols-outlined text-base">edit</span>
+                <span>Editar mis datos</span>
+              </button>
+            )}
 
-          {paso < pasos.length ? (
-            <button
-              type="button"
-              onClick={avanzarPaso}
-              className={`px-4 py-2 text-white rounded transition ${
-                pasoValido(paso, formData)
-                  ? 'bg-[#FA8072] hover:bg-[#e87366]'
-                  : 'bg-[#ffcfc7] cursor-not-allowed'
-              }`}
-              disabled={!pasoValido(paso, formData)}
-            >
-              Siguiente
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className={`px-4 py-2 text-white rounded transition ${
-                pasoValido(paso, formData)
-                  ? 'bg-[#FA8072] hover:bg-[#e87366]'
-                  : 'bg-[#ffcfc7] cursor-not-allowed'
-              }`}
-              disabled={!pasoValido(paso, formData)}
-            >
-              Enviar solicitud
-            </button>
-          )}
+            {paso < pasos.length ? (
+              <button
+                type="button"
+                onClick={avanzarPaso}
+                className={`px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shadow-md inline-flex items-center gap-2 active:scale-95 cursor-pointer ${
+                  pasoValido(paso, formData)
+                    ? 'bg-[#c85a32] hover:bg-[#a84320] text-white hover:scale-102'
+                    : 'bg-[#c85a32]/40 text-white/80 cursor-not-allowed'
+                }`}
+                disabled={!pasoValido(paso, formData)}
+              >
+                <span>Siguiente</span>
+                <span className="material-symbols-outlined text-base">arrow_forward</span>
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className={`px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shadow-md inline-flex items-center gap-2 active:scale-95 cursor-pointer ${
+                  pasoValido(paso, formData)
+                    ? 'bg-[#c85a32] hover:bg-[#a84320] text-white hover:scale-102'
+                    : 'bg-[#c85a32]/40 text-white/80 cursor-not-allowed'
+                }`}
+                disabled={!pasoValido(paso, formData)}
+              >
+                <span className="material-symbols-outlined text-base">send</span>
+                <span>Enviar solicitud</span>
+              </button>
+            )}
+          </div>
         </div>
       </form>
     </div>
