@@ -11,18 +11,23 @@ export const ongLoginService = async (email: string, contrasena: string) => {
       body: JSON.stringify({ email, contrasena }),
     });
 
+    const data = await res.json().catch(() => null);
+
     if (!res.ok) {
-      return { ok: false, mensaje: "Error en la respuesta del servidor" };
+      return {
+        ok: false,
+        mensaje:
+          data?.message ||
+          "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de ONG.",
+      };
     }
 
-    const data = await res.json();
-
-    if (data) {
-       return { ok: true, ong: data.organizacion };
+    if (data && data.organizacion) {
+      return { ok: true, ong: data.organizacion };
     } else {
       return { ok: false, mensaje: "Datos inválidos" };
     }
-  } catch  {
+  } catch {
     return { ok: false, mensaje: "Error de red o servidor" };
   }
 };
