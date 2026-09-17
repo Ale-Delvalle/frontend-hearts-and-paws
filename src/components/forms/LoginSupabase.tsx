@@ -45,6 +45,17 @@ export default function LoginSupabaseForm() {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="relative z-10 w-full max-w-md bg-white dark:bg-[#1c1c21] p-8 sm:p-10 rounded-3xl shadow-2xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 text-center backdrop-blur-xs space-y-6"
     >
+      {/* Botón Volver superior */}
+      <div className="flex justify-start">
+        <Link
+          href="/login"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#54433a] dark:text-[#dac2b6] hover:text-[#c85a32] dark:hover:text-[#c85a32] transition-colors cursor-pointer group"
+        >
+          <span className="material-symbols-outlined text-base transition-transform group-hover:-translate-x-0.5">arrow_back</span>
+          <span>Volver a tipos de cuenta</span>
+        </Link>
+      </div>
+
       {/* Badge de seguridad */}
       <div className="flex justify-center">
         <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#fff1ea] dark:bg-[#26262e] border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 text-[#6c2f00] dark:text-[#ffdbc9] text-xs font-semibold tracking-wide shadow-xs">
@@ -140,6 +151,17 @@ export default function LoginSupabaseForm() {
           <span className="material-symbols-outlined text-xs text-[#c85a32]">verified_user</span>
           Tus datos viajan cifrados bajo el estándar OAuth 2.0
         </p>
+      </div>
+
+      {/* Selector de otra cuenta */}
+      <div className="text-center text-xs text-[#54433a] dark:text-[#dac2b6] font-body-editorial">
+        ¿Buscás otro tipo de acceso?{" "}
+        <Link
+          href="/login"
+          className="text-[#6c2f00] dark:text-[#ffdbc9] font-bold hover:text-[#c85a32] dark:hover:text-[#c85a32] transition-colors ml-1 underline underline-offset-2 cursor-pointer"
+        >
+          Cambiar tipo de cuenta
+        </Link>
       </div>
     </motion.div>
   );
