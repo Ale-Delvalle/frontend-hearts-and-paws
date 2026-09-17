@@ -58,7 +58,10 @@ export const OngAuthProvider = ({ children }: { children: ReactNode }) => {
         console.error("Error después del login:", error);
       }
     }
-    return false;
+    throw new Error(
+      res.mensaje ||
+        "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de ONG."
+    );
   };
 
   const logout = async () => {
