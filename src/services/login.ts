@@ -12,10 +12,13 @@ export const loginUserService = async (email: string, contrasena: string) => {
       credentials: 'include',
       body: JSON.stringify({ email, contrasena }),
     });
-  const data = await response.json();
+  const data = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(data.message || 'Login fallido');
+    throw new Error(
+      data?.message ||
+        'Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.'
+    );
   }
 
   return data;
