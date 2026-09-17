@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import OngTimeline from './OngTimeline'
 import OngMascotasCatalogo from './OngMascotasCatalogo'
+import OngCasosCerrados from './OngCasosCerrados'
 
-type Tab = 'publicaciones' | 'mascotas'
+type Tab = 'publicaciones' | 'mascotas' | 'cerrados'
 
 export default function OngPerfilTabs({ ongId }: { ongId: string }) {
   const [tab, setTab] = useState<Tab>('publicaciones')
@@ -18,7 +19,7 @@ export default function OngPerfilTabs({ ongId }: { ongId: string }) {
 
   return (
     <div className="flex flex-col gap-6 font-body-editorial">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 flex-wrap">
         <button className={claseTab(tab === 'publicaciones')} onClick={() => setTab('publicaciones')}>
           <span className="material-symbols-outlined text-lg">feed</span>
           <span>Publicaciones</span>
@@ -27,9 +28,15 @@ export default function OngPerfilTabs({ ongId }: { ongId: string }) {
           <span className="material-symbols-outlined text-lg">pets</span>
           <span>Mascotas</span>
         </button>
+        <button className={claseTab(tab === 'cerrados')} onClick={() => setTab('cerrados')}>
+          <span className="material-symbols-outlined text-lg">task_alt</span>
+          <span>Casos cerrados</span>
+        </button>
       </div>
 
-      {tab === 'publicaciones' ? <OngTimeline ongId={ongId} /> : <OngMascotasCatalogo ongId={ongId} />}
+      {tab === 'publicaciones' && <OngTimeline ongId={ongId} />}
+      {tab === 'mascotas' && <OngMascotasCatalogo ongId={ongId} />}
+      {tab === 'cerrados' && <OngCasosCerrados ongId={ongId} />}
     </div>
   )
 }

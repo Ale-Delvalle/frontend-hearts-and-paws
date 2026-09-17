@@ -37,6 +37,24 @@ export interface TimelinePaginado {
   limit: number
 }
 
+export type MotivoCierreCaso = 'ADOPCION' | 'DONACION' | 'FALLECIDO' | 'OTRO'
+
+export interface CasoCerradoItem extends Omit<CasoTimelineItem, 'mascota'> {
+  mascota: {
+    id: string
+    nombre: string
+    estado?: 'EN_ADOPCION' | 'EN_TRANSITO' | 'ADOPTADO' | 'FALLECIDO'
+    imagenes: { id: string; url: string }[]
+  }
+}
+
+export interface CasosCerradosPaginado {
+  data: CasoCerradoItem[]
+  total: number
+  page: number
+  limit: number
+}
+
 // GET /casos/timeline
 export interface OngResumen {
   id: string
