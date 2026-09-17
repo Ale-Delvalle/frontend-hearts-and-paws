@@ -63,6 +63,12 @@ export default function MascotaCard({
     onAdoptar?.(mascota.casoId)
   }
 
+  const handleVerPerfil = () => {
+    if (onVerPerfil) onVerPerfil(mascota)
+    else if (onConocerHistoria) onConocerHistoria(mascota)
+    else router.push(`/mascotas/${mascota.id}`)
+  }
+
   const toggleFavorito = async () => {
     try {
       await putAgregarAFavoritos( mascota.casoId, token ?? undefined)
@@ -115,7 +121,10 @@ export default function MascotaCard({
       {/* Botón de Favoritos en la esquina superior derecha de la imagen */}
       {mostrarFavorito && (
         <button
-          onClick={toggleFavorito}
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleFavorito()
+          }}
           className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-[#1c1c21]/90 backdrop-blur-md flex items-center justify-center text-[#c85a32] hover:bg-white dark:hover:bg-[#26262e] hover:scale-110 transition-all shadow-xs cursor-pointer"
           aria-label="Marcar como favorito"
           type="button"
@@ -125,7 +134,10 @@ export default function MascotaCard({
       )}
 
       {/* Contenedor Destacado de Imagen */}
-      <div className="relative w-full h-64 sm:h-72 bg-[#6c2f00]/5 dark:bg-[#ffdbc9]/5 overflow-hidden">
+      <div
+        onClick={handleVerPerfil}
+        className="relative w-full h-64 sm:h-72 bg-[#6c2f00]/5 dark:bg-[#ffdbc9]/5 overflow-hidden cursor-pointer"
+      >
         {totalImagenes > 0 ? (
           <Image
             src={mascota.imagenes[imagenActual]?.url}
@@ -145,7 +157,10 @@ export default function MascotaCard({
         {totalImagenes > 1 && (
           <>
             <button
-              onClick={irAAnterior}
+              onClick={(e) => {
+                e.stopPropagation()
+                irAAnterior()
+              }}
               className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6c2f00] dark:text-[#ffdbc9] bg-white/90 dark:bg-[#1c1c21]/90 backdrop-blur-md rounded-full shadow-xs p-2 hover:bg-white dark:hover:bg-[#26262e] transition-all z-10 cursor-pointer"
               type="button"
               aria-label="Imagen anterior"
@@ -153,7 +168,10 @@ export default function MascotaCard({
               <span className="material-symbols-outlined text-sm block">chevron_left</span>
             </button>
             <button
-              onClick={irASiguiente}
+              onClick={(e) => {
+                e.stopPropagation()
+                irASiguiente()
+              }}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6c2f00] dark:text-[#ffdbc9] bg-white/90 dark:bg-[#1c1c21]/90 backdrop-blur-md rounded-full shadow-xs p-2 hover:bg-white dark:hover:bg-[#26262e] transition-all z-10 cursor-pointer"
               type="button"
               aria-label="Imagen siguiente"
@@ -168,7 +186,10 @@ export default function MascotaCard({
       <div className="p-6 flex-1 flex flex-col justify-between">
         <div>
           {/* Título de la Mascota */}
-          <h2 className="font-display-editorial text-2xl font-bold text-[#6c2f00] dark:text-[#ffdbc9] mb-2 leading-tight">
+          <h2
+            onClick={handleVerPerfil}
+            className="font-display-editorial text-2xl font-bold text-[#6c2f00] dark:text-[#ffdbc9] mb-2 leading-tight cursor-pointer hover:underline hover:text-[#a84320] dark:hover:text-[#e06d44] transition-colors"
+          >
             {mascota.nombre || "Sin nombre"}
           </h2>
 
@@ -214,10 +235,7 @@ export default function MascotaCard({
           {/* Botones de Acción Solicitados */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => {
-                if (onVerPerfil) onVerPerfil(mascota);
-                else onConocerHistoria?.(mascota);
-              }}
+              onClick={handleVerPerfil}
               className="flex-1 bg-[#c85a32] hover:bg-[#a84320] text-white font-body-editorial text-xs font-semibold py-2.5 px-3 rounded-full transition-all duration-300 shadow-xs flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
               type="button"
             >
