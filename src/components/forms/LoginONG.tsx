@@ -65,10 +65,17 @@ export default function LoginOng() {
         toast.success("Login exitoso, redirigiendo...");
         router.push("/dashboard/ong");
       } else {
-        toast.error("Credenciales inválidas");
+        toast.error(
+          "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de ONG.",
+          { duration: 5000 }
+        );
       }
-    } catch (error) {
-      toast.error("Error de conexión, intenta nuevamente");
+    } catch (error: unknown) {
+      const errorMsg =
+        error instanceof Error
+          ? error.message
+          : "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de ONG.";
+      toast.error(errorMsg, { duration: 5000 });
       console.error(error);
     } finally {
       setLoading(false);
