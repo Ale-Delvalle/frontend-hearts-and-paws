@@ -77,14 +77,25 @@ export default function LoginUsuario() {
           router.push("/dashboard/ong");
           break;
         default:
-          toast.error("Credenciales inválidas");
-          setLoading(false); // solo si hubo error
+          toast.error(
+            "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.",
+            { duration: 5000 }
+          );
+          setLoading(false);
       }
     } else {
-      setLoading(false); // en caso de login fallido
+      toast.error(
+        "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.",
+        { duration: 5000 }
+      );
+      setLoading(false);
     }
-  } catch (error) {
-    toast.error("Error de conexión, intenta nuevamente");
+  } catch (error: unknown) {
+    const errorMsg =
+      error instanceof Error
+        ? error.message
+        : "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.";
+    toast.error(errorMsg, { duration: 5000 });
     console.log(error);
     setLoading(false);
   }
