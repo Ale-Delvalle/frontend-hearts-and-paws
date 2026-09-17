@@ -10,7 +10,6 @@ import {
   getDetalleDonacionPorCaso,
 } from "@/services/donacion";
 import MascotaCard from "@/components/adopcion/MascotaCard";
-import MascotaModal from "@/components/adopcion/MascotaModal";
 import DonarModal from "@/components/donacion/DonarModal";
 import { useAuth } from "@/components/SupabaseProvider";
 import { Mascota } from "@/types/mascotas";
@@ -39,8 +38,7 @@ export default function MisFavoritos() {
   const [favoritos, setFavoritos] = useState<Favorito[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [mascotaSeleccionada, setMascotaSeleccionada] = useState<Mascota | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
+
   const [donarModalVisible, setDonarModalVisible] = useState(false);
   const [casoDonacionId, setCasoDonacionId] = useState<string | null>(null);
   const [detalleDonacion, setDetalleDonacion] = useState<{ meta: number; recaudado: number } | null>(null);
@@ -78,10 +76,7 @@ export default function MisFavoritos() {
       toast.error("No se pudo eliminar el favorito");
     }
   };
-  const handleConocerHistoria = (mascota: Mascota) => {
-    setMascotaSeleccionada(mascota);
-    setModalVisible(true);
-  };
+
 
   const handleAdoptarODonar = async (casoId: string) => {
     const fav = favoritos.find((f) => f.caso.id === casoId);
@@ -101,7 +96,6 @@ export default function MisFavoritos() {
 
     if (mascota.tipo === "adopcion") {
       toast.success(`¡Gracias por querer adoptar a ${mascota.nombre}!`);
-      setModalVisible(false);
       router.push(`/adoptar/formulario-adopcion?id=${mascota.casoId}`);
     } else {
       setCasoDonacionId(mascota.casoId);
@@ -248,7 +242,8 @@ export default function MisFavoritos() {
                     <MascotaCard
                       mascota={mascota}
                       modo={mascota.tipo as "adopcion" | "donacion"}
-                      onConocerHistoria={handleConocerHistoria}
+                      onVerPerfil={() => router.push(`/mascotas/${mascota.id}`)}
+                      onConocerHistoria={() => router.push(`/mascotas/${mascota.id}`)}
                       onAdoptar={() => handleAdoptarODonar(mascota.casoId)}
                       mostrarFavorito={false}
                     />
@@ -266,15 +261,7 @@ export default function MisFavoritos() {
             </div>
           )}
 
-          {mascotaSeleccionada && (
-            <MascotaModal
-              visible={modalVisible}
-              mascota={mascotaSeleccionada}
-              onClose={() => setModalVisible(false)}
-              onAccion={handleAdoptarODonar}
-              modo={mascotaSeleccionada.tipo as "adopcion" | "donacion"}
-            />
-          )}
+
 
           <DonarModal
             visible={donarModalVisible}
