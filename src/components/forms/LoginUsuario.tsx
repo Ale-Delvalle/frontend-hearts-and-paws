@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useUsuarioAuth } from "@/context/UsuarioAuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { authMe } from "@/services/login";
+import LoginErrorModal from "./LoginErrorModal";
 
 export default function LoginUsuario() {
   const router = useRouter();
@@ -15,6 +16,8 @@ export default function LoginUsuario() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [modalErrorMessage, setModalErrorMessage] = useState("");
 
   // Bloqueo scroll al montar y restaurar al desmontar
   useEffect(() => {
@@ -77,17 +80,17 @@ export default function LoginUsuario() {
           router.push("/dashboard/ong");
           break;
         default:
-          toast.error(
-            "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.",
-            { duration: 5000 }
-          );
+          const defaultMsg =
+            "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.";
+          setModalErrorMessage(defaultMsg);
+          setShowErrorModal(true);
           setLoading(false);
       }
     } else {
-      toast.error(
-        "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.",
-        { duration: 5000 }
-      );
+      const failMsg =
+        "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.";
+      setModalErrorMessage(failMsg);
+      setShowErrorModal(true);
       setLoading(false);
     }
   } catch (error: unknown) {
@@ -95,7 +98,8 @@ export default function LoginUsuario() {
       error instanceof Error
         ? error.message
         : "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de Usuario.";
-    toast.error(errorMsg, { duration: 5000 });
+    setModalErrorMessage(errorMsg);
+    setShowErrorModal(true);
     console.log(error);
     setLoading(false);
   }
@@ -212,7 +216,13 @@ export default function LoginUsuario() {
       </div>
     )}
 
-
+    {/* Modal de aviso de credenciales incorrectas en el centro de la pantalla */}
+    <LoginErrorModal
+      isOpen={showErrorModal}
+      onClose={() => setShowErrorModal(false)}
+      tipoCuenta="Usuario"
+      mensaje={modalErrorMessage}
+    />
   </>
 );
 }
