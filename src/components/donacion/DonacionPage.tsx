@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { Mascota } from "@/types/mascotas";
 import { Caso } from "@/types/casos";
@@ -13,7 +14,6 @@ import {
   getDetalleDonacionPorCaso,
 } from "@/services/donacion";
 import MascotaCard from "@/components/adopcion/MascotaCard";
-import MascotaModal from "@/components/adopcion/MascotaModal";
 import DonarModal from "./DonarModal";
 import { useUsuarioAuth } from "@/context/UsuarioAuthContext";
 import { DetalleDonacion } from "@/types/detalledonacion";
@@ -22,6 +22,7 @@ import { useAuth } from "../SupabaseProvider";
 import Footer from "../Footer";
 
 export default function DonacionPage() {
+  const router = useRouter();
   const { usuario } = useUsuarioAuth();
 
   const [userSupabaseId, setUserSupabaseId] = useState<string | null>(null);
@@ -33,9 +34,7 @@ export default function DonacionPage() {
   const [resultados, setResultados] = useState<Caso[]>([]);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
-  const [mascotaSeleccionada, setMascotaSeleccionada] =
-    useState<Mascota | null>(null);
-  const [mostrandoHistoria, setMostrandoHistoria] = useState(false);
+
 
   // Estados para el modal de donación
   const [donarModalVisible, setDonarModalVisible] = useState(false);
@@ -85,10 +84,7 @@ export default function DonacionPage() {
     return orden === "mas_reciente" ? fechaB - fechaA : fechaA - fechaB;
   });
 
-  const handleConocerHistoria = (mascota: Mascota) => {
-    setMascotaSeleccionada(mascota);
-    setMostrandoHistoria(true);
-  };
+
 
   const handleDonar = async (mascota: Mascota) => {
     if (!mascota.casoId) {
@@ -230,7 +226,8 @@ export default function DonacionPage() {
               <MascotaCard
                 key={caso.id}
                 mascota={mascotaCompleta}
-                onConocerHistoria={() => handleConocerHistoria(mascotaCompleta)}
+                onVerPerfil={() => router.push(`/mascotas/${mascotaCompleta.id}`)}
+                onConocerHistoria={() => router.push(`/mascotas/${mascotaCompleta.id}`)}
                 onAdoptar={() => handleDonar(mascotaCompleta)}
                 modo="donacion"
               />
@@ -239,17 +236,7 @@ export default function DonacionPage() {
         </div>
       </div>
 
-      {/* Modal historia */}
-      {mascotaSeleccionada && (
-        <MascotaModal
-          mascota={mascotaSeleccionada}
-          visible={mostrandoHistoria}
-          cargando={false}
-          onClose={() => setMostrandoHistoria(false)}
-          onAccion={() => handleDonar(mascotaSeleccionada)}
-          modo="donacion"
-        />
-      )}
+
 
       {/* Modal de donación */}
       {donarModalVisible && detalleDonacion && mascotaParaDonar && (
