@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useOngAuth } from "../../context/OngAuthContext";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import LoginErrorModal from "./LoginErrorModal";
 
 export default function LoginOng() {
   const { login } = useOngAuth();
@@ -14,6 +15,8 @@ export default function LoginOng() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [modalErrorMessage, setModalErrorMessage] = useState("");
 
   // Bloquea scroll al montar, y lo restaura al desmontar
   useEffect(() => {
@@ -65,17 +68,18 @@ export default function LoginOng() {
         toast.success("Login exitoso, redirigiendo...");
         router.push("/dashboard/ong");
       } else {
-        toast.error(
-          "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de ONG.",
-          { duration: 5000 }
-        );
+        const errorMsg =
+          "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de ONG.";
+        setModalErrorMessage(errorMsg);
+        setShowErrorModal(true);
       }
     } catch (error: unknown) {
       const errorMsg =
         error instanceof Error
           ? error.message
           : "Credenciales incorrectas. Verifique que el email ingresado corresponde al tipo de cuenta de ONG.";
-      toast.error(errorMsg, { duration: 5000 });
+      setModalErrorMessage(errorMsg);
+      setShowErrorModal(true);
       console.error(error);
     } finally {
       setLoading(false);
@@ -192,6 +196,14 @@ export default function LoginOng() {
         </div>
       </div>
     )}
+
+    {/* Modal de aviso de credenciales incorrectas en el centro de la pantalla */}
+    <LoginErrorModal
+      isOpen={showErrorModal}
+      onClose={() => setShowErrorModal(false)}
+      tipoCuenta="ONG"
+      mensaje={modalErrorMessage}
+    />
   </>
   );
 }
