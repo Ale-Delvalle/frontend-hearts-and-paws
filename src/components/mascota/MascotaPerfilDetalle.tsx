@@ -8,7 +8,9 @@ import { toast } from 'react-hot-toast';
 import { MascotaPerfil } from '@/types/mascotas';
 import { getPerfilMascota } from '@/services/mascotaProfile';
 import { useUsuarioAuth } from '@/context/UsuarioAuthContext';
+import { useOngAuth } from '@/context/OngAuthContext';
 import { useAuth } from '../SupabaseProvider';
+import CambiarFotoMascotaModal from './CambiarFotoMascotaModal';
 
 function formatFecha(fechaStr?: string): string {
   if (!fechaStr) return 'Fecha no especificada';
@@ -28,6 +30,7 @@ function formatFecha(fechaStr?: string): string {
 export default function MascotaPerfilDetalle({ id }: { id: string }) {
   const router = useRouter();
   const { usuario } = useUsuarioAuth();
+  const { ong } = useOngAuth();
   const { user } = useAuth();
 
   const [mascota, setMascota] = useState<MascotaPerfil | null>(null);
@@ -37,6 +40,11 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
   const [filtroTipo, setFiltroTipo] = useState<'todos' | 'donacion_activa' | 'adopcion'>('todos');
   const [busquedaTimeline, setBusquedaTimeline] = useState('');
   const [compartido, setCompartido] = useState(false);
+  const [modalCambiarFotoOpen, setModalCambiarFotoOpen] = useState(false);
+
+  const esOngDuena = Boolean(
+    ong && (ong.id === mascota?.organizacionId || ong.id === mascota?.organizacion?.id)
+  );
 
   useEffect(() => {
     async function cargar() {
@@ -185,7 +193,7 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
             <div className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-[#1c1c21] border border-[#6c2f00]/15 dark:border-[#ffdbc9]/20 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Galería de Fotos (5 columnas) */}
               <div className="lg:col-span-5 flex flex-col gap-4">
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#6c2f00]/5 dark:bg-[#ffdbc9]/5 border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 shadow-sm">
+                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#6c2f00]/5 dark:bg-[#ffdbc9]/5 border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 shadow-sm group">
                   <Image
                     src={imagenes[fotoSeleccionada] || imagenes[0]}
                     alt={mascota.nombre}
@@ -194,6 +202,17 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
                     unoptimized
                     priority
                   />
+                  {esOngDuena && (
+                    <button
+                      type="button"
+                      onClick={() => setModalCambiarFotoOpen(true)}
+                      className="absolute bottom-3 right-3 bg-[#c85a32] hover:bg-[#a84320] text-white text-xs font-semibold px-3 py-2 rounded-full shadow-lg flex items-center gap-1.5 transition-all backdrop-blur-xs cursor-pointer z-10"
+                      title="Cambiar foto de la mascota"
+                    >
+                      <span className="material-symbols-outlined text-base">photo_camera</span>
+                      <span>Cambiar foto</span>
+                    </button>
+                  )}
                 </div>
 
                 {/* Miniaturas */}
@@ -558,6 +577,29 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
               </div>
             </div>
           </div>
+        )}
+        {/* Modal para cambiar foto de la mascota */}
+        {mascota && (
+          <CambiarFotoMascotaModal
+            isOpen={modalCambiarFotoOpen}
+            onClose={() => setModalCambiarFotoOpen(false)}
+            mascotaId={mascota.id}
+            nombreMascota={mascota.nombre}
+            fotoActualUrl={imagenes[0]}
+            onFotoActualizada={(nuevaUrl) => {
+              setMascota((prev) => {
+                if (!prev) return prev;
+                return {
+                  ...prev,
+                  imagenes: [
+                    { id: 'nueva', url: nuevaUrl, urlBlur: null, esSensible: false },
+                    ...(prev.imagenes || []),
+                  ],
+                };
+              });
+              setFotoSeleccionada(0);
+            }}
+          />
         )}
       </div>
     </div>
