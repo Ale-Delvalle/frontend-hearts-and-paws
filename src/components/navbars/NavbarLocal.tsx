@@ -19,6 +19,7 @@ import {
   FaUser,
   FaCat,
   FaNewspaper,
+  FaSearch,
 } from "react-icons/fa";
 
 import { useOngAuth } from "@/context/OngAuthContext";
@@ -79,6 +80,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
     menuLinks = [
       { label: "Inicio", href: "/", icon: <FaHome /> },
       { label: "Publicaciones", href: "/publicaciones", icon: <FaNewspaper /> },
+      { label: "Perdidas", href: "/mascotas-perdidas", icon: <FaSearch /> },
       { label: "Mi Perfil", href: "/dashboard/ong", icon: <FaUserShield /> },
       {
         label: "Publicar",
@@ -110,6 +112,11 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
           label: "Publicaciones",
           href: "/publicaciones",
           icon: <FaNewspaper />,
+        },
+        {
+          label: "Perdidas",
+          href: "/mascotas-perdidas",
+          icon: <FaSearch />,
         },
         {
           label: "Solicitudes",
@@ -149,6 +156,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
       menuLinks = [
         { label: "Inicio", href: "/" },
         { label: "Publicaciones", href: "/publicaciones" },
+        { label: "Perdidas", href: "/mascotas-perdidas" },
         { label: "Adoptar", href: "/adoptar/adopcion" },
         { label: "Donar", href: "/donacion" },
         { label: "Perfil", href: "/dashboard/usuario" },
@@ -164,6 +172,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
   } else {
     menuLinks = [
       { label: "Inicio", href: "/" },
+      { label: "Mascotas Perdidas", href: "/mascotas-perdidas" },
       { label: "Adoptar", href: "/adoptar/adopcion" },
       { label: "Donar", href: "/donacion" },
       { label: "ONGs", href: "/ongs" },

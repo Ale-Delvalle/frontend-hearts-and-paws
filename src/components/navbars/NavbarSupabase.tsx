@@ -69,6 +69,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
 
   let menuLinks: MenuLink[] = [
     { label: 'Inicio', href: '/' },
+    { label: 'Mascotas Perdidas', href: '/mascotas-perdidas' },
     { label: 'Adoptar', href: '/adoptar/adopcion' },
     { label: 'Donar', href: '/donacion' },
     { label: 'ONGs', href: '/ongs' },
@@ -80,6 +81,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
     menuLinks = [
       { label: 'Historias', href: '/#historias' },
       { label: 'Publicaciones', href: '/publicaciones' },
+      { label: 'Mascotas Perdidas', href: '/mascotas-perdidas' },
       { label: 'Adoptar', href: '/adoptar/adopcion' },
       { label: 'Donar', href: '/donacion' },
     ];
