@@ -43,3 +43,23 @@ export const updateEstadoMascota = async (mascotaId: string, estado: string) => 
 
   return await res.json();
 };
+
+// Cambiar la foto principal de una mascota (solo la ONG dueña)
+export const cambiarFotoMascota = async (mascotaId: string, archivo: File) => {
+  const formData = new FormData();
+  formData.append("foto", archivo);
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/mascotas/${mascotaId}/cambiar-foto`, {
+    method: "PATCH",
+    credentials: "include",
+    body: formData,
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    throw new Error(data?.message || "Error al actualizar la foto de la mascota");
+  }
+
+  return data;
+};
