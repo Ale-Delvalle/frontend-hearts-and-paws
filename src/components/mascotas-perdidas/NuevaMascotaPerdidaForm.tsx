@@ -105,8 +105,14 @@ export default function NuevaMascotaPerdidaForm() {
       formData.append('fechaPerdido', fechaPerdido);
       if (archivo) formData.append('imagen', archivo);
 
-      await crearMascotaPerdida(formData);
-      toast.success('¡Publicación creada exitosamente!');
+      const res = await crearMascotaPerdida(formData);
+      if (res.publicacion?.moderacion === 'PENDIENTE') {
+        toast.success('Tu publicación está pendiente de aprobación. Se mostrará cuando un administrador la apruebe.', {
+          duration: 6000,
+        });
+      } else {
+        toast.success('¡Publicación creada exitosamente!');
+      }
       router.push('/mascotas-perdidas');
     } catch (error: any) {
       toast.error(error.message || 'Error al crear la publicación.');
