@@ -256,6 +256,23 @@ export default function MascotaPerdidaDetalle({ id }: MascotaPerdidaDetalleProps
             </div>
           )}
 
+          {publicacion.moderacion !== 'APROBADA' && (
+            <div
+              className={`px-5 py-3.5 rounded-2xl border text-sm font-semibold flex items-center gap-2 ${
+                publicacion.moderacion === 'RECHAZADA'
+                  ? 'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800 text-red-700 dark:text-red-300'
+                  : 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300'
+              }`}
+            >
+              <span className="material-symbols-outlined text-base">
+                {publicacion.moderacion === 'RECHAZADA' ? 'block' : 'hourglass_top'}
+              </span>
+              {publicacion.moderacion === 'RECHAZADA'
+                ? 'Esta publicación fue rechazada por un administrador y no es visible para el público.'
+                : 'Esta publicación está pendiente de aprobación y aún no es visible para el público.'}
+            </div>
+          )}
+
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
 
             {/* Columna imagen */}
