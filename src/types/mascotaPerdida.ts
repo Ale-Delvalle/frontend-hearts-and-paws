@@ -1,5 +1,7 @@
 export type EstadoPerdida = 'PERDIDO' | 'ENCONTRADO' | 'REUNIDO';
 
+export type EstadoModeracion = 'PENDIENTE' | 'APROBADA' | 'RECHAZADA';
+
 export interface AutorPublicacion {
   id: string;
   nombre: string;
@@ -19,6 +21,7 @@ export interface MascotaPerdida {
   imagenUrl?: string | null;
   recompensa?: string | null;
   estado: EstadoPerdida;
+  moderacion: EstadoModeracion;
   fechaPerdido: string;
   creado_en: string;
   usuarioId?: string | null;
