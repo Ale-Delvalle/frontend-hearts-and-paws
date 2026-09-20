@@ -142,6 +142,7 @@ const Navbar = ({ theme, toggleTheme }: ThemeProps) => {
             { label: "Mascotas", href: "/dashboard/admin/mascotas-registradas" },
             { label: "Adopciones", href: "/dashboard/admin/adopciones-registradas" },
             { label: "Donaciones", href: "/dashboard/admin/donaciones-recibidas" },
+            { label: "Perdidas pendientes", href: "/dashboard/admin/mascotas-perdidas-pendientes" },
           ],
         },
         {
