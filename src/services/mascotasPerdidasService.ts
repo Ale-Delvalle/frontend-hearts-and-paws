@@ -36,12 +36,71 @@ export async function getMascotasPerdidas(
 export async function getMascotaPerdidaById(id: string): Promise<MascotaPerdida> {
   const res = await fetch(`${API_URL}/mascotas-perdidas/${id}`, {
     method: 'GET',
+    credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     cache: 'no-store',
   });
 
   if (!res.ok) {
     throw new Error('No se encontró la publicación de la mascota perdida.');
+  }
+
+  return await res.json();
+}
+
+export async function getMascotasPerdidasPendientes(
+  page = 1,
+  limit = 12
+): Promise<MascotasPerdidasPaginadas> {
+  const queryParams = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+
+  const res = await fetch(`${API_URL}/mascotas-perdidas/pendientes?${queryParams.toString()}`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    throw new Error('Error al cargar las publicaciones pendientes.');
+  }
+
+  return await res.json();
+}
+
+export async function moderarMascotaPerdida(
+  id: string,
+  moderacion: 'APROBADA' | 'RECHAZADA'
+): Promise<{ ok: boolean; mensaje: string; publicacion: MascotaPerdida }> {
+  const res = await fetch(`${API_URL}/mascotas-perdidas/${id}/moderacion`, {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ moderacion }),
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    throw new Error(data?.message || 'Error al moderar la publicación.');
+  }
+
+  return data;
+}
+
+export async function getMisMascotasPerdidas(): Promise<MascotaPerdida[]> {
+  const res = await fetch(`${API_URL}/mascotas-perdidas/mias`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    cache: 'no-store',
+  });
+
+  if (!res.ok) {
+    throw new Error('Error al cargar tus publicaciones.');
   }
 
   return await res.json();
