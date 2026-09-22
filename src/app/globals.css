@@ -133,3 +133,33 @@ textarea::placeholder {
   color: var(--input-placeholder);
 }
 
+/* Insignias de reconocimiento (Tránsito / Padrino-Madrina) otorgadas por una ONG.
+   Texto destacado con degradado animado; sirve de base hasta que se reemplace por una placa/imagen. */
+@keyframes insignia-brillo {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.insignia-badge {
+  background-size: 200% auto;
+  animation: insignia-brillo 3s linear infinite;
+}
+
+.insignia-badge--transito {
+  background-image: linear-gradient(90deg, #2e5d32, #6fbf73, #2e5d32);
+}
+
+.insignia-badge--padrino {
+  background-image: linear-gradient(90deg, #c85a32, #ffb37a, #c85a32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insignia-badge {
+    animation: none;
+  }
+}
+
