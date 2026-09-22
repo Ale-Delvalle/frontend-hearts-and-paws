@@ -36,6 +36,7 @@ interface UsuarioUpdateData {
   direccion?: string;
   ciudad?: string;
   pais?: string;
+  genero?: 'MASCULINO' | 'FEMENINO';
 }
 
 export async function ActualizarUsuario(datos: UsuarioUpdateData, token?: string) {

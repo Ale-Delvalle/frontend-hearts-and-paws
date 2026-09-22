@@ -10,6 +10,8 @@ import {
 import toast from "react-hot-toast";
 import { useUsuarioAuth } from "@/context/UsuarioAuthContext";
 import { supabase } from "@/lib/supabaseClient";
+import InsigniaBadge from "@/components/insignias/InsigniaBadge";
+import { GeneroUsuario } from "@/types/insignia";
 
 interface UsuarioUpdateData {
   email?: string;
@@ -18,6 +20,7 @@ interface UsuarioUpdateData {
   direccion?: string;
   ciudad?: string;
   pais?: string;
+  genero?: GeneroUsuario;
 }
 
 export default function DashboardSencillo() {
@@ -38,6 +41,7 @@ export default function DashboardSencillo() {
     direccion: string;
     ciudad: string;
     pais: string;
+    genero?: GeneroUsuario;
     imagenPerfil?: string;
   }>({
     nombre: "",
@@ -59,6 +63,7 @@ export default function DashboardSencillo() {
         direccion: usuario.direccion || "",
         ciudad: usuario.ciudad || "",
         pais: usuario.pais || "",
+        genero: usuario.genero || undefined,
         imagenPerfil: usuario.imagenPerfil || "",
       });
     } else if (user) {
@@ -134,14 +139,18 @@ export default function DashboardSencillo() {
     setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleChangeGenero = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setUserData((prev) => ({ ...prev, genero: e.target.value as GeneroUsuario }));
+  };
+
  const handleGuardar = async () => {
   try {
     const idUsuario = user?.id || usuario?.id;
     if (!idUsuario) throw new Error("Usuario no autenticado");
 
-    const { email, telefono, direccion, ciudad, pais } = userData;
+    const { email, telefono, direccion, ciudad, pais, genero } = userData;
 
-    const datos: UsuarioUpdateData = { email, telefono, direccion, ciudad, pais };
+    const datos: UsuarioUpdateData = { email, telefono, direccion, ciudad, pais, genero };
 
     // 1. Actualiza en tu backend
     await ActualizarUsuario(datos, token ?? undefined);
@@ -302,6 +311,14 @@ export default function DashboardSencillo() {
               <p className="font-body-editorial text-sm md:text-base text-[#54433a] dark:text-[#dac2b6] mt-1">
                 Bienvenido a tu perfil personal en Hearts&amp;Paws
               </p>
+
+              {usuario?.insignias && usuario.insignias.length > 0 && (
+                <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-4">
+                  {usuario.insignias.map((insignia) => (
+                    <InsigniaBadge key={insignia.id} insignia={insignia} genero={usuario.genero} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -363,6 +380,33 @@ export default function DashboardSencillo() {
                 )}
               </div>
             ))}
+
+            <div>
+              <label
+                htmlFor="genero"
+                className="block mb-2 text-xs font-semibold uppercase tracking-wider text-[#6c2f00] dark:text-[#ffdbc9] font-body-editorial"
+              >
+                género
+              </label>
+              <select
+                id="genero"
+                name="genero"
+                disabled={!isEditando}
+                value={userData.genero || ""}
+                onChange={handleChangeGenero}
+                className={`w-full px-4 py-3 rounded-lg text-sm transition-all duration-300 ${
+                  isEditando
+                    ? "bg-white dark:bg-[#26262e] border border-[#6c2f00]/40 dark:border-[#ffdbc9]/40 text-[#1c1c21] dark:text-[#ffede4] focus:outline-none focus:border-[#c85a32] focus:ring-1 focus:ring-[#c85a32]"
+                    : "bg-black/5 dark:bg-white/5 border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 text-[#54433a] dark:text-[#dac2b6] cursor-not-allowed"
+                }`}
+              >
+                <option value="" disabled>
+                  Seleccioná una opción
+                </option>
+                <option value="FEMENINO">Femenino</option>
+                <option value="MASCULINO">Masculino</option>
+              </select>
+            </div>
 
             <div className="col-span-full flex justify-end gap-4 mt-6 pt-4 border-t border-[#6c2f00]/10 dark:border-[#ffdbc9]/15">
               {!isEditando ? (
