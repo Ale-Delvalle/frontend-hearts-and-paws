@@ -1,3 +1,5 @@
+import { GeneroUsuario, Insignia } from './insignia';
+
 // Datos del formulario de registro (también sirve para enviar al backend)
 export interface RegisterData {
   nombre: string;
@@ -20,6 +22,8 @@ export interface Usuario {
   direccion: string;
   ciudad: string;
   pais: string;
+  genero?: GeneroUsuario | null;
+  insignias?: Insignia[];
 }
 
 export interface FormDataType {
