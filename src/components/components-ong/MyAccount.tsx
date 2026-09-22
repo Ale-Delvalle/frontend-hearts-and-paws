@@ -7,8 +7,9 @@ import ProfileOng from "./ProfileOng";
 import AdoptionsOng from "./AdoptionsOng";
 import DonationsOng from "./DonationsOng";
 import CasesOng from "./CasesOng";
+import InsigniasOng from "./InsigniasOng";
 
-type ViewType = "profil" | "donations" | "adoptions" | "cases";
+type ViewType = "profil" | "donations" | "adoptions" | "cases" | "insignias";
 
 const MyAccount = () => {
   const { ong, loading } = useOngAuth();
@@ -52,10 +53,15 @@ const MyAccount = () => {
                   view: "adoptions",
                   icon: <span className="material-symbols-outlined text-lg">assignment</span>
                 },
-                { 
-                  label: "Mis Casos", 
+                {
+                  label: "Mis Casos",
                   view: "cases",
                   icon: <span className="material-symbols-outlined text-lg">folder_open</span>
+                },
+                {
+                  label: "Insignias",
+                  view: "insignias",
+                  icon: <span className="material-symbols-outlined text-lg">workspace_premium</span>
                 },
               ].map((item) => {
                 const isActive = selectedView === item.view;
@@ -133,6 +139,7 @@ const MyAccount = () => {
           {selectedView === "donations" && <DonationsOng />}
           {selectedView === "adoptions" && <AdoptionsOng />}
           {selectedView === "cases" && <CasesOng />}
+          {selectedView === "insignias" && <InsigniasOng />}
         </main>
       </div>
     </div>
