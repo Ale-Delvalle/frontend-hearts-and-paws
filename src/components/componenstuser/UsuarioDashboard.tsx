@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/SupabaseProvider";
 import {
@@ -32,7 +32,11 @@ export default function DashboardSencillo() {
   const [isEditando, setIsEditando] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  
+  const [menuFotoAbierto, setMenuFotoAbierto] = useState(false);
+  const [verFotoAbierta, setVerFotoAbierta] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const menuFotoRef = useRef<HTMLDivElement>(null);
+
 
   const [userData, setUserData] = useState<{
     nombre: string;
@@ -133,6 +137,15 @@ export default function DashboardSencillo() {
   cargarDatosDesdeSupabase();
 }, []);
 
+  useEffect(() => {
+    const handleClickFuera = (e: MouseEvent) => {
+      if (menuFotoRef.current && !menuFotoRef.current.contains(e.target as Node)) {
+        setMenuFotoAbierto(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickFuera);
+    return () => document.removeEventListener("mousedown", handleClickFuera);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -214,6 +227,30 @@ export default function DashboardSencillo() {
   }
 
   return (
+    <>
+      {verFotoAbierta && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          onClick={() => setVerFotoAbierta(false)}
+        >
+          <div className="relative max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setVerFotoAbierta(false)}
+              className="absolute -top-3 -right-3 bg-white dark:bg-[#1c1c21] text-[#6c2f00] dark:text-[#ffdbc9] rounded-full p-2 shadow-lg"
+              title="Cerrar"
+            >
+              <span className="material-symbols-outlined text-lg">close</span>
+            </button>
+            <img
+              src={previewUrl || userData.imagenPerfil || "/default-avatar.png"}
+              alt={`Foto de perfil de ${userData.nombre}`}
+              className="w-full aspect-square object-cover rounded-3xl border-4 border-white dark:border-[#1c1c21] shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
+
     <div className="min-h-screen bg-[#fff8f5] dark:bg-[#121214] text-[#1c1c21] dark:text-[#ffede4] font-body-editorial flex justify-center py-10 md:py-16 px-4 md:px-8">
       <div className="flex flex-col md:flex-row items-start justify-center gap-6 lg:gap-8 max-w-5xl w-full">
         {/* Navegación lateral estilo Earth & Heart centrada junto al contenedor */}
@@ -267,7 +304,7 @@ export default function DashboardSencillo() {
           <section className="w-full bg-[#fff1ea] dark:bg-[#1c1c21] rounded-xl border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 p-8 md:p-10 shadow-none">
           {/* Avatar y Encabezado */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b border-[#6c2f00]/15 dark:border-[#ffdbc9]/15">
-            <div className="relative w-28 h-28 flex-shrink-0">
+            <div className="relative w-28 h-28 flex-shrink-0" ref={menuFotoRef}>
               <div className="w-28 h-28 rounded-full border-2 border-[#6c2f00]/30 dark:border-[#ffdbc9]/30 shadow-none overflow-hidden relative bg-[#fff8f5] dark:bg-[#26262e] flex items-center justify-center">
                 {uploading ? (
                   <span className="text-xs text-[#6c2f00] dark:text-[#ffdbc9] font-semibold animate-pulse flex items-center justify-center h-full">
@@ -285,23 +322,53 @@ export default function DashboardSencillo() {
                   />
                 )}
               </div>
-              <label
-                htmlFor="imagen-perfil"
+
+              <button
+                type="button"
+                onClick={() => setMenuFotoAbierto((prev) => !prev)}
                 className="absolute bottom-0 right-0 bg-[#c85a32] hover:bg-[#a84320] text-white p-2 rounded-full cursor-pointer transition-all duration-300 shadow-sm flex items-center justify-center"
-                title="Cambiar imagen"
+                title="Opciones de la foto de perfil"
               >
                 <span className="material-symbols-outlined text-base">photo_camera</span>
-                <input
-                  id="imagen-perfil"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const archivo = e.target.files?.[0];
-                    if (archivo) handleActualizar(archivo);
-                  }}
-                />
-              </label>
+              </button>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const archivo = e.target.files?.[0];
+                  if (archivo) handleActualizar(archivo);
+                }}
+              />
+
+              {menuFotoAbierto && (
+                <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 z-20 w-48 bg-white dark:bg-[#1c1c21] border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 rounded-xl shadow-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMenuFotoAbierto(false);
+                      fileInputRef.current?.click();
+                    }}
+                    className="w-full text-left px-4 py-3 text-sm font-semibold text-[#54433a] dark:text-[#dac2b6] hover:bg-[#fff1ea] dark:hover:bg-[#26262e] hover:text-[#6c2f00] dark:hover:text-[#ffdbc9] transition-colors flex items-center gap-2"
+                  >
+                    <span className="material-symbols-outlined text-base">photo_camera</span>
+                    Cambiar foto
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMenuFotoAbierto(false);
+                      setVerFotoAbierta(true);
+                    }}
+                    className="w-full text-left px-4 py-3 text-sm font-semibold text-[#54433a] dark:text-[#dac2b6] hover:bg-[#fff1ea] dark:hover:bg-[#26262e] hover:text-[#6c2f00] dark:hover:text-[#ffdbc9] transition-colors flex items-center gap-2 border-t border-[#6c2f00]/10 dark:border-[#ffdbc9]/10"
+                  >
+                    <span className="material-symbols-outlined text-base">visibility</span>
+                    Ver foto de perfil
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className="text-center sm:text-left flex-1">
@@ -442,5 +509,6 @@ export default function DashboardSencillo() {
       </main>
       </div>
     </div>
+    </>
   );
 }
