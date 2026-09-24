@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 import { connectSocket } from "@/lib/socket";
 import {
   obtenerChatsDeOng,
@@ -201,9 +202,19 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
                   className="flex items-center justify-between px-4 py-2.5 hover:bg-[#ffe3d2] dark:hover:bg-[#26262e] cursor-pointer transition-colors"
                   onClick={() => handleSeleccionarDestinatario(dest.id)}
                 >
-                  <span className="text-sm font-medium text-[#1c1c21] dark:text-[#ffede4]">
-                    {dest.nombre}
-                  </span>
+                  {esOng ? (
+                    <Link
+                      href={`/usuario/${dest.id}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-sm font-medium text-[#1c1c21] dark:text-[#ffede4] hover:text-[#c85a32] hover:underline"
+                    >
+                      {dest.nombre}
+                    </Link>
+                  ) : (
+                    <span className="text-sm font-medium text-[#1c1c21] dark:text-[#ffede4]">
+                      {dest.nombre}
+                    </span>
+                  )}
                   <span
                     className={`ml-2 w-2.5 h-2.5 rounded-full ${
                       dest.conectado ? "bg-emerald-500" : "bg-gray-300 dark:bg-gray-600"
@@ -255,10 +266,10 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
               return nombre.toLowerCase().includes(filtro.toLowerCase());
             })
             .map((chat) => {
-              const otroNombre =
-                chat.usuarioId === userId
-                  ? chat.organizacion?.nombre || "Sin nombre"
-                  : chat.usuario?.nombre || "Sin nombre";
+              const otroEsUsuario = chat.usuarioId !== userId;
+              const otroNombre = otroEsUsuario
+                ? chat.usuario?.nombre || "Sin nombre"
+                : chat.organizacion?.nombre || "Sin nombre";
 
               const inicial = otroNombre.charAt(0).toUpperCase();
 
@@ -273,9 +284,19 @@ export default function ChatSidebar({ esOng, userId, onSelectChat }: ChatSidebar
                   </div>
 
                   <div className="flex flex-col min-w-0 flex-1">
-                    <strong className="truncate text-sm text-[#1c1c21] dark:text-[#ffede4] font-semibold">
-                      {otroNombre}
-                    </strong>
+                    {otroEsUsuario ? (
+                      <Link
+                        href={`/usuario/${chat.usuario?.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="truncate text-sm text-[#1c1c21] dark:text-[#ffede4] font-semibold hover:text-[#c85a32] hover:underline w-fit"
+                      >
+                        {otroNombre}
+                      </Link>
+                    ) : (
+                      <strong className="truncate text-sm text-[#1c1c21] dark:text-[#ffede4] font-semibold">
+                        {otroNombre}
+                      </strong>
+                    )}
                     <p className="text-xs text-[#54433a] dark:text-[#dac2b6] truncate mt-0.5">
                       {chat.ultimoMensaje?.contenido || "Sin mensajes aún"}
                     </p>
