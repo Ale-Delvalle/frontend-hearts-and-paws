@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import toast from "react-hot-toast";
 import {
   buscarUsuarios,
@@ -142,9 +143,12 @@ export default function InsigniasOng() {
                   className="w-10 h-10 rounded-full object-cover border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15"
                 />
                 <div>
-                  <p className="text-sm font-bold text-[#6c2f00] dark:text-[#ffdbc9]">
+                  <Link
+                    href={`/usuario/${usuario.id}`}
+                    className="text-sm font-bold text-[#6c2f00] dark:text-[#ffdbc9] hover:underline"
+                  >
                     {usuario.nombre}
-                  </p>
+                  </Link>
                   <p className="text-xs text-[#54433a] dark:text-[#dac2b6]">{usuario.email}</p>
                 </div>
               </div>
@@ -199,9 +203,12 @@ export default function InsigniasOng() {
                     className="w-10 h-10 rounded-full object-cover border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15"
                   />
                   <div>
-                    <p className="text-sm font-bold text-[#6c2f00] dark:text-[#ffdbc9]">
+                    <Link
+                      href={`/usuario/${insignia.usuario.id}`}
+                      className="text-sm font-bold text-[#6c2f00] dark:text-[#ffdbc9] hover:underline"
+                    >
                       {insignia.usuario.nombre}
-                    </p>
+                    </Link>
                     <p className="text-xs text-[#54433a] dark:text-[#dac2b6]">
                       {ETIQUETA_TIPO[insignia.tipo]} · desde{" "}
                       {new Date(insignia.otorgada_en).toLocaleDateString("es-ES", {
