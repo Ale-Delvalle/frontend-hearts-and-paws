@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { useChatSocket } from '@/hooks/useChatSocket';
 import { Mensaje } from '@/types/chat';
 import { obtenerMensajes } from '@/services/chatService';
@@ -10,9 +11,11 @@ interface ChatWindowProps {
   chatId: string;
   autorId: string;
   autorNombre: string;
+  /** true si quien tiene la ventana abierta es una ONG: en ese caso, el otro participante del chat es siempre un Usuario. */
+  esOng?: boolean;
 }
 
-export default function ChatWindow({ chatId, autorId, autorNombre }: ChatWindowProps) {
+export default function ChatWindow({ chatId, autorId, autorNombre, esOng = false }: ChatWindowProps) {
   const [mensajesIniciales, setMensajesIniciales] = useState<Mensaje[]>([]);
   const [contenido, setContenido] = useState('');
   const { mensajes, enviarMensaje } = useChatSocket(chatId, autorId, autorNombre);
@@ -74,7 +77,13 @@ export default function ChatWindow({ chatId, autorId, autorNombre }: ChatWindowP
                   esAutor ? 'text-white/90' : 'text-[#6c2f00] dark:text-[#ffdbc9]'
                 }`}
               >
-                {msg.autor?.nombre || 'Anon'}
+                {!esAutor && esOng && msg.autor?.id ? (
+                  <Link href={`/usuario/${msg.autor.id}`} className="hover:underline">
+                    {msg.autor?.nombre || 'Anon'}
+                  </Link>
+                ) : (
+                  msg.autor?.nombre || 'Anon'
+                )}
               </div>
               <div className="leading-relaxed">{msg.contenido}</div>
               {hora && (

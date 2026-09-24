@@ -143,6 +143,7 @@ export default function ChatPage() {
                 chatId={chatIdSeleccionado}
                 autorId={userId}
                 autorNombre={autorNombre}
+                esOng={esOng}
               />
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-[#54433a] dark:text-[#dac2b6] bg-white/40 dark:bg-black/20">
