@@ -371,7 +371,14 @@ export default function MascotaPerdidaDetalle({ id }: MascotaPerdidaDetalleProps
                     {esOng ? 'corporate_fare' : 'person'}
                   </span>
                   <span>
-                    <span className="font-semibold">{esOng ? 'ONG:' : 'Por:'}</span> {autorNombre}
+                    <span className="font-semibold">{esOng ? 'ONG:' : 'Por:'}</span>{' '}
+                    {!esOng && publicacion.usuario ? (
+                      <Link href={`/usuario/${publicacion.usuario.id}`} className="hover:text-[#c85a32] hover:underline">
+                        {autorNombre}
+                      </Link>
+                    ) : (
+                      autorNombre
+                    )}
                   </span>
                 </div>
 

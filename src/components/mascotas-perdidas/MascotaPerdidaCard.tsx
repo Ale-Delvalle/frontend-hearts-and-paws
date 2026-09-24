@@ -138,7 +138,22 @@ export default function MascotaPerdidaCard({ publicacion }: MascotaPerdidaCardPr
                 {esOng ? 'corporate_fare' : 'person'}
               </span>
               <span className="truncate">
-                {esOng ? `ONG: ${autorNombre}` : `Por ${autorNombre}`}
+                {esOng ? (
+                  `ONG: ${autorNombre}`
+                ) : usuario ? (
+                  <>
+                    Por{' '}
+                    <Link
+                      href={`/usuario/${usuario.id}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="hover:text-[#c85a32] hover:underline"
+                    >
+                      {autorNombre}
+                    </Link>
+                  </>
+                ) : (
+                  `Por ${autorNombre}`
+                )}
               </span>
             </div>
           </div>
