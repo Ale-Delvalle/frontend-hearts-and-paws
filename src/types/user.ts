@@ -26,6 +26,18 @@ export interface Usuario {
   insignias?: Insignia[];
 }
 
+// GET /usuarios/:id/perfil — perfil público, sin datos de contacto
+export interface UsuarioPerfilPublico {
+  id: string;
+  nombre: string;
+  imagenPerfil: string | null;
+  ciudad: string | null;
+  pais: string | null;
+  genero?: GeneroUsuario | null;
+  creado_en: string;
+  insignias: Insignia[];
+}
+
 export interface FormDataType {
     nombre: string,
     email: string,
