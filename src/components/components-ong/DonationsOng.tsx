@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useOngAuth } from "@/context/OngAuthContext";
 import { Donacion, getDonacionesPorOng } from "@/services/donacionesOng";
 
@@ -165,9 +166,18 @@ export default function DonationsOng() {
               >
                 <div className="space-y-1.5 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-display-editorial text-lg font-bold text-[#6c2f00] dark:text-[#ffdbc9] truncate">
-                      {donacion.usuario?.nombre || "Donante Anónimo"}
-                    </span>
+                    {donacion.usuario?.id ? (
+                      <Link
+                        href={`/usuario/${donacion.usuario.id}`}
+                        className="font-display-editorial text-lg font-bold text-[#6c2f00] dark:text-[#ffdbc9] truncate hover:underline"
+                      >
+                        {donacion.usuario.nombre}
+                      </Link>
+                    ) : (
+                      <span className="font-display-editorial text-lg font-bold text-[#6c2f00] dark:text-[#ffdbc9] truncate">
+                        Donante Anónimo
+                      </span>
+                    )}
                     <span
                       className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${infoEstado.classes}`}
                     >
