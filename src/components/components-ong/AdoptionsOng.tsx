@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import toast from "react-hot-toast";
 import {
   getMascotasPorOng,
@@ -214,9 +215,12 @@ export default function AdoptionsOng() {
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#6c2f00]/10 dark:border-[#ffdbc9]/10">
                               <div className="flex items-center gap-2">
                                 <span className="material-symbols-outlined text-lg text-[#c85a32]">person</span>
-                                <h3 className="font-display-editorial text-lg font-bold text-[#6c2f00] dark:text-[#ffdbc9]">
+                                <Link
+                                  href={`/usuario/${sol.usuario.id}`}
+                                  className="font-display-editorial text-lg font-bold text-[#6c2f00] dark:text-[#ffdbc9] hover:underline"
+                                >
                                   {sol.usuario.nombre}
-                                </h3>
+                                </Link>
                               </div>
 
                               <span
