@@ -45,4 +45,10 @@ export type OngPerfilPublico = {
   creado_en: string;
   mascotasActivas: number;
   casosPublicados: number;
+  totalReconocimientos: number;
+};
+
+// GET /organizaciones/:id/reconocimientos/mi-estado
+export type ReconocimientoEstado = {
+  yaReconocida: boolean;
 };
