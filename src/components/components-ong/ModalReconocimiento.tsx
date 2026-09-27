@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 const MAX_CARACTERES_MENSAJE = 500;
 
@@ -19,9 +20,15 @@ export default function ModalReconocimiento({
 }: ModalReconocimientoProps) {
   const [mensaje, setMensaje] = useState('');
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="bg-white dark:bg-[#1c1c21] rounded-3xl border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 shadow-2xl p-8 max-w-md w-full space-y-5">
+  return createPortal(
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+      onClick={onCancelar}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="bg-white dark:bg-[#1c1c21] rounded-3xl border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 shadow-2xl p-8 max-w-md w-full space-y-5"
+      >
         <div className="w-14 h-14 rounded-full bg-[#fff1ea] dark:bg-[#2b170f] border border-[#c85a32]/25 text-[#c85a32] flex items-center justify-center mx-auto">
           <span className="material-symbols-outlined text-3xl">verified</span>
         </div>
@@ -79,6 +86,7 @@ export default function ModalReconocimiento({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
