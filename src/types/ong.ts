@@ -52,3 +52,17 @@ export type OngPerfilPublico = {
 export type ReconocimientoEstado = {
   yaReconocida: boolean;
 };
+
+// GET /organizaciones/mis-reconocimientos
+export type ReconocimientoRecibido = {
+  id: string;
+  mensaje: string | null;
+  creado_en: string;
+  revocado_en: string | null;
+  motivoRevocacion: string | null;
+  otorgadoPor: {
+    tipo: 'USUARIO' | 'ONG';
+    id: string;
+    nombre: string;
+  };
+};
