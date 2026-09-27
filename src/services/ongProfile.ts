@@ -1,4 +1,4 @@
-import { OngPerfilPublico } from "@/types/ong";
+import { OngPerfilPublico, ReconocimientoEstado } from "@/types/ong";
 import { TimelinePaginado, CasosCerradosPaginado } from "@/types/casos";
 import { MascotasPaginado } from "@/types/mascotas";
 
@@ -10,6 +10,41 @@ export async function getPerfilPublicoOng(id: string): Promise<OngPerfilPublico>
   });
   if (!res.ok) throw new Error("No se pudo cargar el perfil de la organización");
   return res.json();
+}
+
+export async function getMiEstadoReconocimiento(id: string): Promise<ReconocimientoEstado> {
+  const res = await fetch(`${API_URL}/organizaciones/${id}/reconocimientos/mi-estado`, {
+    credentials: "include",
+  });
+  if (!res.ok) throw new Error("No se pudo consultar el estado del reconocimiento");
+  return res.json();
+}
+
+export async function otorgarReconocimiento(
+  id: string,
+  mensaje?: string,
+): Promise<{ ok: boolean; mensaje: string }> {
+  const res = await fetch(`${API_URL}/organizaciones/${id}/reconocimientos`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mensaje }),
+  });
+
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(data?.message || "No se pudo otorgar el reconocimiento");
+  return data;
+}
+
+export async function revocarReconocimiento(id: string): Promise<{ ok: boolean; mensaje: string }> {
+  const res = await fetch(`${API_URL}/organizaciones/${id}/reconocimientos`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(data?.message || "No se pudo revocar el reconocimiento");
+  return data;
 }
 
 export async function getTimelineOng(id: string, page = 1, limit = 10): Promise<TimelinePaginado> {
