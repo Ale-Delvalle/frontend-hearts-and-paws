@@ -43,18 +43,6 @@ export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
         </p>
       )}
 
-      <div className="flex justify-around items-center w-full mt-2 pt-5 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/20">
-        <div className="text-center">
-          <p className="text-2xl font-bold text-[#c85a32]">{ong.mascotasActivas}</p>
-          <p className="text-xs font-medium text-[#54433a] dark:text-[#dac2b6] mt-0.5">Mascotas activas</p>
-        </div>
-        <div className="w-px h-8 bg-[#6c2f00]/10 dark:bg-[#c85a32]/20" />
-        <div className="text-center">
-          <p className="text-2xl font-bold text-[#c85a32]">{ong.casosPublicados}</p>
-          <p className="text-xs font-medium text-[#54433a] dark:text-[#dac2b6] mt-0.5">Casos publicados</p>
-        </div>
-      </div>
-
       <div className="w-full pt-5 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/20 text-left space-y-1.5">
         <div className="flex items-center justify-between text-xs">
           <span className="font-semibold uppercase tracking-wider text-[#6c2f00] dark:text-[#ffdbc9]">
@@ -75,8 +63,20 @@ export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
         </p>
       </div>
 
-      <div className="w-full pt-2">
+      <div className="w-full">
         <BotonReconocimiento ongId={ong.id} nombreOng={ong.nombre} />
+      </div>
+
+      <div className="flex justify-around items-center w-full mt-2 pt-5 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/20">
+        <div className="text-center">
+          <p className="text-2xl font-bold text-[#c85a32]">{ong.mascotasActivas}</p>
+          <p className="text-xs font-medium text-[#54433a] dark:text-[#dac2b6] mt-0.5">Mascotas activas</p>
+        </div>
+        <div className="w-px h-8 bg-[#6c2f00]/10 dark:bg-[#c85a32]/20" />
+        <div className="text-center">
+          <p className="text-2xl font-bold text-[#c85a32]">{ong.casosPublicados}</p>
+          <p className="text-xs font-medium text-[#54433a] dark:text-[#dac2b6] mt-0.5">Casos publicados</p>
+        </div>
       </div>
     </div>
   )
