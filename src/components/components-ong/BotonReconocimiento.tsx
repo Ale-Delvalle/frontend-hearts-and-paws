@@ -12,6 +12,7 @@ import {
   revocarReconocimiento,
 } from '@/services/ongProfile';
 import ModalReconocimiento from './ModalReconocimiento';
+import ModalRevocarReconocimiento from './ModalRevocarReconocimiento';
 
 interface BotonReconocimientoProps {
   ongId: string;
@@ -29,6 +30,7 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
   const [yaReconocida, setYaReconocida] = useState(false);
   const [cargandoEstado, setCargandoEstado] = useState(true);
   const [mostrarModal, setMostrarModal] = useState(false);
+  const [mostrarModalRevocar, setMostrarModalRevocar] = useState(false);
   const [procesando, setProcesando] = useState(false);
 
   useEffect(() => {
@@ -74,11 +76,12 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
     }
   };
 
-  const handleRevocar = async () => {
+  const handleRevocar = async (motivo?: string) => {
     setProcesando(true);
     try {
-      await revocarReconocimiento(ongId);
+      await revocarReconocimiento(ongId, motivo);
       setYaReconocida(false);
+      setMostrarModalRevocar(false);
       toast.success('Reconocimiento revocado.');
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : 'Error al revocar el reconocimiento.');
@@ -116,6 +119,15 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
         />
       )}
 
+      {mostrarModalRevocar && (
+        <ModalRevocarReconocimiento
+          nombreOng={nombreOng}
+          onConfirmar={handleRevocar}
+          onCancelar={() => setMostrarModalRevocar(false)}
+          cargando={procesando}
+        />
+      )}
+
       {yaReconocida ? (
         <div className="w-full flex flex-col items-center gap-2">
           <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
@@ -124,7 +136,7 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
           </span>
           <button
             type="button"
-            onClick={handleRevocar}
+            onClick={() => setMostrarModalRevocar(true)}
             disabled={procesando}
             className="text-xs font-semibold text-[#54433a] dark:text-[#dac2b6] hover:text-[#c85a32] underline disabled:opacity-50"
           >
