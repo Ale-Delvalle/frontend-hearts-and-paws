@@ -1,4 +1,4 @@
-import { OngPerfilPublico, ReconocimientoEstado } from "@/types/ong";
+import { OngPerfilPublico, ReconocimientoEstado, ReconocimientoRecibido } from "@/types/ong";
 import { TimelinePaginado, CasosCerradosPaginado } from "@/types/casos";
 import { MascotasPaginado } from "@/types/mascotas";
 
@@ -36,15 +36,28 @@ export async function otorgarReconocimiento(
   return data;
 }
 
-export async function revocarReconocimiento(id: string): Promise<{ ok: boolean; mensaje: string }> {
+export async function revocarReconocimiento(
+  id: string,
+  motivo?: string,
+): Promise<{ ok: boolean; mensaje: string }> {
   const res = await fetch(`${API_URL}/organizaciones/${id}/reconocimientos`, {
     method: "DELETE",
     credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ motivo }),
   });
 
   const data = await res.json().catch(() => null);
   if (!res.ok) throw new Error(data?.message || "No se pudo revocar el reconocimiento");
   return data;
+}
+
+export async function getMisReconocimientos(): Promise<ReconocimientoRecibido[]> {
+  const res = await fetch(`${API_URL}/organizaciones/mis-reconocimientos`, {
+    credentials: "include",
+  });
+  if (!res.ok) throw new Error("No se pudieron cargar los reconocimientos recibidos");
+  return res.json();
 }
 
 export async function getTimelineOng(id: string, page = 1, limit = 10): Promise<TimelinePaginado> {
