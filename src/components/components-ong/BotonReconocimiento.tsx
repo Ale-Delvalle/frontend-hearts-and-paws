@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import toast from 'react-hot-toast';
 import { useUsuarioAuth } from '@/context/UsuarioAuthContext';
 import { useOngAuth } from '@/context/OngAuthContext';
 import { useAuth } from '@/components/SupabaseProvider';
@@ -13,6 +12,7 @@ import {
 } from '@/services/ongProfile';
 import ModalReconocimiento from './ModalReconocimiento';
 import ModalRevocarReconocimiento from './ModalRevocarReconocimiento';
+import NotificacionFlash from '@/components/NotificacionFlash';
 
 interface BotonReconocimientoProps {
   ongId: string;
@@ -32,6 +32,9 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
   const [mostrarModal, setMostrarModal] = useState(false);
   const [mostrarModalRevocar, setMostrarModalRevocar] = useState(false);
   const [procesando, setProcesando] = useState(false);
+  const [notificacion, setNotificacion] = useState<{ tipo: 'exito' | 'error'; mensaje: string } | null>(
+    null,
+  );
 
   useEffect(() => {
     if (!estaAutenticado || esMismaOng) {
@@ -68,9 +71,12 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
       await otorgarReconocimiento(ongId, mensaje);
       setYaReconocida(true);
       setMostrarModal(false);
-      toast.success(`¡Reconociste a ${nombreOng}!`);
+      setNotificacion({ tipo: 'exito', mensaje: `¡Reconociste a ${nombreOng}!` });
     } catch (error: unknown) {
-      toast.error(error instanceof Error ? error.message : 'Error al otorgar el reconocimiento.');
+      setNotificacion({
+        tipo: 'error',
+        mensaje: error instanceof Error ? error.message : 'Error al otorgar el reconocimiento.',
+      });
     } finally {
       setProcesando(false);
     }
@@ -82,9 +88,12 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
       await revocarReconocimiento(ongId, motivo);
       setYaReconocida(false);
       setMostrarModalRevocar(false);
-      toast.success('Reconocimiento revocado.');
+      setNotificacion({ tipo: 'exito', mensaje: 'Reconocimiento revocado.' });
     } catch (error: unknown) {
-      toast.error(error instanceof Error ? error.message : 'Error al revocar el reconocimiento.');
+      setNotificacion({
+        tipo: 'error',
+        mensaje: error instanceof Error ? error.message : 'Error al revocar el reconocimiento.',
+      });
     } finally {
       setProcesando(false);
     }
@@ -110,6 +119,14 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
 
   return (
     <>
+      {notificacion && (
+        <NotificacionFlash
+          tipo={notificacion.tipo}
+          mensaje={notificacion.mensaje}
+          onCerrar={() => setNotificacion(null)}
+        />
+      )}
+
       {mostrarModal && (
         <ModalReconocimiento
           nombreOng={nombreOng}
