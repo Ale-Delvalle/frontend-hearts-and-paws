@@ -10,6 +10,7 @@ export interface Caso {
   mascotaId: string
   creado_en: string
   mascota: Mascota
+  ong?: { id: string; nombre: string }
 }
 
 // GET /organizaciones/:id/timeline
