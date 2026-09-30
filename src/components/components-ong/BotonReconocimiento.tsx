@@ -12,7 +12,7 @@ import {
 } from '@/services/ongProfile';
 import ModalReconocimiento from './ModalReconocimiento';
 import ModalRevocarReconocimiento from './ModalRevocarReconocimiento';
-import NotificacionFlash from '@/components/NotificacionFlash';
+import NotificacionReconocimiento from './NotificacionReconocimiento';
 
 interface BotonReconocimientoProps {
   ongId: string;
@@ -71,7 +71,7 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
       await otorgarReconocimiento(ongId, mensaje);
       setYaReconocida(true);
       setMostrarModal(false);
-      setNotificacion({ tipo: 'exito', mensaje: `¡Reconociste a ${nombreOng}!` });
+      setNotificacion({ tipo: 'exito', mensaje: 'Reconociste a esta ONG.' });
     } catch (error: unknown) {
       setNotificacion({
         tipo: 'error',
@@ -88,7 +88,7 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
       await revocarReconocimiento(ongId, motivo);
       setYaReconocida(false);
       setMostrarModalRevocar(false);
-      setNotificacion({ tipo: 'exito', mensaje: 'Reconocimiento revocado.' });
+      setNotificacion({ tipo: 'exito', mensaje: 'Revocaste el reconocimiento.' });
     } catch (error: unknown) {
       setNotificacion({
         tipo: 'error',
@@ -119,14 +119,6 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
 
   return (
     <>
-      {notificacion && (
-        <NotificacionFlash
-          tipo={notificacion.tipo}
-          mensaje={notificacion.mensaje}
-          onCerrar={() => setNotificacion(null)}
-        />
-      )}
-
       {mostrarModal && (
         <ModalReconocimiento
           nombreOng={nombreOng}
@@ -142,6 +134,14 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
           onConfirmar={handleRevocar}
           onCancelar={() => setMostrarModalRevocar(false)}
           cargando={procesando}
+        />
+      )}
+
+      {notificacion && (
+        <NotificacionReconocimiento
+          tipo={notificacion.tipo}
+          mensaje={notificacion.mensaje}
+          onCerrar={() => setNotificacion(null)}
         />
       )}
 
