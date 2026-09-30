@@ -93,15 +93,17 @@ export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
 
           <div className="flip-card-back flex items-center justify-center px-2">
             <span
-              className={`inline-flex items-center gap-1.5 text-sm font-semibold text-center ${
+              className={`inline-flex items-center gap-1.5 text-sm font-semibold text-center border rounded-full px-3 py-1.5 ${
                 mensajeGiro?.tipo === 'revocado'
-                  ? 'text-red-600 dark:text-red-400 border border-red-600 dark:border-red-500 rounded-full px-3 py-1.5'
-                  : 'text-[#6c2f00] dark:text-[#ffdbc9]'
+                  ? 'text-red-600 dark:text-red-400 border-red-600 dark:border-red-500'
+                  : 'text-emerald-600 dark:text-emerald-400 border-emerald-600 dark:border-emerald-500'
               }`}
             >
               <span
                 className={`material-symbols-outlined text-lg ${
-                  mensajeGiro?.tipo === 'revocado' ? 'text-red-600 dark:text-red-400' : 'text-[#c85a32]'
+                  mensajeGiro?.tipo === 'revocado'
+                    ? 'text-red-600 dark:text-red-400'
+                    : 'text-emerald-600 dark:text-emerald-400'
                 }`}
               >
                 {mensajeGiro?.tipo === 'revocado' ? 'remove_circle' : 'verified'}
