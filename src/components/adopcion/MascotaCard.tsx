@@ -228,7 +228,7 @@ export default function MascotaCard({
             </span>
             <span className="flex items-center gap-1.5">
               <span className="material-symbols-outlined text-base text-[#6c2f00] dark:text-[#ffdbc9]">location_on</span>
-              Refugio Aliado
+              {mascota.ongNombre || 'Refugio aliado'}
             </span>
           </div>
 
