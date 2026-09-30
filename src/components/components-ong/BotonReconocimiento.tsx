@@ -18,7 +18,7 @@ interface BotonReconocimientoProps {
   ongId: string;
   nombreOng: string;
   /** Se llama con el mensaje de éxito para que el perfil lo muestre con la animación del cubo. */
-  onExito?: (mensaje: string) => void;
+  onExito?: (info: { texto: string; tipo: 'reconocido' | 'revocado' }) => void;
 }
 
 export default function BotonReconocimiento({ ongId, nombreOng, onExito }: BotonReconocimientoProps) {
@@ -71,7 +71,7 @@ export default function BotonReconocimiento({ ongId, nombreOng, onExito }: Boton
       await otorgarReconocimiento(ongId, mensaje);
       setYaReconocida(true);
       setMostrarModal(false);
-      onExito?.('Reconociste a esta ONG.');
+      onExito?.({ texto: 'Reconociste a esta ONG.', tipo: 'reconocido' });
     } catch (error: unknown) {
       setNotificacion({
         tipo: 'error',
@@ -88,7 +88,7 @@ export default function BotonReconocimiento({ ongId, nombreOng, onExito }: Boton
       await revocarReconocimiento(ongId, motivo);
       setYaReconocida(false);
       setMostrarModalRevocar(false);
-      onExito?.('Revocaste el reconocimiento.');
+      onExito?.({ texto: 'Revocaste el reconocimiento.', tipo: 'revocado' });
     } catch (error: unknown) {
       setNotificacion({
         tipo: 'error',
