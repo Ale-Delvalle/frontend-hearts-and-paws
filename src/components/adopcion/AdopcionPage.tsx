@@ -141,6 +141,7 @@ export default function AdopcionPage() {
                 casoId: caso.id,
                 tipo: caso.tipo.toLowerCase(),
                 descripcion: caso.descripcion,
+                ongNombre: caso.ong?.nombre,
               }
 
               return (
