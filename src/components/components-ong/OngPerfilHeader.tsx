@@ -1,13 +1,37 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import { OngPerfilPublico } from '@/types/ong'
 import BotonReconocimiento from './BotonReconocimiento'
 
 const MAXIMO_BARRA_CONFIANZA = 50
+const DURACION_VISIBLE_MS = 2000
+const DURACION_GIRO_MS = 600
 
 export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
   const porcentajeConfianza = Math.min(
     100,
     Math.round((ong.totalReconocimientos / MAXIMO_BARRA_CONFIANZA) * 100),
   )
+
+  const [mensajeGiro, setMensajeGiro] = useState<string | null>(null)
+  const [volteado, setVolteado] = useState(false)
+
+  useEffect(() => {
+    if (!mensajeGiro) return
+
+    setVolteado(true)
+    const timeoutVolver = setTimeout(() => setVolteado(false), DURACION_VISIBLE_MS)
+    const timeoutLimpiar = setTimeout(
+      () => setMensajeGiro(null),
+      DURACION_VISIBLE_MS + DURACION_GIRO_MS,
+    )
+
+    return () => {
+      clearTimeout(timeoutVolver)
+      clearTimeout(timeoutLimpiar)
+    }
+  }, [mensajeGiro])
 
   return (
     <div className="flex flex-col items-center text-center gap-4 bg-white dark:bg-[#1c1c21] rounded-3xl shadow-xs border border-[#6c2f00]/15 dark:border-[#c85a32]/25 p-6 sm:p-8 transition-colors">
@@ -43,28 +67,39 @@ export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
         </p>
       )}
 
-      <div className="w-full pt-5 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/20 text-left space-y-1.5">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-semibold uppercase tracking-wider text-[#6c2f00] dark:text-[#ffdbc9]">
-            Confianza de la comunidad
-          </span>
-          <span className="font-bold text-[#c85a32]">{ong.totalReconocimientos}</span>
+      <div className={`flip-card w-full pt-5 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/20 ${volteado ? 'is-flipped' : ''}`}>
+        <div className="flip-card-inner">
+          <div className="flip-card-front text-left space-y-1.5">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-semibold uppercase tracking-wider text-[#6c2f00] dark:text-[#ffdbc9]">
+                Confianza de la comunidad
+              </span>
+              <span className="font-bold text-[#c85a32]">{ong.totalReconocimientos}</span>
+            </div>
+            <div className="w-full h-2 rounded-full bg-[#fff1ea] dark:bg-[#26262e] overflow-hidden">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-[#c85a32] to-[#ffb37a] transition-all duration-500"
+                style={{ width: `${porcentajeConfianza}%` }}
+              />
+            </div>
+            <p className="text-[11px] text-[#54433a]/70 dark:text-[#dac2b6]/70">
+              {ong.totalReconocimientos === 1
+                ? '1 persona reconoció a esta ONG'
+                : `${ong.totalReconocimientos} personas reconocieron a esta ONG`}
+            </p>
+          </div>
+
+          <div className="flip-card-back flex items-center justify-center px-2">
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#6c2f00] dark:text-[#ffdbc9] text-center">
+              <span className="material-symbols-outlined text-lg text-[#c85a32]">verified</span>
+              {mensajeGiro}
+            </span>
+          </div>
         </div>
-        <div className="w-full h-2 rounded-full bg-[#fff1ea] dark:bg-[#26262e] overflow-hidden">
-          <div
-            className="h-full rounded-full bg-gradient-to-r from-[#c85a32] to-[#ffb37a] transition-all duration-500"
-            style={{ width: `${porcentajeConfianza}%` }}
-          />
-        </div>
-        <p className="text-[11px] text-[#54433a]/70 dark:text-[#dac2b6]/70">
-          {ong.totalReconocimientos === 1
-            ? '1 persona reconoció a esta ONG'
-            : `${ong.totalReconocimientos} personas reconocieron a esta ONG`}
-        </p>
       </div>
 
       <div className="w-full">
-        <BotonReconocimiento ongId={ong.id} nombreOng={ong.nombre} />
+        <BotonReconocimiento ongId={ong.id} nombreOng={ong.nombre} onExito={setMensajeGiro} />
       </div>
 
       <div className="flex justify-around items-center w-full mt-2 pt-5 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/20">
