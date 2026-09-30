@@ -17,9 +17,11 @@ import NotificacionReconocimiento from './NotificacionReconocimiento';
 interface BotonReconocimientoProps {
   ongId: string;
   nombreOng: string;
+  /** Se llama con el mensaje de éxito para que el perfil lo muestre con la animación del cubo. */
+  onExito?: (mensaje: string) => void;
 }
 
-export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocimientoProps) {
+export default function BotonReconocimiento({ ongId, nombreOng, onExito }: BotonReconocimientoProps) {
   const { usuario } = useUsuarioAuth();
   const { ong } = useOngAuth();
   const { user } = useAuth();
@@ -32,9 +34,7 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
   const [mostrarModal, setMostrarModal] = useState(false);
   const [mostrarModalRevocar, setMostrarModalRevocar] = useState(false);
   const [procesando, setProcesando] = useState(false);
-  const [notificacion, setNotificacion] = useState<{ tipo: 'exito' | 'error'; mensaje: string } | null>(
-    null,
-  );
+  const [notificacion, setNotificacion] = useState<{ tipo: 'error'; mensaje: string } | null>(null);
 
   useEffect(() => {
     if (!estaAutenticado || esMismaOng) {
@@ -71,7 +71,7 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
       await otorgarReconocimiento(ongId, mensaje);
       setYaReconocida(true);
       setMostrarModal(false);
-      setNotificacion({ tipo: 'exito', mensaje: 'Reconociste a esta ONG.' });
+      onExito?.('Reconociste a esta ONG.');
     } catch (error: unknown) {
       setNotificacion({
         tipo: 'error',
@@ -88,7 +88,7 @@ export default function BotonReconocimiento({ ongId, nombreOng }: BotonReconocim
       await revocarReconocimiento(ongId, motivo);
       setYaReconocida(false);
       setMostrarModalRevocar(false);
-      setNotificacion({ tipo: 'exito', mensaje: 'Revocaste el reconocimiento.' });
+      onExito?.('Revocaste el reconocimiento.');
     } catch (error: unknown) {
       setNotificacion({
         tipo: 'error',
