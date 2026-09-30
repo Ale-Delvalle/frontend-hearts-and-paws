@@ -14,7 +14,9 @@ export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
     Math.round((ong.totalReconocimientos / MAXIMO_BARRA_CONFIANZA) * 100),
   )
 
-  const [mensajeGiro, setMensajeGiro] = useState<string | null>(null)
+  const [mensajeGiro, setMensajeGiro] = useState<{ texto: string; tipo: 'reconocido' | 'revocado' } | null>(
+    null,
+  )
   const [volteado, setVolteado] = useState(false)
 
   useEffect(() => {
@@ -90,9 +92,21 @@ export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
           </div>
 
           <div className="flip-card-back flex items-center justify-center px-2">
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#6c2f00] dark:text-[#ffdbc9] text-center">
-              <span className="material-symbols-outlined text-lg text-[#c85a32]">verified</span>
-              {mensajeGiro}
+            <span
+              className={`inline-flex items-center gap-1.5 text-sm font-semibold text-center ${
+                mensajeGiro?.tipo === 'revocado'
+                  ? 'text-red-600 dark:text-red-400 border border-red-600 dark:border-red-500 rounded-full px-3 py-1.5'
+                  : 'text-[#6c2f00] dark:text-[#ffdbc9]'
+              }`}
+            >
+              <span
+                className={`material-symbols-outlined text-lg ${
+                  mensajeGiro?.tipo === 'revocado' ? 'text-red-600 dark:text-red-400' : 'text-[#c85a32]'
+                }`}
+              >
+                {mensajeGiro?.tipo === 'revocado' ? 'remove_circle' : 'verified'}
+              </span>
+              {mensajeGiro?.texto}
             </span>
           </div>
         </div>
