@@ -220,6 +220,7 @@ export default function DonacionPage() {
               casoId: caso.id,
               tipo: caso.tipo.toLowerCase(),
               descripcion: caso.descripcion,
+              ongNombre: caso.ong?.nombre,
             };
 
             return (
