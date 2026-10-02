@@ -64,11 +64,11 @@ export default function GlobalFeedPostCard({ caso }: { caso: CasoFeedItem }) {
         <div className="flex-1 min-w-0">
           <Link
             href={`/ong/${caso.ong.id}`}
-            className="font-body-editorial font-semibold text-base text-[#6c2f00] dark:text-[#ffdbc9] hover:text-[#c85a32] dark:hover:text-[#c85a32] transition truncate block"
+            className="font-sans font-semibold text-lg text-[#6c2f00] dark:text-[#ffdbc9] hover:text-[#c85a32] dark:hover:text-[#c85a32] transition truncate block"
           >
             {caso.ong.nombre}
           </Link>
-          <p className="font-body-editorial text-xs text-[#54433a]/80 dark:text-[#dac2b6]/80 truncate">
+          <p className="font-sans text-sm text-[#54433a]/80 dark:text-[#dac2b6]/80 truncate">
             {ubicacion ? `${ubicacion} · ` : ''}
             {formatearFecha(caso.creado_en)}
           </p>
