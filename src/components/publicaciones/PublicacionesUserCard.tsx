@@ -29,10 +29,10 @@ export default function PublicacionesUserCard() {
           )}
 
           <div className="min-w-0 flex-1">
-            <h3 className="font-serif font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] truncate">
+            <h3 className="font-body-editorial font-bold text-lg text-[#6c2f00] dark:text-[#ffdbc9] truncate">
               {ong.nombre}
             </h3>
-            <p className="text-xs text-[#54433a]/80 dark:text-[#dac2b6]/80 truncate">
+            <p className="font-body-editorial text-sm text-[#54433a]/80 dark:text-[#dac2b6]/80 truncate">
               {[ong.ciudad, ong.pais].filter(Boolean).join(', ') || 'Organización'}
             </p>
             <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#c85a32] bg-[#fff1ea] dark:bg-[#26262e] px-2 py-0.5 rounded-full mt-1 border border-[#c85a32]/20">
@@ -96,10 +96,10 @@ export default function PublicacionesUserCard() {
         )}
 
         <div className="min-w-0 flex-1">
-          <h3 className="font-serif font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] truncate">
+          <h3 className="font-body-editorial font-bold text-lg text-[#6c2f00] dark:text-[#ffdbc9] truncate">
             {nombreUsuario}
           </h3>
-          <p className="text-xs text-[#54433a]/80 dark:text-[#dac2b6]/80 truncate">
+          <p className="font-body-editorial text-sm text-[#54433a]/80 dark:text-[#dac2b6]/80 truncate">
             {emailUsuario}
           </p>
           <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#c85a32] bg-[#fff1ea] dark:bg-[#26262e] px-2 py-0.5 rounded-full mt-1 border border-[#c85a32]/20">
