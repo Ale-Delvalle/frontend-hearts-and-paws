@@ -26,7 +26,7 @@ export default function PublicacionesSidebarLeft({
 
       {/* Mini Tarjeta de Impacto Comunitario */}
       <div className="bg-[#fff1ea]/60 dark:bg-[#1c1c21] rounded-2xl border border-[#6c2f00]/10 dark:border-[#c85a32]/20 p-5 font-sans">
-        <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#a84320] dark:text-[#c85a32] mb-2">
+        <div className="font-display-editorial flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#a84320] dark:text-[#c85a32] mb-2">
           <span className="material-symbols-outlined text-base">diversity_1</span>
           Red Hearts & Paws
         </div>
