@@ -40,7 +40,7 @@ export default function PublicacionesFilterTabs({
   return (
     <div className="bg-white dark:bg-[#1c1c21] rounded-2xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 p-5 shadow-sm font-sans">
       <div className="flex items-center justify-between mb-3">
-        <h4 className="font-sans font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
+        <h4 className="font-display-editorial font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
           Filtrar Contenido
         </h4>
         <span className="material-symbols-outlined text-[#c85a32] text-base">filter_alt</span>
