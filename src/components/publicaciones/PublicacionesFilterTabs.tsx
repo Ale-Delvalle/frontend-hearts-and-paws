@@ -38,9 +38,9 @@ export default function PublicacionesFilterTabs({
   onSelectFiltro,
 }: PublicacionesFilterTabsProps) {
   return (
-    <div className="bg-white dark:bg-[#1c1c21] rounded-2xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 p-5 shadow-sm font-body-editorial">
+    <div className="bg-white dark:bg-[#1c1c21] rounded-2xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 p-5 shadow-sm font-sans">
       <div className="flex items-center justify-between mb-3">
-        <h4 className="font-serif font-bold text-sm text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
+        <h4 className="font-sans font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
           Filtrar Contenido
         </h4>
         <span className="material-symbols-outlined text-[#c85a32] text-base">filter_alt</span>
@@ -70,7 +70,7 @@ export default function PublicacionesFilterTabs({
                 <div>
                   <div className="font-semibold leading-tight">{opcion.label}</div>
                   <div
-                    className={`text-[10px] font-normal leading-tight ${
+                    className={`font-sans text-sm font-normal leading-tight ${
                       estaActivo ? 'text-white/80' : 'text-[#54433a]/70 dark:text-[#dac2b6]/70'
                     }`}
                   >
