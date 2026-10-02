@@ -24,6 +24,7 @@ interface CasoFavorito {
   tipo: "ADOPCION" | "DONACION" | string;
   mascotaId: string; creado_en: string;
   mascota: MascotaFavorito;
+  ong?: { nombre: string };
 }
 interface Favorito {
   id: string;
@@ -236,6 +237,7 @@ export default function MisFavoritos() {
                   tipo: fav.caso.tipo.toLowerCase() === "adopcion" ? "adopcion" : "donacion",
                   imagenes: (mascotaApi.imagenes ?? []).map((img, idx) => ({ id: img.url || `${idx}`, url: img.url })),
                   descripcion: fav.caso.descripcion,
+                  ongNombre: fav.caso.ong?.nombre,
                 };
                 return (
                   <div key={fav.id} className="relative group">
