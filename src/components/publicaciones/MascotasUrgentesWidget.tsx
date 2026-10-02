@@ -34,11 +34,11 @@ export default function MascotasUrgentesWidget() {
   }, [])
 
   return (
-    <div className="bg-white dark:bg-[#1c1c21] rounded-2xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 p-5 shadow-sm font-body-editorial">
+    <div className="bg-white dark:bg-[#1c1c21] rounded-2xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 p-5 shadow-sm font-sans">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-[#c85a32] text-xl">pets</span>
-          <h4 className="font-serif font-bold text-sm text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
+          <h4 className="font-sans font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
             Esperando un Hogar
           </h4>
         </div>
@@ -62,7 +62,7 @@ export default function MascotasUrgentesWidget() {
       )}
 
       {!cargando && mascotas.length === 0 && (
-        <p className="text-xs text-[#54433a]/80 dark:text-[#dac2b6]/80 text-center py-4">
+        <p className="text-sm text-[#54433a]/80 dark:text-[#dac2b6]/80 text-center py-4">
           No hay casos urgentes de adopción en este momento.
         </p>
       )}
@@ -89,10 +89,10 @@ export default function MascotasUrgentesWidget() {
                   />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h5 className="font-serif font-bold text-sm text-[#6c2f00] dark:text-[#ffdbc9] group-hover:text-[#c85a32] dark:group-hover:text-[#c85a32] transition truncate">
+                  <h5 className="font-sans font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] group-hover:text-[#c85a32] dark:group-hover:text-[#c85a32] transition truncate">
                     {caso.mascota.nombre}
                   </h5>
-                  <p className="text-xs text-[#54433a]/80 dark:text-[#dac2b6]/80 capitalize truncate">
+                  <p className="text-sm text-[#54433a]/80 dark:text-[#dac2b6]/80 capitalize truncate">
                     {caso.mascota.tipo || 'En adopción'}
                   </p>
                   <span className="text-[10px] font-semibold text-[#c85a32] group-hover:underline flex items-center gap-0.5 mt-0.5">
@@ -106,7 +106,7 @@ export default function MascotasUrgentesWidget() {
           <div className="pt-2 border-t border-[#6c2f00]/10 dark:border-[#c85a32]/15">
             <Link
               href="/adoptar/adopcion"
-              className="block text-center text-xs font-semibold text-[#c85a32] hover:text-[#a84320] dark:hover:text-[#ffdbc9] transition py-1"
+              className="block text-center text-sm font-semibold text-[#c85a32] hover:text-[#a84320] dark:hover:text-[#ffdbc9] transition py-1"
             >
               Ver todos los animales en adopción →
             </Link>
