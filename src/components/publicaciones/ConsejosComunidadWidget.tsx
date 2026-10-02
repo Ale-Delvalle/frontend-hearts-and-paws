@@ -7,7 +7,7 @@ export default function ConsejosComunidadWidget() {
     <div className="bg-white dark:bg-[#1c1c21] rounded-2xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 p-5 shadow-sm font-sans space-y-4">
       <div className="flex items-center gap-2">
         <span className="material-symbols-outlined text-[#c85a32] text-xl">lightbulb</span>
-        <h4 className="font-sans font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
+        <h4 className="font-display-editorial font-bold text-base text-[#6c2f00] dark:text-[#ffdbc9] uppercase tracking-wider">
           Consejos de la Red
         </h4>
       </div>
