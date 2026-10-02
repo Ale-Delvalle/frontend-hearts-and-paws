@@ -20,6 +20,7 @@ export default function RegisterUserForm() {
     direccion: '',
     ciudad: '',
     pais: '',
+    genero: '',
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof RegisterData, string>>>({});
@@ -56,6 +57,12 @@ export default function RegisterUserForm() {
 
     setErrors((prev) => ({ ...prev, [name]: error }));
     return error;
+  };
+
+  const handleChangeGenero = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setFormData((prev) => ({ ...prev, genero: value }));
+    validarCampo('genero', value);
   };
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -153,7 +160,35 @@ export default function RegisterUserForm() {
             </button>
           </div>
         }
-      />
+      >
+        <div>
+          <label
+            htmlFor="genero"
+            className="block text-xs font-semibold text-[#54433a] dark:text-[#dac2b6] uppercase tracking-wider mb-1.5 ml-1"
+          >
+            Sexo
+          </label>
+          <select
+            id="genero"
+            name="genero"
+            value={formData.genero}
+            onChange={handleChangeGenero}
+            disabled={isLoading}
+            className={`w-full border ${
+              errors.genero ? 'border-red-500 ring-1 ring-red-500' : 'border-[#6c2f00]/20 dark:border-[#ffdbc9]/20'
+            } bg-[#fff8f5] dark:bg-[#121214] text-[#6c2f00] dark:text-[#ffdbc9] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] dark:focus:ring-[#c85a32] transition-all px-5 py-2.5`}
+          >
+            <option value="" disabled>
+              Seleccioná una opción
+            </option>
+            <option value="FEMENINO">Femenino</option>
+            <option value="MASCULINO">Masculino</option>
+          </select>
+          {errors.genero && (
+            <p className="text-red-500 dark:text-red-400 text-xs mt-1 ml-3 font-semibold">{errors.genero}</p>
+          )}
+        </div>
+      </FormBase>
     </div>
   );
 }
