@@ -9,6 +9,8 @@ interface Field<T> {
   type?: string;
   multiline?: boolean;
   rows?: number;
+  /** Si se define, el campo se renderiza como <select> con estas opciones en vez de <input>. */
+  options?: { value: string; label: string }[];
 }
 
 interface Props<T> {
@@ -62,7 +64,7 @@ export default function FormBase<T>({
           </h2>
         </div>
 
-        {fields.map(({ name, label, type = 'text', multiline = false, rows = 4 }) => (
+        {fields.map(({ name, label, type = 'text', multiline = false, rows = 4, options }) => (
           <div key={String(name)}>
             <label
               htmlFor={String(name)}
@@ -71,7 +73,27 @@ export default function FormBase<T>({
               {label}
             </label>
 
-            {multiline ? (
+            {options ? (
+              <select
+                id={String(name)}
+                name={String(name)}
+                value={String(formData[name] ?? '')}
+                onChange={onChange as unknown as React.ChangeEventHandler<HTMLSelectElement>}
+                disabled={isLoading}
+                className={`w-full border ${
+                  errors[name] ? 'border-red-500 ring-1 ring-red-500' : 'border-[#6c2f00]/20 dark:border-[#ffdbc9]/20'
+                } bg-[#fff8f5] dark:bg-[#121214] text-[#6c2f00] dark:text-[#ffdbc9] font-body-editorial text-sm font-semibold rounded-full shadow-xs focus:outline-none focus:ring-2 focus:ring-[#6c2f00] dark:focus:ring-[#c85a32] transition-all px-5 py-2.5`}
+              >
+                <option value="" disabled>
+                  Seleccioná una opción
+                </option>
+                {options.map((opcion) => (
+                  <option key={opcion.value} value={opcion.value}>
+                    {opcion.label}
+                  </option>
+                ))}
+              </select>
+            ) : multiline ? (
               <textarea
                 id={String(name)}
                 name={String(name)}
