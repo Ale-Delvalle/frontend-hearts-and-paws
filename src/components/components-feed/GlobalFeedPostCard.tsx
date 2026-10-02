@@ -94,7 +94,7 @@ export default function GlobalFeedPostCard({ caso }: { caso: CasoFeedItem }) {
         <img
           src={imagenUrl}
           alt={caso.mascota.nombre}
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+          className="w-full h-full object-cover"
         />
       </Link>
 
