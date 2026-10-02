@@ -9,6 +9,7 @@ export interface RegisterData {
   direccion: string;
   ciudad: string;
   pais: string;
+  genero: string;
 }
 
 // Usuario que devuelve el backend
