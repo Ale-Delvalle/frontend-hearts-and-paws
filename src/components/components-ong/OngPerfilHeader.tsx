@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { OngPerfilPublico } from '@/types/ong'
 import BotonReconocimiento from './BotonReconocimiento'
+import { optimizarAvatar } from '@/utils/cloudinaryImage'
 
 const MAXIMO_BARRA_CONFIANZA = 50
 const DURACION_VISIBLE_MS = 2000
@@ -40,7 +41,7 @@ export default function OngPerfilHeader({ ong }: { ong: OngPerfilPublico }) {
       {ong.imagenPerfil ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={ong.imagenPerfil}
+          src={optimizarAvatar(ong.imagenPerfil, 112)}
           alt={`Foto de perfil de ${ong.nombre}`}
           className="w-28 h-28 object-cover rounded-full border-4 border-[#c85a32] shadow-sm"
         />
