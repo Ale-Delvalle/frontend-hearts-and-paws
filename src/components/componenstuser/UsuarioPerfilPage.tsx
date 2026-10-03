@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { UsuarioPerfilPublico } from '@/types/user';
 import { getPerfilPublicoUsuario } from '@/services/userProfile';
 import InsigniaBadge from '@/components/insignias/InsigniaBadge';
+import { optimizarAvatar } from '@/utils/cloudinaryImage';
 
 export default function UsuarioPerfilPage({ id }: { id: string }) {
   const [usuario, setUsuario] = useState<UsuarioPerfilPublico | null>(null);
@@ -49,7 +50,7 @@ export default function UsuarioPerfilPage({ id }: { id: string }) {
           {usuario.imagenPerfil ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={usuario.imagenPerfil}
+              src={optimizarAvatar(usuario.imagenPerfil, 112)}
               alt={`Foto de perfil de ${usuario.nombre}`}
               className="w-28 h-28 object-cover rounded-full border-4 border-[#c85a32] shadow-sm"
             />
