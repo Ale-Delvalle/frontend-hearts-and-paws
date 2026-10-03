@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { MascotaPerfil } from '@/types/mascotas'
 import { ESTADOS_MASCOTA } from '@/lib/estadoMascota'
+import { optimizarAvatar } from '@/utils/cloudinaryImage'
 
 export default function MascotaInfo({ mascota }: { mascota: MascotaPerfil }) {
   const estado = ESTADOS_MASCOTA[mascota.estado]
@@ -32,7 +33,7 @@ export default function MascotaInfo({ mascota }: { mascota: MascotaPerfil }) {
         {mascota.organizacion.imagenPerfil ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={mascota.organizacion.imagenPerfil}
+            src={optimizarAvatar(mascota.organizacion.imagenPerfil, 40)}
             alt={mascota.organizacion.nombre}
             className="w-10 h-10 rounded-full object-cover border-2 border-[#e87366]"
           />

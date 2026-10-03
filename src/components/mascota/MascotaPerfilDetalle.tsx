@@ -11,6 +11,7 @@ import { useUsuarioAuth } from '@/context/UsuarioAuthContext';
 import { useOngAuth } from '@/context/OngAuthContext';
 import { useAuth } from '../SupabaseProvider';
 import CambiarFotoMascotaModal from './CambiarFotoMascotaModal';
+import { optimizarAvatar } from '@/utils/cloudinaryImage';
 
 function formatFecha(fechaStr?: string): string {
   if (!fechaStr) return 'Fecha no especificada';
@@ -278,7 +279,7 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
                         {mascota.organizacion.imagenPerfil ? (
                           <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#c85a32]/30 shrink-0">
                             <Image
-                              src={mascota.organizacion.imagenPerfil}
+                              src={optimizarAvatar(mascota.organizacion.imagenPerfil, 48)}
                               alt={mascota.organizacion.nombre}
                               fill
                               className="object-cover"
