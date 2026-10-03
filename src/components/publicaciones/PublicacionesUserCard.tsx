@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useUsuarioAuth } from '@/context/UsuarioAuthContext'
 import { useOngAuth } from '@/context/OngAuthContext'
 import { useAuth } from '@/components/SupabaseProvider'
+import { optimizarAvatar } from '@/utils/cloudinaryImage'
 
 export default function PublicacionesUserCard() {
   const { usuario } = useUsuarioAuth()
@@ -18,7 +19,7 @@ export default function PublicacionesUserCard() {
           {ong.imagenPerfil ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={ong.imagenPerfil}
+              src={optimizarAvatar(ong.imagenPerfil, 48)}
               alt={ong.nombre}
               className="w-12 h-12 rounded-full object-cover border-2 border-[#c85a32] shrink-0"
             />
@@ -85,7 +86,7 @@ export default function PublicacionesUserCard() {
         {imagenUsuario ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={imagenUsuario}
+            src={optimizarAvatar(imagenUsuario, 48)}
             alt={nombreUsuario}
             className="w-12 h-12 rounded-full object-cover border-2 border-[#c85a32] shrink-0"
           />
