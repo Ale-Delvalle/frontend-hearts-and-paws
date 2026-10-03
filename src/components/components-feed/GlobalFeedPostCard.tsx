@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast'
 import { CasoFeedItem } from '@/types/casos'
 import { useUsuarioAuth } from '@/context/UsuarioAuthContext'
 import { useAuth } from '@/components/SupabaseProvider'
+import { optimizarAvatar } from '@/utils/cloudinaryImage'
 
 function formatearFecha(fecha: string) {
   return new Date(fecha).toLocaleDateString('es-AR', {
@@ -50,7 +51,7 @@ export default function GlobalFeedPostCard({ caso }: { caso: CasoFeedItem }) {
           {caso.ong.imagenPerfil ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={caso.ong.imagenPerfil}
+              src={optimizarAvatar(caso.ong.imagenPerfil, 44)}
               alt={`Foto de perfil de ${caso.ong.nombre}`}
               className="w-11 h-11 object-cover rounded-full border-2 border-[#c85a32]"
             />
