@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useOngAuth } from "@/context/OngAuthContext";
+import { optimizarAvatar } from "@/utils/cloudinaryImage";
 
 const ProfileOng = () => {
   const { ong } = useOngAuth();
@@ -16,7 +17,7 @@ const ProfileOng = () => {
   }
 
   const avatarUrl =
-    ong.imagenPerfil ||
+    optimizarAvatar(ong.imagenPerfil, 112) ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(ong.nombre || "ONG")}&background=FFC0CB&color=fff`;
 
   return (
