@@ -10,6 +10,7 @@ import {
   revocarInsignia,
 } from "@/services/insigniasOng";
 import { InsigniaOtorgada, TipoInsignia, UsuarioBuscado } from "@/types/insignia";
+import { optimizarAvatar } from "@/utils/cloudinaryImage";
 
 const MIN_CARACTERES = 3;
 
@@ -138,7 +139,7 @@ export default function InsigniasOng() {
             >
               <div className="flex items-center gap-3">
                 <img
-                  src={usuario.imagenPerfil || "/default-avatar.png"}
+                  src={optimizarAvatar(usuario.imagenPerfil, 40) || "/default-avatar.png"}
                   alt={`Foto de perfil de ${usuario.nombre}`}
                   className="w-10 h-10 rounded-full object-cover border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15"
                 />
@@ -198,7 +199,7 @@ export default function InsigniasOng() {
               >
                 <div className="flex items-center gap-3">
                   <img
-                    src={insignia.usuario.imagenPerfil || "/default-avatar.png"}
+                    src={optimizarAvatar(insignia.usuario.imagenPerfil, 40) || "/default-avatar.png"}
                     alt={`Foto de perfil de ${insignia.usuario.nombre}`}
                     className="w-10 h-10 rounded-full object-cover border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15"
                   />
