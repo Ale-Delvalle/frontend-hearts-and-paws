@@ -12,6 +12,7 @@ import { useUsuarioAuth } from "@/context/UsuarioAuthContext";
 import { supabase } from "@/lib/supabaseClient";
 import InsigniaBadge from "@/components/insignias/InsigniaBadge";
 import { GeneroUsuario } from "@/types/insignia";
+import { optimizarAvatar } from "@/utils/cloudinaryImage";
 
 interface UsuarioUpdateData {
   email?: string;
@@ -243,7 +244,7 @@ export default function DashboardSencillo() {
               <span className="material-symbols-outlined text-lg">close</span>
             </button>
             <img
-              src={previewUrl || userData.imagenPerfil || "/default-avatar.png"}
+              src={optimizarAvatar(previewUrl || userData.imagenPerfil, 400) || "/default-avatar.png"}
               alt={`Foto de perfil de ${userData.nombre}`}
               className="w-full aspect-square object-cover rounded-3xl border-4 border-white dark:border-[#1c1c21] shadow-2xl"
             />
@@ -313,8 +314,7 @@ export default function DashboardSencillo() {
                 ) : (
                   <img
                     src={
-                      previewUrl ||
-                      userData.imagenPerfil ||
+                      optimizarAvatar(previewUrl || userData.imagenPerfil, 112) ||
                       "/default-avatar.png"
                     }
                     alt={`Foto de perfil de ${userData.nombre}`}
