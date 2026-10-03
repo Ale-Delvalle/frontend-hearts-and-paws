@@ -7,6 +7,7 @@ import {
   getTotalOrganizacionesAprobadas,
 } from "@/services/adminconexion";
 import Footer from "../Footer";
+import { optimizarAvatar } from "@/utils/cloudinaryImage";
 
 interface Organizacion {
   id: string;
@@ -153,7 +154,7 @@ export default function OrganizacionesPanel() {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={org.imagenPerfil || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
+                      src={optimizarAvatar(org.imagenPerfil, 64) || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
                       alt={`Foto de ${org.nombre}`}
                       className="w-16 h-16 object-cover border-2 border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 group-hover:border-[#c85a32] rounded-full shadow-xs transition-colors shrink-0"
                     />
@@ -201,7 +202,7 @@ export default function OrganizacionesPanel() {
             </button>
 
             <img
-              src={organizacionSeleccionada.imagenPerfil || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
+              src={optimizarAvatar(organizacionSeleccionada.imagenPerfil, 96) || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
               alt={`Foto de perfil de ${organizacionSeleccionada.nombre}`}
               className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-[#fff1ea] dark:border-[#26262e] shadow-md mb-4"
             />

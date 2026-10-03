@@ -4,6 +4,7 @@ import { getTotalOrganizacionesRechazadas } from '@/services/adminconexion';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Footer from '../Footer';
+import { optimizarAvatar } from '@/utils/cloudinaryImage';
 
 interface Organizacion {
   id: string;
@@ -110,7 +111,7 @@ export default function OngsRechazadas() {
                     <div>
                       <div className="flex items-start gap-4 mb-4">
                         <img
-                          src={org.imagenPerfil ?? "/default-profile.png"}
+                          src={optimizarAvatar(org.imagenPerfil, 64) ?? "/default-profile.png"}
                           alt={`Foto de ${org.nombre}`}
                           className="w-16 h-16 object-cover border-2 border-[#6c2f00]/20 dark:border-[#ffdbc9]/20 rounded-2xl shadow-xs shrink-0"
                         />
@@ -169,7 +170,7 @@ export default function OngsRechazadas() {
             </button>
             <div className="flex items-center gap-4 mb-4">
               <img
-                src={selectedOng.imagenPerfil ?? "/default-profile.png"}
+                src={optimizarAvatar(selectedOng.imagenPerfil, 64) ?? "/default-profile.png"}
                 alt={selectedOng.nombre}
                 className="w-16 h-16 rounded-2xl object-cover border-2 border-[#6c2f00]/20 dark:border-[#ffdbc9]/20 shadow-xs"
               />

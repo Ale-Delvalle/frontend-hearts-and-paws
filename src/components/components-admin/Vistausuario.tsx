@@ -3,6 +3,7 @@
 import { getTodosUser } from "@/services/adminconexion";
 import React, { useEffect, useState } from "react";
 import Footer from "../Footer";
+import { optimizarAvatar } from "@/utils/cloudinaryImage";
 
 type Usuario = {
   id: string;
@@ -73,8 +74,8 @@ export function Vistausuario() {
     setTimeout(() => setUsuarioSeleccionado(null), 300);
   };
 
-  const getAvatarUrl = (nombre: string, imagenPerfil?: string | null) => {
-    if (imagenPerfil) return imagenPerfil;
+  const getAvatarUrl = (nombre: string, imagenPerfil?: string | null, tamanio = 64) => {
+    if (imagenPerfil) return optimizarAvatar(imagenPerfil, tamanio) as string;
     const encodedName = encodeURIComponent(nombre || "Usuario Anónimo");
     return `https://ui-avatars.com/api/?name=${encodedName}&background=FFC0CB&color=fff&bold=true`;
   };
@@ -185,7 +186,7 @@ export function Vistausuario() {
               className="cursor-pointer bg-white dark:bg-[#1c1c21] border border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 rounded-2xl p-6 shadow-xs hover:shadow-md transition-all duration-300 group flex items-start gap-4"
             >
               <img
-                src={getAvatarUrl(user.nombre, user.imagenPerfil)}
+                src={getAvatarUrl(user.nombre, user.imagenPerfil, 64)}
                 alt={user.nombre}
                 className="w-16 h-16 rounded-full object-cover border-2 border-[#6c2f00]/15 dark:border-[#ffdbc9]/15 group-hover:border-[#c85a32] transition-colors shrink-0 shadow-xs"
               />
@@ -243,7 +244,8 @@ export function Vistausuario() {
             <img
               src={getAvatarUrl(
                 usuarioSeleccionado.nombre,
-                usuarioSeleccionado.imagenPerfil
+                usuarioSeleccionado.imagenPerfil,
+                96
               )}
               alt={usuarioSeleccionado.nombre}
               className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-[#fff1ea] dark:border-[#26262e] shadow-md mb-4"

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { getTotalOrganizaciones, getVerificacion, Patchsolicitud } from "@/services/adminconexion";
 import { OngUser } from "@/types/ong";
 import Footer from "../Footer";
+import { optimizarAvatar } from "@/utils/cloudinaryImage";
 
 
 
@@ -111,7 +112,7 @@ export default function AdminDashboard() {
               >
                 {/* Imagen de perfil */}
                 <img
-                  src={req.imagenPerfil || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
+                  src={optimizarAvatar(req.imagenPerfil, 144) || "https://ui-avatars.com/api/?name=ONG&background=FFC0CB&color=fff"}
                   alt={`Foto de perfil de ${req.nombre}`}
                   className="w-32 h-32 md:w-36 md:h-36 object-cover border-4 border-[#fff1ea] dark:border-[#121214] rounded-2xl shadow-xs shrink-0"
                 />
