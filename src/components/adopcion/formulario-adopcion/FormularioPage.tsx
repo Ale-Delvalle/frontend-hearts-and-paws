@@ -10,7 +10,7 @@ import Compromisos from './Compromisos'
 import DeclaracionFinal from './DeclaracionFinal'
 
 import { FormularioAdopcionData } from '@/types/formularioadopcion'
-import { enviarSolicitudAdopcion, obtenerCasoAdopcionId } from '@/services/adopcion'
+import { enviarSolicitudAdopcion, obtenerCasoAdopcionId, obtenerMisSolicitudesResumen } from '@/services/adopcion'
 import { useAuth } from '../../SupabaseProvider';
 
 
@@ -51,6 +51,7 @@ export default function FormularioAdopcionPage() {
 
 
   const [casoId, setCasoId] = useState('')
+  const [yaSolicitada, setYaSolicitada] = useState(false)
   const [formData, setFormData] = useState<FormularioAdopcionData>({
     casoAdopcionId: '',
     tipoVivienda: '',
@@ -73,6 +74,22 @@ useEffect(() => {
   setCasoId(casoParam);
 
 }, [searchParams]);
+
+// Si el usuario ya solicitó esta mascota, bloquea el formulario (cubre también la entrada por URL directa)
+useEffect(() => {
+  if (!casoId) return;
+  let activo = true;
+  obtenerMisSolicitudesResumen(token ?? undefined)
+    .then((resumen) => {
+      if (activo && resumen.some((r) => r.mascotaId === casoId)) setYaSolicitada(true);
+    })
+    .catch(() => {
+      /* si falla la consulta, el backend igual rechaza un envío duplicado */
+    });
+  return () => {
+    activo = false;
+  };
+}, [casoId, token]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -108,39 +125,34 @@ useEffect(() => {
 
   const enviarFormulario = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
+    if (yaSolicitada) {
+      toast('Ya solicitaste la adopción de esta mascota.')
+      return
+    }
 
     if (!pasoValido(paso, formData)) {
       toast.error('Debes completar correctamente este paso.')
       return
     }
 
-    
-
-
     try {
       const casoAdopcionId = await obtenerCasoAdopcionId(casoId)
 
-     await enviarSolicitudAdopcion({ ...formData, casoAdopcionId }, casoAdopcionId, token);
+      await enviarSolicitudAdopcion({ ...formData, casoAdopcionId }, casoAdopcionId, token);
 
-
+      setYaSolicitada(true)
       toast.success('¡Solicitud enviada con éxito!')
       router.push('/adoptar/usuario-adopcion-exitoso')
     } catch (error: unknown) {
-      if (
-        error instanceof Error &&
-        error.message.includes('no puede enviar mas de 1 solicitud')
-      ) {
-       // toast.error('Ya has enviado una solicitud para este caso.')
-
-        setTimeout(() => {
-          router.push('/adoptar/adopcion')
-        }, 2000)
-
+      // El backend responde 400 con "Ya enviaste una solicitud para este caso de adopción"
+      if (error instanceof Error && error.message.includes('Ya enviaste una solicitud')) {
+        setYaSolicitada(true)
+        toast('Ya solicitaste la adopción de esta mascota.')
         return
       }
 
-      toast.error('Ya has enviado una solicitud para este caso.')
+      toast.error('No se pudo enviar la solicitud. Intentá nuevamente.')
     }
   }
 
@@ -174,6 +186,38 @@ useEffect(() => {
           Completá este formulario para que la organización pueda evaluar tu postulación y coordinar una adopción segura y consciente.
         </p>
       </div>
+
+      {yaSolicitada && (
+        <div className="w-full max-w-3xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 px-5 py-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400">
+          <div className="flex items-center gap-2 text-sm font-semibold">
+            <span className="material-symbols-outlined text-base">check_circle</span>
+            Ya solicitaste la adopción de esta mascota. No es necesario enviar otra solicitud.
+          </div>
+          <button
+            type="button"
+            onClick={() => router.push('/adoptar/adopcion')}
+            className="text-xs font-semibold underline underline-offset-2 cursor-pointer whitespace-nowrap"
+          >
+            Volver al catálogo
+          </button>
+        </div>
+      )}
+
+      {yaSolicitada && (
+        <div className="w-full max-w-3xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 px-5 py-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400">
+          <div className="flex items-center gap-2 text-sm font-semibold">
+            <span className="material-symbols-outlined text-base">check_circle</span>
+            Ya solicitaste la adopción de esta mascota. No es necesario enviar otra solicitud.
+          </div>
+          <button
+            type="button"
+            onClick={() => router.push('/adoptar/adopcion')}
+            className="text-xs font-semibold underline underline-offset-2 cursor-pointer whitespace-nowrap"
+          >
+            Volver al catálogo
+          </button>
+        </div>
+      )}
 
       <form
         className="w-full max-w-3xl space-y-8 bg-white dark:bg-[#1c1c21] p-6 sm:p-10 rounded-3xl border border-[#6c2f00]/15 dark:border-[#c85a32]/25 shadow-xl transition-all"
@@ -268,11 +312,11 @@ useEffect(() => {
               <button
                 type="submit"
                 className={`px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 shadow-md inline-flex items-center gap-2 active:scale-95 cursor-pointer ${
-                  pasoValido(paso, formData)
+                  pasoValido(paso, formData) && !yaSolicitada
                     ? 'bg-[#c85a32] hover:bg-[#a84320] text-white hover:scale-102'
                     : 'bg-[#c85a32]/40 text-white/80 cursor-not-allowed'
                 }`}
-                disabled={!pasoValido(paso, formData)}
+                disabled={!pasoValido(paso, formData) || yaSolicitada}
               >
                 <span className="material-symbols-outlined text-base">send</span>
                 <span>Enviar solicitud</span>
