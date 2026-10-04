@@ -7,9 +7,31 @@ import { Caso } from '@/types/casos'
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { getMascotasEnAdopcion, getMascotasFiltradas } from '@/services/mascotas'
+import { obtenerMisSolicitudesResumen } from '@/services/adopcion'
+import { useUsuarioAuth } from '@/context/UsuarioAuthContext'
+import { useAuth } from '@/components/SupabaseProvider'
 
 export default function AdopcionPage() {
   const router = useRouter()
+  const { usuario } = useUsuarioAuth()
+  const { user, token } = useAuth()
+  const [mascotasSolicitadas, setMascotasSolicitadas] = useState<Set<string>>(new Set())
+
+  // Una sola consulta: marca en el catálogo las mascotas ya solicitadas por el usuario
+  useEffect(() => {
+    if (!usuario && !user) return
+    let activo = true
+    obtenerMisSolicitudesResumen(token ?? undefined)
+      .then((resumen) => {
+        if (activo) setMascotasSolicitadas(new Set(resumen.map((r) => r.mascotaId)))
+      })
+      .catch(() => {
+        /* si falla, el catálogo sigue funcionando sin el aviso */
+      })
+    return () => {
+      activo = false
+    }
+  }, [usuario, user, token])
 
   // Ahora tipo puede ser '', 'perro' o 'gato'
   const [tipo, setTipo] = useState<'perro' | 'gato' | ''>('')
@@ -54,6 +76,10 @@ export default function AdopcionPage() {
   const handleAdoptar = (id: string) => {
     const caso = resultados.find(c => c.mascota.id === id)
     if (!caso) return
+    if (mascotasSolicitadas.has(id)) {
+      toast('Ya solicitaste la adopción de esta mascota.')
+      return
+    }
 
     toast.success(`¡Gracias por querer adoptar a ${caso.mascota.nombre}! 🐶🐱`)
     router.push(`/adoptar/formulario-adopcion?id=${caso.mascota.id}`)
@@ -152,6 +178,7 @@ export default function AdopcionPage() {
                   onConocerHistoria={() => router.push(`/user/mascota/${mascota.id}`)}
                   onAdoptar={() => handleAdoptar(mascota.id)}
                   modo="adopcion"
+                  yaSolicitada={mascotasSolicitadas.has(mascota.id)}
                 />
               )
             })}

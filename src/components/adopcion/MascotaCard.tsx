@@ -19,6 +19,7 @@ interface FavoritoItem {
 
 interface Props extends MascotaCardConModoProps {
   mostrarFavorito?: boolean
+  yaSolicitada?: boolean
 }
 
 export default function MascotaCard({
@@ -28,6 +29,7 @@ export default function MascotaCard({
   onAdoptar,
   modo,
   mostrarFavorito = true,
+  yaSolicitada = false,
 }: Props) {
   const { usuario } = useUsuarioAuth()
   const { token } = useAuth()
@@ -54,6 +56,7 @@ export default function MascotaCard({
   }
 
   const handleAccion = async () => {
+    if (yaSolicitada && modo === 'adopcion') return
     const userId = await getUserId()
     if (!userId) {
       toast.error('Necesitás iniciar sesión para continuar.')
@@ -198,6 +201,14 @@ export default function MascotaCard({
             {mascota.descripcion || "Un compañero amoroso que busca una segunda oportunidad y un hogar lleno de cariño."}
           </p>
 
+          {/* Aviso si el usuario ya solicitó esta adopción */}
+          {modo === 'adopcion' && yaSolicitada && (
+            <div className="mb-4 flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
+              <span className="material-symbols-outlined text-base">check_circle</span>
+              Ya solicitaste su adopción
+            </div>
+          )}
+
           {/* Progreso de Donación si aplica */}
           {modo === 'donacion' && detalleDonacion && (
             <div className="mb-4 p-3 rounded-xl bg-[#fff1ea] dark:bg-[#121214] border border-[#6c2f00]/10 dark:border-[#ffdbc9]/15">
@@ -246,18 +257,22 @@ export default function MascotaCard({
             <button
               onClick={handleAccion}
               className={`flex-1 border border-[#6c2f00]/30 dark:border-[#ffdbc9]/30 hover:bg-[#ffeade] dark:hover:bg-[#26262e] text-[#6c2f00] dark:text-[#ffdbc9] font-body-editorial text-xs font-semibold py-2.5 px-3 rounded-full transition-all duration-300 flex items-center justify-center gap-1 cursor-pointer active:scale-95 ${
-                modo === 'donacion' && metaAlcanzada
+                (modo === 'donacion' && metaAlcanzada) || (modo === 'adopcion' && yaSolicitada)
                   ? 'opacity-60 cursor-not-allowed border-gray-300 dark:border-neutral-700'
                   : ''
               }`}
               type="button"
-              disabled={modo === 'donacion' && metaAlcanzada}
+              disabled={(modo === 'donacion' && metaAlcanzada) || (modo === 'adopcion' && yaSolicitada)}
             >
               <span className="material-symbols-outlined text-base">
-                {modo === 'adopcion' ? 'pets' : 'favorite'}
+                {modo === 'adopcion' ? (yaSolicitada ? 'check' : 'pets') : 'favorite'}
               </span>
               <span>
-                {modo === 'donacion' && metaAlcanzada ? '¡Alcanzada!' : textoBotonAccion}
+                {modo === 'donacion' && metaAlcanzada
+                  ? '¡Alcanzada!'
+                  : modo === 'adopcion' && yaSolicitada
+                    ? 'Solicitada'
+                    : textoBotonAccion}
               </span>
             </button>
           </div>
