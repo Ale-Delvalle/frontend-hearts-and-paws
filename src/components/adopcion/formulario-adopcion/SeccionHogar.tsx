@@ -73,6 +73,7 @@ export default function SeccionHogar({ formData, onChange }: Props) {
               placeholder="Otro tipo de vivienda (ej. Quinta, PH, Campo)"
               value={esOpcionPredefinida ? '' : formData.tipoVivienda}
               onChange={onChange}
+              maxLength={500}
               disabled={esOpcionPredefinida}
               className={`w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl border transition-all ${
                 esOpcionPredefinida
@@ -148,9 +149,13 @@ export default function SeccionHogar({ formData, onChange }: Props) {
                 value={formData.descripcionOtrasMascotas || ''}
                 onChange={onChange}
                 rows={3}
+                maxLength={500}
                 className="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl border border-[#6c2f00]/15 dark:border-[#ffdbc9]/20 bg-white dark:bg-[#1c1c21] text-[#2d1810] dark:text-[#ffede4] focus:outline-none focus:border-[#c85a32] focus:ring-2 focus:ring-[#c85a32]/20 transition-all resize-none"
                 required
               />
+              <p className="mt-1 text-[11px] text-right text-[#54433a]/70 dark:text-[#dac2b6]/70">
+                {(formData.descripcionOtrasMascotas || '').length}/500
+              </p>
             </div>
           )}
         </div>
