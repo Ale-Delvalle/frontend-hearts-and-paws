@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { MascotaPerfil } from '@/types/mascotas';
 import { getPerfilMascota } from '@/services/mascotaProfile';
+import { obtenerMisSolicitudesResumen } from '@/services/adopcion';
 import { useUsuarioAuth } from '@/context/UsuarioAuthContext';
 import { useOngAuth } from '@/context/OngAuthContext';
 import { useAuth } from '../SupabaseProvider';
@@ -32,9 +33,10 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
   const router = useRouter();
   const { usuario } = useUsuarioAuth();
   const { ong } = useOngAuth();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const [mascota, setMascota] = useState<MascotaPerfil | null>(null);
+  const [yaSolicitada, setYaSolicitada] = useState(false);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState('');
   const [fotoSeleccionada, setFotoSeleccionada] = useState(0);
@@ -65,6 +67,25 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
       cargar();
     }
   }, [id]);
+
+  // Marca si el usuario ya solicitó la adopción de esta mascota
+  useEffect(() => {
+    if (!mascota?.id || (!usuario && !user)) {
+      setYaSolicitada(false);
+      return;
+    }
+    let activo = true;
+    obtenerMisSolicitudesResumen(token ?? undefined)
+      .then((resumen) => {
+        if (activo) setYaSolicitada(resumen.some((r) => r.mascotaId === mascota.id));
+      })
+      .catch(() => {
+        /* si falla, el backend igual rechaza un envío duplicado */
+      });
+    return () => {
+      activo = false;
+    };
+  }, [mascota?.id, usuario, user, token]);
 
   const imagenes = useMemo(() => {
     if (mascota?.imagenes && mascota.imagenes.length > 0) {
@@ -116,6 +137,7 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
   }, [mascota]);
 
   const handleAdoptar = () => {
+    if (yaSolicitada) return;
     if (!usuario && !user) {
       toast.error('Necesitás iniciar sesión para postularte a la adopción.');
       router.push('/login');
@@ -330,13 +352,24 @@ export default function MascotaPerfilDetalle({ id }: { id: string }) {
 
                 {/* Acciones Principales */}
                 <div className="pt-4 border-t border-[#6c2f00]/10 dark:border-[#ffdbc9]/15 flex flex-col sm:flex-row gap-3">
-                  <button
-                    onClick={handleAdoptar}
-                    className="flex-1 bg-[#c85a32] hover:bg-[#a84320] text-white font-body-editorial font-semibold py-3.5 px-6 rounded-full text-sm sm:text-base transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
-                  >
-                    <span className="material-symbols-outlined text-lg">pets</span>
-                    <span>¡Quiero Adoptar a {mascota.nombre}!</span>
-                  </button>
+                  {yaSolicitada ? (
+                    <button
+                      type="button"
+                      disabled
+                      className="flex-1 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-400 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 font-body-editorial font-semibold py-3.5 px-6 rounded-full text-sm sm:text-base flex items-center justify-center gap-2 cursor-not-allowed"
+                    >
+                      <span className="material-symbols-outlined text-lg">check_circle</span>
+                      <span>Ya solicitaste la adopción de {mascota.nombre}</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleAdoptar}
+                      className="flex-1 bg-[#c85a32] hover:bg-[#a84320] text-white font-body-editorial font-semibold py-3.5 px-6 rounded-full text-sm sm:text-base transition-all duration-300 shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                    >
+                      <span className="material-symbols-outlined text-lg">pets</span>
+                      <span>¡Quiero Adoptar a {mascota.nombre}!</span>
+                    </button>
+                  )}
 
                   <button
                     onClick={() => router.push('/donacion')}
