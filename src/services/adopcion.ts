@@ -118,3 +118,29 @@ export const enviarSolicitudAdopcion = async (
     throw new Error('Error desconocido al enviar la solicitud');
   }
 };
+export interface ResumenSolicitud {
+  casoAdopcionId: string
+  mascotaId: string
+  estado: 'PENDIENTE' | 'ACEPTADA' | 'RECHAZADA'
+}
+
+export const obtenerMisSolicitudesResumen = async (
+  token?: string
+): Promise<ResumenSolicitud[]> => {
+  const headers: Record<string, string> = {}
+  const fetchOptions: RequestInit = { method: 'GET', headers }
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`
+    fetchOptions.credentials = 'omit'
+  } else {
+    fetchOptions.credentials = 'include'
+  }
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/solicitud-adoptar/mis-solicitudes/ids`,
+    fetchOptions
+  )
+  if (!res.ok) throw new Error('No se pudieron cargar tus solicitudes')
+  return res.json()
+}
