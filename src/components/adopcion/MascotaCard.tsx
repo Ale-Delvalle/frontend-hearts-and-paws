@@ -146,13 +146,25 @@ export default function MascotaCard({
             src={mascota.imagenes[imagenActual]?.url}
             alt={mascota.nombre}
             fill
-            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            className={`object-cover object-center transition-all duration-700 group-hover:scale-105 ${
+              modo === 'adopcion' && yaSolicitada ? 'blur-[3px] scale-105' : ''
+            }`}
             unoptimized
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center text-[#6c2f00]/30 dark:text-[#ffdbc9]/30">
             <span className="material-symbols-outlined text-4xl mb-1">pets</span>
             <span className="font-body-editorial text-xs">Sin foto disponible</span>
+          </div>
+        )}
+
+        {/* Badge sobre la foto difuminada si ya se solicitó la adopción */}
+        {modo === 'adopcion' && yaSolicitada && (
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-10 flex justify-center pointer-events-none">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-950/90 border border-emerald-400 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 text-sm font-bold shadow-lg">
+              <span className="material-symbols-outlined text-lg">check_circle</span>
+              Ya solicitaste su adopción
+            </div>
           </div>
         )}
 
@@ -200,14 +212,6 @@ export default function MascotaCard({
           <p className="font-body-editorial text-sm text-[#54433a] dark:text-[#dac2b6] leading-relaxed line-clamp-3 mb-4">
             {mascota.descripcion || "Un compañero amoroso que busca una segunda oportunidad y un hogar lleno de cariño."}
           </p>
-
-          {/* Aviso si el usuario ya solicitó esta adopción */}
-          {modo === 'adopcion' && yaSolicitada && (
-            <div className="mb-4 flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
-              <span className="material-symbols-outlined text-base">check_circle</span>
-              Ya solicitaste su adopción
-            </div>
-          )}
 
           {/* Progreso de Donación si aplica */}
           {modo === 'donacion' && detalleDonacion && (
