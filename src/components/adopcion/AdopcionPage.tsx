@@ -64,6 +64,11 @@ export default function AdopcionPage() {
   }, [tipo, fetchMascotas])
 
   const resultadosOrdenados = resultados.slice().sort((a, b) => {
+    // Las mascotas ya solicitadas por el usuario van siempre al final
+    const solicitadaA = mascotasSolicitadas.has(a.mascota.id) ? 1 : 0
+    const solicitadaB = mascotasSolicitadas.has(b.mascota.id) ? 1 : 0
+    if (solicitadaA !== solicitadaB) return solicitadaA - solicitadaB
+
     const fechaA = new Date(a.creado_en).getTime()
     const fechaB = new Date(b.creado_en).getTime()
     if (orden === 'mas_reciente') {
