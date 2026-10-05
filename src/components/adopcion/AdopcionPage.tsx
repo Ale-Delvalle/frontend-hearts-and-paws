@@ -69,6 +69,11 @@ export default function AdopcionPage() {
     const solicitadaB = mascotasSolicitadas.has(b.mascota.id) ? 1 : 0
     if (solicitadaA !== solicitadaB) return solicitadaA - solicitadaB
 
+    // Entre el resto, primero las que acumulan menos solicitudes de adopción
+    const totalA = a.adopcion?._count?.solicitudes ?? 0
+    const totalB = b.adopcion?._count?.solicitudes ?? 0
+    if (totalA !== totalB) return totalA - totalB
+
     const fechaA = new Date(a.creado_en).getTime()
     const fechaB = new Date(b.creado_en).getTime()
     if (orden === 'mas_reciente') {
@@ -173,6 +178,7 @@ export default function AdopcionPage() {
                 tipo: caso.tipo.toLowerCase(),
                 descripcion: caso.descripcion,
                 ongNombre: caso.ong?.nombre,
+                totalSolicitudes: caso.adopcion?._count?.solicitudes ?? 0,
               }
 
               return (
