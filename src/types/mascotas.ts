@@ -13,6 +13,7 @@ export interface Mascota {
   casoId:string
   estado?: 'EN_ADOPCION' | 'EN_TRANSITO' | 'ADOPTADO' | 'FALLECIDO'
   ongNombre?: string
+  totalSolicitudes?: number
 }
 
 export interface MascotaCardProps {

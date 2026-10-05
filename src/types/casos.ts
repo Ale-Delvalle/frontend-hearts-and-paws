@@ -11,6 +11,7 @@ export interface Caso {
   creado_en: string
   mascota: Mascota
   ong?: { id: string; nombre: string }
+  adopcion?: { _count?: { solicitudes: number } } | null
 }
 
 // GET /organizaciones/:id/timeline
