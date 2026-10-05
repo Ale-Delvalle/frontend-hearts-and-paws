@@ -247,6 +247,15 @@ export default function MascotaCard({
             </span>
           </div>
 
+          {modo === 'adopcion' && (
+            <div className="mb-4 -mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-[#54433a]/80 dark:text-[#dac2b6]/80">
+              <span className="material-symbols-outlined text-sm text-[#c85a32]">group</span>
+              {(mascota.totalSolicitudes ?? 0) === 0
+                ? 'Sin solicitudes todavía'
+                : `${mascota.totalSolicitudes} ${mascota.totalSolicitudes === 1 ? 'solicitud' : 'solicitudes'} de adopción`}
+            </div>
+          )}
+
           {/* Botones de Acción Solicitados */}
           <div className="flex items-center gap-3">
             <button
